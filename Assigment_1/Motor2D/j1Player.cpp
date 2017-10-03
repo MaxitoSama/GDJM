@@ -309,6 +309,26 @@ bool j1Player::Update(float dt)
 	return true;
 }
 
+// Load / Save
+bool j1Player::Load(pugi::xml_node& data)
+{
+	position.x = data.child("player").attribute("x").as_int();
+	position.y = data.child("player").attribute("y").as_int();
+
+	return true;
+
+}
+bool j1Player::Save(pugi::xml_node& data) const 
+{
+	pugi::xml_node cam = data.append_child("player");
+
+	cam.append_attribute("x") = position.x;
+	cam.append_attribute("y") = position.y;
+
+	return true;
+}
+
+
 /*void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	if (c2->type == COLLIDER_WALL)
 	{
@@ -407,7 +427,7 @@ float j1Player::angle()
 	//Changing the focus of the mouse (0,0) by default
 	x = x - ((win_width*win_scale) / 2) - (23 * win_scale);
 	y = y - position.y*win_scale - 35 * win_scale;
-	LOG("La X=%d i la Y=%d", x, y);
+//	LOG("La X=%d i la Y=%d", x, y);
 
 
 	//Obtaining the angle
@@ -436,7 +456,7 @@ float j1Player::angle()
 	if (x < 0 && y == 0) { angle = 180; }
 	if (x > 0 && y == 0) { angle = 0; }
 
-	LOG("El angulo es %f", angle);
+	//LOG("El angulo es %f", angle);
 
 	return angle;
 }

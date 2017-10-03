@@ -28,6 +28,11 @@ public:
 	//void shot();
 	float angle();
 
+	// Load / Save
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
+
+
 public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* textures = nullptr;
