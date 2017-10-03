@@ -24,17 +24,12 @@ j1Player::j1Player():j1Module()
 	current_animation = NULL;
 
 	//idle animation Right
-	idle_Stop_1.PushBack({ 0,0,50,50 });
+	idle_Stop.PushBack({ 64,110,178,335 });
+	idle_Stop.PushBack({ 64,110,178,335 });
 
-	idle_Stop_1.loop = true;
-	idle_Stop_1.speed = 0.01f;
-
-	//idle animation Left
-	idle_Stop_2.PushBack({ 0,0,50,50 });
-
-	idle_Stop_2.loop = true;
-	idle_Stop_2.speed = 0.07f;
-
+	idle_Stop.loop = false;
+	idle_Stop.speed = 0.01f;
+	
 	// Move Right
 	right.PushBack({ 0,0,50,50 });
 
@@ -81,7 +76,7 @@ bool j1Player::Start()
 
 	LOG("Loading Player Sheet");
 
-	graphics = App->tex->Load("textures/blue.png");
+	graphics = App->tex->Load("assets/character/character.png");
 
 	LOG("Loading Player Collider");
 	//Player_Coll = App->collision->AddCollider({ position.x, position.y, 46, 70 }, COLLIDER_PLAYER, this);
@@ -283,16 +278,16 @@ bool j1Player::Update(float dt)
 		switch (player_last_direction)
 		{
 		case j1Player::UP:
-			current_animation = &idle_Stop_1;
+			current_animation = &idle_Stop;
 			break;
 		case j1Player::DOWN:
-			current_animation = &idle_Stop_1;
+			current_animation = &idle_Stop;
 			break;
 		case j1Player::LEFT:
-			current_animation = &idle_Stop_2;
+			current_animation = &idle_Stop;
 			break;
 		case j1Player::RIGHT:
-			current_animation = &idle_Stop_1;
+			current_animation = &idle_Stop;
 			break;
 		default:
 			break;

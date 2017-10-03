@@ -42,8 +42,7 @@ public:
 	SDL_Rect bridge;
 
 	Animation* current_animation = nullptr;
-	Animation idle_Stop_1;
-	Animation idle_Stop_2;
+	Animation idle_Stop;
 	Animation left;
 	Animation right;
 	Animation left_back;
