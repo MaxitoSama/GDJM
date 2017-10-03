@@ -80,6 +80,7 @@ bool j1Player::Start()
 	win_scale = App->win->GetScale();
 
 	LOG("Loading Player Sheet");
+
 	graphics = App->tex->Load("textures/blue.png");
 
 	LOG("Loading Player Collider");
