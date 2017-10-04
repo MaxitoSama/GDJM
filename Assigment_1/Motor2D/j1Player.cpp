@@ -25,10 +25,18 @@ j1Player::j1Player():j1Module()
 
 	//idle animation Right
 	idle_Stop.PushBack({ 64,110,178,335 });
-	idle_Stop.PushBack({ 64,110,178,335 });
+	idle_Stop.PushBack({ 312,110,184,330 });
+	idle_Stop.PushBack({ 576,110,184,330 });
+	idle_Stop.PushBack({ 846,110,184,330 });
+	idle_Stop.PushBack({ 1140,110,184,330 });
+	idle_Stop.PushBack({ 1452,110,184,330 });
+	idle_Stop.PushBack({ 2021,110,184,330 });
+	idle_Stop.PushBack({ 2286,110,184,330 });
+	idle_Stop.PushBack({ 2560,110,184,330 });
 
-	idle_Stop.loop = false;
-	idle_Stop.speed = 0.01f;
+
+	idle_Stop.loop = true;
+	idle_Stop.speed = 0.05f;
 	
 	// Move Right
 	right.PushBack({ 0,0,50,50 });
