@@ -7,7 +7,11 @@
 	<map />
 	<scene />
 	<player>
-		<player x="512" y="215" />
+<<<<<<< HEAD
+		<player x="-218" y="215" />
+=======
+		<player x="12" y="215" />
+>>>>>>> 63f8509f186f6610bb30ae4de3684b34413c64ef
 	</player>
 	<renderer>
 		<camera x="0" y="0" />
