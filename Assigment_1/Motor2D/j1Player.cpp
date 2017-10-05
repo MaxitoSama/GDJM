@@ -39,7 +39,16 @@ j1Player::j1Player():j1Module()
 	idle_Stop.speed = 0.05f;
 	
 	// Move Right
-	right.PushBack({ 0,0,50,50 });
+	right.PushBack({ 64,472,263,332 });
+	right.PushBack({ 327,472,263,332 });
+	right.PushBack({ 590,472,263,332 });
+	right.PushBack({ 853,472,263,332 });
+	right.PushBack({ 1137,472,263,332 });
+	right.PushBack({ 1449,472,263,332 });
+	right.PushBack({ 1734,472,263,332 });
+	right.PushBack({ 2019,472,263,332 });
+	right.PushBack({ 2286,472,263,332 });
+	right.PushBack({ 2560,472,263,332 });
 
 	right.loop = true;
 	right.speed = 0.1f;
