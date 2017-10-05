@@ -132,7 +132,7 @@ bool j1Player::CleanUp()
 bool j1Player::Update(float dt)
 {
 	SDL_Event e;
-	speed = 2;
+	speed = 1;
 	SDL_Rect Potato = { 128,717,49,56 };
 	SDL_Rect Potato_2 = { ((win_width*win_scale) / 2) - (23 * win_scale),position.y*win_scale - 35 * win_scale,100,100 };
 
@@ -307,7 +307,7 @@ bool j1Player::Update(float dt)
 	//Rotate texture
 	//SDL_RenderCopyEx(App->render->renderer, graphics, &Potato, &Potato_2, angle(), NULL, SDL_FLIP_NONE);
 	// Draw everything --------------------------------------
-	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	App->render->Blit(0.5f,graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
 	return true;
 }
