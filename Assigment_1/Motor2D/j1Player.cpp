@@ -307,7 +307,7 @@ bool j1Player::Update(float dt)
 	//Rotate texture
 	//SDL_RenderCopyEx(App->render->renderer, graphics, &Potato, &Potato_2, angle(), NULL, SDL_FLIP_NONE);
 	// Draw everything --------------------------------------
-	App->render->Blit(0.5f,graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),0.2f);
 
 	return true;
 }
