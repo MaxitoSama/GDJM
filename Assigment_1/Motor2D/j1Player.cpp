@@ -140,14 +140,10 @@ bool j1Player::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		position.x -= speed;
+
 		//The direccion changes with the position of the mouse
-		if (current_animation != &left && angle() >= 90 && angle()<270)
-		{
-			left.Reset();
-			current_animation = &left;
-			player_last_direction = LEFT;
-		}
-		if (current_animation != &right_back && (angle() >= 270 || angle()<90))
+		
+		if (current_animation != &right_back)
 		{
 			right_back.Reset();
 			current_animation = &right_back;
@@ -161,13 +157,7 @@ bool j1Player::Update(float dt)
 
 		position.x += speed;
 
-		if (current_animation != &left_back && angle() >= 90 && angle()<270)
-		{
-			left_back.Reset();
-			current_animation = &left_back;
-			player_last_direction = LEFT;
-		}
-		if (current_animation != &right && (angle() >= 270 || angle()<90))
+		if (current_animation != &right)
 		{
 			right.Reset();
 			current_animation = &right;
