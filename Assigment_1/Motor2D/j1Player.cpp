@@ -87,6 +87,21 @@ j1Player::j1Player():j1Module()
 	die.loop = false;
 	die.speed = 0.05f;
 
+	//JUMP
+	jump.PushBack({ 64,823,263,332 });
+	jump.PushBack({ 327,823,263,332 });
+	jump.PushBack({ 590,823,263,332 });
+	jump.PushBack({ 853,823,263,332 });
+	jump.PushBack({ 1137,823,263,332 });
+	jump.PushBack({ 1449,823,263,332 });
+	jump.PushBack({ 1734,823,263,332 });
+	jump.PushBack({ 2019,823,263,332 });
+	jump.PushBack({ 2286,823,263,332 });
+	jump.PushBack({ 2560,823,263,332 });
+
+	jump.loop = false;
+	jump.speed = 0.05f;
+
 }
 
 j1Player::~j1Player()
