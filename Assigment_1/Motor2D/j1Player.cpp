@@ -24,34 +24,57 @@ j1Player::j1Player():j1Module()
 	current_animation = NULL;
 
 	//idle animation Right
-	idle_Stop.PushBack({ 64,111,176,331 });
-	idle_Stop.PushBack({ 310,111,176,331 });
-	idle_Stop.PushBack({ 575,111,176,331 });
-	idle_Stop.PushBack({ 845,111,176,331 });
-	idle_Stop.PushBack({ 1138,111,176,331 });
-	idle_Stop.PushBack({ 1450,111,176,331 });
-	idle_Stop.PushBack({ 1735,111,176,331 });
-	idle_Stop.PushBack({ 2019,111,176,331 });
-	idle_Stop.PushBack({ 2284,111,176,331 });
-	idle_Stop.PushBack({ 2559,111,176,331 });
+	{
+		idle_right.PushBack({ 64,111,176,331 });
+		idle_right.PushBack({ 310,111,176,331 });
+		idle_right.PushBack({ 575,111,176,331 });
+		idle_right.PushBack({ 845,111,176,331 });
+		idle_right.PushBack({ 1138,111,176,331 });
+		idle_right.PushBack({ 1450,111,176,331 });
+		idle_right.PushBack({ 1735,111,176,331 });
+		idle_right.PushBack({ 2019,111,176,331 });
+		idle_right.PushBack({ 2284,111,176,331 });
+		idle_right.PushBack({ 2559,111,176,331 });
 
-	idle_Stop.loop = true;
-	idle_Stop.speed = 0.05f;
+		idle_right.loop = true;
+		idle_right.speed = 0.05f;
+	}
+
+	//idle animation Left
+	{
+		idle_left.PushBack({ 64,1159,176,329 });
+		idle_left.PushBack({ 311,1159,176,329 });
+		idle_left.PushBack({ 577,1159,176,329 });
+		idle_left.PushBack({ 848,1159,176,329 });
+		idle_left.PushBack({ 1142,1159,176,329 });
+		idle_left.PushBack({ 1455,1159,176,329 });
+		idle_left.PushBack({ 1739,1159,176,329 });
+		idle_left.PushBack({ 2022,1159,176,329 });
+		idle_left.PushBack({ 2286,1159,176,329 });
+		idle_left.PushBack({ 2560,1159,176,329 });
+
+		idle_left.loop = true;
+		//idle_left.speed = 0.001f;
+		idle_left.speed = 0.05f;
+	}
+
 	
 	// Move Right
-	right.PushBack({ 64,472,263,332 });
-	right.PushBack({ 327,472,263,332 });
-	right.PushBack({ 590,472,263,332 });
-	right.PushBack({ 853,472,263,332 });
-	right.PushBack({ 1137,472,263,332 });
-	right.PushBack({ 1449,472,263,332 });
-	right.PushBack({ 1734,472,263,332 });
-	right.PushBack({ 2019,472,263,332 });
-	right.PushBack({ 2286,472,263,332 });
-	right.PushBack({ 2560,472,263,332 });
+	{
+		right.PushBack({ 64,472,263,332 });
+		right.PushBack({ 327,472,263,332 });
+		right.PushBack({ 590,472,263,332 });
+		right.PushBack({ 853,472,263,332 });
+		right.PushBack({ 1137,472,263,332 });
+		right.PushBack({ 1449,472,263,332 });
+		right.PushBack({ 1734,472,263,332 });
+		right.PushBack({ 2019,472,263,332 });
+		right.PushBack({ 2286,472,263,332 });
+		right.PushBack({ 2560,472,263,332 });
 
-	right.loop = true;
-	right.speed = 0.1f;
+		right.loop = true;
+		right.speed = 0.1f;
+	}
 
 	//Move Right back
 	right_back.PushBack({ 0,0,50,50 });
@@ -60,19 +83,21 @@ j1Player::j1Player():j1Module()
 	right_back.speed = 0.09f;
 
 	// Move Left
-	left.PushBack({ 64,823,263,332 });
-	left.PushBack({ 327,823,263,332 });
-	left.PushBack({ 590,823,263,332 });
-	left.PushBack({ 853,823,263,332 });
-	left.PushBack({ 1137,823,263,332 });
-	left.PushBack({ 1449,823,263,332 });
-	left.PushBack({ 1734,823,263,332 });
-	left.PushBack({ 2019,823,263,332 });
-	left.PushBack({ 2286,823,263,332 });
-	left.PushBack({ 2560,823,263,332 });
+	{
+		left.PushBack({ 64,823,263,332 });
+		left.PushBack({ 327,823,263,332 });
+		left.PushBack({ 590,823,263,332 });
+		left.PushBack({ 853,823,263,332 });
+		left.PushBack({ 1137,823,263,332 });
+		left.PushBack({ 1449,823,263,332 });
+		left.PushBack({ 1734,823,263,332 });
+		left.PushBack({ 2019,823,263,332 });
+		left.PushBack({ 2286,823,263,332 });
+		left.PushBack({ 2560,823,263,332 });
 
-	left.loop = true;
-	left.speed = 0.1f;
+		left.loop = true;
+		left.speed = 0.1f;
+	}
 
 	//Move Left Back
 	left_back.PushBack({ 0,0,50,50 });
@@ -88,19 +113,21 @@ j1Player::j1Player():j1Module()
 	die.speed = 0.05f;
 
 	//JUMP
-	jump.PushBack({ 64,2103,263,332 });
-	jump.PushBack({ 327,2103,263,332 });
-	jump.PushBack({ 590,2103,263,332 });
-	jump.PushBack({ 853,2103,263,332 });
-	jump.PushBack({ 1137,2103,263,332 });
-	jump.PushBack({ 1449,2103,263,332 });
-	jump.PushBack({ 1734,2103,263,332 });
-	jump.PushBack({ 2019,2103,263,332 });
-	jump.PushBack({ 2286,2103,263,332 });
-	jump.PushBack({ 2560,2103,263,332 });
+	{
+		jump.PushBack({ 64,2103,263,332 });
+		jump.PushBack({ 327,2103,263,332 });
+		jump.PushBack({ 590,2103,263,332 });
+		jump.PushBack({ 853,2103,263,332 });
+		jump.PushBack({ 1137,2103,263,332 });
+		jump.PushBack({ 1449,2103,263,332 });
+		jump.PushBack({ 1734,2103,263,332 });
+		jump.PushBack({ 2019,2103,263,332 });
+		jump.PushBack({ 2286,2103,263,332 });
+		jump.PushBack({ 2560,2103,263,332 });
 
-	jump.loop = true;
-	jump.speed = 0.05f;
+		jump.loop = true;
+		jump.speed = 0.05f;
+	}
 
 }
 
@@ -171,7 +198,7 @@ bool j1Player::Update(float dt)
 		{
 			left.Reset();
 			current_animation = &left;
-			player_last_direction = RIGHT;
+			player_last_direction = LEFT;
 		}
 
 	}
@@ -193,7 +220,7 @@ bool j1Player::Update(float dt)
 	//JUMP
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		//position.y -= speed;
+		position.y -= speed;
 
 		if (current_animation != &jump)
 		{
@@ -236,16 +263,16 @@ bool j1Player::Update(float dt)
 		switch (player_last_direction)
 		{
 		case j1Player::UP:
-			current_animation = &idle_Stop;
+			current_animation = &idle_right;
 			break;
 		case j1Player::DOWN:
-			current_animation = &idle_Stop;
+			current_animation = &idle_right;
 			break;
 		case j1Player::LEFT:
-			current_animation = &idle_Stop;
+			current_animation = &idle_left;
 			break;
 		case j1Player::RIGHT:
-			current_animation = &idle_Stop;
+			current_animation = &idle_right;
 			break;
 		default:
 			break;
@@ -256,7 +283,7 @@ bool j1Player::Update(float dt)
 	//Player_Coll->SetPos(position.x, position.y);
 
 	// Draw everything --------------------------------------
-	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),1.0f);
+	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),4.0f);
 
 	return true;
 }
