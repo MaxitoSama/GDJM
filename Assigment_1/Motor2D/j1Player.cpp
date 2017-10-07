@@ -221,11 +221,9 @@ bool j1Player::Update(float dt)
 	//JUMP
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-<<<<<<< HEAD
+
 		position.y -= speed;
 
-=======
->>>>>>> origin/master
 		if (current_animation != &jump)
 		{
 			jump.Reset();
