@@ -129,6 +129,7 @@ j1Player::j1Player():j1Module()
 		jump.speed = 0.05f;
 	}
 
+
 }
 
 j1Player::~j1Player()
@@ -220,8 +221,11 @@ bool j1Player::Update(float dt)
 	//JUMP
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
+<<<<<<< HEAD
 		position.y -= speed;
 
+=======
+>>>>>>> origin/master
 		if (current_animation != &jump)
 		{
 			jump.Reset();
@@ -230,29 +234,7 @@ bool j1Player::Update(float dt)
 		}
 	}
 
-	//GRAVITY SIMULATOR
-	/*if (Jump == false)
-	{
-		position.y += 5;
-	}
-
-	/*
-		//JUMP METHODE
-	if (Jump == true && fall == false)
-	{
-		position.y -= 10;
-		counter++;
-		if (counter == 10)
-		{
-			counter = 0;
-			fall = true;
-		}
-	}
-	if (Jump == true && fall == true)
-	{
-		position.y += 10;
-	}*/
-
+	
 	//IDLE ANIMATIONS
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE
 		&& App->input->GetKey(SDL_SCANCODE_UP) == KEY_IDLE

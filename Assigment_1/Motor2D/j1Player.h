@@ -59,6 +59,7 @@ public:
 
 	int font_score = -1;
 	int speed;
+	int Pos_jump;
 
 
 	enum LastDirection { UP, DOWN, LEFT, RIGHT, UPRIGHT, UPLEFT, DOWNRIGHT, DOWNLEFT };
