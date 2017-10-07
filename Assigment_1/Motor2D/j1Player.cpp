@@ -88,18 +88,18 @@ j1Player::j1Player():j1Module()
 	die.speed = 0.05f;
 
 	//JUMP
-	jump.PushBack({ 64,823,263,332 });
-	jump.PushBack({ 327,823,263,332 });
-	jump.PushBack({ 590,823,263,332 });
-	jump.PushBack({ 853,823,263,332 });
-	jump.PushBack({ 1137,823,263,332 });
-	jump.PushBack({ 1449,823,263,332 });
-	jump.PushBack({ 1734,823,263,332 });
-	jump.PushBack({ 2019,823,263,332 });
-	jump.PushBack({ 2286,823,263,332 });
-	jump.PushBack({ 2560,823,263,332 });
+	jump.PushBack({ 64,2103,263,332 });
+	jump.PushBack({ 327,2103,263,332 });
+	jump.PushBack({ 590,2103,263,332 });
+	jump.PushBack({ 853,2103,263,332 });
+	jump.PushBack({ 1137,2103,263,332 });
+	jump.PushBack({ 1449,2103,263,332 });
+	jump.PushBack({ 1734,2103,263,332 });
+	jump.PushBack({ 2019,2103,263,332 });
+	jump.PushBack({ 2286,2103,263,332 });
+	jump.PushBack({ 2560,2103,263,332 });
 
-	jump.loop = false;
+	jump.loop = true;
 	jump.speed = 0.05f;
 
 }
@@ -194,6 +194,14 @@ bool j1Player::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && Jump == false)
 	{
 		Jump = true;
+		//position.y -= speed;
+
+		if (current_animation != &jump)
+		{
+			jump.Reset();
+			current_animation = &jump;
+			player_last_direction = RIGHT;
+		}
 	}
 	//DOWN
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
@@ -245,7 +253,8 @@ bool j1Player::Update(float dt)
 		position.y += 5;
 	}
 
-	//JUMP METHODE
+	/*
+		//JUMP METHODE
 	if (Jump == true && fall == false)
 	{
 		position.y -= 10;
@@ -260,7 +269,6 @@ bool j1Player::Update(float dt)
 	{
 		position.y += 10;
 	}*/
-
 
 	/*if (anim == true)
 	{
