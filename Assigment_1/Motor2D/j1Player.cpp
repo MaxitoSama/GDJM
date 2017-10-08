@@ -8,7 +8,7 @@
 //#include "ModuleParticles.h"
 #include "j1Render.h"
 #include "j1Window.h"
-//#include "ModuleCollision.h"
+#include "j1Colliders.h"
 //#include "ModuleFadeToBlack.h"
 #include "j1Player.h"
 #include "j1Audio.h"
@@ -148,7 +148,7 @@ bool j1Player::Start()
 	graphics = App->tex->Load("assets/character/character.png");
 
 	LOG("Loading Player Collider");
-	//Player_Coll = App->collision->AddCollider({ position.x, position.y, 46, 70 }, COLLIDER_PLAYER, this);
+	Player_Collider = App->colliders->AddCollider({ position.x, position.y, 46, 70 }, COLLIDER_PLAYER, this);
 	//font_score = App->fonts->Load("fonts/Lletres_1.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ./\ ", 2);
 
 	position.x = win_width/2;
@@ -175,7 +175,7 @@ bool j1Player::CleanUp()
 	//App->textures->Unload(textures);
 
 	LOG("Destroying Player Collider");
-	//if (Player_Coll != nullptr)
+	if (Player_Collider != nullptr)
 		//Player_Coll->to_delete = true;
 
 	return true;
@@ -219,10 +219,11 @@ bool j1Player::Update(float dt)
 	}
 
 	//JUMP
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
 
 		position.y -= speed;
+		Jump = true;
 
 		if (current_animation != &jump)
 		{
@@ -232,6 +233,13 @@ bool j1Player::Update(float dt)
 		}
 	}
 
+	if (!Jump) {
+		position.y += 2;
+	}
+	else if (Jump)
+	{
+		Jump = false;
+	}
 	
 	//IDLE ANIMATIONS
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE
@@ -259,11 +267,11 @@ bool j1Player::Update(float dt)
 		}
 	}
 
-	// Player Colliders Position
-	//Player_Coll->SetPos(position.x, position.y);
+	//Player Colliders Position
+	Player_Collider->SetPos(position.x, position.y);
 
 	// Draw everything --------------------------------------
-	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),1.0f);
+	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),0.5f);
 
 	return true;
 }
@@ -288,57 +296,16 @@ bool j1Player::Save(pugi::xml_node& data) const
 }
 
 
-/*void j1Player::OnCollision(Collider* c1, Collider* c2) {
-	if (c2->type == COLLIDER_WALL)
-	{
-		if (c1 == feetcoll && (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
-			|| App->input->controll[0] == KEY_STATE::KEY_REPEAT))
-		{
-			position.y += 1;
-		}
-		if (c1 == feetcoll && (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
-			|| App->input->controll[1] == KEY_STATE::KEY_REPEAT))
-		{
-			position.y -= 1;
-		}
-		if (c1 == feetcoll && (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
-			|| App->input->controll[3] == KEY_STATE::KEY_REPEAT))
-		{
-			position.x += 1;
-		}
-		if (c1 == feetcoll && (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
-			|| App->input->controll[2] == KEY_STATE::KEY_REPEAT))
-		{
-			position.x -= 1;
-		}
-	}
-
-	if (c2->type == COLLIDER_ENEMY_SHOT && god == false)
-	{
-		if (alive) {
-			alive = false;
-			App->elements1->num_lives_play_1--;
-			anim = true;
-		}
-	}
-
-	if (c2->type == COLLIDER_ENEMY && god == false)
-	{
-		if (alive) {
-			alive = false;
-			App->elements1->num_lives_play_1--;
-			anim = true;
-		}
-	}
-
+void j1Player::OnCollision(Collider* c1, Collider* c2) {
+	
 	//Jump methode
 	if (c2->type == COLLIDER_FLOOR)
 	{
-		position.y -= 5;
+		position.y -= 2;
 		Jump = false;
 		fall = false;
 	}
-}*/
+}
 
 float j1Player::angle()
 {
