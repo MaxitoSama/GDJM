@@ -37,7 +37,7 @@ j1Player::j1Player():j1Module()
 		idle_right.PushBack({ 2559,111,176,331 });
 
 		idle_right.loop = true;
-		idle_right.speed = 0.05f;
+		idle_right.speed = 0.03f;
 	}
 
 	//idle animation Left
@@ -55,7 +55,7 @@ j1Player::j1Player():j1Module()
 
 		idle_left.loop = true;
 		//idle_left.speed = 0.001f;
-		idle_left.speed = 0.05f;
+		idle_left.speed = 0.03f;
 	}
 
 	
@@ -73,7 +73,7 @@ j1Player::j1Player():j1Module()
 		right.PushBack({ 2560,472,263,332 });
 
 		right.loop = true;
-		right.speed = 0.1f;
+		right.speed = 0.05f;
 	}
 
 	//Move Right back
@@ -96,7 +96,7 @@ j1Player::j1Player():j1Module()
 		left.PushBack({ 2560,823,263,332 });
 
 		left.loop = true;
-		left.speed = 0.1f;
+		left.speed = 0.05f;
 	}
 
 	//Move Left Back
@@ -126,7 +126,7 @@ j1Player::j1Player():j1Module()
 		jump.PushBack({ 2560,2103,263,332 });
 
 		jump.loop = true;
-		jump.speed = 0.05f;
+		jump.speed = 0.03f;
 	}
 
 
@@ -263,7 +263,7 @@ bool j1Player::Update(float dt)
 	//Player_Coll->SetPos(position.x, position.y);
 
 	// Draw everything --------------------------------------
-	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),4.0f);
+	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),1.0f);
 
 	return true;
 }
@@ -337,39 +337,6 @@ bool j1Player::Save(pugi::xml_node& data) const
 		position.y -= 5;
 		Jump = false;
 		fall = false;
-	}
-}*/
-
-/*void j1Player::shot() {
-	int x, y;
-
-	// Taking the Position of the mouse
-	SDL_GetMouseState(&x, &y);
-
-	//Changing the focus of the mouse (0,0) by default
-	x = x - ((SCREEN_WIDTH*SCREEN_SIZE) / 2) - (23 * SCREEN_SIZE);
-	y = y - position.y*SCREEN_SIZE - 35 * SCREEN_SIZE;
-	LOG("La X=%d i la Y=%d", x, y);
-
-	//The direction of the bullet is the module of the new mouse position
-	App->particles->bullet.speed.y = y / sqrt(x*x + y*y) * 5;
-	App->particles->bullet.speed.x = x / sqrt(x*x + y*y) * 5;
-
-	//Creates the Particle
-	if (shots_fired < SHOTS_PER_BURST && shooting == true && App->ui->mana>0) {
-		LOG("ShOOTTOODAAA!!!!");
-		if (shot_current_delay < SHOT_DELAY)
-			shot_current_delay++;
-		else {
-			App->particles->AddParticle(App->particles->bullet, position.x + 23, position.y + 35, COLLIDER_PLAYER_SHOT);
-			shots_fired++;
-			shot_current_delay = 0;
-			App->ui->mana--;
-		}
-	}
-	else {
-		shots_fired = 0;
-		shooting = false;
 	}
 }*/
 
