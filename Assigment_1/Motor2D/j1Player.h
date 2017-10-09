@@ -21,6 +21,7 @@ public:
 	j1Player();
 	~j1Player();
 
+	bool Awake(pugi::xml_node&);
 	bool Start();
 	bool Update(float dt);
 	bool CleanUp();
@@ -77,6 +78,9 @@ private:
 	uint win_width;
 	uint win_height;
 	uint win_scale;
+	uint jump_height;
+	uint jump_vel;
+	uint gravity;
 };
 
 #endif

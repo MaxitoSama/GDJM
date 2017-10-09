@@ -135,14 +135,16 @@ j1Player::j1Player():j1Module()
 j1Player::~j1Player()
 {}
 
+bool j1Player::Awake(pugi::xml_node& config)
+{
+	LOG("Init Player config");
+	bool ret = true;
+
+	return ret;
+}
 // Load assets
 bool j1Player::Start()
 {
-
-	win_width = App->win->screen_surface->w;
-	win_height = App->win->screen_surface->h;
-	win_scale = App->win->GetScale();
-
 	LOG("Loading Player Sheet");
 
 	graphics = App->tex->Load("assets/character/character.png");
@@ -151,10 +153,23 @@ bool j1Player::Start()
 	Player_Collider = App->colliders->AddCollider({ position.x, position.y, 46, 70 }, COLLIDER_PLAYER, this);
 	//font_score = App->fonts->Load("fonts/Lletres_1.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ./\ ", 2);
 
+	//Init Screen vars
+	win_width = App->win->screen_surface->w;
+	win_height = App->win->screen_surface->h;
+	win_scale = App->win->GetScale();
+
+	//Init position vars
 	position.x = win_width/2;
 	position.y = 215;
 
+	//Init Jump vars
+	jump_height = 300;
+	jump_vel = 2;
+	gravity = 2;
+
+	//Init bools
 	fall = false;
+	Jump = false;
 
 	return true;
 }
@@ -216,7 +231,7 @@ bool j1Player::Update(float dt)
 	{
 		if (!Jump)
 		{
-			Pos_jump = position.y - 300;
+			Pos_jump = position.y - jump_height;
 			Jump = true;
 		}
 
@@ -228,7 +243,6 @@ bool j1Player::Update(float dt)
 		}
 	}
 	
-
 	//Function that makes the Jump
 	Jump_Method();
 
@@ -278,10 +292,9 @@ bool j1Player::Load(pugi::xml_node& data)
 }
 bool j1Player::Save(pugi::xml_node& data) const 
 {
-	pugi::xml_node cam = data.append_child("player");
 
-	cam.append_attribute("x") = position.x;
-	cam.append_attribute("y") = position.y;
+	data.append_child("player").append_attribute("x") = position.x;
+	data.append_child("player").append_attribute("y") = position.y;
 
 	return true;
 }
@@ -292,7 +305,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	//Jump methode
 	if (c2->type == COLLIDER_FLOOR)
 	{
-		position.y -= 2;
+		position.y -= gravity;
 		Jump = false;
 		fall = false;
 	}
@@ -301,12 +314,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 void j1Player::Jump_Method()
 {
 	if (!Jump) {
-		position.y += 2;
+		position.y += gravity;
 	}
 
 	if (Jump == true && position.y != Pos_jump)
 	{
-		position.y -= 1;
+		position.y -= jump_vel;
 		if (position.y == Pos_jump)
 		{
 			Jump = false;
