@@ -154,13 +154,6 @@ bool j1Player::Start()
 	position.x = win_width/2;
 	position.y = 215;
 
-	stop = false;
-	anim = false;
-	water = false;
-	grenade = false;
-	god = false;
-	counter = 0;
-	only = true;
 	fall = false;
 
 	return true;
@@ -195,7 +188,7 @@ bool j1Player::Update(float dt)
 
 		//The direccion changes with the position of the mouse
 		
-		if (current_animation != &left)
+		if (current_animation != &left && !Jump)
 		{
 			left.Reset();
 			current_animation = &left;
@@ -209,7 +202,7 @@ bool j1Player::Update(float dt)
 
 		position.x += speed;
 
-		if (current_animation != &right)
+		if (current_animation != &right && !Jump)
 		{
 			right.Reset();
 			current_animation = &right;
@@ -219,11 +212,13 @@ bool j1Player::Update(float dt)
 	}
 
 	//JUMP
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall)
 	{
-
-		position.y -= speed;
-		Jump = true;
+		if (!Jump)
+		{
+			Pos_jump = position.y - 300;
+			Jump = true;
+		}
 
 		if (current_animation != &jump)
 		{
@@ -232,15 +227,11 @@ bool j1Player::Update(float dt)
 			player_last_direction = RIGHT;
 		}
 	}
-
-	if (!Jump) {
-		position.y += 2;
-	}
-	else if (Jump)
-	{
-		Jump = false;
-	}
 	
+
+	//Function that makes the Jump
+	Jump_Method();
+
 	//IDLE ANIMATIONS
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE
 		&& App->input->GetKey(SDL_SCANCODE_UP) == KEY_IDLE
@@ -304,6 +295,23 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		position.y -= 2;
 		Jump = false;
 		fall = false;
+	}
+}
+
+void j1Player::Jump_Method()
+{
+	if (!Jump) {
+		position.y += 2;
+	}
+
+	if (Jump == true && position.y != Pos_jump)
+	{
+		position.y -= 1;
+		if (position.y == Pos_jump)
+		{
+			Jump = false;
+			fall = true;
+		}
 	}
 }
 

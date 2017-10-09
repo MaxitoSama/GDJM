@@ -25,6 +25,7 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
+	void Jump_Method();
 	//void shot();
 	float angle();
 
@@ -65,21 +66,12 @@ public:
 	enum LastDirection { UP, DOWN, LEFT, RIGHT, UPRIGHT, UPLEFT, DOWNRIGHT, DOWNLEFT };
 	LastDirection player_last_direction;
 	iPoint position;
-	bool stop = false;
-	bool alive = false;
-	bool anim = false;
-	bool water = false;
-	bool grenade = false;
-	bool distance = false;
+	
 	bool Jump = false;
 	bool fall = false;
 	bool shooting = false;
-	int shots_fired = 0;
-	int shot_current_delay = 0;
-	int score = 0;
-	int counter = 0;
-	bool god = false;
-	bool only = true;
+	
+	
 
 private:
 	uint win_width;
