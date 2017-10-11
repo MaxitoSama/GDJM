@@ -49,19 +49,19 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	if(App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->LoadGame();
 
-	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->SaveGame();
 
-	if(App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	/*if(App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		App->render->camera.y += 4;
 
 	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		App->render->camera.y -= 4;
+		App->render->camera.y -= 4;*/
 
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	/*if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		if (App->render->camera.x < 0)
 		{
@@ -75,7 +75,13 @@ bool j1Scene::Update(float dt)
 		{
 			App->render->camera.x -= App->player->speed;
 		}
+	}*/
+
+	if (App->player->position.x>=App->player->win_width/2 && App->player->position.x <= App->player->win_width)
+	{
+		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;
 	}
+
 	//Check Points
 
 

@@ -159,7 +159,7 @@ bool j1Player::Start()
 	win_scale = App->win->GetScale();
 
 	//Init position vars
-	position.x = 30;//win_width/12;
+	position.x =win_width/2;
 	position.y = 215;
 
 	//Init Jump vars
@@ -193,16 +193,15 @@ bool j1Player::Update(float dt)
 {
 	SDL_Event e;
 	speed = 8;
-	SDL_Rect Potato = { 128,717,49,56 };
-	SDL_Rect Potato_2 = { ((win_width*win_scale) / 2) - (23 * win_scale),position.y*win_scale - 35 * win_scale,100,100 };
-
+	
 	//LEFT
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-		position.x -= speed;
+		if (position.x >= speed)
+		{
+			position.x -= speed;
+		}
 
-		//The direccion changes with the position of the mouse
-		
 		if (current_animation != &left && !Jump)
 		{
 			left.Reset();
@@ -214,8 +213,11 @@ bool j1Player::Update(float dt)
 	//RIGHT
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-
-		position.x += speed;
+		if (position.x < (int)win_width +400)
+		{
+			position.x += speed;
+		}
+		
 
 		if (current_animation != &right && !Jump)
 		{

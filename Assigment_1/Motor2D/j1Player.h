@@ -71,12 +71,14 @@ public:
 	bool Jump = false;
 	bool fall = false;
 	bool shooting = false;
-	
 
-private:
 	uint win_width;
 	uint win_height;
 	uint win_scale;
+	
+
+private:
+
 	uint jump_height;
 	uint jump_vel;
 	uint gravity;
