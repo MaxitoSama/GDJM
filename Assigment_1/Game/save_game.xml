@@ -8,10 +8,10 @@
 	<scene />
 	<colliders />
 	<player>
-		<player x="228" />
-		<player y="255" />
+		<player x="656" />
+		<player y="250" />
 	</player>
 	<renderer>
-		<camera x="-100" y="84" />
+		<camera x="72" y="-4" />
 	</renderer>
 </game_state>
