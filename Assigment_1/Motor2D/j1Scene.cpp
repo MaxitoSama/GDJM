@@ -55,16 +55,25 @@ bool j1Scene::Update(float dt)
 		App->SaveGame();
 
 	if(App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		App->render->camera.y -= 1;
+		App->render->camera.y += 4;
 
 	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		App->render->camera.y += 1;
+		App->render->camera.y -= 4;
 
-	if(App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x += 1;
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	{
+		App->render->camera.x += 4;
+	}
+		
 
-	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x -= 1;
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	{
+		if (App->player->position.x >= App->win->screen_surface->w / 4 && App->render->camera.x >= -572 )
+		{
+			App->render->camera.x -= 4;
+		}
+	}
+		
 
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw();
