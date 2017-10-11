@@ -33,7 +33,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	App->map->Load("untitled.tmx");
-
+	App->audio->PlayMusic("audio/music/map1_music.ogg");
 	//Colliders
 	App->colliders->AddCollider({ 0,500,10000,1 }, COLLIDER_FLOOR);
 
@@ -65,7 +65,7 @@ bool j1Scene::Update(float dt)
 	{
 		if (App->render->camera.x < 0)
 		{
-			App->render->camera.x += 4;
+			App->render->camera.x += App->player->speed;
 		}	
 	}
 		
@@ -73,7 +73,7 @@ bool j1Scene::Update(float dt)
 	{
 		if (App->player->position.x >= 400 && App->render->camera.x >= -570)
 		{
-			App->render->camera.x -= 4;
+			App->render->camera.x -= App->player->speed;
 		}
 	}
 	//Check Points
@@ -84,10 +84,12 @@ bool j1Scene::Update(float dt)
 
 	// TODO 7: Set the window title like
 	// "Map:%dx%d Tiles:%dx%d Tilesets:%d"
-	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Player.x=%i Player.y=%i CameraPosition.x=%i",
+	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Player.x=%i Player.y=%i CameraPosition.x=%i CameraPosition.y=%i",
 					App->map->data.width, App->map->data.height,
 					App->map->data.tile_width, App->map->data.tile_height,
-					App->map->data.tilesets.count(), App->player->position.x, App->player->position.y, App->render->camera.x);
+					App->map->data.tilesets.count(), App->player->position.x, 
+					App->player->position.y, App->render->camera.x,
+					App->render->camera.y);
 
 	App->win->SetTitle(title.GetString());
 	return true;

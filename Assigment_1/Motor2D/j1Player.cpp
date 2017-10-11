@@ -192,7 +192,7 @@ bool j1Player::CleanUp()
 bool j1Player::Update(float dt)
 {
 	SDL_Event e;
-	speed = 4;
+	speed = 8;
 	SDL_Rect Potato = { 128,717,49,56 };
 	SDL_Rect Potato_2 = { ((win_width*win_scale) / 2) - (23 * win_scale),position.y*win_scale - 35 * win_scale,100,100 };
 
@@ -241,6 +241,7 @@ bool j1Player::Update(float dt)
 			current_animation = &jump;
 			player_last_direction = RIGHT;
 		}
+		
 	}
 	
 	//Function that makes the Jump
