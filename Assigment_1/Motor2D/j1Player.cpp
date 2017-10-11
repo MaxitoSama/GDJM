@@ -335,15 +335,20 @@ void j1Player::Jump_Method()
 		position.y += gravity;
 	}
 
-	if (Jump == true && position.y != Pos_jump)
+	if (Jump == true && position.y != Pos_jump )
 	{
-		position.y -= jump_vel;
-		if (position.y == Pos_jump)
+		if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+		{
+			position.y -= jump_vel;
+		}
+		
+		if (position.y == Pos_jump || App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 		{
 			Jump = false;
 			fall = true;
 		}
 	}
+	
 }
 
 void j1Player::Acceleration_Method()
