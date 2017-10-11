@@ -32,7 +32,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("hello22.tmx");
+	App->map->Load("untitled.tmx");
 
 	//Colliders
 	App->colliders->AddCollider({ 0,500,10000,1 }, COLLIDER_FLOOR);

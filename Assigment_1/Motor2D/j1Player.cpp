@@ -37,7 +37,7 @@ j1Player::j1Player():j1Module()
 		idle_right.PushBack({ 2559,111,176,331 });
 
 		idle_right.loop = true;
-		idle_right.speed = 0.03f;
+		idle_right.speed = 0.9f;
 	}
 
 	//idle animation Left
@@ -55,7 +55,7 @@ j1Player::j1Player():j1Module()
 
 		idle_left.loop = true;
 		//idle_left.speed = 0.001f;
-		idle_left.speed = 0.03f;
+		idle_left.speed = 0.9f;
 	}
 
 	
@@ -73,7 +73,7 @@ j1Player::j1Player():j1Module()
 		right.PushBack({ 2560,472,263,332 });
 
 		right.loop = true;
-		right.speed = 0.05f;
+		right.speed = 0.9f;
 	}
 
 	//Move Right back
@@ -96,7 +96,7 @@ j1Player::j1Player():j1Module()
 		left.PushBack({ 2560,823,263,332 });
 
 		left.loop = true;
-		left.speed = 0.05f;
+		left.speed = 0.9f;
 	}
 
 	//Move Left Back
@@ -126,7 +126,7 @@ j1Player::j1Player():j1Module()
 		jump.PushBack({ 2560,2103,263,332 });
 
 		jump.loop = true;
-		jump.speed = 0.03f;
+		jump.speed = 0.9f;
 	}
 
 
@@ -164,8 +164,8 @@ bool j1Player::Start()
 
 	//Init Jump vars
 	jump_height = 300;
-	jump_vel = 2;
-	gravity = 2;
+	jump_vel = 10;
+	gravity = 10;
 
 	//Init bools
 	fall = false;
@@ -192,7 +192,7 @@ bool j1Player::CleanUp()
 bool j1Player::Update(float dt)
 {
 	SDL_Event e;
-	speed = 1;
+	speed = 4;
 	SDL_Rect Potato = { 128,717,49,56 };
 	SDL_Rect Potato_2 = { ((win_width*win_scale) / 2) - (23 * win_scale),position.y*win_scale - 35 * win_scale,100,100 };
 
