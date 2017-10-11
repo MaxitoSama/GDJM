@@ -77,7 +77,7 @@ bool j1Scene::Update(float dt)
 		}
 	}*/
 
-	if (App->player->position.x>=App->player->win_width/2 && App->player->position.x <= App->player->win_width)
+	if (App->player->position.x>=App->player->win_width/2/* && App->player->position.x <= App->player->win_width*/)
 	{
 		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;
 	}
@@ -90,12 +90,12 @@ bool j1Scene::Update(float dt)
 
 	// TODO 7: Set the window title like
 	// "Map:%dx%d Tiles:%dx%d Tilesets:%d"
-	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Player.x=%i Player.y=%i CameraPosition.x=%i CameraPosition.y=%i",
+	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Player.x=%i Player.y=%i CameraPosition.x=%i CameraPosition.y=%i Acceleration=%d",
 					App->map->data.width, App->map->data.height,
 					App->map->data.tile_width, App->map->data.tile_height,
 					App->map->data.tilesets.count(), App->player->position.x, 
 					App->player->position.y, App->render->camera.x,
-					App->render->camera.y);
+					App->render->camera.y, App->player->acceleration);
 
 	App->win->SetTitle(title.GetString());
 	return true;

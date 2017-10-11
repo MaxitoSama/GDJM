@@ -167,6 +167,10 @@ bool j1Player::Start()
 	jump_vel = 10;
 	gravity = 10;
 
+	//acceleraation vars
+	acceleration = 0;
+	accel_counter = 0;
+
 	//Init bools
 	fall = false;
 	Jump = false;
@@ -192,15 +196,18 @@ bool j1Player::CleanUp()
 bool j1Player::Update(float dt)
 {
 	SDL_Event e;
-	speed = 8;
+	speed = 4;
 	
 	//LEFT
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		if (position.x >= speed)
 		{
-			position.x -= speed;
+			position.x -= (speed + acceleration);
+			Acceleration_Method();
 		}
+
+		
 
 		if (current_animation != &left && !Jump)
 		{
@@ -213,11 +220,12 @@ bool j1Player::Update(float dt)
 	//RIGHT
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-		if (position.x < (int)win_width +400)
-		{
-			position.x += speed;
-		}
-		
+		/*if (position.x < (int)win_width +400)
+		{*/
+			position.x += speed + acceleration;
+			Acceleration_Method();
+		/*}*/
+
 
 		if (current_animation != &right && !Jump)
 		{
@@ -226,6 +234,13 @@ bool j1Player::Update(float dt)
 			player_last_direction = RIGHT;
 		}
 
+	}
+	
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
+	{
+		acceleration = 0;
+		accel_counter = 0;
+		speed = 8;
 	}
 
 	//JUMP
@@ -328,6 +343,15 @@ void j1Player::Jump_Method()
 			Jump = false;
 			fall = true;
 		}
+	}
+}
+
+void j1Player::Acceleration_Method()
+{
+	accel_counter += 1;
+	if (accel_counter % 100 == 0)
+	{
+		acceleration += 2;
 	}
 }
 

@@ -27,6 +27,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 	void Jump_Method();
+	void Acceleration_Method();
 	//void shot();
 	float angle();
 
@@ -75,13 +76,14 @@ public:
 	uint win_width;
 	uint win_height;
 	uint win_scale;
-	
+	uint acceleration;
 
 private:
 
 	uint jump_height;
 	uint jump_vel;
 	uint gravity;
+	uint accel_counter;
 };
 
 #endif
