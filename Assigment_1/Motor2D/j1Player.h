@@ -56,6 +56,7 @@ public:
 	Animation Scythe_Right;
 	Animation Scythe_Left;
 	Animation jump;
+	Animation slide;
 
 	Collider* Player_Collider;
 	Collider* feetcoll;

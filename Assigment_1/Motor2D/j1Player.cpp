@@ -84,19 +84,20 @@ j1Player::j1Player():j1Module()
 
 	// Move Left
 	{
-		left.PushBack({ 64,823,263,332 });
-		left.PushBack({ 327,823,263,332 });
-		left.PushBack({ 590,823,263,332 });
-		left.PushBack({ 853,823,263,332 });
-		left.PushBack({ 1137,823,263,332 });
-		left.PushBack({ 1449,823,263,332 });
-		left.PushBack({ 1734,823,263,332 });
-		left.PushBack({ 2019,823,263,332 });
-		left.PushBack({ 2286,823,263,332 });
-		left.PushBack({ 2560,823,263,332 });
 
-		left.loop = true;
-		left.speed = 0.5;
+	left.PushBack({ 2611,813,283,341 });
+	left.PushBack({ 2328,813,283,341 });
+	left.PushBack({ 2045,813,283,341 });
+	left.PushBack({ 1762,813,283,341 });
+	left.PushBack({ 1479,813,283,341 });
+	left.PushBack({ 1196,813,283,341 });
+	left.PushBack({ 913,813,283,341 });
+	left.PushBack({ 630,813,283,341 });
+	left.PushBack({ 347,813,283,341 });
+	left.PushBack({ 64,813,283,341 });
+
+	left.loop = true;
+	left.speed = 0.5;
 	}
 
 	//Move Left Back
@@ -196,7 +197,7 @@ bool j1Player::CleanUp()
 bool j1Player::Update(float dt)
 {
 	SDL_Event e;
-	speed = 4;
+	speed = 0;
 	
 	//LEFT
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
@@ -353,10 +354,10 @@ void j1Player::Jump_Method()
 
 void j1Player::Acceleration_Method()
 {
-	accel_counter += 1;
+	accel_counter += 2;
 	if (accel_counter % 100 == 0)
 	{
-		acceleration += 2;
+		acceleration += 0;
 	}
 }
 
