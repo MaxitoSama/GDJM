@@ -35,6 +35,7 @@ void j1Map::Draw()
 	// TODO 5: Prepare the loop to draw all tilesets + Blit
 	uint tile_indx;
 	uint layer_indx;
+	uint counter = 0;
 	for (layer_indx = 0; layer_indx<data.layers.count(); layer_indx++)
 	{
 		for (int j = 0; j < data.height; j++)
@@ -65,7 +66,7 @@ void j1Map::Draw()
 
 void j1Map::Draw_Colliders()
 {
-	uint tile_indx;
+	uint tile_indx=0;
 	uint layer_indx;
 	for (layer_indx = 0; layer_indx<data.layers.count(); layer_indx++)
 	{
@@ -74,14 +75,16 @@ void j1Map::Draw_Colliders()
 			for (int i = 0; i < data.width; i++)
 			{
 				uint id = data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i, j)];
-					
-				int x = MapToWorld(i, j).x;
-				int y = MapToWorld(i, j).y;
 
-				SDL_Rect collider_rec = { x,y,data.tile_width,data.tile_height };
-				if (id == 6)
+				for (uint indx = 0; indx < data.tilesets[tile_indx]->colliders.count(); indx++)
 				{
-					App->colliders->AddCollider(collider_rec, COLLIDER_FLOOR);
+					if (id - data.tilesets[tile_indx]->firstgid == data.tilesets[tile_indx]->colliders[indx]->tile_id)
+					{
+						int x = MapToWorld(i, j).x;
+						int y = MapToWorld(i, j).y;
+						SDL_Rect collider_rec = { x,y,data.tile_width,data.tile_height };
+						App->colliders->AddCollider(collider_rec, data.tilesets[tile_indx]->colliders[indx]->type);
+					}
 				}
 			}
 		}
@@ -301,12 +304,42 @@ bool j1Map::LoadMap()
 bool j1Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 {
 	bool ret = true;
+
 	set->name.create(tileset_node.attribute("name").as_string());
 	set->firstgid = tileset_node.attribute("firstgid").as_int();
 	set->tile_width = tileset_node.attribute("tilewidth").as_int();
 	set->tile_height = tileset_node.attribute("tileheight").as_int();
 	set->margin = tileset_node.attribute("margin").as_int();
 	set->spacing = tileset_node.attribute("spacing").as_int();
+
+	for (pugi::xml_node tile = tileset_node.child("tile"); tile; tile = tile.next_sibling())
+	{
+		TileCollider* aux_collider=new TileCollider();
+
+		aux_collider->tile_id = tile.child("objectgroup").child("object").attribute("id").as_uint();
+		aux_collider->collider_x= tile.child("objectgroup").child("object").attribute("x").as_int();
+		aux_collider->collider_y = tile.child("objectgroup").child("object").attribute("y").as_int();
+		aux_collider->collider_height = tile.child("objectgroup").child("object").attribute("height").as_uint();
+		aux_collider->collider_width = tile.child("objectgroup").child("object").attribute("width").as_uint();
+
+		p2SString type(tile.child("objectgroup").child("object").attribute("type").as_string());
+
+		if (type == "COLLIDER_NONE")
+		{
+			aux_collider->type = COLLIDER_NONE;
+		}
+		else if (type == "COLLIDER_WALL")
+		{
+			aux_collider->type = COLLIDER_WALL;
+		}
+		else if (type == "COLLIDER_FLOOR")
+		{
+			aux_collider->type = COLLIDER_FLOOR;
+		}
+
+		set->colliders.add(aux_collider);
+	}
+	
 	pugi::xml_node offset = tileset_node.child("tileoffset");
 
 	if (offset != NULL)

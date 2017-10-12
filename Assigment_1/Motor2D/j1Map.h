@@ -5,6 +5,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "j1Module.h"
+#include "j1Colliders.h"
 
 // TODO 1: Create a struct for the map layer
 
@@ -31,25 +32,35 @@ struct MapLayer {
 
 };
 
+struct TileCollider
+{
+	COLLIDER_TYPE		type;
+	uint				tile_id;
+	int					collider_x;
+	int					collider_y;
+	uint				collider_height;
+	uint				collider_width;
+};
 
 struct TileSet
 {
 	// TODO 7: Create a method that receives a tile id and returns it's Rectfind the Rect associated with a specific tile id
 	SDL_Rect GetTileRect(int id) const;
 
-	p2SString			name;
-	int					firstgid;
-	int					margin;
-	int					spacing;
-	int					tile_width;
-	int					tile_height;
-	SDL_Texture*		texture;
-	int					tex_width;
-	int					tex_height;
-	int					num_tiles_width;
-	int					num_tiles_height;
-	int					offset_x;
-	int					offset_y;
+	p2SString				name;
+	int						firstgid;
+	int						margin;
+	int						spacing;
+	int						tile_width;
+	int						tile_height;
+	SDL_Texture*			texture;
+	int						tex_width;
+	int						tex_height;
+	int						num_tiles_width;
+	int						num_tiles_height;
+	int						offset_x;
+	int						offset_y;
+	p2List<TileCollider*>	colliders;
 };
 
 enum MapTypes
