@@ -35,7 +35,8 @@ bool j1Scene::Start()
 	App->map->Load("untitled.tmx");
 	App->audio->PlayMusic("audio/music/map1_music.ogg");
 	//Colliders
-	App->colliders->AddCollider({ 0,500,10000,1 }, COLLIDER_FLOOR);
+	App->colliders->AddCollider({ 0,415,10000,10 }, COLLIDER_FLOOR);
+	//App->map->Draw_Colliders();
 
 	return true;
 }
@@ -77,7 +78,7 @@ bool j1Scene::Update(float dt)
 		}
 	}*/
 
-	if (App->player->position.x>=App->player->win_width/2/* && App->player->position.x <= App->player->win_width*/)
+	if (App->player->position.x>=App->player->win_width/2 && App->player->position.x <= App->player->win_width)
 	{
 		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;
 	}

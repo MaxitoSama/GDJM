@@ -14,11 +14,11 @@ public:
 
 private:
 	float current_frame;
+	float next_frame;
 	int last_frame = 0;
 	int loops = 0;
 
 public:
-
 
 	void PushBack(const SDL_Rect& rect)
 	{
@@ -37,6 +37,18 @@ public:
 			}
 
 			return frames[(int)current_frame];
+		}
+	}
+	
+	SDL_Rect& GetNextFrame()
+	{
+		if (current_frame < last_frame)
+		{
+			return frames[(int)current_frame + 1];
+		}
+		else
+		{
+			return frames[0];
 		}
 	}
 

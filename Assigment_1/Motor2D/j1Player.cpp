@@ -151,7 +151,7 @@ bool j1Player::Start()
 	graphics = App->tex->Load("assets/character/character.png");
 
 	LOG("Loading Player Collider");
-	Player_Collider = App->colliders->AddCollider({ position.x, position.y, 46, 250 }, COLLIDER_PLAYER, this);
+	Player_Collider = App->colliders->AddCollider({ position.x, position.y, 46, 330/2 }, COLLIDER_PLAYER, this);
 	//font_score = App->fonts->Load("fonts/Lletres_1.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ./\ ", 2);
 
 	//Init Screen vars
@@ -250,6 +250,7 @@ bool j1Player::Update(float dt)
 		if (!Jump)
 		{
 			Pos_jump = position.y - jump_height;
+			gravity = 10;
 			Jump = true;
 		}
 
@@ -324,10 +325,21 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	//Jump methode
 	if (c2->type == COLLIDER_FLOOR)
 	{
-		position.y -= gravity;
+		position.y-=gravity;
 		Jump = false;
 		fall = false;
 	}
+
+	/*if (SDL_HasIntersection(&c2->rect, &current_animation->GetNextFrame()))
+	{
+		gravity= 0;
+		Jump = false;
+		fall = false;
+	}
+	else
+	{
+		gravity = 10;
+	}*/
 }
 
 void j1Player::Jump_Method()
