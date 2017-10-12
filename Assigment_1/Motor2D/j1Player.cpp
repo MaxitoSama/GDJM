@@ -197,7 +197,7 @@ bool j1Player::CleanUp()
 bool j1Player::Update(float dt)
 {
 	SDL_Event e;
-	speed = 0;
+	speed = 4;
 	
 	//LEFT
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
@@ -357,7 +357,7 @@ void j1Player::Acceleration_Method()
 	accel_counter += 2;
 	if (accel_counter % 100 == 0)
 	{
-		acceleration += 0;
+		acceleration += 3;
 	}
 }
 
