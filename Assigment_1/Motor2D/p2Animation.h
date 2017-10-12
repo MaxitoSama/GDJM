@@ -2,6 +2,7 @@
 #define __ANIMATION_H__
 
 #include "SDL/include/SDL_rect.h"
+#include "j1Player.h"
 #define MAX_FRAMES 200
 
 class Animation
@@ -42,14 +43,11 @@ public:
 	
 	SDL_Rect& GetNextFrame()
 	{
-		if (current_frame < last_frame)
-		{
-			return frames[(int)current_frame + 1];
-		}
-		else
-		{
-			return frames[0];
-		}
+		SDL_Rect Next_frame=frames[(int)current_frame];
+
+		Next_frame.y += 10;
+
+		return Next_frame;
 	}
 
 	bool Finished() const
