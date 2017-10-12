@@ -186,6 +186,9 @@ j1Player::~j1Player()
 bool j1Player::Awake(pugi::xml_node& config)
 {
 	LOG("Init Player config");
+
+	gravity = 10;
+
 	bool ret = true;
 
 	return ret;
@@ -398,9 +401,10 @@ bool j1Player::Load(pugi::xml_node& data)
 }
 bool j1Player::Save(pugi::xml_node& data) const 
 {
+	pugi::xml_node player = data.append_child("player");
 
-	data.append_child("player").append_attribute("x") = position.x;
-	data.append_child("player").append_attribute("y") = position.y;
+	player.append_attribute("x") = position.x;
+	player.append_attribute("y") = position.y;
 
 	return true;
 }
