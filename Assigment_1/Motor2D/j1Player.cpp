@@ -198,7 +198,7 @@ bool j1Player::Start()
 	graphics = App->tex->Load("assets/character/character.png");
 
 	LOG("Loading Player Collider");
-	Player_Collider = App->colliders->AddCollider({ position.x, position.y, 46, 330/2 }, COLLIDER_PLAYER, this);
+	Player_Collider = App->colliders->AddCollider({ position.x, position.y, 263/2, 330/2 }, COLLIDER_PLAYER, this);
 	//font_score = App->fonts->Load("fonts/Lletres_1.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ./\ ", 2);
 
 	//Init Screen vars
@@ -411,12 +411,17 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	//Jump methode
 	if (c2->type == COLLIDER_FLOOR)
 	{
-		position.y-=gravity;
-		Jump = false;
-		fall = false;
+		gravity=0;
+
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+		{
+			Jump = false;
+			fall = false;
+		}
+
 	}
 
-	/*if (SDL_HasIntersection(&c2->rect, &current_animation->GetNextFrame()))
+	/*if (SDL_HasIntersection(&c2->rect, &current_animation->GetNextFrame(8,10)))
 	{
 		gravity= 0;
 		Jump = false;
@@ -438,11 +443,12 @@ void j1Player::Jump_Method()
 	{
 		if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 		{
-			position.y -= jump_vel;
+ 			position.y -= jump_vel;
 		}
 		
 		if (position.y == Pos_jump || App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 		{
+			gravity = 10;
 			Jump = false;
 			fall = true;
 		}
@@ -459,49 +465,3 @@ void j1Player::Acceleration_Method()
 	}
 }
 
-float j1Player::angle()
-{
-	int x, y;
-	float div;
-	float angle_rad;
-	float angle;
-
-	// Taking the Position of the mouse
-	SDL_GetMouseState(&x, &y);
-
-	//Changing the focus of the mouse (0,0) by default
-	x = x - ((win_width*win_scale) / 2) - (23 * win_scale);
-	y = y - position.y*win_scale - 35 * win_scale;
-//	LOG("La X=%d i la Y=%d", x, y);
-
-
-	//Obtaining the angle
-	if (x >0 && y>0) {
-		div = ((float)y / (float)x);
-		angle_rad = atan(div);
-		angle = angle_rad * 57.2957795;
-	}
-	if (x <0 && y>0) {
-		div = ((float)x / (float)y);
-		angle_rad = atan(div);
-		angle = (angle_rad * 57.2957795*-1) + 90;
-	}
-	if (x <0 && y<0) {
-		div = ((float)y / (float)x);
-		angle_rad = atan(div);
-		angle = (angle_rad * 57.2957795) + 180;
-	}
-	if (x >0 && y<0) {
-		div = ((float)x / (float)y);
-		angle_rad = atan(div);
-		angle = (angle_rad * 57.2957795*-1) + 270;
-	}
-	if (x == 0 && y < 0) { angle = 270; }
-	if (x == 0 && y > 0) { angle = 90; }
-	if (x < 0 && y == 0) { angle = 180; }
-	if (x > 0 && y == 0) { angle = 0; }
-
-	//LOG("El angulo es %f", angle);
-
-	return angle;
-}

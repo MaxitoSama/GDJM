@@ -41,11 +41,12 @@ public:
 		}
 	}
 	
-	SDL_Rect& GetNextFrame()
+	SDL_Rect& GetNextFrame(int speed_x, int speed_y)
 	{
 		SDL_Rect Next_frame=frames[(int)current_frame];
 
-		Next_frame.y += 10;
+		Next_frame.y += speed_y;
+		Next_frame.x += speed_x;
 
 		return Next_frame;
 	}
