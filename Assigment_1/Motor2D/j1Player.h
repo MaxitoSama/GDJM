@@ -55,8 +55,10 @@ public:
 	Animation bullet_explosion;
 	Animation Scythe_Right;
 	Animation Scythe_Left;
-	Animation jump;
-	Animation slide;
+	Animation jump_right;
+	Animation jump_left;
+	Animation slide_right;
+	Animation slide_left;
 
 	Collider* Player_Collider;
 	Collider* feetcoll;

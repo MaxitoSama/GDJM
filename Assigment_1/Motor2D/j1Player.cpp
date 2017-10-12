@@ -84,7 +84,6 @@ j1Player::j1Player():j1Module()
 
 	// Move Left
 	{
-
 	left.PushBack({ 2611,813,283,341 });
 	left.PushBack({ 2328,813,283,341 });
 	left.PushBack({ 2045,813,283,341 });
@@ -115,21 +114,69 @@ j1Player::j1Player():j1Module()
 
 	//JUMP_RIGHT
 	{
-		jump.PushBack({ 64,2103,263,332 });
-		jump.PushBack({ 327,2103,263,332 });
-		jump.PushBack({ 590,2103,263,332 });
-		jump.PushBack({ 853,2103,263,332 });
-		jump.PushBack({ 1137,2103,263,332 });
-		jump.PushBack({ 1449,2103,263,332 });
-		jump.PushBack({ 1734,2103,263,332 });
-		jump.PushBack({ 2019,2103,263,332 });
-		jump.PushBack({ 2286,2103,263,332 });
-		jump.PushBack({ 2560,2103,263,332 });
+		jump_right.PushBack({ 64,471,263,332 });
+		jump_right.PushBack({ 327,471,263,332 });
+		jump_right.PushBack({ 590,471,263,332 });
+		jump_right.PushBack({ 853,471,263,332 });
+		jump_right.PushBack({ 1137,471,263,332 });
+		jump_right.PushBack({ 1449,471,263,332 });
+		jump_right.PushBack({ 1734,471,263,332 });
+		jump_right.PushBack({ 2019,471,263,332 });
+		jump_right.PushBack({ 2286,471,263,332 });
+		jump_right.PushBack({ 2560,471,263,332 });
 
-		jump.loop = false;
-		jump.speed = 0.5f;
+		jump_right.loop = false;
+		jump_right.speed = 0.05f;
 	}
 
+	//JUMP_LEFT
+	{
+		jump_left.PushBack({ 64,2200,263,332 });
+		jump_left.PushBack({ 327,2200,263,332 });
+		jump_left.PushBack({ 590,2200,263,332 });
+		jump_left.PushBack({ 853,2200,263,332 });
+		jump_left.PushBack({ 1137,2200,263,332 });
+		jump_left.PushBack({ 1449,2200,263,332 });
+		jump_left.PushBack({ 1734,2200,263,332 });
+		jump_left.PushBack({ 2019,2200,263,332 });
+		jump_left.PushBack({ 2286,2200,263,332 });
+		jump_left.PushBack({ 2560,2200,263,332 });
+
+		jump_left.loop = false;
+		jump_left.speed = 0.5f;
+	}
+
+	//Sliding_right
+	slide_right.PushBack({ 65,1521,283,320 });
+	slide_right.PushBack({ 347,1521,283,320 });
+	slide_right.PushBack({ 632,1521,283,320 });
+	slide_right.PushBack({ 913,1521,283,320 });
+	slide_right.PushBack({ 1197,1521,283,320 });
+	slide_right.PushBack({ 1480,1521,283,320 });
+	slide_right.PushBack({ 1763,1521,283,320 });
+	slide_right.PushBack({ 2045,1521,283,320 });
+	slide_right.PushBack({ 2328,1521,283,320 });
+	slide_right.PushBack({ 2610,1521,283,320 });
+
+	slide_right.loop = true;
+	slide_right.speed = 0.5f;
+
+	//Sliding_left
+	
+		slide_left.PushBack({ 65,1840,283,320 });
+	slide_left.PushBack({ 347,1840,283,320 });
+	slide_left.PushBack({ 632,1840,283,320 });
+	slide_left.PushBack({ 913,1840,283,320 });
+	slide_left.PushBack({ 1197,1840,283,320 });
+	slide_left.PushBack({ 1480,1840,283,320 });
+	slide_left.PushBack({ 1763,1840,283,320 });
+	slide_left.PushBack({ 2045,1840,283,320 });
+	slide_left.PushBack({ 2328,1840,283,320 });
+	slide_left.PushBack({ 2610,1840,283,320 });
+
+	slide_left.loop = true;
+	slide_left.speed = 0.5f;
+	
 
 }
 
@@ -197,7 +244,7 @@ bool j1Player::CleanUp()
 bool j1Player::Update(float dt)
 {
 	SDL_Event e;
-	speed = 0;
+	speed = 8;
 	
 	//LEFT
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
@@ -218,6 +265,7 @@ bool j1Player::Update(float dt)
 		}
 
 	}
+
 	//RIGHT
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
@@ -234,7 +282,6 @@ bool j1Player::Update(float dt)
 			current_animation = &right;
 			player_last_direction = RIGHT;
 		}
-
 	}
 	
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
@@ -244,8 +291,30 @@ bool j1Player::Update(float dt)
 		speed = 8;
 	}
 
-	//JUMP
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall)
+	//SLIDING_RIGHT
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	{
+		if (current_animation == &right && !Jump)
+		{
+			slide_right.Reset();
+			current_animation = &slide_right;
+			player_last_direction = RIGHT;
+		}
+	}
+
+	//SLIDING_LEFT
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	{
+		if (current_animation == &left && !Jump)
+		{
+			slide_left.Reset();
+			current_animation = &slide_left;
+			player_last_direction = LEFT;
+		}
+	}
+
+	//JUMP_RIGHT
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		if (!Jump)
 		{
@@ -253,13 +322,30 @@ bool j1Player::Update(float dt)
 			Jump = true;
 		}
 
-		if (current_animation != &jump)
+		if (current_animation != &jump_right)
 		{
-			jump.Reset();
-			current_animation = &jump;
+			jump_right.Reset();
+			current_animation = &jump_right;
 			player_last_direction = RIGHT;
 		}
 		
+	}
+	//JUMP_LEFT
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+		if (!Jump)
+		{
+			Pos_jump = position.y - jump_height;
+			Jump = true;
+		}
+
+		if (current_animation != &jump_left)
+		{
+			jump_left.Reset();
+			current_animation = &jump_left;
+			player_last_direction = LEFT;
+		}
+
 	}
 	
 	//Function that makes the Jump
