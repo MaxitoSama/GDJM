@@ -78,7 +78,7 @@ bool j1Scene::Update(float dt)
 		}
 	}*/
 
-	if (App->player->position.x >= App->player->win_width/2 && App->player->position.x <= App->player->win_width*2)
+	if (App->player->position.x >= App->player->win_width/2 && App->player->position.x <= 15000)//App->player->win_width)
 	{
 		App->render->camera.x =- App->player->position.x + App->player->win_width / 2;
 	}

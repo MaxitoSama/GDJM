@@ -289,9 +289,9 @@ bool j1Player::Update(float dt)
 	
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
 	{
-		acceleration = 0;
-		accel_counter = 0;
-		speed = 8;
+		acceleration = 0; //+ max speed
+		accel_counter = 0; //times added acceleration
+		speed = 0; //ammount of speed
 	}
 
 	//SLIDING_RIGHT
@@ -462,10 +462,10 @@ void j1Player::Jump_Method()
 
 void j1Player::Acceleration_Method()
 {
-	accel_counter += 2;
+	accel_counter += 4;
 	if (accel_counter % 100 == 0)
 	{
-		acceleration += 0;
+		acceleration += 1;
 	}
 }
 
