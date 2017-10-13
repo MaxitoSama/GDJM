@@ -462,8 +462,8 @@ void j1Player::Jump_Method()
 
 void j1Player::Acceleration_Method()
 {
-	accel_counter += 4;
-	if (accel_counter % 100 == 0)
+	accel_counter += 1;
+	if (accel_counter % 10 == 0)
 	{
 		acceleration += 1;
 	}
