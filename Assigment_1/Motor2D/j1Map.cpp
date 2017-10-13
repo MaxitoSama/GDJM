@@ -66,6 +66,7 @@ void j1Map::Draw()
 
 void j1Map::Draw_Colliders()
 {
+	int counter = 0;
 	uint tile_indx=0;
 	uint layer_indx;
 	for (layer_indx = 0; layer_indx<data.layers.count(); layer_indx++)
@@ -75,16 +76,27 @@ void j1Map::Draw_Colliders()
 			for (int i = 0; i < data.width; i++)
 			{
 				uint id = data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i, j)];
-
-				for (uint indx = 0; indx < data.tilesets[tile_indx]->colliders.count(); indx++)
+				if (id != 0)
 				{
-					uint collider_num = data.tilesets[tile_indx]->colliders[indx]->tile_id;
-					if (id - data.tilesets[tile_indx]->firstgid == collider_num)
+					if (data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i + 1, j)] == id)
 					{
-						int x = MapToWorld(i, j).x;
-						int y = MapToWorld(i, j).y;
-						SDL_Rect collider_rec = { x,y,data.tile_width,data.tile_height };
-						App->colliders->AddCollider(collider_rec, data.tilesets[tile_indx]->colliders[indx]->type);
+						counter++;
+						continue;
+					}
+					else
+					{
+						for (uint indx = 0; indx < data.tilesets[tile_indx]->colliders.count(); indx++)
+						{
+							uint collider_num = data.tilesets[tile_indx]->colliders[indx]->tile_id;
+							if (id - data.tilesets[tile_indx]->firstgid == collider_num)
+							{
+								int x = MapToWorld(i - counter, j).x;
+								int y = MapToWorld(i- counter , j).y;
+								SDL_Rect collider_rec = { x,y,data.tile_width*(counter+1),data.tile_height };
+								App->colliders->AddCollider(collider_rec, data.tilesets[tile_indx]->colliders[indx]->type);
+							}
+							counter = 0;
+						}
 					}
 				}
 			}
@@ -336,6 +348,10 @@ bool j1Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 		else if (type == "COLLIDER_FLOOR")
 		{
 			aux_collider->type = COLLIDER_FLOOR;
+		}
+		else
+		{
+			aux_collider->type = COLLIDER_NONE;
 		}
 
 		set->colliders.add(aux_collider);

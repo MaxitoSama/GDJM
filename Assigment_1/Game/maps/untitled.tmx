@@ -10,7 +10,11 @@
    </terrain>
    <terrain name="under" tile="-1"/>
   </terraintypes>
-  <tile id="5" terrain="0,0,0,0"/>
+  <tile id="5" terrain="0,0,0,0">
+   <objectgroup draworder="index">
+    <object id="1" type="COLLIDER_FLOOR" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
   <tile id="45" terrain="1,1,1,1"/>
  </tileset>
  <layer name="Capa de Patrones 1" width="498" height="90">

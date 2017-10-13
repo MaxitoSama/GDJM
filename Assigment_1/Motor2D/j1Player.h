@@ -23,7 +23,7 @@ public:
 
 	bool Awake(pugi::xml_node&);
 	bool Start();
-	bool Update(float dt);
+	bool PostUpdate();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 	void Jump_Method();
@@ -78,12 +78,12 @@ public:
 	uint win_height;
 	uint win_scale;
 	uint acceleration;
+	uint gravity;
 
 private:
 
 	uint jump_height;
 	uint jump_vel;
-	uint gravity;
 	uint accel_counter;
 };
 

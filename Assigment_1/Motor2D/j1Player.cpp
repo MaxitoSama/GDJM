@@ -201,7 +201,7 @@ bool j1Player::Start()
 	graphics = App->tex->Load("assets/character/character.png");
 
 	LOG("Loading Player Collider");
-	Player_Collider = App->colliders->AddCollider({ position.x, position.y, 263/2, 330/2 }, COLLIDER_PLAYER, this);
+	Player_Collider = App->colliders->AddCollider({ position.x, position.y, 32, 330/2 }, COLLIDER_PLAYER, this);
 	//font_score = App->fonts->Load("fonts/Lletres_1.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ./\ ", 2);
 
 	//Init Screen vars
@@ -244,7 +244,7 @@ bool j1Player::CleanUp()
 	return true;
 }
 // Update: draw background
-bool j1Player::Update(float dt)
+bool j1Player::PostUpdate()
 {
 	SDL_Event e;
 	speed = 8;
@@ -415,7 +415,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	//Jump methode
 	if (c2->type == COLLIDER_FLOOR)
 	{
-		gravity=0;
+		position.y -= 10;
 
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
 		{

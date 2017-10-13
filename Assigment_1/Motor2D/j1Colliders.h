@@ -11,12 +11,7 @@ enum COLLIDER_TYPE
 	COLLIDER_WALL,
 	COLLIDER_FLOOR,
 	COLLIDER_PLAYER,
-	COLLIDER_ENEMY,
-	COLLIDER_PLAYER_SHOT,
-	COLLIDER_ENEMY_SHOT,
 	COLLIDER_FEET,
-	COLLIDER_GRENADE_EXPLOSION,
-	COLLIDER_MAP_LIMIT_FOR_ENEMIES,
 	COLLIDER_MAX
 };
 
@@ -40,6 +35,8 @@ struct Collider
 	}
 
 	bool CheckCollision(const SDL_Rect& r) const;
+	
+	bool CheckFutureColision(const SDL_Rect& r);
 };
 
 class j1Colliders : public j1Module
@@ -60,6 +57,7 @@ public:
 	void DebugDraw();
 
 	bool checkColisionList(Collider* enemCollider);
+	
 
 private:
 	Collider* colliders[MAX_COLLIDERS];
