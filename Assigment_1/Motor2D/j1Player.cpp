@@ -216,7 +216,7 @@ bool j1Player::Start()
 	//Init Jump vars
 	jump_height = 300;
 	jump_vel = 10;
-	gravity = 10;
+	gravity = 0;
 
 	//acceleraation vars
 	acceleration = 0;

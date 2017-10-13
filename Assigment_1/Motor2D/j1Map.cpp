@@ -47,7 +47,7 @@ void j1Map::Draw()
 				{
 					for (tile_indx = 0; tile_indx < data.tilesets.count(); tile_indx++)
 					{
-						if (id >= data.tilesets[tile_indx]->firstgid)
+						if (id >= data.tilesets[tile_indx]->firstgid )
 						{
 							id += (data.tilesets[tile_indx]->firstgid-1);
 							break;
