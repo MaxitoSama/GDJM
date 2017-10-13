@@ -91,12 +91,12 @@ void j1Map::Draw_Colliders()
 							if (id - data.tilesets[tile_indx]->firstgid == collider_num)
 							{
 								int x = MapToWorld(i - counter, j).x;
-								int y = MapToWorld(i- counter , j).y;
+								int y = MapToWorld(i - counter , j).y;
 								SDL_Rect collider_rec = { x,y,data.tile_width*(counter+1),data.tile_height };
 								App->colliders->AddCollider(collider_rec, data.tilesets[tile_indx]->colliders[indx]->type);
 							}
-							counter = 0;
 						}
+						counter = 0;
 					}
 				}
 			}
