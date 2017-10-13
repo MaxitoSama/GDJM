@@ -32,7 +32,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("untitled.tmx");
+	App->map->Load("SLIDE.tmx");
 	App->audio->PlayMusic("audio/music/map1_music.ogg");
 	//Colliders
 	//App->colliders->AddCollider({ 0,415,10000,10 }, COLLIDER_FLOOR);

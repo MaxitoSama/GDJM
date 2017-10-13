@@ -221,6 +221,8 @@ bool j1Player::Start()
 	//acceleraation vars
 	acceleration = 0;
 	accel_counter = 0;
+	velocity = 1;
+	slide_counter = 0;
 
 	//Init bools
 	fall = false;
@@ -247,14 +249,14 @@ bool j1Player::CleanUp()
 bool j1Player::PostUpdate()
 {
 	SDL_Event e;
-	speed = 8;
 	
 	//LEFT
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE)
 	{
 		if (position.x >= speed)
 		{
-			position.x -= (speed + acceleration);
+			speed = velocity + acceleration;
+			position.x -= speed;
 			Acceleration_Method();
 		}
 
@@ -270,11 +272,12 @@ bool j1Player::PostUpdate()
 	}
 
 	//RIGHT
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE)
 	{
 		/*if (position.x < (int)win_width +400)
 		{*/
-			position.x += speed + acceleration;
+			speed = velocity + acceleration;
+			position.x += speed;
 			Acceleration_Method();
 		/*}*/
 
@@ -295,24 +298,45 @@ bool j1Player::PostUpdate()
 	}
 
 	//SLIDING_RIGHT
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		if (current_animation == &right && !Jump)
+		if (speed >= 0)
 		{
-			slide_right.Reset();
-			current_animation = &slide_right;
-			player_last_direction = RIGHT;
+			Slide_Method();
+			position.x += speed;
+			if (current_animation != &slide_right && !Jump)
+			{
+				slide_right.Reset();
+				current_animation = &slide_right;
+				player_last_direction = RIGHT;
+			}
 		}
+		else
+		{
+			current_animation = &idle_right;
+		}
+		
+
+		
 	}
 
 	//SLIDING_LEFT
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		if (current_animation == &left && !Jump)
+		if (speed >= 0)
 		{
-			slide_left.Reset();
-			current_animation = &slide_left;
-			player_last_direction = LEFT;
+			Slide_Method();
+			position.x -= speed;
+			if (current_animation != &slide_left && !Jump)
+			{
+				slide_left.Reset();
+				current_animation = &slide_left;
+				player_last_direction = LEFT;
+			}
+		}
+		else
+		{
+			current_animation = &idle_left;
 		}
 	}
 	//JUMP_ONPLACE
@@ -496,6 +520,15 @@ void j1Player::Acceleration_Method()
 	if (accel_counter % 10 == 0)
 	{
 		acceleration += 1;
+	}
+}
+
+void j1Player::Slide_Method()
+{
+	slide_counter += 1;
+	if (slide_counter % 10 == 0)
+	{
+		speed -= 1;
 	}
 }
 
