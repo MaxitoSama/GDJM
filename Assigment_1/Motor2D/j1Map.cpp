@@ -78,7 +78,8 @@ void j1Map::Draw_Colliders()
 
 				for (uint indx = 0; indx < data.tilesets[tile_indx]->colliders.count(); indx++)
 				{
-					if (id - data.tilesets[tile_indx]->firstgid == data.tilesets[tile_indx]->colliders[indx]->tile_id)
+					uint collider_num = data.tilesets[tile_indx]->colliders[indx]->tile_id;
+					if (id - data.tilesets[tile_indx]->firstgid == collider_num)
 					{
 						int x = MapToWorld(i, j).x;
 						int y = MapToWorld(i, j).y;
@@ -316,7 +317,7 @@ bool j1Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 	{
 		TileCollider* aux_collider=new TileCollider();
 
-		aux_collider->tile_id = tile.child("objectgroup").child("object").attribute("id").as_uint();
+		aux_collider->tile_id = tile.attribute("id").as_uint();
 		aux_collider->collider_x= tile.child("objectgroup").child("object").attribute("x").as_int();
 		aux_collider->collider_y = tile.child("objectgroup").child("object").attribute("y").as_int();
 		aux_collider->collider_height = tile.child("objectgroup").child("object").attribute("height").as_uint();
