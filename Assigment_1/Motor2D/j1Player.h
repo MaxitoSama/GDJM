@@ -27,6 +27,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 	void Jump_Method();
+	void Slide_Method();
 	void Acceleration_Method();
 
 	// Load / Save
@@ -64,6 +65,7 @@ public:
 	int font_score = -1;
 	int speed;
 	int Pos_jump;
+	int velocity;
 
 
 	enum LastDirection { UP, DOWN, LEFT, RIGHT, UPRIGHT, UPLEFT, DOWNRIGHT, DOWNLEFT };
@@ -85,6 +87,7 @@ private:
 	uint jump_height;
 	uint jump_vel;
 	uint accel_counter;
+	uint slide_counter;
 };
 
 #endif
