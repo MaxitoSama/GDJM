@@ -315,7 +315,37 @@ bool j1Player::PostUpdate()
 			player_last_direction = LEFT;
 		}
 	}
+	//JUMP_ONPLACE
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall)
+	{
+		if (!Jump)
+		{
+			Pos_jump = position.y - jump_height;
+			gravity = 10;
+			Jump = true;
+		}
+		if (player_last_direction == RIGHT)
+		{
+			if (current_animation != &jump_right)
+			{
+				jump_right.Reset();
+				current_animation = &jump_right;
+				player_last_direction = RIGHT;
+			}
+		}
+		if (player_last_direction == LEFT)
+		{
+			if (current_animation != &jump_left)
+			{
+				jump_left.Reset();
+				current_animation = &jump_left;
+				player_last_direction = LEFT;
+			}
+		}
 
+
+	}
+	//JUMP_ONPLACE_LEFT
 	//JUMP_RIGHT
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
