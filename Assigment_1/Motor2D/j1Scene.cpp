@@ -34,7 +34,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {
 
-	App->map->Load("test.tmx");
+	App->map->Load("test1.tmx");
 
 	App->audio->PlayMusic("audio/music/map1_music.ogg");
 	//Colliders
