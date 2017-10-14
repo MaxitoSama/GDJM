@@ -261,7 +261,7 @@ bool j1Player::PostUpdate()
 	//MOVE_RIGHT---------------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE)
 	{
-		if(position.x < (int)win_width + 3400)
+		if(position.x < (int)win_width + 1000000)
 		{
 			speed = velocity + acceleration;
 			position.x += speed;
@@ -278,11 +278,12 @@ bool j1Player::PostUpdate()
 	}
 	
 	//Acceleration counter reset
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || current_animation == &idle_right)
 	{
-		acceleration = 0; //+ max speed
+
+		acceleration = 1; //+ max speed
 		accel_counter = 0; //times added acceleration
-		speed = 0; //ammount of speed
+		speed = 4; //ammount of speed
 	}
 
 	//SLIDING_RIGHT--------------------------------------------
@@ -493,7 +494,7 @@ void j1Player::Acceleration_Method()
 {
 	accel_counter += 1;
 
-	if (accel_counter % 1000 == 0)
+	if (accel_counter % 10 == 0 && accel_counter <= 200)
 	{
 		acceleration += 1;
 	}
@@ -505,7 +506,7 @@ void j1Player::Slide_Method()
 
 	if (slide_counter % 10 == 0)
 	{
-		speed -= 1;
+		speed -= 5;
 	}
 }
 
