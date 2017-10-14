@@ -137,4 +137,9 @@
       <Filter>Desenvolupament  ========\Tools\PuguiXML</Filter>
     </Xml>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Game\maps\test1.tmx">
+      <Filter>Desenvolupament  ========\Tools\PuguiXML</Filter>
+    </None>
+  </ItemGroup>
 </Project>
