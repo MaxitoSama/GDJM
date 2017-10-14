@@ -74,6 +74,7 @@ bool j1Scene::Update(float dt)
 	if (App->player->position.x >= App->player->win_width/2 && App->player->position.x <= 24630)//App->player->win_width)
 	{
 		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;// + App->player->win_width / 2;
+		App->input->GetKey(SDL_SCANCODE_F2);
 	}
 
 	//App->render->Blit(img, 0, 0);
