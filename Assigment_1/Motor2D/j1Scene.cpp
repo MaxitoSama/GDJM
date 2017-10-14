@@ -34,7 +34,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {
 
-	App->map->Load("test.tmx");
+	App->map->Load("untitled.tmx");
 
 	App->audio->PlayMusic("audio/music/map1_music.ogg");
 	//Colliders
@@ -66,6 +66,7 @@ bool j1Scene::Update(float dt)
 		CleanUp();
 		App->scene2->Start();
 		App->player->position.y = 215;
+		App->player->position.x = 60;
 	}
 	
 	if (App->player->position.x >= App->player->win_width/2 && App->player->position.x <= 15000)//App->player->win_width)
