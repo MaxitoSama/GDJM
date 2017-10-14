@@ -4,6 +4,7 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Colliders.h"
+#include "j1Player.h"
 #include "j1Map.h"
 #include <math.h>
 
@@ -35,7 +36,14 @@ void j1Map::Draw()
 	// TODO 5: Prepare the loop to draw all tilesets + Blit
 	uint tile_indx;
 	uint layer_indx;
+	uint background_indx;
 	uint counter = 0;
+	
+	for (background_indx = 0; background_indx < data.backgrounds.count(); background_indx++)
+	{
+		App->render->Blit(data.backgrounds[background_indx]->Image, 0, 0, NULL, 1.0f, data.backgrounds[background_indx]->Pvelocity);
+	}
+
 	for (layer_indx = 0; layer_indx<data.layers.count(); layer_indx++)
 	{
 		for (int j = 0; j < data.height; j++)
@@ -194,6 +202,20 @@ bool j1Map::Load(const char* file_name)
 		}
 
 		data.tilesets.add(set);
+	}
+
+	//Load all backgrounds images ------------------------------------------
+	pugi::xml_node background;
+	for (background = map_file.child("map").child("imagelayer"); background && ret; background = background.next_sibling("imagelayer"))
+	{
+		Image_Background* set = new Image_Background();
+
+		if (ret == true)
+		{
+			ret = LoadBackground(background, set);
+		}
+
+		data.backgrounds.add(set);
 	}
 
 	// TODO 4: Iterate all layers and load each of them
@@ -412,7 +434,6 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 // TODO 3: Create the definition for a function that loads a single layer
 bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 {
-	pugi::xml_node data_node = node.child("data");
 	uint i = 0;
 
 	layer->name = node.attribute("name").as_string();
@@ -430,6 +451,43 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	}
 
 	return true;
+}
+
+bool j1Map::LoadBackground(pugi::xml_node& Image_node, Image_Background* background)
+{
+	bool ret = true;
+	pugi::xml_node image = Image_node.child("image");
+
+	background->name = Image_node.attribute("name").as_string();
+	background->width = Image_node.child("image").attribute("width").as_uint();
+	background->height = Image_node.child("image").attribute("height").as_uint();
+	background->Pvelocity =App->player->speed *(-1);
+
+	if (image == NULL)
+	{
+		LOG("Error parsing Image_Background xml file: Cannot find 'image' tag.");
+		ret = false;
+	}
+	else
+	{
+		background->Image = App->tex->Load(PATH(folder.GetString(), image.attribute("source").as_string()));
+		int w, h;
+		SDL_QueryTexture(background->Image, NULL, NULL, &w, &h);
+
+		if (background->width <= 0)
+		{
+			background->width = w;
+		}
+
+		background->height = image.attribute("height").as_int();
+
+		if (background->height <= 0)
+		{
+			background->height = h;
+		}
+	}
+
+	return ret;
 }
 
 MapLayer::~MapLayer()

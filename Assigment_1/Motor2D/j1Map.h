@@ -63,6 +63,15 @@ struct TileSet
 	p2List<TileCollider*>	colliders;
 };
 
+struct Image_Background
+{
+	p2SString				name;
+	uint					width;
+	uint					height;
+	SDL_Texture*			Image;
+	float					Pvelocity;
+};
+
 enum MapTypes
 {
 	MAPTYPE_UNKNOWN = 0,
@@ -73,15 +82,15 @@ enum MapTypes
 // ----------------------------------------------------
 struct MapData
 {
-	int					width;
-	int					height;
-	int					tile_width;
-	int					tile_height;
-	SDL_Color			background_color;
-	MapTypes			type;
-	p2List<TileSet*>	tilesets;
-	// TODO 2: Add a list/array of layers to the map!
-	p2List<MapLayer*>	layers;
+	int							width;
+	int							height;
+	int							tile_width;
+	int							tile_height;
+	SDL_Color					background_color;
+	MapTypes					type;
+	p2List<TileSet*>			tilesets;
+	p2List<MapLayer*>			layers;
+	p2List<Image_Background*>	backgrounds;
 };
 
 // ----------------------------------------------------
@@ -117,8 +126,8 @@ private:
 	bool LoadMap();
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
-	// TODO 3: Create a method that loads a single laye
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
+	bool LoadBackground(pugi::xml_node& Image_node, Image_Background* background);
 
 public:
 
