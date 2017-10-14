@@ -66,6 +66,9 @@
    </objectgroup>
   </tile>
  </tileset>
+ <imagelayer name="background">
+  <image source="BG.png"/>
+ </imagelayer>
  <layer name="Plataforms Back" width="800" height="35">
   <data>
    <tile gid="0"/>
