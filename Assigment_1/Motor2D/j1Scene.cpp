@@ -58,39 +58,11 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame();
 
-	//if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		//App->render->camera.y -= 4;
-
-	/*if(App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		App->render->camera.y += 4;
-
-	/*if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		if (App->render->camera.x < 0)
-		{
-			App->render->camera.x += App->player->speed;
-		}	
-	}
-		
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
-		if (App->player->position.x >= 400 && App->render->camera.x >= -570)
-		{
-			App->render->camera.x -= App->player->speed;
-		}
-	}*/
-
+	
 	if (App->player->position.x >= App->player->win_width/2 && App->player->position.x <= 15000)//App->player->win_width)
 	{
 		App->render->camera.x =- App->player->position.x + App->player->win_width / 2;
 	}
-
-	/*if (App->player->position.y >= App->player->win_height / 1.5 && App->player->position.y <= App->player->win_height * 4)
-	{
-		App->render->camera.y = -App->player->position.y + App->player->win_height / 2;
-	}*/
-	//Check Points
-
 
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw();

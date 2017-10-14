@@ -5,17 +5,13 @@
 #include "p2Log.h"
 #include "j1Textures.h"
 #include "j1Input.h"
-//#include "ModuleParticles.h"
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Colliders.h"
-//#include "ModuleFadeToBlack.h"
 #include "j1Player.h"
 #include "j1Audio.h"
-//#include "ModuleFirstScene.h"
 
 using namespace std;
-
 
 j1Player::j1Player():j1Module()
 {
@@ -216,7 +212,7 @@ bool j1Player::Start()
 	graphics = App->tex->Load("assets/character/character.png");
 
 	LOG("Loading Player Collider");
-	Player_Collider = App->colliders->AddCollider({ position.x, position.y, 32, 330/2 }, COLLIDER_PLAYER, this);
+	Player_Collider = App->colliders->AddCollider({ (position.x+(263/4)-54), position.y+ (330 / 2), 64, 10 }, COLLIDER_PLAYER, this);
 
 	//Init Screen vars
 	win_width = App->win->screen_surface->w;
@@ -243,10 +239,10 @@ bool j1Player::PostUpdate()
 {
 	SDL_Event e;
 	
-	//MOVE_LEFT
+	//MOVE_LEFT----------------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE)
 	{
-		if (position.x >= speed)
+		if (position.x >= 2)
 		{
 			speed = velocity + acceleration;
 			position.x -= speed;
@@ -262,10 +258,10 @@ bool j1Player::PostUpdate()
 
 	}
 
-	//MOVE_RIGHT
+	//MOVE_RIGHT---------------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE)
 	{
-		if(position.x>=speed && position.x < (int)win_width +400)
+		if(position.x < (int)win_width +400)
 		{
 			speed = velocity + acceleration;
 			position.x += speed;
@@ -281,6 +277,7 @@ bool j1Player::PostUpdate()
 		}
 	}
 	
+	//Acceleration counter reset
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
 	{
 		acceleration = 0; //+ max speed
@@ -288,7 +285,7 @@ bool j1Player::PostUpdate()
 		speed = 0; //ammount of speed
 	}
 
-	//SLIDING_RIGHT
+	//SLIDING_RIGHT--------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		if (speed >= 0)
@@ -302,19 +299,17 @@ bool j1Player::PostUpdate()
 				player_last_direction = RIGHT;
 			}
 		}
+
 		else
 		{
 			current_animation = &idle_right;
-		}
-		
-
-		
+		}		
 	}
 
-	//SLIDING_LEFT
+	//SLIDING_LEFT----------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		if (speed >= 0)
+		if (speed >= 0 && position.x >= 2)
 		{
 			Slide_Method();
 			position.x -= speed;
@@ -325,12 +320,13 @@ bool j1Player::PostUpdate()
 				player_last_direction = LEFT;
 			}
 		}
+
 		else
 		{
 			current_animation = &idle_left;
 		}
 	}
-	//JUMP_ONPLACE
+	//JUMP_ONPLACE----------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall)
 	{
 		if (!Jump)
@@ -339,6 +335,7 @@ bool j1Player::PostUpdate()
 			gravity = 10;
 			Jump = true;
 		}
+		
 		if (player_last_direction == RIGHT)
 		{
 			if (current_animation != &jump_right)
@@ -348,6 +345,7 @@ bool j1Player::PostUpdate()
 				player_last_direction = RIGHT;
 			}
 		}
+		
 		if (player_last_direction == LEFT)
 		{
 			if (current_animation != &jump_left)
@@ -357,11 +355,9 @@ bool j1Player::PostUpdate()
 				player_last_direction = LEFT;
 			}
 		}
-
-
 	}
-	//JUMP_ONPLACE_LEFT
-	//JUMP_RIGHT
+
+	//JUMP_RIGHT------------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		if (!Jump)
@@ -379,7 +375,7 @@ bool j1Player::PostUpdate()
 		}
 		
 	}
-	//JUMP_LEFT
+	//JUMP_LEFT-------------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		if (!Jump)
@@ -397,10 +393,10 @@ bool j1Player::PostUpdate()
 
 	}
 	
-	//Function that makes the Jump
+	//Call Jump_Method-----------------------------------------
 	Jump_Method();
 
-	//IDLE ANIMATIONS
+	//IDLE ANIMATIONS------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE
 		&& App->input->GetKey(SDL_SCANCODE_UP) == KEY_IDLE
 		&& App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
@@ -426,10 +422,10 @@ bool j1Player::PostUpdate()
 		}
 	}
 
-	//Player Colliders Position
-	Player_Collider->SetPos(position.x, position.y);
+	//Player Colliders Position--------------------------------
+	Player_Collider->SetPos((position.x + (263 / 4) - 54), position.y + (330 / 2));
 
-	// Draw everything --------------------------------------
+	// Draw everything ----------------------------------------
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),0.5f);
 
 	return true;
@@ -467,19 +463,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			Jump = false;
 			fall = false;
 		}
-
 	}
-
-	/*if (SDL_HasIntersection(&c2->rect, &current_animation->GetNextFrame(8,10)))
-	{
-		gravity= 0;
-		Jump = false;
-		fall = false;
-	}
-	else
-	{
-		gravity = 10;
-	}*/
 }
 
 void j1Player::Jump_Method()
@@ -502,12 +486,13 @@ void j1Player::Jump_Method()
 			fall = true;
 		}
 	}
-	
 }
 
+//Acceleration Method
 void j1Player::Acceleration_Method()
 {
 	accel_counter += 1;
+
 	if (accel_counter % 10 == 0)
 	{
 		acceleration += 1;
@@ -517,6 +502,7 @@ void j1Player::Acceleration_Method()
 void j1Player::Slide_Method()
 {
 	slide_counter += 1;
+
 	if (slide_counter % 10 == 0)
 	{
 		speed -= 1;
