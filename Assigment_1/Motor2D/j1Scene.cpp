@@ -9,6 +9,7 @@
 #include "j1Map.h"
 #include "j1Colliders.h"
 #include "j1Scene.h"
+#include "j1Scene2.h"
 #include "j1Player.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -58,6 +59,14 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame();
 
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		active = false;
+		App->scene2->active = true;
+		CleanUp();
+		App->scene2->Start();
+		App->player->position.y = 215;
+	}
 	
 	if (App->player->position.x >= App->player->win_width/2 && App->player->position.x <= 15000)//App->player->win_width)
 	{
@@ -96,8 +105,8 @@ bool j1Scene::PostUpdate()
 bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
-	//Reset Checkpoints
-	
+	App->map->CleanUp();
+	App->colliders->CleanUp();
 
 	return true;
 }

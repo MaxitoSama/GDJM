@@ -45,6 +45,7 @@ bool j1Scene2::Start()
 		//Colliders
 		//App->colliders->AddCollider({ 0,415,10000,10 }, COLLIDER_FLOOR);
 		App->map->Draw_Colliders();
+		App->player->Start();
 	}
 	
 	return true;
