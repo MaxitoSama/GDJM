@@ -120,6 +120,9 @@
     </Xml>
     <Xml Include="..\Game\save_game.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Game\maps\test1.tmx" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

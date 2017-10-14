@@ -261,7 +261,7 @@ bool j1Player::PostUpdate()
 	//MOVE_RIGHT---------------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE)
 	{
-		if(position.x < (int)win_width + 1000000)
+		if(position.x < 25600) //800 number of tiles and 32 the pixels per tiles there is.
 		{
 			speed = velocity + acceleration;
 			position.x += speed;
