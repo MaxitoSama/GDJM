@@ -278,7 +278,7 @@ bool j1Player::PostUpdate()
 	}
 	
 	//Acceleration counter reset
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || current_animation == &idle_right)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP)
 	{
 
 		acceleration = 1; //+ max speed
