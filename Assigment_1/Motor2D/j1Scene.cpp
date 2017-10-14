@@ -85,10 +85,10 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x =- App->player->position.x + App->player->win_width / 2;
 	}
 
-	if (App->player->position.y >= App->player->win_height / 1.5 && App->player->position.y <= App->player->win_height * 4)
+	/*if (App->player->position.y >= App->player->win_height / 1.5 && App->player->position.y <= App->player->win_height * 4)
 	{
 		App->render->camera.y = -App->player->position.y + App->player->win_height / 2;
-	}
+	}*/
 	//Check Points
 
 

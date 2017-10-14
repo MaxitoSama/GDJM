@@ -23,6 +23,18 @@
     <path>data.zip</path>
   </file_system>
 
+  <player>
+    <position pos_x="60" pos_y="215"/>
+    <gravity  value="10"/>
+    <acceleration value="0"/>
+    <accel_counter value="0"/>
+    <velocity value="1"/>
+    <slide_counter value="0"/>
+    <jump jump_height="300" jump_vel="10"/>
+    <jump_bool value="false"/>
+    <fall_bool value="false"/>
+  </player>
+
   <map>
     <folder>maps/</folder>
   </map>

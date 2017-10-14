@@ -187,7 +187,22 @@ bool j1Player::Awake(pugi::xml_node& config)
 {
 	LOG("Init Player config");
 
-	gravity = 10;
+	//Init position var
+	position.x= config.child("position").attribute("pos_x").as_uint(10);
+	position.y= config.child("position").attribute("pos_y").as_uint(10);
+
+	//Init Velocity var
+	gravity = config.child("gravity").attribute("value").as_uint(10);
+	acceleration = config.child("acceleration").attribute("value").as_uint(0);
+	accel_counter = config.child("accel_counter").attribute("value").as_uint(0);
+	velocity = config.child("velocity").attribute("value").as_uint(1);
+	slide_counter = config.child("slide_counter").attribute("value").as_uint(0);
+
+	//Jump vars
+	jump_height = config.child("jump").attribute("jump_height").as_uint(300);
+	jump_vel = config.child("jump").attribute("jump_vel").as_uint(10);
+	fall = config.child("jump_bool").attribute("value").as_bool(false);
+	Jump = config.child("fall_bool").attribute("value").as_bool(false);
 
 	bool ret = true;
 
@@ -202,31 +217,11 @@ bool j1Player::Start()
 
 	LOG("Loading Player Collider");
 	Player_Collider = App->colliders->AddCollider({ position.x, position.y, 32, 330/2 }, COLLIDER_PLAYER, this);
-	//font_score = App->fonts->Load("fonts/Lletres_1.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ./\ ", 2);
 
 	//Init Screen vars
 	win_width = App->win->screen_surface->w;
 	win_height = App->win->screen_surface->h;
 	win_scale = App->win->GetScale();
-
-	//Init position vars
-	position.x =win_width/2;
-	position.y = 215;
-
-	//Init Jump vars
-	jump_height = 300;
-	jump_vel = 10;
-	gravity = 0;
-
-	//acceleraation vars
-	acceleration = 0;
-	accel_counter = 0;
-	velocity = 1;
-	slide_counter = 0;
-
-	//Init bools
-	fall = false;
-	Jump = false;
 
 	return true;
 }
@@ -236,12 +231,10 @@ bool j1Player::CleanUp()
 {
 	LOG("Unloading player Sheet");
 	App->tex->UnLoad(graphics);
-	//App->fonts->UnLoad(font_score);
-	//App->textures->Unload(textures);
 
 	LOG("Destroying Player Collider");
 	if (Player_Collider != nullptr)
-		//Player_Coll->to_delete = true;
+		Player_Collider->to_delete = true;
 
 	return true;
 }
@@ -250,7 +243,7 @@ bool j1Player::PostUpdate()
 {
 	SDL_Event e;
 	
-	//LEFT
+	//MOVE_LEFT
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE)
 	{
 		if (position.x >= speed)
@@ -259,8 +252,6 @@ bool j1Player::PostUpdate()
 			position.x -= speed;
 			Acceleration_Method();
 		}
-
-		
 
 		if (current_animation != &left && !Jump)
 		{
@@ -271,15 +262,15 @@ bool j1Player::PostUpdate()
 
 	}
 
-	//RIGHT
+	//MOVE_RIGHT
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE)
 	{
-		/*if (position.x < (int)win_width +400)
-		{*/
+		if(position.x>=speed && position.x < (int)win_width +400)
+		{
 			speed = velocity + acceleration;
 			position.x += speed;
 			Acceleration_Method();
-		/*}*/
+		}
 
 
 		if (current_animation != &right && !Jump)
