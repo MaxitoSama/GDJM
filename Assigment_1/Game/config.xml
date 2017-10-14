@@ -13,10 +13,10 @@
 
   <window>
     <resolution width="1024" height="768" scale="1"/>
-    <fullscreen value="false"/>
+    <fullscreen value="fakse"/>
     <borderless value="false"/>
     <resizable value="false"/>
-    <fullscreen_window value="false"/>
+    <fullscreen_window value="true"/>
   </window>
 
   <file_system>
@@ -28,7 +28,7 @@
     <gravity  value="10"/>
     <acceleration value="0"/>
     <accel_counter value="0"/>
-    <velocity value="1"/>
+    <velocity value="4"/>
     <slide_counter value="0"/>
     <jump jump_height="300" jump_vel="10"/>
     <jump_bool value="false"/>

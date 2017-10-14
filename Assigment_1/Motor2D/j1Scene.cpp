@@ -33,7 +33,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 
-	App->map->Load("test.tmx");
+	App->map->Load("test1.tmx");
 
 	App->audio->PlayMusic("audio/music/map1_music.ogg");
 	//Colliders
