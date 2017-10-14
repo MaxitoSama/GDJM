@@ -261,7 +261,7 @@ bool j1Player::PostUpdate()
 	//MOVE_RIGHT---------------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE)
 	{
-		if(position.x < (int)win_width +400)
+		if(position.x < (int)win_width + 3400)
 		{
 			speed = velocity + acceleration;
 			position.x += speed;
@@ -331,7 +331,7 @@ bool j1Player::PostUpdate()
 	{
 		if (!Jump)
 		{
-			Pos_jump = position.y - jump_height;
+           	Pos_jump = position.y - jump_height;
 			gravity = 10;
 			Jump = true;
 		}
@@ -479,7 +479,7 @@ void j1Player::Jump_Method()
  			position.y -= jump_vel;
 		}
 		
-		if (position.y == Pos_jump || App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+		if (position.y <= Pos_jump || App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 		{
 			gravity = 10;
 			Jump = false;
@@ -493,7 +493,7 @@ void j1Player::Acceleration_Method()
 {
 	accel_counter += 1;
 
-	if (accel_counter % 10 == 0)
+	if (accel_counter % 1000 == 0)
 	{
 		acceleration += 1;
 	}

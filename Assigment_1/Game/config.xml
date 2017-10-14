@@ -28,9 +28,9 @@
     <gravity  value="10"/>
     <acceleration value="0"/>
     <accel_counter value="0"/>
-    <velocity value="4"/>
+    <velocity value="10"/>
     <slide_counter value="0"/>
-    <jump jump_height="300" jump_vel="10"/>
+    <jump jump_height="200" jump_vel="15"/>
     <jump_bool value="false"/>
     <fall_bool value="false"/>
   </player>
