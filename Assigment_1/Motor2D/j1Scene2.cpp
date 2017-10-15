@@ -40,10 +40,7 @@ bool j1Scene2::Start()
 	if (active)
 	{
 		App->map->Load("test.tmx");
-
 		App->audio->PlayMusic("audio/music/map1_music.ogg");
-		//Colliders
-		//App->colliders->AddCollider({ 0,415,10000,10 }, COLLIDER_FLOOR);
 		App->map->Draw_Colliders();
 		App->player->Start();
 	}
@@ -65,6 +62,9 @@ bool j1Scene2::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame();
+
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+		ChangeScene();
 
 
 	if (App->player->position.x >= App->player->win_width / 2 && App->player->position.x <= 15000)//App->player->win_width)
@@ -104,9 +104,21 @@ bool j1Scene2::PostUpdate()
 bool j1Scene2::CleanUp()
 {
 	LOG("Freeing scene");
-	//Reset Checkpoints
-
+	App->map->CleanUp();
+	App->colliders->CleanUp();
 
 	return true;
 }
 
+void j1Scene2::ChangeScene()
+{
+	active = false;
+	App->scene->active = true;
+	CleanUp();
+	App->scene->Start();
+	App->player->position.y = 215;
+	App->player->position.x = 60;
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+	App->player->Start();
+}

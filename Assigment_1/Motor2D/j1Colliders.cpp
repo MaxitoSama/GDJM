@@ -107,7 +107,7 @@ bool j1Colliders::Update(float dt)
 
 void j1Colliders::DebugDraw()
 {
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
 		LOG("YOu can see the colliders");
 		debug = !debug;
 	}
@@ -126,19 +126,19 @@ void j1Colliders::DebugDraw()
 			switch (colliders[i]->type)
 			{
 			case COLLIDER_NONE: // white
-				App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
+				App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha,false);
 				break;
 			case COLLIDER_WALL: // blue
-				App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+				App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha,false);
 				break;
 			case COLLIDER_PLAYER: // green
-				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
+				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha,false);
 				break;
 			case COLLIDER_FEET: // pink
-				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha, false);
 				break;
 			case COLLIDER_FLOOR: // light blue
-				App->render->DrawQuad(colliders[i]->rect, 135, 206, 250, alpha);
+				App->render->DrawQuad(colliders[i]->rect, 135, 206, 250, alpha, false);
 				break;
 			}
 

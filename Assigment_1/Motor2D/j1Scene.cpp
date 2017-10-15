@@ -33,13 +33,12 @@ bool j1Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene::Start()
 {
-
-	App->map->Load("test1.tmx");
-
-	App->audio->PlayMusic("audio/music/map1_music.ogg");
-	//Colliders
-	//App->colliders->AddCollider({ 0,415,10000,10 }, COLLIDER_FLOOR);
-	App->map->Draw_Colliders();
+	if (active)
+	{
+		App->map->Load("test1.tmx");
+		App->audio->PlayMusic("audio/music/map1_music.ogg");
+		App->map->Draw_Colliders();
+	}
 
 	return true;
 }
@@ -60,21 +59,11 @@ bool j1Scene::Update(float dt)
 		App->LoadGame();
 
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		active = false;
-		App->scene2->active = true;
-		CleanUp();
-		App->scene2->Start();
-		App->player->position.y = 215;
-		App->player->position.x = 60;
-		App->render->camera.x = 0;
-		App->render->camera.y = 0;
-	}
+		ChangeScene();
 	
 	if (App->player->position.x >= App->player->win_width/2 && App->player->position.x <= 24630)//App->player->win_width)
 	{
 		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;// + App->player->win_width / 2;
-		App->input->GetKey(SDL_SCANCODE_F2);
 	}
 
 	//App->render->Blit(img, 0, 0);
@@ -113,4 +102,16 @@ bool j1Scene::CleanUp()
 	App->colliders->CleanUp();
 
 	return true;
+}
+
+void j1Scene::ChangeScene()
+{
+	active = false;
+	App->scene2->active = true;
+	CleanUp();
+	App->scene2->Start();
+	App->player->position.y = 215;
+	App->player->position.x = 60;
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 }
