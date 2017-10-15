@@ -35,7 +35,7 @@ bool j1Scene::Start()
 {
 	if (active)
 	{
-		App->map->Load("test1.tmx");
+		App->map->Load("Map_1.tmx");
 		App->audio->PlayMusic("audio/music/map1_music.ogg");
 		App->map->Draw_Colliders();
 		App->colliders->AddCollider({ 200,900,50,50 }, COLLIDER_WIN, this);
