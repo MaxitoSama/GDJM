@@ -19,6 +19,12 @@
     <fullscreen_window value="true"/>
   </window>
 
+  <audio>
+    <music_volume value="128"/>
+    <fx_volume value="100"/>
+  </audio>
+
+
   <file_system>
     <path>data.zip</path>
   </file_system>

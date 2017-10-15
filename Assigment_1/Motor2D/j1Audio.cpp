@@ -1,7 +1,9 @@
 #include "p2Defs.h"
 #include "p2Log.h"
+#include "j1App.h"
 #include "j1Audio.h"
 #include "p2List.h"
+#include "j1Input.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL_mixer\include\SDL_mixer.h"
@@ -23,6 +25,9 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	LOG("Loading Audio Mixer");
 	bool ret = true;
 	SDL_Init(0);
+
+	music_volume = config.child("music_volume").attribute("value").as_int();
+	fx_volume = config.child("fx_volume").attribute("value").as_int();
 
 	if(SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
 	{
@@ -51,6 +56,23 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	}
 
 	LoadFx("audio/fx/Jump_Sound.wav");
+
+	
+
+	return ret;
+}
+
+bool j1Audio::Update(float dt)
+{
+	bool ret = true;
+
+	Mix_VolumeMusic(music_volume);
+
+	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN && App->audio->music_volume <= 128)
+		App->audio->music_volume += 10;
+
+	if (App->input->GetKey(SDL_SCANCODE_KP_MINUS) == KEY_DOWN && App->audio->music_volume >= 0)
+		App->audio->music_volume -= 10;
 
 	return ret;
 }
@@ -170,6 +192,28 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 	{
 		Mix_PlayChannel(-1, fx[id - 1], repeat);
 	}
+
+	return ret;
+}
+
+//Load the configuration
+bool j1Audio::Save(pugi::xml_node& node)const
+{
+	bool ret = true;
+
+	node.append_child("music_volume").append_attribute("value").set_value(music_volume);
+	LOG("Saving music");
+
+	return ret;
+}
+
+//Save the configuration
+bool  j1Audio::Load(const pugi::xml_node& node) 
+{
+	bool ret = true;
+
+	music_volume = node.child("music_volume").attribute("value").as_int();
+	LOG("Loading music");
 
 	return ret;
 }

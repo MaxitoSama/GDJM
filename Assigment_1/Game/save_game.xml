@@ -9,9 +9,9 @@
 	<scene2 />
 	<colliders />
 	<player>
-		<player x="60" y="835" Map="1" />
+		<player x="2510" y="815" Map="2" />
 	</player>
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="-1526" y="0" />
 	</renderer>
 </game_state>

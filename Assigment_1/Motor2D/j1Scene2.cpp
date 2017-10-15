@@ -43,8 +43,8 @@ bool j1Scene2::Start()
 		App->audio->PlayMusic("audio/music/map1_music.ogg");
 		App->map->Draw_Colliders();
 
-		App->colliders->AddCollider({ 25400,180,50,50 }, COLLIDER_WIN, this);
-		App->colliders->AddCollider({ 18923,200,50,50 }, COLLIDER_WIN, this);
+		App->colliders->AddCollider({ 25400,0,50,310 }, COLLIDER_WIN2, this);
+		App->colliders->AddCollider({ 18923,0,50,310 }, COLLIDER_WIN2, this);
 		App->player->Curr_map = 2;
 
 		App->player->Start();
@@ -82,16 +82,6 @@ bool j1Scene2::Update(float dt)
 
 	App->map->Draw();
 
-
-	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Player.x=%i Player.y=%i CameraPosition.x=%i CameraPosition.y=%i Acceleration=%d X=%d Y=%d",
-		App->map->data.width, App->map->data.height,
-		App->map->data.tile_width, App->map->data.tile_height,
-		App->map->data.tilesets.count(), App->player->position.x,
-		App->player->position.y, App->render->camera.x,
-		App->render->camera.y, App->player->acceleration,
-		App->player->position.x, App->player->position.y);
-
-	App->win->SetTitle(title.GetString());
 	return true;
 }
 

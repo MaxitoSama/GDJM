@@ -39,7 +39,7 @@ bool j1Scene::Start()
 		App->audio->PlayMusic("audio/music/map1_music.ogg");
 		App->map->Draw_Colliders();
 
-		App->colliders->AddCollider({ 25400,320,50,50 }, COLLIDER_WIN, this);
+		App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
 		App->player->Curr_map = 1;
 	}
 
