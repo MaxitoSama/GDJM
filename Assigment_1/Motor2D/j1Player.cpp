@@ -313,10 +313,10 @@ bool j1Player::PostUpdate()
 	//SLIDING_LEFT----------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
 	{
-		if (speed >= 0 && position.x >= 2)
+		if (speed <= 0)
 		{
 			Slide_Method();
-			position.x -= speed;
+			position.x += speed;
 			if (current_animation != &slide_left && !Jump)
 			{
 				slide_left.Reset();
@@ -492,9 +492,13 @@ void j1Player::Slide_Method()
 {
 	slide_counter += 1;
 
-	if (slide_counter % 10 == 0)
+	if (slide_counter % 10 == 0 && speed>=0)
 	{
 		speed -= 5;
+	}
+	if (slide_counter % 10 == 0 && speed <= 0)
+	{
+		speed += 5;
 	}
 }
 

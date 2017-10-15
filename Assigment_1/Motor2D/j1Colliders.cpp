@@ -195,7 +195,7 @@ void j1Colliders::DebugDraw()
 				App->render->DrawQuad(colliders[i]->rect, 135, 206, 250, alpha, false);
 				break;
 			case COLLIDER_FEET: // light blue
-				App->render->DrawQuad(colliders[i]->rect, 135, 206, 0, alpha, false);
+				App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha, false);
 				break;
 			case COLLIDER_WIN: // light blue
 				App->render->DrawQuad(colliders[i]->rect, 0, 206, 250, alpha, false);
@@ -272,7 +272,7 @@ bool Collider::CheckCollision(const SDL_Rect& r)const
 {
 	if ((rect.x < r.x + r.w && rect.x + rect.w > r.x) || (rect.x < r.x + r.w  && rect.x + rect.w > r.x))
 	{
-		if (rect.y < r.y + r.h-10 && rect.y + rect.h-10 > r.y)
+		if (rect.y < r.y + r.h && rect.y + rect.h > r.y)
 		{
 			return true;
 		}
