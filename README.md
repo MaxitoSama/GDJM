@@ -19,6 +19,8 @@ First Scene     	= "F1"
 Start of Scene 		= "F2"
 See Colliders 		= "F3"
 
+We used the Save and Load buttons as a mechanic to be able to progress
+through the game.
 
 
 # Github Link
