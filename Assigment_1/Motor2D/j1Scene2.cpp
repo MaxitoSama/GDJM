@@ -44,7 +44,7 @@ bool j1Scene2::Start()
 		App->map->Draw_Colliders();
 		//App->colliders->AddCollider({ 200,900,50,50 }, COLLIDER_WIN, this);
 		App->colliders->AddCollider({ 25400,320,50,50 }, COLLIDER_WIN, this);
-
+		App->player->Curr_map = 2;
 		App->player->Start();
 	}
 	
@@ -67,7 +67,7 @@ bool j1Scene2::Update(float dt)
 		App->LoadGame();
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-		Change_to_Scene_1();
+		Change_to_Scene_1(0,0);
 
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		StartCurrentScene();
@@ -116,14 +116,14 @@ bool j1Scene2::CleanUp()
 	return true;
 }
 
-void j1Scene2::Change_to_Scene_1()
+void j1Scene2::Change_to_Scene_1(int x, int y)
 {
 	active = false;
 	App->scene->active = true;
 	CleanUp();
 	App->scene->Start();
-	App->player->position.y = 215;
-	App->player->position.x = 60;
+	App->player->position.y = y;
+	App->player->position.x = x;
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 	App->player->Start();

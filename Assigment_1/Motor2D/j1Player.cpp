@@ -10,6 +10,8 @@
 #include "j1Colliders.h"
 #include "j1Player.h"
 #include "j1Audio.h"
+#include "j1Scene.h"
+#include "j1Scene2.h"
 
 using namespace std;
 
@@ -440,8 +442,29 @@ bool j1Player::PostUpdate()
 // Load / Save
 bool j1Player::Load(pugi::xml_node& data)
 {
-	position.x = data.child("player").attribute("x").as_int();
-	position.y = data.child("player").attribute("y").as_int();
+	int map = data.child("player").attribute("Map").as_int();
+	int x = data.child("player").attribute("x").as_int();
+	int y = data.child("player").attribute("y").as_int();
+	
+	if (Curr_map != map)
+	{
+		if (map == 1)
+		{
+			App->scene2->Change_to_Scene_1(x,y);
+		}
+		if (map == 2)
+		{
+			App->scene->Change_to_Scene_2(x,y);
+		}
+	}
+
+	else
+	{
+		position.x = data.child("player").attribute("x").as_int();
+		position.y = data.child("player").attribute("y").as_int();
+	}
+	
+	
 
 	return true;
 
@@ -452,6 +475,7 @@ bool j1Player::Save(pugi::xml_node& data) const
 
 	player.append_attribute("x") = position.x;
 	player.append_attribute("y") = position.y;
+	player.append_attribute("Map") = Curr_map;
 
 	return true;
 }

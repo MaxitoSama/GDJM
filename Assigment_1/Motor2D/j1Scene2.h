@@ -33,7 +33,7 @@ public:
 	bool CleanUp();
 
 	//Change the scene 1
-	void Change_to_Scene_1();
+	void Change_to_Scene_1(int x, int y);
 
 	//Start again
 	void StartCurrentScene();

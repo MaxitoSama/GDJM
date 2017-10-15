@@ -66,6 +66,7 @@ public:
 	int speed;
 	int Pos_jump;
 	int velocity;
+	int Curr_map;
 
 
 	enum LastDirection { UP, DOWN, LEFT, RIGHT, UPRIGHT, UPLEFT, DOWNRIGHT, DOWNLEFT };

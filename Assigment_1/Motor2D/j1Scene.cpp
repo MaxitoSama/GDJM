@@ -38,10 +38,10 @@ bool j1Scene::Start()
 		App->map->Load("Map_1.tmx");
 		App->audio->PlayMusic("audio/music/map1_music.ogg");
 		App->map->Draw_Colliders();
-		//App->colliders->AddCollider({ 200,900,50,50 }, COLLIDER_WIN, this);
+
 		App->colliders->AddCollider({ 25400,180,50,50 }, COLLIDER_WIN, this);
 		App->colliders->AddCollider({ 18923,200,50,50 }, COLLIDER_WIN, this);
-	
+		App->player->Curr_map = 1;
 	}
 
 	return true;
@@ -69,7 +69,7 @@ bool j1Scene::Update(float dt)
 		StartCurrentScene();
 
 	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)
-		Change_to_Scene_2();
+		Change_to_Scene_2(0,0);
 
 	
 	if (App->player->position.x >= App->player->win_width / 2 && App->player->position.x <= 24630)
@@ -123,14 +123,14 @@ void j1Scene::StartCurrentScene()
 	App->render->camera.y = 0;
 }
 
-void j1Scene::Change_to_Scene_2()
+void j1Scene::Change_to_Scene_2(int x, int y)
 {
 	active = false;
 	App->scene2->active = true;
 	CleanUp();
 	App->scene2->Start();
-	App->player->position.y = 215;
-	App->player->position.x = 60;
+	App->player->position.y = y;
+	App->player->position.x = x;
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 }

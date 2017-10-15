@@ -143,11 +143,11 @@ bool j1Colliders::Update(float dt)
 			{
 				if (App->scene->active)
 				{
-					App->scene->Change_to_Scene_2();
+					App->scene->Change_to_Scene_2(0,0);
 				}
 				else
 				{
-					App->scene2->Change_to_Scene_1();
+					App->scene2->Change_to_Scene_1(0,0);
 				}
 			}
 		}
