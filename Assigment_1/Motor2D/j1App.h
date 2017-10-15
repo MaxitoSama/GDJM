@@ -73,8 +73,9 @@ private:
 	// Call modules after each loop iteration
 	bool PostUpdate();
 
-	// Load / Save
+	// Load 
 	bool LoadGameNow();
+	//Save
 	bool SavegameNow() const;
 
 public:

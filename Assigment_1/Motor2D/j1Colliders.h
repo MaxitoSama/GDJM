@@ -39,6 +39,7 @@ struct Collider
 	bool CheckCollision(const SDL_Rect& r) const;
 	
 	bool CheckFutureFallColision(const SDL_Rect& r);
+
 	bool CheckFutureCrashColision(const SDL_Rect& r);
 };
 
@@ -50,8 +51,11 @@ public:
 	~j1Colliders();
 
 	bool Awake();
+	
 	bool PreUpdate();
+	
 	bool Update(float dt);
+	
 	//update_status PostUpdate();
 	bool CleanUp();
 

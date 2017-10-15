@@ -118,6 +118,7 @@ bool j1Scene2::CleanUp()
 	return true;
 }
 
+//Change to scene 1
 void j1Scene2::Change_to_Scene_1(int x, int y)
 {
 	active = false;
@@ -131,6 +132,7 @@ void j1Scene2::Change_to_Scene_1(int x, int y)
 	App->player->Start();
 }
 
+//Go to the begining
 void j1Scene2::StartCurrentScene()
 {
 	App->player->position.y = 215;

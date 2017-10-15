@@ -78,13 +78,7 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 
-	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Player.x=%i Player.y=%i CameraPosition.x=%i CameraPosition.y=%i Acceleration=%d X=%d Y=%d",
-					App->map->data.width, App->map->data.height,
-					App->map->data.tile_width, App->map->data.tile_height,
-					App->map->data.tilesets.count(), App->player->position.x, 
-					App->player->position.y, App->render->camera.x,
-					App->render->camera.y, App->player->acceleration,
-					App->player->position.x,App->player->position.y);
+	p2SString title("%s",App->GetTitle());
 
 	App->win->SetTitle(title.GetString());
 	return true;
@@ -113,6 +107,7 @@ bool j1Scene::CleanUp()
 	return true;
 }
 
+//go to the begining
 void j1Scene::StartCurrentScene()
 {
 	App->player->position.y = 215;
@@ -121,6 +116,7 @@ void j1Scene::StartCurrentScene()
 	App->render->camera.y = 0;
 }
 
+//Change to scene 2
 void j1Scene::Change_to_Scene_2(int x, int y)
 {
 	CleanUp();

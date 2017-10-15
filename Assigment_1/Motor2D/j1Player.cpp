@@ -21,7 +21,7 @@ j1Player::j1Player():j1Module()
 	graphics = NULL;
 	current_animation = NULL;
 
-	//idle animation Right
+	//IDLE RIGHT----------------------------------------------------
 	{
 		idle_right.PushBack({ 64,111,176,331 });
 		idle_right.PushBack({ 310,111,176,331 });
@@ -38,7 +38,7 @@ j1Player::j1Player():j1Module()
 		idle_right.speed = 0.5f;
 	}
 
-	//idle animation Left
+	//IDLE LEFT----------------------------------------------------
 	{
 		idle_left.PushBack({ 64,1159,176,329 });
 		idle_left.PushBack({ 311,1159,176,329 });
@@ -52,12 +52,11 @@ j1Player::j1Player():j1Module()
 		idle_left.PushBack({ 2560,1159,176,329 });
 
 		idle_left.loop = true;
-		//idle_left.speed = 0.001f;
 		idle_left.speed = 0.5f;
 	}
 
 	
-	// Move Right
+	// MOVE RICHT----------------------------------------------------
 	{
 		right.PushBack({ 64,472,263,332 });
 		right.PushBack({ 327,472,263,332 });
@@ -74,13 +73,7 @@ j1Player::j1Player():j1Module()
 		right.speed = 0.5f;
 	}
 
-	//Move Right back
-	right_back.PushBack({ 0,0,50,50 });
-
-	right_back.loop = true;
-	right_back.speed = 0.5f;
-
-	// Move Left
+	// MOVE LEFT----------------------------------------------------
 	{
 	left.PushBack({ 2611,813,283,341 });
 	left.PushBack({ 2328,813,283,341 });
@@ -97,20 +90,7 @@ j1Player::j1Player():j1Module()
 	left.speed = 0.5;
 	}
 
-	//Move Left Back
-	left_back.PushBack({ 0,0,50,50 });
-
-	left_back.loop = true;
-	left_back.speed = 0.5f;
-
-	//DIE
-	die.PushBack({ 331,190,29,26 });
-	die.PushBack({ 361,190,29,26 });
-	die.PushBack({ 391,190,29,26 });
-	die.loop =true;
-	die.speed = 0.5f;
-
-	//JUMP_RIGHT
+	//JUMP_RIGHT----------------------------------------------------
 	{
 		jump_right.PushBack({ 64,471,263,332 });
 		jump_right.PushBack({ 327,471,263,332 });
@@ -127,7 +107,7 @@ j1Player::j1Player():j1Module()
 		jump_right.speed = 0.05f;
 	}
 
-	//JUMP_LEFT
+	//JUMP_LEFT----------------------------------------------------
 	{
 		jump_left.PushBack({ 64,2200,263,332 });
 		jump_left.PushBack({ 327,2200,263,332 });
@@ -144,7 +124,7 @@ j1Player::j1Player():j1Module()
 		jump_left.speed = 0.5f;
 	}
 
-	//Sliding_right
+	//SLIDE RIGHT----------------------------------------------------
 	slide_right.PushBack({ 65,1521,283,320 });
 	slide_right.PushBack({ 347,1521,283,320 });
 	slide_right.PushBack({ 632,1521,283,320 });
@@ -159,7 +139,7 @@ j1Player::j1Player():j1Module()
 	slide_right.loop = true;
 	slide_right.speed = 0.5f;
 
-	//Sliding_left
+	//SLIDE LEFT----------------------------------------------------
 	
 		slide_left.PushBack({ 65,1840,283,320 });
 	slide_left.PushBack({ 347,1840,283,320 });
@@ -185,18 +165,18 @@ bool j1Player::Awake(pugi::xml_node& config)
 {
 	LOG("Init Player config");
 
-	//Init position var
+	//Init position var----------------------------------------------------
 	position.x= config.child("position").attribute("pos_x").as_uint(10);
 	position.y= config.child("position").attribute("pos_y").as_uint(10);
 
-	//Init Velocity var
+	//Init Velocity var----------------------------------------------------
 	gravity = config.child("gravity").attribute("value").as_uint(10);
 	acceleration = config.child("acceleration").attribute("value").as_uint(0);
 	accel_counter = config.child("accel_counter").attribute("value").as_uint(0);
 	velocity = config.child("velocity").attribute("value").as_uint(1);
 	slide_counter = config.child("slide_counter").attribute("value").as_uint(0);
 
-	//Jump vars
+	//Jump vars----------------------------------------------------
 	jump_height = config.child("jump").attribute("jump_height").as_uint(300);
 	jump_vel = config.child("jump").attribute("jump_vel").as_uint(10);
 	fall = config.child("jump_bool").attribute("value").as_bool(false);
@@ -217,7 +197,7 @@ bool j1Player::Start()
 	collider_player = App->colliders->AddCollider({ position.x, position.y, 200/2, 332/2 }, COLLIDER_PLAYER, this);
 	collider_feet = App->colliders->AddCollider({ (position.x+(263/4)-54), position.y+ (310 / 2), 64, 10 }, COLLIDER_FEET, this);
 
-	//Init Screen vars
+	//Init Screen vars----------------------------------------------------
 	win_width = App->win->screen_surface->w;
 	win_height = App->win->screen_surface->h;
 	win_scale = App->win->GetScale();
@@ -266,7 +246,7 @@ bool j1Player::PostUpdate()
 	//MOVE_RIGHT---------------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && !dead)
 	{
-		if(position.x < 25600) //800 number of tiles and 32 the pixels per tiles there is.
+		if(position.x < 25600) 
 		{
 			speed = (velocity + acceleration);
 			position.x += speed;
@@ -286,9 +266,9 @@ bool j1Player::PostUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP || dead)
 	{
 
-		acceleration = 1; //+ max speed
-		accel_counter = 0; //times added acceleration
-		speed = 4; //ammount of speed
+		acceleration = 1; 
+		accel_counter = 0; 
+		speed = 4; 
 	}
 
 	//SLIDING_RIGHT--------------------------------------------
@@ -519,7 +499,7 @@ void j1Player::Slide_Method()
 
 	if (slide_counter % 10 == 0 && speed>=0)
 	{
-		speed -= 2;
+		speed -= 5;
 	}
 	if (slide_counter % 10 == 0 && speed <= 0)
 	{

@@ -28,6 +28,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	return ret;
 }
 
+//draw the map and background
 void j1Map::Draw()
 {
 	if (map_loaded == false)
@@ -71,6 +72,7 @@ void j1Map::Draw()
 	}
 }
 
+//draw the colliders
 void j1Map::Draw_Colliders()
 {
 	int counter_x = 0;
@@ -79,6 +81,7 @@ void j1Map::Draw_Colliders()
 	uint tile_indx=0;
 	uint layer_indx;
 
+	//draw the horizontal colliders together
 	for (layer_indx = 0; layer_indx<data.layers.count(); layer_indx++)
 	{
 
@@ -115,6 +118,7 @@ void j1Map::Draw_Colliders()
 
 		}
 
+		//draw the vertical colliders together
 		for (int i = 0; i < data.width; i++)
 		{
 			for (int j = 0; j < data.height; j++)
