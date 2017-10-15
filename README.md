@@ -7,7 +7,7 @@ There are two types of controls.
 For gameplay:
 Left  = "D"
 Right = "A"
-Slide = "S"
+Slide = "S + A/D"
 Jump  = "Space"
 Save  = "F5"
 Load  = "F6"

@@ -38,9 +38,7 @@ bool j1Scene::Start()
 		App->map->Load("Map_1.tmx");
 		App->audio->PlayMusic("audio/music/map1_music.ogg");
 		App->map->Draw_Colliders();
-		//App->colliders->AddCollider({ 200,900,50,50 }, COLLIDER_WIN, this);
-		App->colliders->AddCollider({ 25400,180,50,50 }, COLLIDER_WIN, this);
-		App->colliders->AddCollider({ 18923,200,50,50 }, COLLIDER_WIN, this);
+		App->colliders->AddCollider({ 25400,320,50,50 }, COLLIDER_WIN, this);
 	
 	}
 
@@ -77,11 +75,8 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;
 	}
 
-	//App->render->Blit(img, 0, 0);
 	App->map->Draw();
 
-	// TODO 7: Set the window title like
-	// "Map:%dx%d Tiles:%dx%d Tilesets:%d"
 	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Player.x=%i Player.y=%i CameraPosition.x=%i CameraPosition.y=%i Acceleration=%d X=%d Y=%d",
 					App->map->data.width, App->map->data.height,
 					App->map->data.tile_width, App->map->data.tile_height,
