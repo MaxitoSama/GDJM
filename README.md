@@ -29,7 +29,7 @@ through the game.
 
 
 ## Github Link
-[Release](https://github.com/MaxitoSama/GDJM/releases)
+[Repository](https://github.com/MaxitoSama/GDJM)
 
 ## Licence
 Tile Map: [Link](http://www.gameart2d.com/free-platformer-game-tileset.html)
