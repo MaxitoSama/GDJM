@@ -32,7 +32,10 @@ through the game.
 https://github.com/MaxitoSama/GDJM/releases
 
 ## Licence
-Tile Map: http: http://www.gameart2d.com/free-platformer-game-tileset.html
-Main Character: http://www.gameart2d.com/ninja-adventure---free-sprites.html
-Background Music: https://www.youtube.com/watch?v=KCoqdCjzFV8
+Tile Map: http:[Link](http://www.gameart2d.com/free-platformer-game-tileset.html)
+
+Main Character:[Link](http://www.gameart2d.com/ninja-adventure---free-sprites.html)
+
+Background Music: [Link](https://www.youtube.com/watch?v=KCoqdCjzFV8)
+
 
