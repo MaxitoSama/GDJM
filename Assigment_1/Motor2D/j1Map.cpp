@@ -132,7 +132,7 @@ void j1Map::Draw_Colliders()
 						for (uint indx = 0; indx < data.tilesets[tile_indx]->colliders.count(); indx++)
 						{
 							uint collider_num = data.tilesets[tile_indx]->colliders[indx]->tile_id;
-							if (id - data.tilesets[tile_indx]->firstgid == collider_num && data.tilesets[tile_indx]->colliders[indx]->type == COLLIDER_WALL)
+							if (id - data.tilesets[tile_indx]->firstgid == collider_num && data.tilesets[tile_indx]->colliders[indx]->type == COLLIDER_WALL )
 							{
 								int x = MapToWorld(i , j - counter_y).x;
 								int y = MapToWorld(i , j - counter_y).y;

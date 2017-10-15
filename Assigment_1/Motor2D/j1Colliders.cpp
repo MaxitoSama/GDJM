@@ -125,7 +125,7 @@ bool j1Colliders::Update(float dt)
 				}
 			}
 
-			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect) == true)
+			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect) == true && App->input->GetKey(SDL_SCANCODE_S)==KEY_IDLE)
 			{
 				App->player->position.x -= App->player->speed;
 			}
