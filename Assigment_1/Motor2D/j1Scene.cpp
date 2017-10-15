@@ -105,8 +105,10 @@ bool j1Scene::PostUpdate()
 bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
-	App->map->CleanUp();
+	
 	App->colliders->CleanUp();
+	App->map->CleanUp();
+	App->tex->CleanUp();
 
 	return true;
 }
@@ -121,9 +123,9 @@ void j1Scene::StartCurrentScene()
 
 void j1Scene::Change_to_Scene_2(int x, int y)
 {
+	CleanUp();
 	active = false;
 	App->scene2->active = true;
-	CleanUp();
 	App->scene2->Start();
 	App->player->position.y = y;
 	App->player->position.x = x;
