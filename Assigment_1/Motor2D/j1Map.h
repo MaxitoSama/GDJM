@@ -7,29 +7,18 @@
 #include "j1Module.h"
 #include "j1Colliders.h"
 
-// TODO 1: Create a struct for the map layer
-
-struct MapLayer {
-	// ----------------------------------------------------
-
-	// TODO 6: Short function to get the value of x,y
-
+struct MapLayer 
+{
 	inline uint Get(int x, int y) const;
-
-	// ----------------------------------------------------
-
 
 	p2SString		name;
 
 	uint			width;
 	uint			height;
-
-	//p2List<uint>	data; slow way
 	uint*			data = nullptr;
 	uint			size = 0;
 
 	~MapLayer();
-
 };
 
 struct TileCollider
@@ -44,7 +33,6 @@ struct TileCollider
 
 struct TileSet
 {
-	// TODO 7: Create a method that receives a tile id and returns it's Rectfind the Rect associated with a specific tile id
 	SDL_Rect GetTileRect(int id) const;
 
 	p2SString				name;
@@ -115,7 +103,7 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
-	// TODO 8: Create a method that translates x,y coordinates from map positions to world positions
+	//Translates x,y coordinates from map positions to world positions
 	iPoint MapToWorld(int x, int y) const;
 
 	// Draw colliders

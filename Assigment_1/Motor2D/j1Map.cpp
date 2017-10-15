@@ -33,7 +33,6 @@ void j1Map::Draw()
 	if (map_loaded == false)
 		return;
 
-	// TODO 5: Prepare the loop to draw all tilesets + Blit
 	uint tile_indx;
 	uint layer_indx;
 	uint background_indx;
@@ -41,7 +40,7 @@ void j1Map::Draw()
 	
 	for (background_indx = 0; background_indx < data.backgrounds.count(); background_indx++)
 	{
-		App->render->Blit(data.backgrounds[background_indx]->Image, 0, 0, NULL, 1.0f, data.backgrounds[background_indx]->Pvelocity);
+		App->render->Blit(data.backgrounds[background_indx]->Image, 0, 0, NULL, 1.0f, 0);
 	}
 
 	for (layer_indx = 0; layer_indx<data.layers.count(); layer_indx++)
@@ -82,6 +81,7 @@ void j1Map::Draw_Colliders()
 
 	for (layer_indx = 0; layer_indx<data.layers.count(); layer_indx++)
 	{
+
 		for (int j = 0; j < data.height; j++)
 		{
 			for (int i = 0; i < data.width; i++)
@@ -114,6 +114,7 @@ void j1Map::Draw_Colliders()
 			}
 
 		}
+
 		for (int i = 0; i < data.width; i++)
 		{
 			for (int j = 0; j < data.height; j++)
@@ -179,21 +180,23 @@ bool j1Map::CleanUp()
 	// Remove all tilesets
 	p2List_item<TileSet*>* item;
 	p2List_item<MapLayer*>* item_l;
+	p2List_item<Image_Background*>* item_I;
 
 	item = data.tilesets.start;
 	item_l = data.layers.start;
+	item_I = data.backgrounds.start;
 
 	while (item != NULL)
 	{
 		RELEASE(item->data);
 		item = item->next;
 	}
+	
 	data.tilesets.clear();
 
-	// TODO 2: clean up all layer data
-	// Remove all layers
-
 	data.layers.clear();
+
+	data.backgrounds.clear();
 
 
 	// Clean up the pugui tree
@@ -255,7 +258,6 @@ bool j1Map::Load(const char* file_name)
 		data.backgrounds.add(set);
 	}
 
-	// TODO 4: Iterate all layers and load each of them
 	// Load layer info ----------------------------------------------
 	pugi::xml_node layer;
 
@@ -287,9 +289,6 @@ bool j1Map::Load(const char* file_name)
 			LOG("spacing: %d margin: %d", s->spacing, s->margin);
 			item = item->next;
 		}
-
-		// TODO 4: Add info here about your loaded layers
-		// Adapt this vcode with your own variables
 
 		p2List_item<MapLayer*>* item_layer = data.layers.start;
 		while (item_layer != NULL)
@@ -468,13 +467,12 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	return ret;
 }
 
-// TODO 3: Create the definition for a function that loads a single layer
 bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 {
 	uint i = 0;
 
 	layer->name = node.attribute("name").as_string();
-	layer->width = node.attribute("width").as_uint(0);//the 0 is the value that returns if "Width" doesn't exists
+	layer->width = node.attribute("width").as_uint(0);
 	layer->height = node.attribute("height").as_uint(0);
 	layer->size = layer->width*layer->height;
 
@@ -529,7 +527,6 @@ bool j1Map::LoadBackground(pugi::xml_node& Image_node, Image_Background* backgro
 
 MapLayer::~MapLayer()
 {
-
 	delete[] data;
 }
 
