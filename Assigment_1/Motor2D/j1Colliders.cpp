@@ -40,7 +40,7 @@ j1Colliders::j1Colliders() : j1Module()
 	matrix[COLLIDER_FEET][COLLIDER_FEET] = false;
 	matrix[COLLIDER_FEET][COLLIDER_WALL] = false;
 	matrix[COLLIDER_FEET][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_FEET][COLLIDER_DEATH] = false;
+	matrix[COLLIDER_FEET][COLLIDER_DEATH] = true;
 	matrix[COLLIDER_FEET][COLLIDER_FLOOR] = true;
 }
 
