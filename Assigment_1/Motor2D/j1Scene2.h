@@ -32,9 +32,12 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	//Change the scene
-	void ChangeScene();
+	//Change the scene 1
+	void Change_to_Scene_1();
 
+	//Start again
+	void StartCurrentScene();
+	
 private:
 };
 

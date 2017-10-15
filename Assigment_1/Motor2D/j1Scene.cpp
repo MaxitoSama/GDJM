@@ -62,8 +62,15 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame();
 
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+		StartCurrentScene();
+
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-		ChangeScene();
+		StartCurrentScene();
+
+	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)
+		Change_to_Scene_2();
+
 	
 	if (App->player->position.x >= App->player->win_width / 2 && App->player->position.x <= 24630)
 	{
@@ -108,7 +115,15 @@ bool j1Scene::CleanUp()
 	return true;
 }
 
-void j1Scene::ChangeScene()
+void j1Scene::StartCurrentScene()
+{
+	App->player->position.y = 215;
+	App->player->position.x = 60;
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+}
+
+void j1Scene::Change_to_Scene_2()
 {
 	active = false;
 	App->scene2->active = true;
