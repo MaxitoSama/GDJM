@@ -74,7 +74,7 @@ public:
 	
 	bool Jump = false;
 	bool fall = false;
-	bool floor;
+	bool dead=false;
 
 	uint win_width;
 	uint win_height;

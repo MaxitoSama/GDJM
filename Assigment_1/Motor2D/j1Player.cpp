@@ -240,7 +240,7 @@ bool j1Player::PostUpdate()
 	SDL_Event e;
 	
 	//MOVE_LEFT----------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && !dead)
 	{
 		if (position.x >= 2)
 		{
@@ -259,7 +259,7 @@ bool j1Player::PostUpdate()
 	}
 
 	//MOVE_RIGHT---------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && !dead)
 	{
 		if(position.x < 25600) //800 number of tiles and 32 the pixels per tiles there is.
 		{
@@ -278,7 +278,7 @@ bool j1Player::PostUpdate()
 	}
 	
 	//Acceleration counter reset
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP)
+	if ((App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP) && !dead)
 	{
 
 		acceleration = 1; //+ max speed
@@ -287,7 +287,7 @@ bool j1Player::PostUpdate()
 	}
 
 	//SLIDING_RIGHT--------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
 	{
 		if (speed >= 0)
 		{
@@ -308,7 +308,7 @@ bool j1Player::PostUpdate()
 	}
 
 	//SLIDING_LEFT----------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
 	{
 		if (speed >= 0 && position.x >= 2)
 		{
@@ -328,7 +328,7 @@ bool j1Player::PostUpdate()
 		}
 	}
 	//JUMP_ONPLACE----------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && !dead)
 	{
 		if (!Jump)
 		{
@@ -359,7 +359,7 @@ bool j1Player::PostUpdate()
 	}
 
 	//JUMP_RIGHT------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead)
 	{
 		if (!Jump)
 		{
@@ -377,7 +377,7 @@ bool j1Player::PostUpdate()
 		
 	}
 	//JUMP_LEFT-------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead)
 	{
 		if (!Jump)
 		{
@@ -458,12 +458,21 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	if (c2->type == COLLIDER_FLOOR)
 	{
 		position.y -= 10;
+		dead = false;
 
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
 		{
 			Jump = false;
 			fall = false;
 		}
+	}
+	if (c2->type == COLLIDER_DEATH)
+	{
+		position.x = 60;
+		position.y = 215;
+		App->render->camera.x = 0;
+		App->render->camera.y = 0;
+		dead = true;
 	}
 }
 

@@ -14,23 +14,23 @@ j1Colliders::j1Colliders() : j1Module()
 
 	matrix[COLLIDER_WALL][COLLIDER_WALL] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_WALL][COLLIDER_FEET] = false;
+	matrix[COLLIDER_WALL][COLLIDER_DEATH] = false;
 	matrix[COLLIDER_WALL][COLLIDER_FLOOR] = false;
 
-	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_FEET] = false;
+	matrix[COLLIDER_PLAYER][COLLIDER_DEATH] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_FLOOR] = true;
 	
-	matrix[COLLIDER_FEET][COLLIDER_FEET] = false;
-	matrix[COLLIDER_FEET][COLLIDER_WALL] = true;
-	matrix[COLLIDER_FEET][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_FEET][COLLIDER_FLOOR] = true;
+	matrix[COLLIDER_DEATH][COLLIDER_DEATH] = false;
+	matrix[COLLIDER_DEATH][COLLIDER_WALL] = true;
+	matrix[COLLIDER_DEATH][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_DEATH][COLLIDER_FLOOR] = true;
 
-	matrix[COLLIDER_FLOOR][COLLIDER_WALL] = false;
-	matrix[COLLIDER_FLOOR][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_FLOOR][COLLIDER_FEET] = false;
 	matrix[COLLIDER_FLOOR][COLLIDER_FLOOR] = false;
+	matrix[COLLIDER_FLOOR][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_FLOOR][COLLIDER_DEATH] = false;
+	matrix[COLLIDER_FLOOR][COLLIDER_WALL] = false;
 }
 
 // Destructor
@@ -134,7 +134,7 @@ void j1Colliders::DebugDraw()
 			case COLLIDER_PLAYER: // green
 				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha,false);
 				break;
-			case COLLIDER_FEET: // pink
+			case COLLIDER_DEATH: // pink
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha, false);
 				break;
 			case COLLIDER_FLOOR: // light blue
