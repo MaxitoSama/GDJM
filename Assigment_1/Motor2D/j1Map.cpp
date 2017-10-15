@@ -74,9 +74,12 @@ void j1Map::Draw()
 
 void j1Map::Draw_Colliders()
 {
-	int counter = 0;
+	int counter_x = 0;
+	int counter_y = 0;
+	
 	uint tile_indx=0;
 	uint layer_indx;
+
 	for (layer_indx = 0; layer_indx<data.layers.count(); layer_indx++)
 	{
 		for (int j = 0; j < data.height; j++)
@@ -88,7 +91,39 @@ void j1Map::Draw_Colliders()
 				{
 					if (data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i + 1, j)] == id)
 					{
-						counter++;
+						counter_x++;
+						continue;
+					}
+
+					else
+					{
+						for (uint indx = 0; indx < data.tilesets[tile_indx]->colliders.count(); indx++)
+						{
+							uint collider_num = data.tilesets[tile_indx]->colliders[indx]->tile_id;
+							if (id - data.tilesets[tile_indx]->firstgid == collider_num && data.tilesets[tile_indx]->colliders[indx]->type==COLLIDER_FLOOR)
+							{
+								int x = MapToWorld(i - counter_x, j- counter_y).x;
+								int y = MapToWorld(i - counter_x, j- counter_y).y;
+								SDL_Rect collider_rec = { x,y,data.tile_width*(counter_x +1),data.tile_height*(counter_y+1) };
+								App->colliders->AddCollider(collider_rec, data.tilesets[tile_indx]->colliders[indx]->type);
+							}
+						}
+						counter_x = 0;
+					}
+				}
+			}
+
+		}
+		for (int i = 0; i < data.width; i++)
+		{
+			for (int j = 0; j < data.height; j++)
+			{
+				uint id = data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i, j)];
+				if (id != 0)
+				{
+					if (data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i, j + 1)] == id)
+					{
+						counter_y++;
 						continue;
 					}
 					else
@@ -96,15 +131,15 @@ void j1Map::Draw_Colliders()
 						for (uint indx = 0; indx < data.tilesets[tile_indx]->colliders.count(); indx++)
 						{
 							uint collider_num = data.tilesets[tile_indx]->colliders[indx]->tile_id;
-							if (id - data.tilesets[tile_indx]->firstgid == collider_num)
+							if (id - data.tilesets[tile_indx]->firstgid == collider_num && data.tilesets[tile_indx]->colliders[indx]->type == COLLIDER_WALL)
 							{
-								int x = MapToWorld(i - counter, j).x;
-								int y = MapToWorld(i - counter , j).y;
-								SDL_Rect collider_rec = { x,y,data.tile_width*(counter+1),data.tile_height };
+								int x = MapToWorld(i , j - counter_y).x;
+								int y = MapToWorld(i , j - counter_y).y;
+								SDL_Rect collider_rec = { x,y,data.tile_width,data.tile_height*(counter_y +1)};
 								App->colliders->AddCollider(collider_rec, data.tilesets[tile_indx]->colliders[indx]->type);
 							}
 						}
-						counter = 0;
+						counter_y = 0;
 					}
 				}
 			}

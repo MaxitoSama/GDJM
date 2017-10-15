@@ -59,8 +59,8 @@ public:
 	Animation slide_right;
 	Animation slide_left;
 
-	Collider* Player_Collider;
-	Collider* feetcoll;
+	Collider* collider_feet;
+	Collider* collider_player;
 
 	int font_score = -1;
 	int speed;

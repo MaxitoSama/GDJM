@@ -212,7 +212,8 @@ bool j1Player::Start()
 	graphics = App->tex->Load("assets/character/character.png");
 
 	LOG("Loading Player Collider");
-	Player_Collider = App->colliders->AddCollider({ (position.x+(263/4)-54), position.y+ (330 / 2), 64, 10 }, COLLIDER_PLAYER, this);
+	collider_player = App->colliders->AddCollider({ position.x, position.y, 200/2, 332/2 }, COLLIDER_PLAYER, this);
+	collider_feet = App->colliders->AddCollider({ (position.x+(263/4)-54), position.y+ (320 / 2), 64, 10 }, COLLIDER_FEET, this);
 
 	//Init Screen vars
 	win_width = App->win->screen_surface->w;
@@ -229,8 +230,10 @@ bool j1Player::CleanUp()
 	App->tex->UnLoad(graphics);
 
 	LOG("Destroying Player Collider");
-	if (Player_Collider != nullptr)
-		Player_Collider->to_delete = true;
+	if (collider_feet != nullptr)
+		collider_feet->to_delete = true;
+	if (collider_player != nullptr)
+		collider_player->to_delete = true;
 
 	return true;
 }
@@ -244,8 +247,8 @@ bool j1Player::PostUpdate()
 	{
 		if (position.x >= 2)
 		{
-			speed = velocity + acceleration;
-			position.x -= speed;
+			speed = -(velocity + (int)acceleration);
+			position.x += speed;
 			Acceleration_Method();
 		}
 
@@ -263,7 +266,7 @@ bool j1Player::PostUpdate()
 	{
 		if(position.x < 25600) //800 number of tiles and 32 the pixels per tiles there is.
 		{
-			speed = velocity + acceleration;
+			speed = (velocity + acceleration);
 			position.x += speed;
 			Acceleration_Method();
 		}
@@ -424,7 +427,8 @@ bool j1Player::PostUpdate()
 	}
 
 	//Player Colliders Position--------------------------------
-	Player_Collider->SetPos((position.x + (263 / 4) - 54), position.y + (330 / 2));
+	collider_player->SetPos(position.x,position.y);
+	collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (330 / 2));
 
 	// Draw everything ----------------------------------------
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),0.5f);
@@ -455,7 +459,7 @@ bool j1Player::Save(pugi::xml_node& data) const
 void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	
 	//Jump methode
-	if (c2->type == COLLIDER_FLOOR)
+	if (c1->type==COLLIDER_FEET && c2->type == COLLIDER_FLOOR)
 	{
 		position.y -= 10;
 		dead = false;
@@ -466,13 +470,17 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			fall = false;
 		}
 	}
-	if (c2->type == COLLIDER_DEATH)
+	if (c1->type == COLLIDER_FEET && c2->type == COLLIDER_DEATH)
 	{
 		position.x = 60;
 		position.y = 215;
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
 		dead = true;
+	}
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WALL)
+	{
+		position.x -= speed;
 	}
 }
 
