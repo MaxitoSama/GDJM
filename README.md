@@ -1,8 +1,9 @@
 # First Assignment: Ninja's Path
 
 ## Authors 
-Josep:[Github](https://github.com/joseppi)
-Marc:[Github](https://github.com/MaxitoSama)
+Josep: [Github](https://github.com/joseppi)
+
+Marc: [Github](https://github.com/MaxitoSama)
 
 ## Information about the game.
 Ninja's Path
