@@ -38,7 +38,8 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* textures = nullptr;
 
-	Mix_Chunk* music = NULL;
+	Mix_Chunk* jump_sound = NULL;
+	
 
 	SDL_Rect bridge;
 

@@ -280,7 +280,7 @@ bool j1Player::PostUpdate()
 		}
 	}
 	
-	//Acceleration counter reset
+	//ACCELERATION RESET---------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP || dead)
 	{
 
@@ -292,7 +292,7 @@ bool j1Player::PostUpdate()
 	//SLIDING_RIGHT--------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
 	{
-		if (speed >= 0)
+		if (speed > 0)
 		{
 			Slide_Method();
 			position.x += speed;
@@ -313,7 +313,7 @@ bool j1Player::PostUpdate()
 	//SLIDING_LEFT----------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
 	{
-		if (speed <= 0)
+		if (speed < 0)
 		{
 			Slide_Method();
 			position.x += speed;
@@ -333,6 +333,7 @@ bool j1Player::PostUpdate()
 	//JUMP_ONPLACE----------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && !dead)
 	{
+		App->audio->PlayFx(1);
 		if (!Jump)
 		{
            	Pos_jump = position.y - jump_height;
@@ -494,7 +495,7 @@ void j1Player::Slide_Method()
 
 	if (slide_counter % 10 == 0 && speed>=0)
 	{
-		speed -= 5;
+		speed -= 2;
 	}
 	if (slide_counter % 10 == 0 && speed <= 0)
 	{
