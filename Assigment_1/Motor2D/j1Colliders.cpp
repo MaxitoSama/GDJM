@@ -96,17 +96,31 @@ bool j1Colliders::Update(float dt)
 
 			c2 = colliders[k];
 
-			if (c1->CheckFutureColision(c2->rect)==true)
+			
+			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect) == true)
 			{
-				if (c1->to_delete == false && c2->to_delete != true) {
-					if (matrix[c1->type][c2->type] && c1->callback)
-						c1->callback->OnCollision(c1, c2);
+				App->player->position.y -= 10;
+				App->player->dead = false;
 
-					if (c1->to_delete == false) {
-						if (matrix[c2->type][c1->type] && c2->callback)
-							c2->callback->OnCollision(c2, c1);
-					}
+				if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+				{
+					App->player->Jump = false;
+					App->player->fall = false;
 				}
+			}
+
+			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect) == true)
+			{
+				App->player->position.x -= App->player->speed;
+			}
+
+			if (c1->type == COLLIDER_DEATH && c2->type == COLLIDER_FEET && c1->CheckCollision(c2->rect) == true)
+			{
+				App->player->position.x = 60;
+				App->player->position.y = 215;
+				App->render->camera.x = 0;
+				App->render->camera.y = 0;
+				App->player->dead = true;
 			}
 		}
 	}
@@ -221,9 +235,9 @@ bool j1Colliders::EraseCollider(Collider* collider)
 
 // -----------------------------------------------------
 
-bool Collider::CheckCollision(const SDL_Rect& r) const
+bool Collider::CheckCollision(const SDL_Rect& r)const
 {
-	if (rect.x < r.x + r.w && rect.x + rect.w > r.x)
+	if ((rect.x < r.x + r.w && rect.x + rect.w > r.x) || (rect.x < r.x + r.w  && rect.x + rect.w > r.x))
 	{
 		if (rect.y < r.y + r.h-10 && rect.y + rect.h-10 > r.y)
 		{
@@ -233,7 +247,7 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 	return false;
 }
 
-bool Collider::CheckFutureColision(const SDL_Rect& r)
+bool Collider::CheckFutureFallColision(const SDL_Rect& r)
 {
 	if (rect.x < r.x + r.w && rect.x + rect.w > r.x)
 	{
@@ -245,6 +259,28 @@ bool Collider::CheckFutureColision(const SDL_Rect& r)
 	return false;
 }
 
-
-
-
+bool Collider::CheckFutureCrashColision(const SDL_Rect& r)
+{
+	if (App->player->speed >=0)
+	{
+		if (rect.x - App->player->speed < r.x + r.w  && rect.x + rect.w > r.x)
+		{
+			if (rect.y < r.y + r.h  && rect.y + rect.h > r.y)
+			{
+				return true;
+			}
+		}
+	}
+	else
+	{
+		if (rect.x < r.x + r.w && rect.x + rect.w - App->player->speed> r.x)
+		{
+			if (rect.y < r.y + r.h  && rect.y + rect.h > r.y)
+			{
+				return true;
+			}
+		}
+	}
+	
+	return false;
+}

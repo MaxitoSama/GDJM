@@ -213,7 +213,7 @@ bool j1Player::Start()
 
 	LOG("Loading Player Collider");
 	collider_player = App->colliders->AddCollider({ position.x, position.y, 200/2, 332/2 }, COLLIDER_PLAYER, this);
-	collider_feet = App->colliders->AddCollider({ (position.x+(263/4)-54), position.y+ (320 / 2), 64, 10 }, COLLIDER_FEET, this);
+	collider_feet = App->colliders->AddCollider({ (position.x+(263/4)-54), position.y+ (310 / 2), 64, 10 }, COLLIDER_FEET, this);
 
 	//Init Screen vars
 	win_width = App->win->screen_surface->w;
@@ -428,7 +428,7 @@ bool j1Player::PostUpdate()
 
 	//Player Colliders Position--------------------------------
 	collider_player->SetPos(position.x,position.y);
-	collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (330 / 2));
+	collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (310 / 2));
 
 	// Draw everything ----------------------------------------
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),0.5f);
@@ -453,35 +453,6 @@ bool j1Player::Save(pugi::xml_node& data) const
 	player.append_attribute("y") = position.y;
 
 	return true;
-}
-
-
-void j1Player::OnCollision(Collider* c1, Collider* c2) {
-	
-	//Jump methode
-	if (c1->type==COLLIDER_FEET && c2->type == COLLIDER_FLOOR)
-	{
-		position.y -= 10;
-		dead = false;
-
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
-		{
-			Jump = false;
-			fall = false;
-		}
-	}
-	if (c1->type == COLLIDER_FEET && c2->type == COLLIDER_DEATH)
-	{
-		position.x = 60;
-		position.y = 215;
-		App->render->camera.x = 0;
-		App->render->camera.y = 0;
-		dead = true;
-	}
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WALL)
-	{
-		position.x -= speed;
-	}
 }
 
 void j1Player::Jump_Method()

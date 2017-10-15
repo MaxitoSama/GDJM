@@ -25,7 +25,6 @@ public:
 	bool Start();
 	bool PostUpdate();
 	bool CleanUp();
-	void OnCollision(Collider* c1, Collider* c2);
 	void Jump_Method();
 	void Slide_Method();
 	void Acceleration_Method();
