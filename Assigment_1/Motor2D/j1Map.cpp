@@ -44,28 +44,28 @@ void j1Map::Draw()
 		App->render->Blit(data.backgrounds[background_indx]->Image, 0, 0, NULL, 1.0f, 0);
 	}
 
-	for (layer_indx = 0; layer_indx<data.layers.count(); layer_indx++)
+	p2List_item<MapLayer*>* item = data.layers.start;
+
+	for (; item != NULL; item = item->next)
 	{
-		for (int j = 0; j < data.height; j++)
+		MapLayer* layer = item->data;
+
+		/*if (layer->properties.Get("Nodraw") != 0)
+			continue;*/
+
+		for (int y = 0; y < data.height; ++y)
 		{
-			for (int i = 0; i < data.width; i++)
+			for (int x = 0; x < data.width; ++x)
 			{
-				uint id = data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i, j)];
-				if (id != 0)
+				int tile_id = layer->Get(x, y);
+				if (tile_id > 0)
 				{
-					for (tile_indx = 0; tile_indx < data.tilesets.count(); tile_indx++)
-					{
-						if (id >= data.tilesets[tile_indx]->firstgid )
-						{
-							id += (data.tilesets[tile_indx]->firstgid-1);
-							break;
-						}
-					}
-					
-					SDL_Rect tile_rect = data.tilesets[tile_indx]->GetTileRect(id);
-					int x = MapToWorld(i, j).x;
-					int y = MapToWorld(i, j).y;
-					App->render->Blit(data.tilesets[tile_indx]->texture, x, y, &tile_rect);
+					TileSet* tileset = GetTilesetFromTileId(tile_id);
+
+					SDL_Rect r = tileset->GetTileRect(tile_id);
+					iPoint pos = MapToWorld(x, y);
+
+					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
 				}
 			}
 		}
@@ -89,10 +89,10 @@ void j1Map::Draw_Colliders()
 		{
 			for (int i = 0; i < data.width; i++)
 			{
-				uint id = data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i, j)];
+				uint id = data.layers[layer_indx]->Get(i, j);
 				if (id != 0)
 				{
-					if (data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i + 1, j)] == id)
+					if (data.layers[layer_indx]->Get(i+1,j) == id)
 					{
 						counter_x++;
 						continue;
@@ -123,10 +123,10 @@ void j1Map::Draw_Colliders()
 		{
 			for (int j = 0; j < data.height; j++)
 			{
-				uint id = data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i, j)];
+				uint id = data.layers[layer_indx]->Get(i, j);
 				if (id != 0)
 				{
-					if (data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i, j + 1)] == id)
+					if (data.layers[layer_indx]->Get(i, j + 1) == id)
 					{
 						counter_y++;
 						continue;
@@ -154,6 +154,24 @@ void j1Map::Draw_Colliders()
 	App->colliders->AddCollider({ 0,1080,1000000,10 }, COLLIDER_DEATH);
 }
 
+TileSet* j1Map::GetTilesetFromTileId(int id) const
+{
+	p2List_item<TileSet*>* item = data.tilesets.start;
+	TileSet* set = item->data;
+
+	while (item)
+	{
+		if (id < item->data->firstgid)
+		{
+			set = item->prev->data;
+			break;
+		}
+		set = item->data;
+		item = item->next;
+	}
+
+	return set;
+}
 
 iPoint j1Map::MapToWorld(int x, int y) const
 {
@@ -536,5 +554,5 @@ MapLayer::~MapLayer()
 
 inline uint MapLayer::Get(int x, int y) const
 {
-	return x + y*width;
+	return data[(y*width) + x];
 }

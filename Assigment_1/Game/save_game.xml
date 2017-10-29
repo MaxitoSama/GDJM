@@ -3,15 +3,17 @@
 	<input />
 	<window />
 	<textures />
-	<audio />
+	<audio>
+		<music_volume value="128" />
+	</audio>
 	<map />
 	<scene />
 	<scene2 />
 	<colliders />
 	<player>
-		<player x="2510" y="815" Map="2" />
+		<player x="60" y="827" Map="1" />
 	</player>
 	<renderer>
-		<camera x="-1526" y="0" />
+		<camera x="0" y="0" />
 	</renderer>
 </game_state>

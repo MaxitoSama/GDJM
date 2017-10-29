@@ -116,6 +116,7 @@ private:
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadBackground(pugi::xml_node& Image_node, Image_Background* background);
+	TileSet* j1Map::GetTilesetFromTileId(int id) const;
 
 public:
 

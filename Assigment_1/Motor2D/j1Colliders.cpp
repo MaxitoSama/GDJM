@@ -109,6 +109,9 @@ bool j1Colliders::Update(float dt)
 	Collider* c1;
 	Collider* c2;
 
+	int distance_1;
+	int distance_2;
+
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		// skip empty colliders
@@ -127,9 +130,9 @@ bool j1Colliders::Update(float dt)
 			c2 = colliders[k];
 
 			
-			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect) == true)
+			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect, distance_1) == true)
 			{
-				App->player->position.y -= 10;
+				App->player->position.y -= distance_1;
 				App->player->dead = false;
 
 				if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
@@ -139,9 +142,9 @@ bool j1Colliders::Update(float dt)
 				}
 			}
 
-			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect) == true && App->input->GetKey(SDL_SCANCODE_S)==KEY_IDLE)
+			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect,distance_2) == true && App->input->GetKey(SDL_SCANCODE_S)==KEY_IDLE)
 			{
-				App->player->position.x -= App->player->speed;
+				App->player->position.x -= distance_2;
 			}
 
 			if (c1->type == COLLIDER_DEATH && c2->type == COLLIDER_FEET && c1->CheckCollision(c2->rect) == true)
@@ -294,36 +297,39 @@ bool Collider::CheckCollision(const SDL_Rect& r)const
 	return false;
 }
 
-bool Collider::CheckFutureFallColision(const SDL_Rect& r)
+bool Collider::CheckFutureFallColision(const SDL_Rect& r, int& distance)
 {
 	if (rect.x < r.x + r.w && rect.x + rect.w > r.x)
 	{
-		if (rect.y-10 < r.y + r.h - 10 && rect.y + rect.h > r.y)
+		if (rect.y < r.y + r.h + 10 && rect.y && rect.y + rect.h > r.y)
 		{
+			distance = r.y + r.h + 10 - rect.y;
 			return true;
 		}
 	}
 	return false;
 }
 
-bool Collider::CheckFutureCrashColision(const SDL_Rect& r)
+bool Collider::CheckFutureCrashColision(const SDL_Rect& r,int& distance)
 {
-	if (App->player->speed >=0)
+	if (App->player->speed >0)
 	{
-		if (rect.x - App->player->speed < r.x + r.w  && rect.x + rect.w > r.x)
+		if (rect.x  < r.x + r.w + App->player->speed && rect.x + rect.w > r.x)
 		{
 			if (rect.y < r.y + r.h  && rect.y + rect.h > r.y)
 			{
+				distance = r.x + r.w + App->player->speed - rect.x;
 				return true;
 			}
 		}
 	}
-	else
+	if (App->player->speed <0)
 	{
-		if (rect.x < r.x + r.w && rect.x + rect.w - App->player->speed> r.x)
+		if (rect.x < r.x + r.w && rect.x + rect.w > r.x+App->player->speed)
 		{
 			if (rect.y < r.y + r.h  && rect.y + rect.h > r.y)
 			{
+				distance = r.x-(rect.x + rect.w - App->player->speed);
 				return true;
 			}
 		}

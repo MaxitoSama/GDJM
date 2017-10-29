@@ -39,9 +39,9 @@ struct Collider
 
 	bool CheckCollision(const SDL_Rect& r) const;
 	
-	bool CheckFutureFallColision(const SDL_Rect& r);
+	bool CheckFutureFallColision(const SDL_Rect& r,int& distance);
 
-	bool CheckFutureCrashColision(const SDL_Rect& r);
+	bool CheckFutureCrashColision(const SDL_Rect& r, int& distance);
 };
 
 class j1Colliders : public j1Module

@@ -225,41 +225,56 @@ bool j1Player::PostUpdate()
 	SDL_Event e;
 	
 	//MOVE_LEFT----------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && !dead)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT  && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && !dead)
 	{
-		if (position.x >= 2)
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
 		{
-			speed = -(velocity + (int)acceleration);
-			position.x += speed;
-			Acceleration_Method();
-		}
+			if (position.x >= 2)
+			{
+				speed = -(velocity + (int)acceleration);
+				position.x += speed;
+				Acceleration_Method();
+			}
 
-		if (current_animation != &left && !Jump)
+			if (current_animation != &left && !Jump)
+			{
+				left.Reset();
+				current_animation = &left;
+				player_last_direction = LEFT;
+			}
+		}
+		else
 		{
-			left.Reset();
-			current_animation = &left;
-			player_last_direction = LEFT;
+			current_animation = &idle_left;
 		}
 
 	}
 
 	//MOVE_RIGHT---------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && !dead)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT  && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && !dead)
 	{
-		if(position.x < 25600) 
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE)
 		{
-			speed = (velocity + acceleration);
-			position.x += speed;
-			Acceleration_Method();
-		}
+			if (position.x < 25600)
+			{
+				speed = (velocity + acceleration);
+				position.x += speed;
+				Acceleration_Method();
+			}
 
 
-		if (current_animation != &right && !Jump)
-		{
-			right.Reset();
-			current_animation = &right;
-			player_last_direction = RIGHT;
+			if (current_animation != &right && !Jump)
+			{
+				right.Reset();
+				current_animation = &right;
+				player_last_direction = RIGHT;
+			}
 		}
+		else
+		{
+			current_animation = &idle_right;
+		}
+
 	}
 	
 	//ACCELERATION RESET---------------------------------------
