@@ -142,7 +142,8 @@ bool j1Colliders::Update(float dt)
 				}
 			}
 
-			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect,distance_2) == true && App->input->GetKey(SDL_SCANCODE_S)==KEY_IDLE)
+			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect,distance_2) == true && (App->input->GetKey(SDL_SCANCODE_D )==KEY_REPEAT 
+				|| App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) && App->input->GetKey(SDL_SCANCODE_S)==KEY_IDLE)
 			{
 				App->player->position.x -= distance_2;
 			}

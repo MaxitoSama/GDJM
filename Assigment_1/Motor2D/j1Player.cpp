@@ -195,7 +195,7 @@ bool j1Player::Start()
 
 	LOG("Loading Player Collider");
 	collider_player = App->colliders->AddCollider({ position.x, position.y, 200/2, 332/2 }, COLLIDER_PLAYER, this);
-	collider_feet = App->colliders->AddCollider({ (position.x+(263/4)-54), position.y+ (310 / 2), 64, 10 }, COLLIDER_FEET, this);
+	collider_feet = App->colliders->AddCollider({ (position.x+(263/4)-54), position.y+ (310 / 2)-1, 64, 10 }, COLLIDER_FEET, this);
 
 	//Init Screen vars----------------------------------------------------
 	win_width = App->win->screen_surface->w;
@@ -426,7 +426,7 @@ bool j1Player::PostUpdate()
 
 	//Player Colliders Position--------------------------------
 	collider_player->SetPos(position.x,position.y);
-	collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (310 / 2));
+	collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (310 / 2)-1);
 
 	// Draw everything ----------------------------------------
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),0.5f);
