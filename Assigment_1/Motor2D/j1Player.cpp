@@ -229,7 +229,7 @@ bool j1Player::PostUpdate()
 	{
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
 		{
-			if (position.x >= 2)
+			if (position.x >= 0)
 			{
 				speed = -(velocity + (int)acceleration);
 				position.x += speed;
@@ -310,7 +310,7 @@ bool j1Player::PostUpdate()
 	//SLIDING_LEFT----------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
 	{
-		if (speed < 0)
+		if (speed < 0 && position.x>=0)
 		{
 			Slide_Method();
 			position.x += speed;

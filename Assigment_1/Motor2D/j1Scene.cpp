@@ -38,7 +38,6 @@ bool j1Scene::Start()
 		App->map->Load("Map_1.tmx");
 		App->audio->PlayMusic("audio/music/map1_music.ogg");
 		App->map->Draw_Colliders();
-
 		App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
 		App->player->Curr_map = 1;
 	}
@@ -55,6 +54,8 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	int dist = App->player->win_width / 2;
+
 	if(App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame();
 
@@ -71,7 +72,7 @@ bool j1Scene::Update(float dt)
 		Change_to_Scene_2(0,0);
 
 	
-	if (App->player->position.x >= App->player->win_width / 2 && App->player->position.x <= 24630)
+	if (App->player->position.x > dist && App->player->position.x <= 24630)
 	{
 		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;
 	}

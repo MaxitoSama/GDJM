@@ -62,6 +62,8 @@ bool j1Scene2::PreUpdate()
 // Called each loop iteration
 bool j1Scene2::Update(float dt)
 {
+	int dist = App->player->win_width / 2;
+
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame();
 
@@ -75,7 +77,7 @@ bool j1Scene2::Update(float dt)
 		StartCurrentScene();
 
 
-	if (App->player->position.x >= App->player->win_width / 2 && App->player->position.x <= 24630)
+	if (App->player->position.x >= dist && App->player->position.x <= 24630)
 	{
 		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;
 	}
