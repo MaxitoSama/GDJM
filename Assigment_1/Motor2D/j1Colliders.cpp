@@ -249,7 +249,7 @@ bool j1Colliders::CleanUp()
 	return true;
 }
 
-Collider* j1Colliders::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback)
+Collider* j1Colliders::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback, Particle* part)
 {
 	Collider* ret = nullptr;
 

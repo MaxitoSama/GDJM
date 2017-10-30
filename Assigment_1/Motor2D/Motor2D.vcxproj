@@ -76,12 +76,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy_Balloon.cpp" />
     <ClCompile Include="j1Colliders.cpp" />
+    <ClCompile Include="j1Enemies.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="j1Main.cpp" />
     <ClCompile Include="j1App.cpp" />
     <ClCompile Include="j1Audio.cpp" />
     <ClCompile Include="j1Input.cpp" />
     <ClCompile Include="j1Map.cpp" />
+    <ClCompile Include="j1Particles.cpp" />
     <ClCompile Include="j1Player.cpp" />
     <ClCompile Include="j1Scene.cpp" />
     <ClCompile Include="j1Scene2.cpp" />
@@ -92,8 +96,12 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy_Balloon.h" />
     <ClInclude Include="j1Colliders.h" />
+    <ClInclude Include="j1Enemies.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="j1Map.h" />
+    <ClInclude Include="j1Particles.h" />
     <ClInclude Include="j1Player.h" />
     <ClInclude Include="j1Scene.h" />
     <ClInclude Include="j1Scene2.h" />
@@ -106,6 +114,7 @@
     <ClInclude Include="p2Defs.h" />
     <ClInclude Include="p2List.h" />
     <ClInclude Include="j1Module.h" />
+    <ClInclude Include="p2Path.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="j1Render.h" />
     <ClInclude Include="j1Textures.h" />
