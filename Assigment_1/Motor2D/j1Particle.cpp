@@ -59,7 +59,7 @@ j1Particle::j1Particle()
 
 	//bullets particle
 	bullet.display_dead_animation = true;
-	bullet.anim.PushBack({ 7,304,10,10 });
+	bullet.anim.PushBack({ 7,304,100,100 });
 	bullet.anim.loop = true;
 	bullet.anim.speed = 0.1f;
 	bullet.life = 350;

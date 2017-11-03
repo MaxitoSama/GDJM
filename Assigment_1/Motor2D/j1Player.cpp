@@ -8,6 +8,7 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Colliders.h"
+#include "j1Particle.h"
 #include "j1Player.h"
 #include "j1Audio.h"
 #include "j1Scene.h"
@@ -393,6 +394,12 @@ bool j1Player::PostUpdate()
 			player_last_direction = LEFT;
 		}
 
+	}
+
+	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+	{
+		App->particles->bullet.speed.y = -01.0f;
+		App->particles->AddParticle(App->particles->bullet, position.x, position.y,COLLIDER_FEET);
 	}
 	
 	//Call Jump_Method-----------------------------------------
