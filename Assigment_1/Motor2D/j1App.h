@@ -18,6 +18,7 @@ class j1Colliders;
 class j1Particle;
 class j1Map;
 class j1Player;
+class j1Enemies;
 
 class j1App
 {
@@ -93,6 +94,7 @@ public:
 	j1Particle*			particles;
 	j1Map*				map;
 	j1Player*			player;
+	j1Enemies*			enemies;
 
 private:
 
