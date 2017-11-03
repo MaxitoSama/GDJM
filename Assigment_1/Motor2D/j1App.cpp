@@ -11,6 +11,7 @@
 #include "j1Scene.h"
 #include "j1Scene2.h"
 #include "j1Colliders.h"
+#include "j1Particle.h"
 #include "j1Map.h"
 #include "j1Player.h"
 #include "j1App.h"
@@ -32,6 +33,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new j1Scene();
 	scene2 = new j1Scene2();
 	colliders = new j1Colliders();
+	particles = new j1Particle();
 	map = new j1Map();
 	player = new j1Player();
 
@@ -45,6 +47,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(scene2);
 	AddModule(colliders);
+	AddModule(particles);
 	AddModule(player);
 
 	// render last to swap buffer

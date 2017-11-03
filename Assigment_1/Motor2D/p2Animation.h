@@ -2,7 +2,6 @@
 #define __ANIMATION_H__
 
 #include "SDL/include/SDL_rect.h"
-#include "j1Player.h"
 #define MAX_FRAMES 200
 
 class Animation
