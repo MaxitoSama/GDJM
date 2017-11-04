@@ -142,8 +142,17 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 	}
 
-	rect.w *= img_scale;
-	rect.h *= img_scale;
+	if (img_scale < 0)
+	{
+		rect.w *= img_scale;
+		rect.h *= -img_scale;
+	}
+	else 
+	{
+		rect.w *= img_scale;
+		rect.h *= img_scale;
+	}
+	
 
 	SDL_Point* p = NULL;
 	SDL_Point pivot;

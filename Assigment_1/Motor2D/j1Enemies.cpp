@@ -11,23 +11,6 @@
 
 //Include all enemies
 #include "Enemy_Zombie.h"
-//#include "Enemy_Torpedo.h"
-//#include "Enemy_Tank.h"
-//#include "Enemy_Flying_Machine.h"
-//#include "Enemy_Miners.h"
-//#include "Enemy_Drone.h"
-//#include "Enemy_Trump.h"
-//#include "Enemy_Falling_Drone.h"
-//#include "Enemy_Barrel.h"
-//#include "Enemy_Megaman.h"
-//#include "Enemy_General_Turret.h"
-//#include "Enemy_Antiaircraft_left.h"
-//#include "Enemy_Antiaircraft_right.h"
-//#include "Enemy_Boss1_Base.h"
-//#include "Enemy_CentralSide.h"
-//#include "Enemy_LeftSide.h"
-//#include "Enemy_RightSide.h"
-
 
 #define SPAWN_MARGIN 2000
 
@@ -94,16 +77,16 @@ bool j1Enemies::Update(float dt)
 			if (enemies[i] != nullptr && (enemies[i]->collider == nullptr) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
+			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_WALL) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
+
+		/*for (uint i = 0; i < MAX_ENEMIES; ++i)
 			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_NONE) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_NONE) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
-			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_NONE) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
-
-		for (uint i = 0; i < MAX_ENEMIES; ++i)
-			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_NONE) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
+			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_NONE) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);*/
 	}
 
 	return true;
@@ -184,56 +167,6 @@ void j1Enemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::ZOMBIE:
 			enemies[i] = new Enemy_Zombie(info.x, info.y);
 			break;
-			
-			
-		/*		case ENEMY_TYPES::TORPEDO:
-			enemies[i] = new Enemy_Torpedo(info.x, info.y, info.wave);
-			break;
-		case ENEMY_TYPES::MINER:
-			enemies[i] = new Enemy_Miners(info.x, info.y, info.wave, info.id);
-			break;
-		case ENEMY_TYPES::TRUMP:
-			enemies[i] = new Enemy_Trump(info.x, info.y, info.wave, info.id);
-			break;
-		case ENEMY_TYPES::BALLON:
-			enemies[i] = new Enemy_Balloon(info.x, info.y);
-			break;
-		case ENEMY_TYPES::FLYING_MACHINE:
-			enemies[i] = new Enemy_Flying_Machine(info.x, info.y);
-			break;
-		case ENEMY_TYPES::DRONE:
-			enemies[i] = new Enemy_Drone(info.x, info.y, info.wave, info.id);
-			break;
-		case ENEMY_TYPES::FALLING_DRONE:
-			enemies[i] = new Enemy_Faling_Drone(info.x, info.y, info.wave, info.id);
-			break;
-		case ENEMY_TYPES::BARREL:
-			enemies[i] = new Enemy_Barrel(info.x, info.y);
-			break;
-		case ENEMY_TYPES::MEGAMAN:
-			enemies[i] = new Enemy_Megaman(info.x, info.y);
-			break;
-		case ENEMY_TYPES::GENERAL_TURRET:
-			enemies[i] = new Enemy_General_Turret(info.x, info.y, info.wave, info.id);
-			break;
-		case ENEMY_TYPES::RIGHTSIDE:
-			enemies[i] = new Enemy_RightSide(info.x, info.y);
-			break;
-		case ENEMY_TYPES::LEFTSIDE:
-			enemies[i] = new Enemy_LeftSide(info.x, info.y);
-			break;
-		case ENEMY_TYPES::CENTRALSIDE:
-			enemies[i] = new Enemy_CentralSide(info.x, info.y);
-			break;
-		case ENEMY_TYPES::BOSS1_BASE:
-			enemies[i] = new Enemy_Boss1_Base(info.x, info.y, info.wave, info.id);
-			break;
-		case ENEMY_TYPES::ANTIAIRCRAFT_LEFT:
-			enemies[i] = new Enemy_Antiaircraft_left(info.x, info.y, info.id);
-			break;
-		case ENEMY_TYPES::ANTIAIRCRAFT_RIGHT:
-			enemies[i] = new Enemy_Antiaircraft_right(info.x, info.y, info.id);
-			break;*/
 		}
 	}
 }

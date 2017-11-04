@@ -4,6 +4,7 @@
 #include "j1Colliders.h"
 #include "p2Point.h"
 #include "j1Render.h"
+#include "j1Player.h"
 
 
 Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
@@ -55,7 +56,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	//Add and save collider
 	collider_pos.x = 0;
 	collider_pos.y = 0;
-	collider = App->colliders->AddCollider({ x, y, 42, 44 }, COLLIDER_NONE, (j1Module*)App->enemies);
+	collider = App->colliders->AddCollider({ x, y, 42, 44 }, COLLIDER_WALL, (j1Module*)App->enemies);
 }
 
 Enemy_Zombie::~Enemy_Zombie()
@@ -75,6 +76,7 @@ void Enemy_Zombie::Move()
 		//App->particles->AddParticle(App->particles->small_shot_particle, particle_type::P_SMALL_SHOT, position.x + 18, position.y + App->render->camera.y + 40, COLLIDER_ENEMY_SHOT, 0, 248, ANGLE);
 
 	}
+	
 }
 
 void Enemy_Zombie::DeadAnim()

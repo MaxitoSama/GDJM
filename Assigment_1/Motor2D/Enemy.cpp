@@ -215,7 +215,7 @@ void Enemy::Draw(SDL_Texture* sprites)
 	Red_now = SDL_GetTicks() - Red_Start_time;
 
 	if (collider != nullptr)
-		collider->SetPos(App->render->camera.x + position.x + collider_pos.x, App->render->camera.y + position.y + collider_pos.y);
+		collider->SetPos(position.x, position.y);
 
 	if (animation != nullptr)
 	{
@@ -236,8 +236,8 @@ void Enemy::Draw(SDL_Texture* sprites)
 			Red_Start_time = SDL_GetTicks();
 		}
 		
-		App->render->Blit(sprites, App->render->camera.x + position.x, App->render->camera.y + position.y, &(animation->GetCurrentFrame()), 0.5f);
-		SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
+		App->render->Blit(sprites, position.x, App->render->camera.y + position.y, &(animation->GetCurrentFrame()), -0.5f,1.0f);
+	
 		if (extra_anim && lives > 0)
 			ExtraAnim(sprites);
 		white_counter++;
