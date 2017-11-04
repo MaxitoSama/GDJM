@@ -235,9 +235,9 @@ void Enemy::Draw(SDL_Texture* sprites)
 			sprites = RedSprite;
 			Red_Start_time = SDL_GetTicks();
 		}
-
-		App->render->Blit(sprites, App->render->camera.x + position.x, App->render->camera.y + position.y, &(animation->GetCurrentFrame()));
-
+		
+		App->render->Blit(sprites, App->render->camera.x + position.x, App->render->camera.y + position.y, &(animation->GetCurrentFrame()), 0.5f);
+		SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
 		if (extra_anim && lives > 0)
 			ExtraAnim(sprites);
 		white_counter++;

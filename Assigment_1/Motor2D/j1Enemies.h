@@ -11,6 +11,7 @@
 enum ENEMY_TYPES
 {
 	NO_TYPE,
+	ZOMBIE,
 	TANK,
 	TORPEDO,
 	TRUMP,

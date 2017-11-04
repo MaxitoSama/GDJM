@@ -11,6 +11,7 @@
 #include "j1Scene.h"
 #include "j1Scene2.h"
 #include "j1Player.h"
+#include "j1Enemies.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -40,6 +41,8 @@ bool j1Scene::Start()
 		App->map->Draw_Colliders();
 		App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
 		App->player->Curr_map = 1;
+		//enemies
+		App->enemies->AddEnemy(ZOMBIE, 1500, 820);
 	}
 
 	return true;

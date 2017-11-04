@@ -10,7 +10,7 @@
 #include "Enemy.h"
 
 //Include all enemies
-//#include "Enemy_Balloon.h"
+#include "Enemy_Zombie.h"
 //#include "Enemy_Torpedo.h"
 //#include "Enemy_Tank.h"
 //#include "Enemy_Flying_Machine.h"
@@ -29,7 +29,7 @@
 //#include "Enemy_RightSide.h"
 
 
-#define SPAWN_MARGIN 75
+#define SPAWN_MARGIN 2000
 
 j1Enemies::j1Enemies()
 {
@@ -181,10 +181,12 @@ void j1Enemies::SpawnEnemy(const EnemyInfo& info)
 	{
 		switch (info.type)
 		{
-		/*case ENEMY_TYPES::TANK:
-			enemies[i] = new Enemy_Tank(info.x, info.y, info.wave);
+		case ENEMY_TYPES::ZOMBIE:
+			enemies[i] = new Enemy_Zombie(info.x, info.y);
 			break;
-		case ENEMY_TYPES::TORPEDO:
+			
+			
+		/*		case ENEMY_TYPES::TORPEDO:
 			enemies[i] = new Enemy_Torpedo(info.x, info.y, info.wave);
 			break;
 		case ENEMY_TYPES::MINER:

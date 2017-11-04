@@ -11,6 +11,7 @@
 #include "j1Scene.h"
 #include "j1Scene2.h"
 #include "j1Player.h"
+#include "j1Enemies.h"
 
 j1Scene2::j1Scene2() : j1Module()
 {
@@ -48,6 +49,7 @@ bool j1Scene2::Start()
 		App->player->Curr_map = 2;
 
 		App->player->Start();
+		App->enemies->AddEnemy(ZOMBIE, 10, 10);
 	}
 	
 	return true;
