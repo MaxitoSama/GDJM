@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Enemy_Zombie.cpp" />
     <ClCompile Include="j1Colliders.cpp" />
     <ClCompile Include="j1Enemies.cpp" />
     <ClCompile Include="j1Main.cpp" />
@@ -96,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enemy_Zombie.h" />
     <ClInclude Include="j1Colliders.h" />
     <ClInclude Include="j1Enemies.h" />
     <ClInclude Include="j1Map.h" />
@@ -112,6 +114,7 @@
     <ClInclude Include="p2Defs.h" />
     <ClInclude Include="p2List.h" />
     <ClInclude Include="j1Module.h" />
+    <ClInclude Include="p2Path.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="j1Render.h" />
     <ClInclude Include="j1Textures.h" />
