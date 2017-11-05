@@ -4,6 +4,7 @@
 #include "j1Render.h"
 #include "j1Colliders.h"
 #include "j1Player.h"
+#include "j1Enemies.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
 
@@ -21,6 +22,7 @@ j1Colliders::j1Colliders() : j1Module()
 	matrix[COLLIDER_WALL][COLLIDER_FEET] = false;
 	matrix[COLLIDER_WALL][COLLIDER_WIN] = false;
 	matrix[COLLIDER_WALL][COLLIDER_WIN2] = false;
+	matrix[COLLIDER_WALL][COLLIDER_ENEMY] = true;
 
 
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
@@ -30,6 +32,7 @@ j1Colliders::j1Colliders() : j1Module()
 	matrix[COLLIDER_PLAYER][COLLIDER_FEET] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_WIN] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_WIN2] = false;
+	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
 	
 	matrix[COLLIDER_DEATH][COLLIDER_DEATH] = false;
 	matrix[COLLIDER_DEATH][COLLIDER_WALL] = true;
@@ -46,6 +49,7 @@ j1Colliders::j1Colliders() : j1Module()
 	matrix[COLLIDER_FLOOR][COLLIDER_FEET] = true;
 	matrix[COLLIDER_FLOOR][COLLIDER_WIN] = false;
 	matrix[COLLIDER_FLOOR][COLLIDER_WIN2] = false;
+	matrix[COLLIDER_FLOOR][COLLIDER_ENEMY] = true;
 
 	matrix[COLLIDER_FEET][COLLIDER_FEET] = false;
 	matrix[COLLIDER_FEET][COLLIDER_WALL] = false;
@@ -70,6 +74,10 @@ j1Colliders::j1Colliders() : j1Module()
 	matrix[COLLIDER_WIN2][COLLIDER_FLOOR] = true;
 	matrix[COLLIDER_WIN2][COLLIDER_FEET] = true;
 	matrix[COLLIDER_WIN2][COLLIDER_WIN] = false;
+
+	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY] = false;
+	matrix[COLLIDER_ENEMY][COLLIDER_FLOOR] = false;
+	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = true;
 
 
 }
@@ -165,7 +173,24 @@ bool j1Colliders::Update(float dt)
 			{
 				App->scene2->Change_to_Scene_1(0, 0);
 			}
-
+			
+			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect,distance_1) == true)
+			{
+				App->enemies->OnCollision(c2, c1);
+			}
+	
+			
+		/*	if (c1->CheckCollision(c2->rect) == true)
+			{
+				if (c1->to_delete == false && c2->to_delete != true) {
+					if (matrix[COLLIDER_ENEMY][COLLIDER_FLOOR] && c1->callback)
+						c1->callback->OnCollision(c2, c1);
+					if (c1->to_delete == false) {
+						if (matrix[c2->type][c1->type] && c2->callback)
+							c2->callback->OnCollision(c2, c1);
+					}
+				}
+			}*/
 		}
 	}
 
@@ -217,6 +242,9 @@ void j1Colliders::DebugDraw()
 				break;
 			case COLLIDER_WIN2: // light blue
 				App->render->DrawQuad(colliders[i]->rect, 0, 206, 250, alpha, false);
+				break;
+			case COLLIDER_ENEMY: // light blue
+				App->render->DrawQuad(colliders[i]->rect, 100, 206, 250, alpha, false);
 				break;
 				
 			}

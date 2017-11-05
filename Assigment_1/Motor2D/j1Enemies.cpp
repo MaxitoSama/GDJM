@@ -77,7 +77,7 @@ bool j1Enemies::Update(float dt)
 			if (enemies[i] != nullptr && (enemies[i]->collider == nullptr) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
-			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_WALL) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
+			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_ENEMY) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
 
 		/*for (uint i = 0; i < MAX_ENEMIES; ++i)
 			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_NONE) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
@@ -173,6 +173,7 @@ void j1Enemies::SpawnEnemy(const EnemyInfo& info)
 
 void j1Enemies::OnCollision(Collider* c1, Collider* c2)
 {
+	
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
@@ -184,6 +185,28 @@ void j1Enemies::OnCollision(Collider* c1, Collider* c2)
 				enemies[i]->collider = nullptr;
 			}
 			break;
+		}
+	}
+
+	if (c2->type == COLLIDER_FLOOR)
+	{
+		for (uint i = 0; i < MAX_ENEMIES; ++i)
+		{
+			if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
+			{
+				enemies[i]->original_pos.y-= 10;
+			}
+		}
+	}
+
+	if (c2->type == COLLIDER_PLAYER)
+	{
+		for (uint i = 0; i < MAX_ENEMIES; ++i)
+		{
+			if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
+			{
+				enemies[i]->original_pos.y -= 10;
+			}
 		}
 	}
 }

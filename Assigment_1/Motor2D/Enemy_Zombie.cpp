@@ -53,10 +53,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	//big_shoot = &App->particles->big_shot_particle;
 	Shot_Total_time = (Uint32)(2000.0f);
 
-	//Add and save collider
-	collider_pos.x = 0;
-	collider_pos.y = 0;
-	collider = App->colliders->AddCollider({ x, y, 42, 44 }, COLLIDER_WALL, (j1Module*)App->enemies);
+	collider = App->colliders->AddCollider({ (int)position.x, (int)position.y, -120, 342/2 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
 }
 
 Enemy_Zombie::~Enemy_Zombie()
@@ -67,6 +64,8 @@ Enemy_Zombie::~Enemy_Zombie()
 void Enemy_Zombie::Move()
 {
 	position = original_pos + path.GetCurrentPosition(&animation);
+	original_pos.x -= 1;
+	original_pos.y += 10;
 	
 	Shot_now = SDL_GetTicks() - Shot_Start_time;
 	if (Shot_now > Shot_Total_time)

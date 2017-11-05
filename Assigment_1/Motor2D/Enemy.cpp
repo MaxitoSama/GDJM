@@ -250,6 +250,10 @@ void Enemy::Draw(SDL_Texture* sprites)
 
 void Enemy::OnCollision(Collider* collider)
 {
+	if (collider->type == COLLIDER_ENEMY)
+	{
+
+	}
 	if ((collider->type == COLLIDER_NONE || collider->type == COLLIDER_NONE) && die == false)
 	{
 		/*switch (collider->part->type)
