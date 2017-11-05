@@ -21,6 +21,7 @@ public:
 	Path path;
 	Animation anim;
 	Animation dead;
+	Animation walking;
 
 	char* shot_path;
 	//particle_type shoot;

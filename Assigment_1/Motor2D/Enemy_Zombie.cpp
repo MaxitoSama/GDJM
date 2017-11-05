@@ -15,6 +15,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	WhiteSprite = App->tex->Load("assets/enemies/hitten/hitten_white_Balloon.png");
 
 	//Set animation steps, speed and loop
+	//Idle
 	anim.PushBack({ 55, 432, 240, 342 });
 	anim.PushBack({ 295, 432, 240, 342 });
 	anim.PushBack({ 540, 432, 240, 342 });
@@ -30,11 +31,41 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	anim.PushBack({ 3154, 432, 240, 342 });
 	anim.PushBack({ 3412, 432, 240, 342 });
 	anim.PushBack({ 3670, 432, 240, 342 });
-	anim.speed = 0.05f;
+	anim.speed = 0.5f;
 	anim.loop = true;
 
+	//dead
+	dead.PushBack({ 0, 0, 290, 367 });
+	dead.PushBack({ 290, 0, 327, 367 });
+	dead.PushBack({ 617, 0, 314, 367 });
+	dead.PushBack({ 930, 0, 300, 367 });
+	dead.PushBack({ 1220, 0, 250, 367 });
+	dead.PushBack({ 1470, 0, 290, 367 });
+	dead.PushBack({ 1740, 0, 290, 367 });
+	dead.PushBack({ 2020, 0, 330, 367 });
+	dead.PushBack({ 2366, 0, 380, 367 });
+	dead.PushBack({ 2765, 0, 380, 367 });
+	dead.PushBack({ 3148, 0, 380, 367 });
+	dead.PushBack({ 3556, 0, 390, 367 });
+	dead.speed = 0.5f;
+	dead.loop = true;
+
+	//walking
+	walking.PushBack({ 11, 809, 264, 361 });
+	walking.PushBack({ 311, 809, 264, 360 });
+	walking.PushBack({ 621, 809, 264, 360 });
+	walking.PushBack({ 920, 809, 264, 360 });
+	walking.PushBack({ 1220, 809, 264, 360 });
+	walking.PushBack({ 1501, 809, 264, 360 });
+	walking.PushBack({ 1806, 809, 264, 360 });
+	walking.PushBack({ 2069, 809, 264, 360 });
+	walking.PushBack({ 2333, 809, 264, 360 });
+	walking.PushBack({ 2596, 809, 264, 360 });
+	walking.speed = 0.5f;
+	walking.loop = true;
+	
 	//Set path
-	path.PushBack({ 0.0f, 0.0f}, 40, &anim); //Si esta quiet en un punt ha de tenir velocitat y = 0.2 per moures a la mateixa velocitat que l'overlay
+	path.PushBack({ 0.0f, 0.0f}, 40, &dead); //Si esta quiet en un punt ha de tenir velocitat y = 0.2 per moures a la mateixa velocitat que l'overlay
 	//path.PushBack({ 0.0f, -0.3f }, 240, &anim);
 	//path.PushBack({ 0.0f, 0.9f }, 60, &anim);
 	//path.PushBack({ 0.0f, -0.3f }, 350, &anim);
