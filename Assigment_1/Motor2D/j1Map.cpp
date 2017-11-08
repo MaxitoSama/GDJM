@@ -37,11 +37,10 @@ void j1Map::Draw()
 	uint tile_indx;
 	uint layer_indx;
 	uint background_indx;
-	uint counter = 0;
 	
 	for (background_indx = 0; background_indx < data.backgrounds.count(); background_indx++)
 	{
-		App->render->Blit(data.backgrounds[background_indx]->Image, 0, 0, NULL, 1.0f, 0);
+		App->render->Blit(data.backgrounds[background_indx]->Image, -App->render->camera.x, -App->render->camera.y, NULL, 1.0f);
 	}
 
 	p2List_item<MapLayer*>* item = data.layers.start;

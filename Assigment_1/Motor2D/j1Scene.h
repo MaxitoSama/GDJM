@@ -39,6 +39,8 @@ public:
 	void StartCurrentScene();
 
 private:
+	bool Map_1;
+	bool Map_2;
 };
 
 #endif // __j1SCENE_H__

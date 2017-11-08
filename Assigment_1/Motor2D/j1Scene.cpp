@@ -27,6 +27,9 @@ bool j1Scene::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
+	Map_1 = true;
+	Map_2 = false;
+
 
 	return ret;
 }
@@ -34,17 +37,30 @@ bool j1Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene::Start()
 {
-	if (active)
+	if (Map_1)
 	{
 		App->map->Load("Map_1.tmx");
 		App->audio->PlayMusic("audio/music/map1_music.ogg");
 		App->map->Draw_Colliders();
 		App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
-		App->player->Curr_map = 1;
 		//enemies
 		App->enemies->AddEnemy(ZOMBIE, 1500, 0);
 		App->colliders->AddCollider({ 32,600,32,1 }, COLLIDER_FLOOR, this);
 		App->colliders->AddCollider({ 64,600,32,1 }, COLLIDER_FLOOR, this);
+		App->player->Start();
+	}
+
+	if (Map_2)
+	{
+		App->map->Load("Map_2.tmx");
+		App->audio->PlayMusic("audio/music/map1_music.ogg");
+		App->map->Draw_Colliders();
+
+		App->colliders->AddCollider({ 25400,0,50,310 }, COLLIDER_WIN2, this);
+		App->colliders->AddCollider({ 18923,0,50,310 }, COLLIDER_WIN2, this);
+
+		App->player->Start();
+		App->enemies->AddEnemy(ZOMBIE, 10, 10);
 	}
 
 	return true;
@@ -68,7 +84,16 @@ bool j1Scene::Update(float dt)
 		App->LoadGame();
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-		StartCurrentScene();
+	{
+		if (Map_1)
+		{
+			StartCurrentScene();
+		}
+		else
+		{
+			Change_to_Scene_2(60, 215);
+		}
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		StartCurrentScene();
@@ -116,8 +141,8 @@ bool j1Scene::CleanUp()
 //go to the begining
 void j1Scene::StartCurrentScene()
 {
-	App->player->position.y = 215;
 	App->player->position.x = 60;
+	App->player->position.y = 215;
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 }
@@ -126,11 +151,26 @@ void j1Scene::StartCurrentScene()
 void j1Scene::Change_to_Scene_2(int x, int y)
 {
 	CleanUp();
-	active = false;
-	App->scene2->active = true;
-	App->scene2->Start();
-	App->player->position.y = y;
-	App->player->position.x = x;
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
+	
+	if (Map_1)
+	{
+		Map_1 = false;
+		Map_2 = true;
+		App->scene->Start();
+		App->player->position.y = y;
+		App->player->position.x = x;
+		App->render->camera.x = 0;
+		App->render->camera.y = 0;
+	}
+	else
+	{
+		Map_1 = true;
+		Map_2 = false;
+		App->scene->Start();
+		App->player->position.y = y;
+		App->player->position.x = x;
+		App->render->camera.x = 0;
+		App->render->camera.y = 0;
+	}
+	
 }
