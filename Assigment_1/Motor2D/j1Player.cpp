@@ -450,14 +450,7 @@ bool j1Player::Load(pugi::xml_node& data)
 	
 	if (Curr_map != map)
 	{
-		if (map == 1)
-		{
-			App->scene2->Change_to_Scene_1(x,y);
-		}
-		if (map == 2)
-		{
-			App->scene->Change_to_Scene_2(x,y);
-		}
+		App->scene->ChangeScene(x, y);
 	}
 
 	else
