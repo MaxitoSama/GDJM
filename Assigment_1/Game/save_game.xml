@@ -12,7 +12,7 @@
 	<colliders />
 	<scene />
 	<player>
-		<player x="343" y="828" Map="2" />
+		<player x="0" y="432" Map="1" />
 	</player>
 	<enemies />
 	<renderer>

@@ -133,6 +133,7 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 	
+	App->enemies->CleanUp();
 	App->colliders->CleanUp();
 	App->map->CleanUp();
 	App->tex->CleanUp();
