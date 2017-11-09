@@ -16,6 +16,8 @@
 #include "j1Player.h"
 #include "j1Enemies.h"
 #include "j1App.h"
+#include "j1Timer.h"
+#include "j1PerfTimer.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -179,6 +181,16 @@ void j1App::FinishUpdate()
 
 	if(want_to_load == true)
 		LoadGameNow();
+
+	//Framerate calculations
+	if (last_sec_frame_time.Read() > 1000)
+	{
+
+	}
+	float seconds_since_startup = startup_time.ReadSec();
+	static char title[256];
+	sprintf_s(title, 256, "Time since startup: %.3f", seconds_since_startup);
+	App->win->SetTitle(title);
 }
 
 // Call modules before each loop iteration

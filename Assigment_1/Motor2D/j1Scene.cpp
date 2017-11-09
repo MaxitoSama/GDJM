@@ -113,7 +113,7 @@ bool j1Scene::Update(float dt)
 
 	p2SString title("%s",App->GetTitle());
 
-	App->win->SetTitle(title.GetString());
+	//App->win->SetTitle(title.GetString());
 	return true;
 }
 

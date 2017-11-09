@@ -5,6 +5,9 @@
 #include "p2DynArray.h"
 #include "j1Module.h"
 #include "PugiXml\src\pugixml.hpp"
+#include "p2Defs.h"
+#include "j1PerfTimer.h"
+#include "j1Timer.h"
 
 // Modules
 class j1Window;
@@ -111,6 +114,13 @@ private:
 	bool				want_to_load;
 	p2SString			load_game;
 	mutable p2SString	save_game;
+
+	//j1PerfTimer			ptimer;
+	//uint32				frame_count = 0;
+	j1Timer				startup_time;
+	j1Timer				last_sec_frame_time;
+	//uint32				last_sec_frame_count = 0;
+	//int					capped_ms = -1;
 };
 
 extern j1App* App; 
