@@ -22,6 +22,7 @@
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
+	
 	frames = 0;
 	want_to_save = want_to_load = false;
 
@@ -127,7 +128,15 @@ bool j1App::Start()
 		ret = item->data->Start();
 		item = item->next;
 	}
-
+	if (last_sec_frame_time.ReadSec() < 1000)
+	{
+		frames++;
+	}
+	else
+	{
+		frame_count = frames;
+		frames = 0;
+	}
 	return ret;
 }
 
@@ -189,7 +198,7 @@ void j1App::FinishUpdate()
 	}
 	float seconds_since_startup = startup_time.ReadSec();
 	static char title[256];
-	sprintf_s(title, 256, "Time since startup: %.3f", seconds_since_startup);
+	sprintf_s(title, 256, "Time since startup: %.3f Frame Count: %i", seconds_since_startup, frame_count);
 	App->win->SetTitle(title);
 }
 
