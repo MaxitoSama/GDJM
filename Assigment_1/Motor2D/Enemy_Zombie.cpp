@@ -11,8 +11,8 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 {
 	//Open all textures
 	NormalSprite = App->tex->Load("assets/enemies/zombie/zombie.png");
-	RedSprite = App->tex->Load("assets/enemies/hitten/hitten_red_Balloon.png");
-	WhiteSprite = App->tex->Load("assets/enemies/hitten/hitten_white_Balloon.png");
+	//RedSprite = App->tex->Load("assets/enemies/hitten/hitten_red_Balloon.png");
+	//WhiteSprite = App->tex->Load("assets/enemies/hitten/hitten_white_Balloon.png");
 
 	//Set animation steps, speed and loop
 	//Idle
