@@ -22,7 +22,6 @@
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
-	
 	frames = 0;
 	want_to_save = want_to_load = false;
 
@@ -180,6 +179,7 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {
+
 }
 
 // ---------------------------------------------
@@ -191,14 +191,23 @@ void j1App::FinishUpdate()
 	if(want_to_load == true)
 		LoadGameNow();
 
-	//Framerate calculations
-	if (last_sec_frame_time.Read() > 1000)
-	{
+	//last_sec_frame_time.Start();
 
+	//Framerate calculations
+	float seconds_per_frame = last_sec_frame_time.ReadSec();
+	if (seconds_per_frame < 1.0f)
+	{
+		frames++;
+	}
+	else
+	{
+		frame_count = frames;
+		frames = 0;
+		last_sec_frame_time.Reset();
 	}
 	float seconds_since_startup = startup_time.ReadSec();
 	static char title[256];
-	sprintf_s(title, 256, "Time since startup: %.3f Frame Count: %i", seconds_since_startup, frame_count);
+	sprintf_s(title, 256, "Time since startup: %.3f Avg Frame Count: %i", seconds_since_startup, frame_count);
 	App->win->SetTitle(title);
 }
 
