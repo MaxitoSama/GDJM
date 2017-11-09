@@ -36,7 +36,7 @@ void j1Map::Draw()
 
 	uint tile_indx;
 	uint layer_indx;
-	uint background_indx;
+	uint background_indx=0;
 	
 	for (background_indx = 0; background_indx < data.backgrounds.count(); background_indx++)
 	{
@@ -554,4 +554,9 @@ MapLayer::~MapLayer()
 inline uint MapLayer::Get(int x, int y) const
 {
 	return data[(y*width) + x];
+}
+
+Image_Background::~Image_Background()
+{
+	delete Image;
 }

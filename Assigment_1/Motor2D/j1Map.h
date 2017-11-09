@@ -58,6 +58,8 @@ struct Image_Background
 	uint					height;
 	SDL_Texture*			Image;
 	float					Pvelocity;
+
+	~Image_Background();
 };
 
 enum MapTypes
