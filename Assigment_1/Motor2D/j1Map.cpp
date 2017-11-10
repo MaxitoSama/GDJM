@@ -182,6 +182,32 @@ iPoint j1Map::MapToWorld(int x, int y) const
 	return ret;
 }
 
+iPoint j1Map::WorldToMap(int x, int y) const
+{
+	iPoint ret(0, 0);
+
+	ret.x = x / data.tile_width;
+	ret.y = y / data.tile_height;
+
+	return ret;
+}
+
+int j1Map::MovementCost(int x, int y) const
+{
+	int ret = -1;
+
+	if (x >= 0 && x < data.width && y >= 0 && y < data.height)
+	{
+		int id = data.layers.start->next->data->Get(x, y);
+
+		if (id == 0)
+			ret = 3;
+		else
+			ret = 0;
+	}
+	return ret;
+}
+
 SDL_Rect TileSet::GetTileRect(int id) const
 {
 	int relative_id = id - firstgid;
