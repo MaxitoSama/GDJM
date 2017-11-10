@@ -167,11 +167,11 @@ bool j1Colliders::Update(float dt)
 
 			if (c1->type == COLLIDER_WIN && c2->type == COLLIDER_FEET && c1->CheckCollision(c2->rect) == true)
 			{
-				App->scene->ChangeScene(0,0);
+				App->scene->ChangeScene(60,215);
 			}
 			if (c1->type == COLLIDER_WIN2 && c2->type == COLLIDER_FEET && c1->CheckCollision(c2->rect) == true)
 			{
-				App->scene2->Change_to_Scene_1(0, 0);
+				App->scene->ChangeScene(60, 215);
 			}
 			
 			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect,distance_1) == true)

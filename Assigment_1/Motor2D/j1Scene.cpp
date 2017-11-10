@@ -47,7 +47,6 @@ bool j1Scene::Start()
 		App->enemies->AddEnemy(ZOMBIE, 1500, 0);
 		App->colliders->AddCollider({ 32,600,32,1 }, COLLIDER_FLOOR, this);
 		App->colliders->AddCollider({ 64,600,32,1 }, COLLIDER_FLOOR, this);
-		App->player->Start();
 		App->player->Curr_map = 1;
 	}
 
@@ -60,7 +59,6 @@ bool j1Scene::Start()
 		App->colliders->AddCollider({ 25400,0,50,310 }, COLLIDER_WIN2, this);
 		App->colliders->AddCollider({ 18923,0,50,310 }, COLLIDER_WIN2, this);
 
-		App->player->Start();
 		App->player->Curr_map = 2;
 		App->enemies->AddEnemy(ZOMBIE, 10, 10);
 	}
@@ -101,7 +99,7 @@ bool j1Scene::Update(float dt)
 		StartCurrentScene();
 
 	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)
-		ChangeScene(0,0);
+		ChangeScene(60,215);
 
 	
 	if (App->player->position.x > dist && App->player->position.x <= 24630)
@@ -165,6 +163,7 @@ void j1Scene::ChangeScene(int x, int y)
 		App->player->position.x = x;
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
+		App->player->Start();
 	}
 	else
 	{
@@ -175,6 +174,7 @@ void j1Scene::ChangeScene(int x, int y)
 		App->player->position.x = x;
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
+		App->player->Start();
 	}
 	
 }
