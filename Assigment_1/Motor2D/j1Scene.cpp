@@ -104,12 +104,11 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
 	{
+		App->pathfinding->ResetPath();
 		App->pathfinding->CreatePath({ 0,0 }, App->map->WorldToMap(App->player->position.x, App->player->position.y));
 		LOG("Path created");
 	}
 		
-
-	
 	if (App->player->position.x > dist && App->player->position.x <= 24630)
 	{
 		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;

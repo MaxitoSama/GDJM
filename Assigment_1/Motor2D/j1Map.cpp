@@ -44,7 +44,7 @@ void j1Map::DrawPath()
 	// Draw path
 	for (uint i = 0; i < App->pathfinding->breadcrumbs.count(); ++i)
 	{
-		iPoint pos = MapToWorld(App->pathfinding->breadcrumbs[i].x, App->pathfinding->breadcrumbs[i].x);
+		iPoint pos = MapToWorld(App->pathfinding->breadcrumbs[i].x, App->pathfinding->breadcrumbs[i].y);
 		App->render->Blit(PathTile, pos.x, pos.y);
 	}
 }

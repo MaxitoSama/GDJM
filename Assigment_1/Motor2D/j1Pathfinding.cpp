@@ -35,9 +35,9 @@ void j1PathFinding::ResetPath()
 	frontier.Clear();
 	visited.clear();
 	breadcrumbs.clear();
-	frontier.Push(iPoint(19, 4), 0);
-	visited.add(iPoint(19, 4));
-	breadcrumbs.add(iPoint(19, 4));
+	frontier.Push(iPoint(0, 0), 0);
+	visited.add(iPoint(0, 0));
+	breadcrumbs.add(iPoint(0, 0));
 	memset(cost_so_far, 0, sizeof(uint) * COST_MAP * COST_MAP);
 }
 
@@ -61,7 +61,8 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 		int x, y;
 		App->input->GetMousePosition(x, y);
 
-		iPoint goal = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
+		iPoint goal = destination;
+
 		frontier.Push(origin,0);
 
 		while (frontier.Count() != 0)
