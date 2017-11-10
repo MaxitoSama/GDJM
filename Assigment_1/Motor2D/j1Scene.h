@@ -2,6 +2,8 @@
 #define __j1SCENE_H__
 
 #include "j1Module.h"
+#include "p2DynArray.h"
+#include "p2Point.h"
 
 struct SDL_Texture;
 
@@ -38,6 +40,8 @@ public:
 	//Start again
 	void StartCurrentScene();
 
+public:
+	p2DynArray<iPoint> path_test;
 private:
 	bool Map_1;
 	bool Map_2;

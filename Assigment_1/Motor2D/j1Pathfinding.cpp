@@ -24,11 +24,21 @@ bool j1PathFinding::CleanUp()
 	return true;
 }
 
-
 // To request all tiles involved in the last generated path
 const p2DynArray<iPoint>* j1PathFinding::GetPath() const
 {
 	return &path;
+}
+
+void j1PathFinding::ResetPath()
+{
+	frontier.Clear();
+	visited.clear();
+	breadcrumbs.clear();
+	frontier.Push(iPoint(19, 4), 0);
+	visited.add(iPoint(19, 4));
+	breadcrumbs.add(iPoint(19, 4));
+	memset(cost_so_far, 0, sizeof(uint) * COST_MAP * COST_MAP);
 }
 
 
@@ -52,8 +62,9 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 		App->input->GetMousePosition(x, y);
 
 		iPoint goal = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
+		frontier.Push(origin,0);
 
-		while (frontier.Count() != 0 && App->map->MovementCost(curr.x, curr.y) != 0)
+		while (frontier.Count() != 0)
 		{
 			if (curr == goal)
 			{

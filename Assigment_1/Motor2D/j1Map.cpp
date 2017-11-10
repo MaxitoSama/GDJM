@@ -1,9 +1,11 @@
 #include "p2Defs.h"
+#include "p2DynArray.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Colliders.h"
+#include "j1Pathfinding.h"
 #include "j1Player.h"
 #include "j1Map.h"
 #include <math.h>
@@ -17,6 +19,13 @@ j1Map::j1Map() : j1Module(), map_loaded(false)
 j1Map::~j1Map()
 {}
 
+bool j1Map::Start()
+{
+	PathTile = App->tex->Load("maps/PathTile.png");
+	return true;
+}
+
+
 // Called before render is available
 bool j1Map::Awake(pugi::xml_node& config)
 {
@@ -26,6 +35,18 @@ bool j1Map::Awake(pugi::xml_node& config)
 	folder.create(config.child("folder").child_value());
 
 	return ret;
+}
+
+void j1Map::DrawPath()
+{
+	iPoint point;
+
+	// Draw path
+	for (uint i = 0; i < App->pathfinding->breadcrumbs.count(); ++i)
+	{
+		iPoint pos = MapToWorld(App->pathfinding->breadcrumbs[i].x, App->pathfinding->breadcrumbs[i].x);
+		App->render->Blit(PathTile, pos.x, pos.y);
+	}
 }
 
 //draw the map and background
@@ -69,6 +90,8 @@ void j1Map::Draw()
 			}
 		}
 	}
+
+	DrawPath();
 }
 
 //draw the colliders

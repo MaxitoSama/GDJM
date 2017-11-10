@@ -7,9 +7,9 @@
 #include "p2List.h"
 #include "p2PQueue.h"
 
-#define DEFAULT_PATH_LENGTH 50
+#define DEFAULT_PATH_LENGTH 10000
 #define INVALID_WALK_CODE 255
-#define COST_MAP 100
+#define COST_MAP 1000
 
 class j1PathFinding : public j1Module
 {
@@ -26,11 +26,16 @@ public:
 	// Main function to request a path from A to B
 	int CreatePath(const iPoint& origin, const iPoint& destination);
 
+	//Reset the Path
+	void ResetPath();
+
 	// To request all tiles involved in the last generated path
 	const p2DynArray<iPoint>* GetPath() const;
 
 
-
+public:
+	p2DynArray<iPoint>	path;
+	p2List<iPoint>		breadcrumbs;
 private:
 
 	// size of the map
@@ -39,10 +44,9 @@ private:
 	// all map walkability values [0..255]
 	uchar* map;
 	// we store the created path here
-	p2DynArray<iPoint>	path;
+	
 	p2PQueue<iPoint>	frontier;
 	p2List<iPoint>		visited;
-	p2List<iPoint>		breadcrumbs;
 	uint				cost_so_far[COST_MAP][COST_MAP];
 };
 

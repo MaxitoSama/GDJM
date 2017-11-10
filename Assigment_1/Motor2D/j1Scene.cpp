@@ -8,6 +8,7 @@
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Colliders.h"
+#include "j1Pathfinding.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
 #include "j1Player.h"
@@ -100,6 +101,13 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)
 		ChangeScene(60,215);
+
+	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+	{
+		App->pathfinding->CreatePath({ 0,0 }, App->map->WorldToMap(App->player->position.x, App->player->position.y));
+		LOG("Path created");
+	}
+		
 
 	
 	if (App->player->position.x > dist && App->player->position.x <= 24630)
