@@ -11,7 +11,8 @@
 enum ENEMY_TYPES
 {
 	NO_TYPE,
-	ZOMBIE
+	ZOMBIE,
+	PLANE
 };
 
 class Enemy;

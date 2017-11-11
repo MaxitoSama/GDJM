@@ -61,6 +61,9 @@
     <ClCompile Include="j1Timer.cpp">
       <Filter>Desenvolupament  ========\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy_Plane.cpp">
+      <Filter>Desenvolupament  ========\Modules\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -146,6 +149,9 @@
     </ClInclude>
     <ClInclude Include="j1Timer.h">
       <Filter>Desenvolupament  ========\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Plane.h">
+      <Filter>Desenvolupament  ========\Modules\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

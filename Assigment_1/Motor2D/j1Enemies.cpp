@@ -11,6 +11,7 @@
 
 //Include all enemies
 #include "Enemy_Zombie.h"
+#include "Enemy_Plane.h"
 
 #define SPAWN_MARGIN 2000
 
@@ -157,6 +158,9 @@ void j1Enemies::SpawnEnemy(const EnemyInfo& info)
 		{
 		case ENEMY_TYPES::ZOMBIE:
 			enemies[i] = new Enemy_Zombie(info.x, info.y);
+			break;
+		case ENEMY_TYPES::PLANE:
+			enemies[i] = new Enemy_Plane(info.x, info.y);
 			break;
 		}
 	}
