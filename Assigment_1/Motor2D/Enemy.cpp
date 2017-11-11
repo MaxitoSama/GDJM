@@ -10,35 +10,12 @@
 
 Enemy::Enemy(int x, int y, int wave, int id) : position(x, y), original_pos(x, y), wave(wave), id(id), collider_pos(0, 0)
 {
-	//b1 = App->tex->Load("assets/enemies/explosions/big2.png");
-
-
-/*
-	//Big1
-	anim_b1.PushBack({ 12, 14, 106, 106 });
-	anim_b1.PushBack({ 130, 13, 106, 106 });
-	anim_b1.PushBack({ 253, 13, 106, 106 });
-	anim_b1.PushBack({ 382, 16, 106, 106 });
-
-	anim_b1.PushBack({ 9, 147, 106, 106 });
-	anim_b1.PushBack({ 129, 145, 106, 106 });
-	anim_b1.PushBack({ 251, 146, 106, 106 });
-	anim_b1.PushBack({ 376, 147, 106, 106 });
-
-	anim_b1.PushBack({ 14, 279, 106, 106 });
-	anim_b1.PushBack({ 133, 279, 106, 106 });
-	anim_b1.PushBack({ 258, 279, 106, 106 });
-	anim_b1.PushBack({ 374, 279, 106, 106 });
-	anim_b1.PushBack({ 0, 0, 0, 0 }); //last one should be always transparent
-	anim_b1.speed = 0.5f;
-	anim_b1.loop = false;
-*/
 
 }
 
 Enemy::~Enemy()
 {
-	App->tex->UnLoad(b1);
+	//App->tex->UnLoad(b1);
 
 	if (collider != nullptr)
 		collider->to_delete = true;
@@ -49,12 +26,12 @@ const Collider* Enemy::GetCollider() const
 	return collider;
 }
 
-void Enemy::Draw(SDL_Texture* sprites)
+void Enemy::Draw(SDL_Texture* sprites, float direction)
 {
 	Red_now = SDL_GetTicks() - Red_Start_time;
 
 	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
+		collider->SetPos(position.x-120, position.y);
 
 	if (animation != nullptr)
 	{
@@ -75,7 +52,7 @@ void Enemy::Draw(SDL_Texture* sprites)
 			Red_Start_time = SDL_GetTicks();
 		}
 		
-		App->render->Blit(sprites, position.x, App->render->camera.y + position.y, &(animation->GetCurrentFrame()), -0.5f,1.0f);
+		App->render->Blit(sprites, position.x, App->render->camera.y + position.y, &(animation->GetCurrentFrame()), direction,1.0f);
 	
 		if (extra_anim && lives > 0)
 			ExtraAnim(sprites);
@@ -113,7 +90,7 @@ void Enemy::OnCollision(Collider* collider)
 	}
 	else if (collider->type == COLLIDER_NONE)
 	{
-		Draw(sprites);
+		Draw(sprites,scale);
 	}
 }
 

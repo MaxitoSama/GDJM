@@ -5,6 +5,7 @@
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1Map.h"
+#include "j1Enemies.h"
 #include "j1PathFinding.h"
 
 j1PathFinding::j1PathFinding() : j1Module(), path(DEFAULT_PATH_LENGTH), width(0), height(0)
@@ -50,7 +51,7 @@ void j1PathFinding::ResetPath()
 	memset(cost_so_far, 0, sizeof(uint) * COST_MAP * COST_MAP);
 }
 
-void j1PathFinding::Path(int x, int y)
+void j1PathFinding::Path(int x, int y, p2DynArray<iPoint>& path)
 {
 	path.Clear();
 	iPoint goal = App->map->WorldToMap(x, y);
@@ -66,9 +67,11 @@ void j1PathFinding::Path(int x, int y)
 		path.PushBack(curr);
 		item = item->prev;
 	}
+	
+	path.Flip();
 }
 
-void j1PathFinding::DrawPath()
+void j1PathFinding::DrawPath(p2DynArray<iPoint>& path)
 {
 	iPoint point;
 

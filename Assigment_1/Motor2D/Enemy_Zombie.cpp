@@ -4,6 +4,8 @@
 #include "j1Colliders.h"
 #include "p2Point.h"
 #include "j1Render.h"
+#include "j1Map.h"
+#include "j1Pathfinding.h"
 #include "j1Player.h"
 
 
@@ -65,7 +67,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	walking.loop = true;
 	
 	//Set path
-	path.PushBack({ 0.0f, 0.0f}, 40, &dead); //Si esta quiet en un punt ha de tenir velocitat y = 0.2 per moures a la mateixa velocitat que l'overlay
+	//path.PushBack({ 0.0f, 0.0f}, 40, &walking); //Si esta quiet en un punt ha de tenir velocitat y = 0.2 per moures a la mateixa velocitat que l'overlay
 	//path.PushBack({ 0.0f, -0.3f }, 240, &anim);
 	//path.PushBack({ 0.0f, 0.9f }, 60, &anim);
 	//path.PushBack({ 0.0f, -0.3f }, 350, &anim);
@@ -76,6 +78,9 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	initial_hp = lives;
 	//points = 400;
 	extra_anim = false;
+	animation = &walking;
+	scale = -0.5;
+	
 	//explosion_type = BIG1; //Explosion type
 
 	//shooting mechanic
@@ -84,7 +89,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	//big_shoot = &App->particles->big_shot_particle;
 	Shot_Total_time = (Uint32)(2000.0f);
 
-	collider = App->colliders->AddCollider({ (int)position.x, (int)position.y, -120, 342/2 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
+	collider = App->colliders->AddCollider({ (int)(position.x-120), (int)position.y, 120, 342/2 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
 }
 
 Enemy_Zombie::~Enemy_Zombie()
@@ -94,19 +99,71 @@ Enemy_Zombie::~Enemy_Zombie()
 
 void Enemy_Zombie::Move()
 {
-	position = original_pos + path.GetCurrentPosition(&animation);
-	original_pos.x -= 1;
-	original_pos.y += 10;
+	iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y };
+	fPoint speed;
+
+	position = original_pos;
+	//original_pos.y += speed.y;
 	
-	Shot_now = SDL_GetTicks() - Shot_Start_time;
-	if (Shot_now > Shot_Total_time)
+	if (abs((int)App->player->position.x - (int)original_pos.x)<=500 && !going)
 	{
-		Shot_Start_time = SDL_GetTicks();
-
-		//App->particles->AddParticle(App->particles->small_shot_particle, particle_type::P_SMALL_SHOT, position.x + 18, position.y + App->render->camera.y + 40, COLLIDER_ENEMY_SHOT, 0, 248, ANGLE);
-
+		going = true;
+		pathcounter = 0;
+		App->pathfinding->CreatePath(enemyposition, App->player->position);
+		App->pathfinding->Path(App->player->position.x, App->player->position.y,Enemypath);
 	}
-	
+
+	if (!going)
+	{
+		animation = &anim;
+	}
+
+	else
+	{
+		animation = &walking;
+
+		if (enemyposition != App->player->position)
+		{
+			if (App->player->position.x < enemyposition.x)
+			{
+				speed.x = -4;
+				scale = -0.5;
+			}
+			else
+			{
+				speed.x = 4;
+				scale = 0.5;
+			}
+			if (App->player->position.y < enemyposition.y)
+			{
+				speed.y = -1;
+			}
+			else
+			{
+				speed.y =1;
+			}
+			
+			iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);
+				
+			if((int)original_pos.x != PositiontoGo.x)
+			{
+				original_pos.x += speed.x;
+			}
+			if ((int)original_pos.y != PositiontoGo.y)
+			{
+				original_pos.y += speed.y;
+			}
+			
+			if((int)original_pos.x == PositiontoGo.x && (int)original_pos.y == PositiontoGo.y)
+			{
+					pathcounter++;
+			}
+		}
+		else
+		{
+			going = false;
+		}
+	}
 }
 
 void Enemy_Zombie::DeadAnim()

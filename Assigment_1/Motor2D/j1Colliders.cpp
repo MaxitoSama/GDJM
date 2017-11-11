@@ -5,6 +5,8 @@
 #include "j1Colliders.h"
 #include "j1Player.h"
 #include "j1Enemies.h"
+#include "Enemy.h"
+#include "j1Pathfinding.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
 
@@ -249,6 +251,14 @@ void j1Colliders::DebugDraw()
 				
 			}
 
+		}
+
+		for (uint i = 0; i < MAX_ENEMIES; ++i)
+		{
+			if (App->enemies->enemies[i] != nullptr)
+			{
+				App->pathfinding->DrawPath(App->enemies->enemies[i]->Enemypath);
+			}
 		}
 	}
 }

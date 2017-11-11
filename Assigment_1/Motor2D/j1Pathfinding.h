@@ -28,9 +28,9 @@ public:
 	// Main function to request a path from A to B
 	int CreatePath(const iPoint& origin, const iPoint& destination);
 
-	void DrawPath();
+	void DrawPath(p2DynArray<iPoint>& path);
 
-	void Path(int x, int y);
+	void Path(int x, int y, p2DynArray<iPoint>& path);
 
 	//Reset the Path
 	void ResetPath();

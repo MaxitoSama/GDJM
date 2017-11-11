@@ -60,7 +60,7 @@ bool j1Enemies::Update(float dt)
 	{
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 
-			if (enemies[i] != nullptr && (enemies[i]->lower_level)) enemies[i]->Draw(enemies[i]->sprites);
+			if (enemies[i] != nullptr && (enemies[i]->lower_level)) enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale);
 	}
 	else
 	{
@@ -75,10 +75,20 @@ bool j1Enemies::Update(float dt)
 		}
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
-			if (enemies[i] != nullptr && (enemies[i]->collider == nullptr) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
+		{
+			if (enemies[i] != nullptr && (enemies[i]->collider == nullptr) && (enemies[i]->lower_level == false))
+			{
+				enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale);
+			}
+		}
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
-			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_ENEMY) && (enemies[i]->lower_level == false)) enemies[i]->Draw(enemies[i]->sprites);
+		{
+			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_ENEMY) && (enemies[i]->lower_level == false))
+			{
+				enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale);
+			}
+		}
 	}
 
 	return true;
@@ -91,7 +101,7 @@ bool j1Enemies::PostUpdate()
 	{
 		if (enemies[i] != nullptr)
 		{
-			if (enemies[i]->position.x < -(SPAWN_MARGIN + 1) || enemies[i]->position.x >(SCREEN_WIDTH + (SPAWN_MARGIN + 1)) || enemies[i]->position.y >(-App->render->camera.y + SCREEN_HEIGHT + (SPAWN_MARGIN + 1)) || enemies[i]->position.y < (-App->render->camera.y - (SPAWN_MARGIN + 1)))
+			if (enemies[i]->position.y >(-App->render->camera.y + SCREEN_HEIGHT + (SPAWN_MARGIN + 1)) || enemies[i]->position.y < (-App->render->camera.y - (SPAWN_MARGIN + 1)))
 				//if ((abs((int)App->render->camera.y) + SCREEN_HEIGHT + SPAWN_MARGIN) < enemies[i]->position.y)
 			{
 				LOG("DeSpawning enemy at %d", enemies[i]->position.y * SCREEN_SIZE);

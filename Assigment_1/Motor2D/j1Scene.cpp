@@ -108,7 +108,7 @@ bool j1Scene::Update(float dt)
 		App->pathfinding->ResetPath();
 		iPoint PlayerPosition = { App->player->position.x, App->player->position.y };
 		App->pathfinding->CreatePath({ 0,0 }, PlayerPosition);
-		App->pathfinding->Path(PlayerPosition.x, PlayerPosition.y);
+		App->pathfinding->Path(PlayerPosition.x, PlayerPosition.y,path_test);
 		LOG("Path created");
 	}
 		
@@ -118,7 +118,6 @@ bool j1Scene::Update(float dt)
 	}
 
 	App->map->Draw();
-	App->pathfinding->DrawPath();
 
 	p2SString title("%s",App->GetTitle());
 

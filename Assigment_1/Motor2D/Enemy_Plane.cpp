@@ -23,7 +23,7 @@ Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
 	dead.speed = 0.3f;
 	dead.loop = true;
 	//Set path
-	path.PushBack({ 0.0f, 0.0f}, 40, &anim); //Si esta quiet en un punt ha de tenir velocitat y = 0.2 per moures a la mateixa velocitat que l'overlay
+	//path.PushBack({ 0.0f, 0.0f}, 40, &anim); //Si esta quiet en un punt ha de tenir velocitat y = 0.2 per moures a la mateixa velocitat que l'overlay
 
 
 	//Set lives, initial_hp, points adn extra_anim
@@ -31,6 +31,7 @@ Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
 	//initial_hp = lives;
 	//points = 400;
 	extra_anim = false;
+	scale = -0.5;
 	//explosion_type = BIG1; //Explosion type
 
 	//shooting mechanic
@@ -38,6 +39,7 @@ Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
 	//shoot = particle_type::P_BIG_SHOT;
 	//big_shoot = &App->particles->big_shot_particle;
 	//Shot_Total_time = (Uint32)(2000.0f);
+	animation = &anim;
 
 	//Add and save collider
 	collider_pos.x = 0;
@@ -52,7 +54,7 @@ Enemy_Plane::~Enemy_Plane()
 
 void Enemy_Plane::Move()
 {
-	position = original_pos + path.GetCurrentPosition(&animation);
+	position = original_pos;
 	
 	Shot_now = SDL_GetTicks() - Shot_Start_time;
 	if (Shot_now > Shot_Total_time)

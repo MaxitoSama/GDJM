@@ -2,6 +2,7 @@
 #define __ENEMY_H__
 
 #include "p2Point.h"
+#include "p2DynArray.h"
 #include "p2animation.h"
 #include "SDL/include/SDL_timer.h"
 
@@ -42,15 +43,6 @@ public:
 	SDL_Texture* WhiteSprite = nullptr;
 	SDL_Texture* Shoot = nullptr;
 
-	//Explosions textures
-	SDL_Texture* b1;
-	SDL_Texture* b2;
-	SDL_Texture* m1;
-	SDL_Texture* m2;
-	SDL_Texture* s1;
-	SDL_Texture* s2;
-	SDL_Texture* fm;
-
 	//Time between red ticks
 	Uint32 Red_now;
 	Uint32 Red_Start_time;
@@ -65,6 +57,7 @@ public:
 
 	int lives; //Hit points
 	int initial_hp; //To calculate when to turn red
+	float scale;
 	bool hit; //When to turn white
 	bool extra_anim = false; //Something moving over basic animation?
 	bool die = false; //enemy is dead if it's true.
@@ -83,12 +76,16 @@ public:
 
 	const Collider* GetCollider() const;
 
+	p2DynArray<iPoint>	Enemypath;
+	uint				pathcounter = 0;
+	bool				going = false;
+
 	virtual void Move() {};
 	virtual void ExtraAnim(SDL_Texture* texture) {};
 	//virtual void ExtraAnim2(SDL_Texture* texture) {};
 	//virtual void ExtraAnim3(SDL_Texture* texture) {};
 	virtual void DeadAnim();
-	virtual void Draw(SDL_Texture* sprites);
+	virtual void Draw(SDL_Texture* sprites, float direction);
 	virtual void OnCollision(Collider* collider);
 	virtual void Drop();
 };

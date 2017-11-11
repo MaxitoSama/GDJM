@@ -18,7 +18,6 @@ public:
 
 public:
 
-	Path path;
 	Animation anim;
 	Animation dead;
 	Animation walking;
