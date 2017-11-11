@@ -19,11 +19,6 @@ j1Map::j1Map() : j1Module(), map_loaded(false)
 j1Map::~j1Map()
 {}
 
-bool j1Map::Start()
-{
-	PathTile = App->tex->Load("maps/PathTile.png");
-	return true;
-}
 
 
 // Called before render is available
@@ -37,17 +32,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	return ret;
 }
 
-void j1Map::DrawPath()
-{
-	iPoint point;
 
-	// Draw path
-	for (uint i = 0; i < App->pathfinding->breadcrumbs.count(); ++i)
-	{
-		iPoint pos = MapToWorld(App->pathfinding->breadcrumbs[i].x, App->pathfinding->breadcrumbs[i].y);
-		App->render->Blit(PathTile, pos.x, pos.y);
-	}
-}
 
 //draw the map and background
 void j1Map::Draw()
@@ -70,9 +55,6 @@ void j1Map::Draw()
 	{
 		MapLayer* layer = item->data;
 
-		/*if (layer->properties.Get("Nodraw") != 0)
-			continue;*/
-
 		for (int y = 0; y < data.height; ++y)
 		{
 			for (int x = 0; x < data.width; ++x)
@@ -90,8 +72,6 @@ void j1Map::Draw()
 			}
 		}
 	}
-
-	DrawPath();
 }
 
 //draw the colliders

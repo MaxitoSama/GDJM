@@ -20,11 +20,17 @@ public:
 	// Destructor
 	~j1PathFinding();
 
+	bool Start();
+
 	// Called before quitting
 	bool CleanUp();
 
 	// Main function to request a path from A to B
 	int CreatePath(const iPoint& origin, const iPoint& destination);
+
+	void DrawPath();
+
+	void Path(int x, int y);
 
 	//Reset the Path
 	void ResetPath();
@@ -45,6 +51,7 @@ private:
 	uchar* map;
 	// we store the created path here
 	
+	SDL_Texture*		PathTile = nullptr;
 	p2PQueue<iPoint>	frontier;
 	p2List<iPoint>		visited;
 	uint				cost_so_far[COST_MAP][COST_MAP];

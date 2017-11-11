@@ -1,6 +1,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+#include "j1Textures.h"
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1Map.h"
@@ -16,11 +17,21 @@ j1PathFinding::~j1PathFinding()
 {
 }
 
+bool j1PathFinding::Start()
+{
+	PathTile = App->tex->Load("maps/PathTile.png");
+	return true;
+}
+
 // Called before quitting
 bool j1PathFinding::CleanUp()
 {
 	LOG("Freeing pathfinding library");
-	path.Clear();
+	
+	frontier.Clear();
+	breadcrumbs.clear();
+	visited.clear();
+
 	return true;
 }
 
@@ -35,12 +46,39 @@ void j1PathFinding::ResetPath()
 	frontier.Clear();
 	visited.clear();
 	breadcrumbs.clear();
-	frontier.Push(iPoint(0, 0), 0);
-	visited.add(iPoint(0, 0));
-	breadcrumbs.add(iPoint(0, 0));
+	
 	memset(cost_so_far, 0, sizeof(uint) * COST_MAP * COST_MAP);
 }
 
+void j1PathFinding::Path(int x, int y)
+{
+	path.Clear();
+	iPoint goal = App->map->WorldToMap(x, y);
+	iPoint curr = goal;
+	p2List_item<iPoint>* item;
+
+	item = breadcrumbs.end;
+	path.PushBack(curr);
+
+	while (item != breadcrumbs.start && visited.find(curr) != -1)
+	{
+		curr = breadcrumbs[visited.find(curr)];
+		path.PushBack(curr);
+		item = item->prev;
+	}
+}
+
+void j1PathFinding::DrawPath()
+{
+	iPoint point;
+
+	// Draw path
+	for (uint i = 0; i < path.Count(); ++i)
+	{
+		iPoint pos = App->map->MapToWorld(path[i].x, path[i].y);
+		App->render->Blit(PathTile, pos.x, pos.y);
+	}
+}
 
 // ----------------------------------------------------------------------------------
 // Actual A* algorithm: return number of steps in the creation of the path or -1 ----
@@ -58,12 +96,10 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 	if (ret != -1)
 	{
 		iPoint curr;
-		int x, y;
-		App->input->GetMousePosition(x, y);
 
-		iPoint goal = destination;
+		iPoint goal =App->map->WorldToMap(destination.x,destination.y);
 
-		frontier.Push(origin,0);
+		frontier.Push(App->map->WorldToMap(origin.x, origin.y),0);
 
 		while (frontier.Count() != 0)
 		{
@@ -90,7 +126,7 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 						{
 							cost_so_far[neighbors[i].x][neighbors[i].y] = Distance;
 							frontier.Push(neighbors[i], Distance);							//El nou cost es la distancia
-							visited.add(curr);
+							visited.add(neighbors[i]);
 							breadcrumbs.add(curr);
 						}
 					}

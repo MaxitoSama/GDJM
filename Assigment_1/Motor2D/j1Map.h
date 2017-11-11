@@ -96,8 +96,6 @@ public:
 	// Called before render is available
 	bool Awake(pugi::xml_node& conf);
 
-	bool Start();
-
 	// Called each loop iteration
 	void Draw();
 
@@ -115,8 +113,6 @@ public:
 
 	int MovementCost(int x, int y) const;
 	
-	void DrawPath();
-
 	// Draw colliders
 	void Draw_Colliders();
 

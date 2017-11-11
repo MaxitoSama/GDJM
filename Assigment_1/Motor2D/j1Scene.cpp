@@ -105,7 +105,9 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
 	{
 		App->pathfinding->ResetPath();
-		App->pathfinding->CreatePath({ 0,0 }, App->map->WorldToMap(App->player->position.x, App->player->position.y));
+		iPoint PlayerPosition = { App->player->position.x, App->player->position.y };
+		App->pathfinding->CreatePath({ 0,0 }, PlayerPosition);
+		App->pathfinding->Path(PlayerPosition.x, PlayerPosition.y);
 		LOG("Path created");
 	}
 		
@@ -115,6 +117,7 @@ bool j1Scene::Update(float dt)
 	}
 
 	App->map->Draw();
+	App->pathfinding->DrawPath();
 
 	p2SString title("%s",App->GetTitle());
 
@@ -141,6 +144,7 @@ bool j1Scene::CleanUp()
 	App->enemies->CleanUp();
 	App->colliders->CleanUp();
 	App->map->CleanUp();
+	App->pathfinding->CleanUp();
 	App->tex->CleanUp();
 
 	return true;
@@ -166,6 +170,7 @@ void j1Scene::ChangeScene(int x, int y)
 		Map_2 = true;
 
 		App->scene->Start();
+		App->pathfinding->Start();
 		App->player->position.y = y;
 		App->player->position.x = x;
 		App->render->camera.x = 0;
@@ -177,6 +182,7 @@ void j1Scene::ChangeScene(int x, int y)
 		Map_1 = true;
 		Map_2 = false;
 		App->scene->Start();
+		App->pathfinding->Start();
 		App->player->position.y = y;
 		App->player->position.x = x;
 		App->render->camera.x = 0;
