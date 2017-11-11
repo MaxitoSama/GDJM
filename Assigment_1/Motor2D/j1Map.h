@@ -108,6 +108,11 @@ public:
 	//Translates x,y coordinates from map positions to world positions
 	iPoint MapToWorld(int x, int y) const;
 
+	//Translates x,y coordinates from world positions to map positions
+	iPoint WorldToMap(int x, int y) const;
+
+	int MovementCost(int x, int y) const;
+	
 	// Draw colliders
 	void Draw_Colliders();
 
@@ -129,5 +134,6 @@ private:
 	pugi::xml_document	map_file;
 	p2SString			folder;
 	bool				map_loaded;
+	SDL_Texture*		PathTile = nullptr;
 };
 #endif // __j1MAP_H__

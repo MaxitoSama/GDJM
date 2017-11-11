@@ -61,8 +61,13 @@
     <ClCompile Include="j1Timer.cpp">
       <Filter>Desenvolupament  ========\Tools</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Enemy_Plane.cpp">
       <Filter>Desenvolupament  ========\Modules\Enemies</Filter>
+=======
+    <ClCompile Include="j1Pathfinding.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+>>>>>>> origin/master
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,8 +155,16 @@
     <ClInclude Include="j1Timer.h">
       <Filter>Desenvolupament  ========\Tools</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Enemy_Plane.h">
       <Filter>Desenvolupament  ========\Modules\Enemies</Filter>
+=======
+    <ClInclude Include="j1Pathfinding.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="p2PQueue.h">
+      <Filter>Programacio 2 ===========</Filter>
+>>>>>>> origin/master
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

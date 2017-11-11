@@ -7,15 +7,16 @@
 		<music_volume value="128" />
 	</audio>
 	<map />
+	<pathfinding />
 	<scene />
 	<scene2 />
 	<colliders />
 	<scene />
 	<player>
-		<player x="60" y="436" Map="1" />
+		<player x="21954" y="188" Map="2" />
 	</player>
 	<enemies />
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="-20979" y="0" />
 	</renderer>
 </game_state>
