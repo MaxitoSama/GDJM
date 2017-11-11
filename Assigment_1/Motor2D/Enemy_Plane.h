@@ -1,5 +1,5 @@
-#ifndef __BALLOON_H__
-#define __BALLOON_H__
+#ifndef __PLANE_H__
+#define __PLANE_H__
 
 #include "Enemy.h"
 #include "p2Path.h"

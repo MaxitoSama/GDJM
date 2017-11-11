@@ -9,32 +9,29 @@
 Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
 {
 	//Open all textures
-	NormalSprite = App->tex->Load("assets/enemies/Balloon.png");
-	RedSprite = App->tex->Load("assets/enemies/hitten/hitten_red_Balloon.png");
-	WhiteSprite = App->tex->Load("assets/enemies/hitten/hitten_white_Balloon.png");
+	NormalSprite = App->tex->Load("assets/enemies/plane/plane.png");
+	//RedSprite = App->tex->Load("assets/enemies/hitten/hitten_red_Balloon.png");
+	//WhiteSprite = App->tex->Load("assets/enemies/hitten/hitten_white_Balloon.png");
 
 	//Set animation steps, speed and loop
-	anim.PushBack({ 11, 6, 42, 53 });
-	anim.PushBack({ 64, 6, 42, 53 });
-	anim.PushBack({ 116, 6, 42, 53 });
-	anim.PushBack({ 168, 6, 42, 53 });
-	anim.PushBack({ 219, 6, 42, 53 });
-	anim.speed = 2.0f;
+	anim.PushBack({ 49, 40, 639, 412 });
+	anim.PushBack({ 806, 40, 639, 412 });
+	anim.speed = 0.3f;
 	anim.loop = true;
 
+	dead.PushBack({ 1539, 40, 639, 412 });
+	dead.speed = 0.3f;
+	dead.loop = true;
 	//Set path
-	path.PushBack({ 0.0f, 0.9f}, 40, &anim); //Si esta quiet en un punt ha de tenir velocitat y = 0.2 per moures a la mateixa velocitat que l'overlay
-	path.PushBack({ 0.0f, -0.3f }, 240, &anim);
-	path.PushBack({ 0.0f, 0.9f }, 60, &anim);
-	path.PushBack({ 0.0f, -0.3f }, 350, &anim);
-	path.PushBack({ 0.0f, 0.9f }, 600, &anim);
+	path.PushBack({ 0.0f, 0.0f}, 40, &anim); //Si esta quiet en un punt ha de tenir velocitat y = 0.2 per moures a la mateixa velocitat que l'overlay
+
 
 	//Set lives, initial_hp, points adn extra_anim
-	lives = 25;
-	initial_hp = lives;
-	points = 400;
+	//lives = 25;
+	//initial_hp = lives;
+	//points = 400;
 	extra_anim = false;
-	explosion_type = BIG1; //Explosion type
+	//explosion_type = BIG1; //Explosion type
 
 	//shooting mechanic
 	
@@ -45,7 +42,7 @@ Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
 	//Add and save collider
 	collider_pos.x = 0;
 	collider_pos.y = 0;
-	collider = App->colliders->AddCollider({ x, y, 42, 44 }, COLLIDER_NONE, (j1Module*)App->enemies);
+	collider = App->colliders->AddCollider({ x, y, -639/2, 412/2 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
 }
 
 Enemy_Plane::~Enemy_Plane()
