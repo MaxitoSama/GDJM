@@ -142,7 +142,7 @@ j1Player::j1Player():j1Module()
 
 	//SLIDE LEFT----------------------------------------------------
 	
-		slide_left.PushBack({ 65,1840,283,320 });
+	slide_left.PushBack({ 65,1840,283,320 });
 	slide_left.PushBack({ 347,1840,283,320 });
 	slide_left.PushBack({ 632,1840,283,320 });
 	slide_left.PushBack({ 913,1840,283,320 });
@@ -155,7 +155,19 @@ j1Player::j1Player():j1Module()
 
 	slide_left.loop = true;
 	slide_left.speed = 0.5f;
-	
+
+	//Death------------------------------------------------------------
+	death.PushBack({ 76,2574,220,346 });
+	death.PushBack({ 296,2574,220,346 });
+	death.PushBack({ 513,2574,274,346 });
+	death.PushBack({ 786,2574,314,346 });
+	death.PushBack({ 1099,2574,332,346 });
+	death.PushBack({ 1430,2574,340,346 });
+	death.PushBack({ 1769,2574,349,346 });
+	death.PushBack({ 2117,2574,349,346 });
+	death.PushBack({ 2468,2574,349,346 });
+	death.loop = true;
+	death.speed = 0.05f;
 
 }
 
@@ -327,6 +339,24 @@ bool j1Player::Update(float dt)
 		{
 			current_animation = &idle_left;
 		}
+	}
+	//DEATH ANIMATION TEST
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	{
+			if (position.x < 25600)
+			{
+				speed = (velocity + acceleration);
+				position.x += speed;
+				Acceleration_Method();
+			}
+
+
+			if (current_animation != &right && !Jump)
+			{
+				right.Reset();
+				current_animation = &death;
+				player_last_direction = DEATH;
+			}
 	}
 	//JUMP_ONPLACE----------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && !dead)
