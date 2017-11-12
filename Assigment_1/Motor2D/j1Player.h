@@ -26,7 +26,8 @@ class j1Player : public j1Module
 		UPRIGHT,
 		UPLEFT,
 		DOWNRIGHT,
-		DOWNLEFT
+		DOWNLEFT,
+		DEATH
 	};
 
 public:
@@ -62,6 +63,7 @@ public:
 	Animation		jump_left;
 	Animation		slide_right;
 	Animation		slide_left;
+	Animation		death;
 
 	Collider*		collider_feet;
 	Collider*		collider_player;
@@ -83,7 +85,7 @@ public:
 	
 	bool			Jump = false;
 	bool			fall = false;
-	bool			dead=false;
+	bool			dead = false;
 
 	
 
