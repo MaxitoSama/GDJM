@@ -214,25 +214,7 @@ void j1App::FinishUpdate()
 	if(want_to_load == true)
 		LoadGameNow();
 
-	//last_sec_frame_time.Start();
-
 	//Framerate calculations
-	/*float seconds_per_frame = last_sec_frame_time.ReadSec();
-	if (seconds_per_frame < 1.0f)
-	{
-		frames++;
-	}
-	else
-	{
-		frame_count = frames;
-		frames = 0;
-		last_sec_frame_time.Reset();
-	}
-	float seconds_since_startup = startup_time.ReadSec();
-	static char title[256];
-	sprintf_s(title, 256, "Time since startup: %.3f Avg Frame Count: %i", seconds_since_startup, frame_count);
-	App->win->SetTitle(title);*/
-
 	if (last_sec_frame_time.Read() > 1000)
 	{
 		last_sec_frame_time.Start();
@@ -247,7 +229,7 @@ void j1App::FinishUpdate()
 
 	static char title[256];
 	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu ",
-		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
+	avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
 	App->win->SetTitle(title);
 
 	uint32 framerate = 1000 / framerate_cap;

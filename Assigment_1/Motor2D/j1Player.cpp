@@ -343,12 +343,12 @@ bool j1Player::Update(float dt)
 				player_last_direction = LEFT;
 			}
 		}
-
 		else
 		{
 			current_animation = &idle_left;
 		}
 	}
+/*
 	//DEATH ANIMATION TEST
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
@@ -367,6 +367,7 @@ bool j1Player::Update(float dt)
 				player_last_direction = DEATH;
 			}
 	}
+*/
 	//JUMP_ONPLACE----------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && !dead)
 	{
