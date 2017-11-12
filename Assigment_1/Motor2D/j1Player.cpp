@@ -76,19 +76,19 @@ j1Player::j1Player():j1Module()
 
 	// MOVE LEFT----------------------------------------------------
 	{
-	left.PushBack({ 2611,813,283,341 });
-	left.PushBack({ 2328,813,283,341 });
-	left.PushBack({ 2045,813,283,341 });
-	left.PushBack({ 1762,813,283,341 });
-	left.PushBack({ 1479,813,283,341 });
-	left.PushBack({ 1196,813,283,341 });
-	left.PushBack({ 913,813,283,341 });
-	left.PushBack({ 630,813,283,341 });
-	left.PushBack({ 347,813,283,341 });
-	left.PushBack({ 64,813,283,341 });
+		left.PushBack({ 2611,813,283,341 });
+		left.PushBack({ 2328,813,283,341 });
+		left.PushBack({ 2045,813,283,341 });
+		left.PushBack({ 1762,813,283,341 });
+		left.PushBack({ 1479,813,283,341 });
+		left.PushBack({ 1196,813,283,341 });
+		left.PushBack({ 913,813,283,341 });
+		left.PushBack({ 630,813,283,341 });
+		left.PushBack({ 347,813,283,341 });
+		left.PushBack({ 64,813,283,341 });
 
-	left.loop = true;
-	left.speed = 0.5;
+		left.loop = true;
+		left.speed = 0.5;
 	}
 
 	//JUMP_RIGHT----------------------------------------------------
@@ -126,48 +126,56 @@ j1Player::j1Player():j1Module()
 	}
 
 	//SLIDE RIGHT----------------------------------------------------
-	slide_right.PushBack({ 65,1521,283,320 });
-	slide_right.PushBack({ 347,1521,283,320 });
-	slide_right.PushBack({ 632,1521,283,320 });
-	slide_right.PushBack({ 913,1521,283,320 });
-	slide_right.PushBack({ 1197,1521,283,320 });
-	slide_right.PushBack({ 1480,1521,283,320 });
-	slide_right.PushBack({ 1763,1521,283,320 });
-	slide_right.PushBack({ 2045,1521,283,320 });
-	slide_right.PushBack({ 2328,1521,283,320 });
-	slide_right.PushBack({ 2610,1521,283,320 });
+	{
+		slide_right.PushBack({ 65,1521,283,320 });
+		slide_right.PushBack({ 347,1521,283,320 });
+		slide_right.PushBack({ 632,1521,283,320 });
+		slide_right.PushBack({ 913,1521,283,320 });
+		slide_right.PushBack({ 1197,1521,283,320 });
+		slide_right.PushBack({ 1480,1521,283,320 });
+		slide_right.PushBack({ 1763,1521,283,320 });
+		slide_right.PushBack({ 2045,1521,283,320 });
+		slide_right.PushBack({ 2328,1521,283,320 });
+		slide_right.PushBack({ 2610,1521,283,320 });
 
-	slide_right.loop = true;
-	slide_right.speed = 0.5f;
+		slide_right.loop = true;
+		slide_right.speed = 0.5f;
+	}
+
 
 	//SLIDE LEFT----------------------------------------------------
-	
-	slide_left.PushBack({ 65,1840,283,320 });
-	slide_left.PushBack({ 347,1840,283,320 });
-	slide_left.PushBack({ 632,1840,283,320 });
-	slide_left.PushBack({ 913,1840,283,320 });
-	slide_left.PushBack({ 1197,1840,283,320 });
-	slide_left.PushBack({ 1480,1840,283,320 });
-	slide_left.PushBack({ 1763,1840,283,320 });
-	slide_left.PushBack({ 2045,1840,283,320 });
-	slide_left.PushBack({ 2328,1840,283,320 });
-	slide_left.PushBack({ 2610,1840,283,320 });
+	{
+		slide_left.PushBack({ 65,1840,283,320 });
+		slide_left.PushBack({ 347,1840,283,320 });
+		slide_left.PushBack({ 632,1840,283,320 });
+		slide_left.PushBack({ 913,1840,283,320 });
+		slide_left.PushBack({ 1197,1840,283,320 });
+		slide_left.PushBack({ 1480,1840,283,320 });
+		slide_left.PushBack({ 1763,1840,283,320 });
+		slide_left.PushBack({ 2045,1840,283,320 });
+		slide_left.PushBack({ 2328,1840,283,320 });
+		slide_left.PushBack({ 2610,1840,283,320 });
 
-	slide_left.loop = true;
-	slide_left.speed = 0.5f;
+		slide_left.loop = true;
+		slide_left.speed = 0.5f;
+	}
+
 
 	//Death------------------------------------------------------------
-	death.PushBack({ 76,2574,220,346 });
-	death.PushBack({ 296,2574,220,346 });
-	death.PushBack({ 513,2574,274,346 });
-	death.PushBack({ 786,2574,314,346 });
-	death.PushBack({ 1099,2574,332,346 });
-	death.PushBack({ 1430,2574,340,346 });
-	death.PushBack({ 1769,2574,349,346 });
-	death.PushBack({ 2117,2574,349,346 });
-	death.PushBack({ 2468,2574,349,346 });
-	death.loop = true;
-	death.speed = 0.05f;
+	{
+		death.PushBack({ 76,2574,220,346 });
+		death.PushBack({ 296,2574,220,346 });
+		death.PushBack({ 513,2574,274,346 });
+		death.PushBack({ 786,2574,314,346 });
+		death.PushBack({ 1099,2574,332,346 });
+		death.PushBack({ 1430,2574,340,346 });
+		death.PushBack({ 1769,2574,349,346 });
+		death.PushBack({ 2117,2574,349,346 });
+		death.PushBack({ 2468,2574,349,346 });
+		death.loop = true;
+		death.speed = 0.05f;
+	}
+
 
 }
 
@@ -199,6 +207,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 
 	return ret;
 }
+
 // Load assets
 bool j1Player::Start()
 {
