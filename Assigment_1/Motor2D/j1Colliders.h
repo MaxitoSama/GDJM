@@ -40,7 +40,7 @@ struct Collider
 
 	bool CheckCollision(const SDL_Rect& r) const;
 	
-	bool CheckFutureFallColision(const SDL_Rect& r,int& distance);
+	bool CheckFutureFallColision(const SDL_Rect& r,int& distance,float dt);
 
 	bool CheckFutureCrashColision(const SDL_Rect& r, int& distance);
 };

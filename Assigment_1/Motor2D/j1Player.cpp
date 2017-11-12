@@ -221,7 +221,7 @@ bool j1Player::CleanUp()
 	return true;
 }
 // Update: draw background
-bool j1Player::PostUpdate()
+bool j1Player::Update(float dt)
 {
 	SDL_Event e;
 	
@@ -232,7 +232,7 @@ bool j1Player::PostUpdate()
 		{
 			if (position.x >= 0)
 			{
-				speed = -(velocity + (int)acceleration);
+				speed = -(velocity /*+ (int)acceleration*/)*dt;
 				position.x += speed;
 				Acceleration_Method();
 			}
@@ -258,7 +258,7 @@ bool j1Player::PostUpdate()
 		{
 			if (position.x < 25600)
 			{
-				speed = (velocity + acceleration);
+				speed = (velocity /*+ acceleration*/)*dt;
 				position.x += speed;
 				Acceleration_Method();
 			}
@@ -335,7 +335,7 @@ bool j1Player::PostUpdate()
 		if (!Jump)
 		{
            	Pos_jump = position.y - jump_height;
-			gravity = 10;
+			gravity = 500;
 			Jump = true;
 		}
 		
@@ -366,7 +366,7 @@ bool j1Player::PostUpdate()
 		if (!Jump)
 		{
 			Pos_jump = position.y - jump_height;
-			gravity = 10;
+			gravity = 500;
 			Jump = true;
 		}
 
@@ -403,7 +403,7 @@ bool j1Player::PostUpdate()
 	}
 	
 	//Call Jump_Method-----------------------------------------
-	Jump_Method();
+	Jump_Method(dt);
 
 	//IDLE ANIMATIONS------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE
@@ -475,22 +475,22 @@ bool j1Player::Save(pugi::xml_node& data) const
 	return true;
 }
 
-void j1Player::Jump_Method()
+void j1Player::Jump_Method(float dt)
 {
 	if (!Jump) {
-		position.y += gravity;
+		position.y += gravity*dt;
 	}
 
 	if (Jump == true && position.y != Pos_jump )
 	{
 		if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 		{
- 			position.y -= jump_vel;
+ 			position.y -= jump_vel*dt;
 		}
 		
 		if (position.y <= Pos_jump || App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 		{
-			gravity = 10;
+			gravity = 500;
 			Jump = false;
 			fall = true;
 		}

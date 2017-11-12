@@ -1,13 +1,13 @@
 <!-- Config file for the game -->
 
 <config>
-  <app>
+  <app framerate_cap="60">
     <title>Ninja's Path</title>
     <organization>UPC</organization>
   </app>
 	
   <renderer>
-    <vsync value="true"/>
+    <vsync value="false"/>
     <camera camera_x="0" camera_y="0"/>
   </renderer>
 
@@ -31,12 +31,12 @@
 
   <player>
     <position pos_x="60" pos_y="215"/>
-    <gravity  value="10"/>
+    <gravity  value="500"/>
     <acceleration value="0"/>
     <accel_counter value="0"/>
-    <velocity value="10"/>
+    <velocity value="1000"/>
     <slide_counter value="0"/>
-    <jump jump_height="300" jump_vel="20"/>
+    <jump jump_height="300" jump_vel="1000"/>
     <jump_bool value="false"/>
     <fall_bool value="false"/>
   </player>

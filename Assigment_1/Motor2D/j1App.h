@@ -101,11 +101,13 @@ public:
 	j1Enemies*			enemies;
 	j1PathFinding*		pathfinding;
 
+	float				dt;
+
 private:
 
 	p2List<j1Module*>	modules;
 	uint32				frames;
-	float				dt;
+	
 	int					argc;
 	char**				args;
 
@@ -117,12 +119,15 @@ private:
 	p2SString			load_game;
 	mutable p2SString	save_game;
 
-	//j1PerfTimer			ptimer;
-	uint32				frame_count;
+	j1PerfTimer			ptimer;
+	uint32				frame_count=0;
 	j1Timer				startup_time;
+	j1Timer				frame_time;
 	j1Timer				last_sec_frame_time;
-	//uint32				last_sec_frame_count = 0;
-	//int					capped_ms = -1;
+	uint32				last_sec_frame_count = 0;
+	uint32				prev_last_sec_frame_count = 0;
+	uint16_t			framerate_cap;
+	int					capped_ms = -1;
 };
 
 extern j1App* App; 

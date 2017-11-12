@@ -4,6 +4,8 @@
 #include "j1Colliders.h"
 #include "p2Point.h"
 #include "j1Render.h"
+#include "j1Map.h"
+#include "j1Pathfinding.h"
 #include "j1Player.h"
 
 Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
@@ -18,6 +20,13 @@ Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
 	anim.PushBack({ 806, 40, 639, 412 });
 	anim.speed = 0.3f;
 	anim.loop = true;
+
+	moving.PushBack({ 49, 40, 639, 412 });
+	moving.PushBack({ 49, 37, 639, 412 });
+	moving.PushBack({ 806, 40, 639, 412 });
+	moving.PushBack({ 806, 43, 639, 412 });
+	moving.speed = 0.3f;
+	moving.loop = true;
 
 	dead.PushBack({ 1539, 40, 639, 412 });
 	dead.speed = 0.3f;
@@ -54,14 +63,69 @@ Enemy_Plane::~Enemy_Plane()
 
 void Enemy_Plane::Move()
 {
-	position = original_pos;
-	
-	Shot_now = SDL_GetTicks() - Shot_Start_time;
-	if (Shot_now > Shot_Total_time)
-	{
-		Shot_Start_time = SDL_GetTicks();
+	iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y };
+	fPoint speed;
 
-		//App->particles->AddParticle(App->particles->small_shot_particle, particle_type::P_SMALL_SHOT, position.x + 18, position.y + App->render->camera.y + 40, COLLIDER_ENEMY_SHOT, 0, 248, ANGLE);
+	position = original_pos;
+	//original_pos.y += speed.y;
+
+	if (abs((int)App->player->position.x - (int)original_pos.x) <= 500 && !going)
+	{
+		going = true;
+		pathcounter = 0;
+		App->pathfinding->CreatePath(enemyposition, App->player->position);
+		App->pathfinding->Path(App->player->position.x, App->player->position.y, Enemypath);
+	}
+
+	if (!going)
+	{
+		animation = &moving;
+	}
+
+	else
+	{
+		
+		if (enemyposition != App->player->position)
+		{
+			if (App->player->position.x < enemyposition.x)
+			{
+				speed.x = -4;
+				scale = -0.5;
+			}
+			else
+			{
+				speed.x = 4;
+				scale = 0.5;
+			}
+			if (App->player->position.y < enemyposition.y)
+			{
+				speed.y = -1;
+			}
+			else
+			{
+				speed.y = 1;
+			}
+
+			iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);
+
+			if ((int)original_pos.x != PositiontoGo.x)
+			{
+				original_pos.x += speed.x;
+			}
+			if ((int)original_pos.y != PositiontoGo.y)
+			{
+				original_pos.y += speed.y;
+			}
+
+			if ((int)original_pos.x == PositiontoGo.x && (int)original_pos.y == PositiontoGo.y)
+			{
+				pathcounter++;
+			}
+		}
+		else
+		{
+			going = false;
+		}
 	}
 }
 

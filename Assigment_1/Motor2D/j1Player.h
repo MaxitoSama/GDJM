@@ -36,9 +36,9 @@ public:
 
 	bool Awake(pugi::xml_node&);
 	bool Start();
-	bool PostUpdate();
+	bool Update(float dt);
 	bool CleanUp();
-	void Jump_Method();
+	void Jump_Method(float dt);
 	void Slide_Method();
 	void Acceleration_Method();
 

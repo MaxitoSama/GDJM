@@ -140,7 +140,7 @@ bool j1Colliders::Update(float dt)
 			c2 = colliders[k];
 
 			
-			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect, distance_1) == true)
+			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect, distance_1,dt) == true)
 			{
 				App->player->position.y -= distance_1;
 				App->player->dead = false;
@@ -176,7 +176,7 @@ bool j1Colliders::Update(float dt)
 				App->scene->ChangeScene(60, 215);
 			}
 			
-			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect,distance_1) == true)
+			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect,distance_1,dt) == true)
 			{
 				App->enemies->OnCollision(c2, c1);
 			}
@@ -336,13 +336,13 @@ bool Collider::CheckCollision(const SDL_Rect& r)const
 	return false;
 }
 
-bool Collider::CheckFutureFallColision(const SDL_Rect& r, int& distance)
+bool Collider::CheckFutureFallColision(const SDL_Rect& r, int& distance, float dt)
 {
 	if (rect.x < r.x + r.w && rect.x + rect.w > r.x)
 	{
-		if (rect.y < r.y + r.h + 10 && rect.y && rect.y + rect.h > r.y)
+		if (rect.y < r.y + r.h + App->player->gravity*dt && rect.y && rect.y + rect.h > r.y)
 		{
-			distance = r.y + r.h + 10 - rect.y;
+			distance = r.y + r.h + App->player->gravity*dt - rect.y;
 			return true;
 		}
 	}

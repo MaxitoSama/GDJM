@@ -20,6 +20,7 @@ public:
 
 	Animation anim;
 	Animation dead;
+	Animation moving;
 
 	char* shot_path;
 	//particle_type shoot;
