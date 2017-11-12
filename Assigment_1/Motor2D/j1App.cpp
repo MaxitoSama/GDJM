@@ -104,7 +104,6 @@ bool j1App::Awake()
 		title.create(app_config.child("title").child_value());
 		organization.create(app_config.child("organization").child_value());
 
-		// TODO 1: Read from config file your framerate cap
 		framerate_cap = app_config.attribute("framerate_cap").as_uint(INFINITE);
 		LOG("Framerate %d", framerate_cap);
 	}
@@ -198,7 +197,6 @@ void j1App::PrepareUpdate()
 	frame_count++;
 	last_sec_frame_count++;
 
-	// TODO 4: Calculate the dt: differential time since last frame
 	dt = frame_time.ReadSec();
 	LOG("Delta time %f", dt);
 	frame_time.Start();

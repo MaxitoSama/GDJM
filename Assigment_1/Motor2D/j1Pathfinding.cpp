@@ -88,7 +88,6 @@ void j1PathFinding::DrawPath(p2DynArray<iPoint>& path)
 // ----------------------------------------------------------------------------------
 int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
-	// TODO 1: if origin or destination are not walkable, return -1
 	int ret = 0;
 
 	if (App->map->MovementCost(destination.x, destination.y) == 0)
