@@ -198,6 +198,10 @@ void j1App::PrepareUpdate()
 	last_sec_frame_count++;
 
 	dt = frame_time.ReadSec();
+	if (dt > 5.0f / (float)framerate_cap)
+	{
+		dt = 5.0f / (float)framerate_cap;
+	}
 	LOG("Delta time %f", dt);
 	frame_time.Start();
 	ptimer.Start();

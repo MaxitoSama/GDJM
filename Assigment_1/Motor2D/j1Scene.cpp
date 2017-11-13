@@ -163,6 +163,7 @@ void j1Scene::StartCurrentScene()
 void j1Scene::ChangeScene(int x, int y)
 {
 	CleanUp();
+	App->player->speed = 0;
 	
 	if (Map_1 && App->player->Curr_map==1)
 	{

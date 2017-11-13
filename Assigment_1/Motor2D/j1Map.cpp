@@ -325,18 +325,18 @@ bool j1Map::Load(const char* file_name)
 
 	if (ret == true)
 	{
-		LOG("Successfully parsed map XML file: %s", file_name);
+		/*LOG("Successfully parsed map XML file: %s", file_name);
 		LOG("width: %d height: %d", data.width, data.height);
-		LOG("tile_width: %d tile_height: %d", data.tile_width, data.tile_height);
+		LOG("tile_width: %d tile_height: %d", data.tile_width, data.tile_height);*/
 
 		p2List_item<TileSet*>* item = data.tilesets.start;
 		while (item != NULL)
 		{
 			TileSet* s = item->data;
-			LOG("Tileset ----");
+			/*LOG("Tileset ----");
 			LOG("name: %s firstgid: %d", s->name.GetString(), s->firstgid);
 			LOG("tile width: %d tile height: %d", s->tile_width, s->tile_height);
-			LOG("spacing: %d margin: %d", s->spacing, s->margin);
+			LOG("spacing: %d margin: %d", s->spacing, s->margin);*/
 			item = item->next;
 		}
 
@@ -344,9 +344,9 @@ bool j1Map::Load(const char* file_name)
 		while (item_layer != NULL)
 		{
 			MapLayer* l = item_layer->data;
-			LOG("Layer ----");
+			/*LOG("Layer ----");
 			LOG("name: %s", l->name.GetString());
-			LOG("tile width: %d tile height: %d", l->width, l->height);
+			LOG("tile width: %d tile height: %d", l->width, l->height);*/
 			item_layer = item_layer->next;
 		}
 	}
