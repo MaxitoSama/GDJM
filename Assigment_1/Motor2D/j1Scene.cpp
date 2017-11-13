@@ -45,10 +45,10 @@ bool j1Scene::Start()
 		App->map->Draw_Colliders();
 		App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
 		//enemies
-		/*App->enemies->AddEnemy(ZOMBIE, 1500, 0);*/
+		App->enemies->AddEnemy(ZOMBIE, 1500, 0);
 		App->colliders->AddCollider({ 32,600,32,1 }, COLLIDER_FLOOR, this);
 		App->colliders->AddCollider({ 64,600,32,1 }, COLLIDER_FLOOR, this);
-	/*	App->enemies->AddEnemy(PLANE, 1500, 0);*/
+		App->enemies->AddEnemy(PLANE, 1500, 0);
 		App->player->Curr_map = 1;
 	}
 
@@ -118,6 +118,7 @@ bool j1Scene::Update(float dt)
 	}
 
 	App->map->Draw();
+	App->pathfinding->DrawPath(path_test);
 
 	p2SString title("%s",App->GetTitle());
 

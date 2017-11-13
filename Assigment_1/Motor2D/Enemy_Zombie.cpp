@@ -159,7 +159,7 @@ void Enemy_Zombie::Move()
 					pathcounter++;
 			}
 		}
-		else
+		if(abs((int)App->player->position.x - (int)original_pos.x) >= 500)
 		{
 			going = false;
 		}

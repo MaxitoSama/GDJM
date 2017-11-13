@@ -88,6 +88,8 @@ void j1PathFinding::DrawPath(p2DynArray<iPoint>& path)
 // ----------------------------------------------------------------------------------
 int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
+	ResetPath();
+
 	int ret = 0;
 
 	if (App->map->MovementCost(destination.x, destination.y) == 0)
