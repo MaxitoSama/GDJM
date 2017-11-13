@@ -40,8 +40,8 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 	void Jump_Method(float dt);
-	void Slide_Method();
-	void Acceleration_Method();
+	void Slide_Method(float dt);
+	int Acceleration_Method();
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;

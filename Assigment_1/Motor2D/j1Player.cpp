@@ -251,9 +251,10 @@ bool j1Player::Update(float dt)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
 		{
-			if (position.x >= 0)
+			if (position.x >= 0 )
 			{
-				speed = -(velocity /*+ (int)acceleration*/)*dt;
+
+				speed = -(velocity+Acceleration_Method())*dt;
 				position.x += speed;
 				Acceleration_Method();
 			}
@@ -279,7 +280,7 @@ bool j1Player::Update(float dt)
 		{
 			if (position.x < 25600)
 			{
-				speed = (velocity /*+ acceleration*/)*dt;
+				speed = (velocity + Acceleration_Method())*dt;
 				position.x += speed;
 				Acceleration_Method();
 			}
@@ -313,7 +314,7 @@ bool j1Player::Update(float dt)
 	{
 		if (speed > 0)
 		{
-			Slide_Method();
+			Slide_Method(dt);
 			position.x += speed;
 			if (current_animation != &slide_right && !Jump)
 			{
@@ -334,7 +335,7 @@ bool j1Player::Update(float dt)
 	{
 		if (speed < 0 && position.x>=0)
 		{
-			Slide_Method();
+			Slide_Method(dt);
 			position.x += speed;
 			if (current_animation != &slide_left && !Jump)
 			{
@@ -478,6 +479,8 @@ bool j1Player::Update(float dt)
 	// Draw everything ----------------------------------------
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),0.5f);
 
+	LOG("player position X = %d and Y = %d", position.x, position.y);
+
 	return true;
 }
 
@@ -499,10 +502,7 @@ bool j1Player::Load(pugi::xml_node& data)
 		position.y = data.child("player").attribute("y").as_int();
 	}
 	
-	
-
 	return true;
-
 }
 bool j1Player::Save(pugi::xml_node& data) const 
 {
@@ -538,27 +538,34 @@ void j1Player::Jump_Method(float dt)
 }
 
 //Acceleration Method
-void j1Player::Acceleration_Method()
+int j1Player::Acceleration_Method()
 {
-	accel_counter += 1;
+	int vel = 0;
 
-	if (accel_counter % 10 == 0 && accel_counter <= 200)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_IDLE)
 	{
-		acceleration += 1;
+		vel = 0;
 	}
+	
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && !Jump && !fall)
+	{
+		vel = 500;
+	}
+
+	return vel;
 }
 
-void j1Player::Slide_Method()
+void j1Player::Slide_Method(float dt)
 {
 	slide_counter += 1;
 
 	if (slide_counter % 10 == 0 && speed>=0)
 	{
-		speed -= 5;
+		speed -= 100*dt;
 	}
 	if (slide_counter % 10 == 0 && speed <= 0)
 	{
-		speed += 5;
+		speed += 100*dt;
 	}
 }
 
