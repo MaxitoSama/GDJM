@@ -13,10 +13,10 @@
 	<colliders />
 	<scene />
 	<player>
-		<player x="19400" y="90" Map="2" />
+		<player x="2742" y="828" Map="2" />
 	</player>
 	<enemies />
 	<renderer>
-		<camera x="-18456" y="0" />
+		<camera x="-1782" y="0" />
 	</renderer>
 </game_state>
