@@ -460,8 +460,9 @@ bool j1Player::Update(float dt)
 			break;
 		}
 	}
-	/*
+	
 	//Player Colliders Position--------------------------------
+/*
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
 	{
 		collider_player->SetPos(position.x, position.y);
@@ -469,11 +470,9 @@ bool j1Player::Update(float dt)
 		slide_rect.h = 150;
 		slide_rect.w = 100;
 		slide_rect.x = position.x;
-		slide_rect.y = position.y + 30;
+		slide_rect.y = position.y + 40;
 		collider_player->rect = slide_rect;
 	}
-
-
 	else
 	{
 		SDL_Rect idle_rect;
@@ -483,7 +482,8 @@ bool j1Player::Update(float dt)
 		idle_rect.h = 332 / 2;
 		collider_player->rect = idle_rect;
 	}
-	*/
+*/
+	
 	collider_player->SetPos(position.x, position.y);
 	
 

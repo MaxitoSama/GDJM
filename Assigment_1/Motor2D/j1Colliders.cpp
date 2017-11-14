@@ -158,7 +158,7 @@ bool j1Colliders::Update(float dt)
 				App->player->position.x -= distance_2;
 			}
 
-			if (c1->type == COLLIDER_DEATH && c2->type == COLLIDER_FEET && c1->CheckCollision(c2->rect) == true)
+			if (c1->type == COLLIDER_DEATH && c2->type == COLLIDER_PLAYER && c1->CheckCollision(c2->rect) == true)
 			{
 				App->player->position.x = 60;
 				App->player->position.y = 215;

@@ -84,7 +84,7 @@ void j1Map::Draw_Colliders()
 	uint layer_indx;
 
 	//draw the horizontal colliders together
-	for (layer_indx = 0; layer_indx<data.layers.count(); layer_indx++)
+	for (layer_indx = 0; layer_indx < data.layers.count(); layer_indx++)
 	{
 
 		for (int j = 0; j < data.height; j++)
@@ -154,6 +154,9 @@ void j1Map::Draw_Colliders()
 	}
 
 	App->colliders->AddCollider({ 0,1080,1000000,10 }, COLLIDER_DEATH);
+	//They both appear in both maps.
+	//App->colliders->AddCollider({ 22112,829,288,32 },COLLIDER_DEATH);
+	//App->colliders->AddCollider({ 11392,636,608,64 }, COLLIDER_DEATH);
 }
 
 TileSet* j1Map::GetTilesetFromTileId(int id) const
