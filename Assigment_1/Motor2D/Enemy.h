@@ -55,26 +55,20 @@ public:
 	Uint32 Shot_Total_time2;
 	Uint32 Shot_Total_time3;
 
-	int lives; //Hit points
-	int initial_hp; //To calculate when to turn red
+	
 	float scale;
 	int colliderXsize;
 	int initial_pos;
 	bool left;
 	bool right;
-	bool extra_anim = false; //Something moving over basic animation?
-	bool die = false; //enemy is dead if it's true.
-	bool lower_level = false; //Is the enemy behing the overlayed map?
-	Explosions explosion_type;
-
-	int wave;
-	int id = -1; //Id of an enemy inside a wave
-	int points = 0; //Points that give to the player
+	
 	Collider* collider = nullptr;
-	int white_counter;
+	int collision_distance_1;
+	
 
 public:
-	Enemy(int x, int y, int wave = 1, int id = 0);
+	
+	Enemy(int x, int y);
 	virtual ~Enemy();
 
 	const Collider* GetCollider() const;

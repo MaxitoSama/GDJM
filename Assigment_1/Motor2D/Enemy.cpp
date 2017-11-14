@@ -8,7 +8,7 @@
 #include "SDL/include/SDL_timer.h"
 #include "j1Audio.h"
 
-Enemy::Enemy(int x, int y, int wave, int id) : position(x, y), original_pos(x, y), wave(wave), id(id), collider_pos(0, 0)
+Enemy::Enemy(int x, int y) : position(x, y), original_pos(x, y), collider_pos(0, 0)
 {
 
 }
@@ -39,17 +39,7 @@ void Enemy::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 	if (animation != nullptr)
 	{
 		sprites = NormalSprite;
-		
-		if (RedSprite != nullptr && lives <= (initial_hp / 5) && lives > 0 && Red_now >= Red_Total_time && Red_now <= (Red_Total_time + 50))
-		{
-			sprites = RedSprite;
-		}
-		else if (RedSprite != nullptr && lives <= (initial_hp / 5) && lives > 0 && Red_now >= (Red_Total_time + 150))
-		{
-			sprites = RedSprite;
-			Red_Start_time = SDL_GetTicks();
-		}
-		
+
 		if (direction < 0)
 		{
 			App->render->Blit(sprites, position.x + ColliderPosition, position.y, &(animation->GetCurrentFrame()), direction, 1.0f);
@@ -58,15 +48,7 @@ void Enemy::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 		{
 			App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()), direction, 1.0f);
 		}
-	
-		if (extra_anim && lives > 0)
-			ExtraAnim(sprites);
-		white_counter++;
 	}
-	/*if (lives <= 0 && die == false)
-		die = explode();
-	if (lives <= 0 && die)
-		explode();*/
 }
 
 void Enemy::OnCollision(Collider* collider)
@@ -75,22 +57,9 @@ void Enemy::OnCollision(Collider* collider)
 	{
 
 	}
-	if ((collider->type == COLLIDER_NONE || collider->type == COLLIDER_NONE) && die == false)
+	if ((collider->type == COLLIDER_NONE || collider->type == COLLIDER_NONE) )
 	{
-		/*switch (collider->part->type)
-		{
-		case P_MARION_BULLET_P1:
-			lives -= 1;
-			break;
-		}*/
-		if (lives <= 0)
-		{
-			if (collider->type == COLLIDER_NONE)
-				//App->player->points += points;
-			
-
-			Drop();
-		}
+		
 	}
 	else if (collider->type == COLLIDER_NONE)
 	{

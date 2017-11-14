@@ -179,7 +179,11 @@ bool j1Colliders::Update(float dt)
 			
 			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect,distance_1,dt) == true)
 			{
-				App->enemies->OnCollision(c2, c1);
+				App->enemies->OnCollision(c2, c1, distance_1);
+			}
+			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2) == true)
+			{
+				App->enemies->OnCollision(c2, c1, distance_2);
 			}
 	
 			

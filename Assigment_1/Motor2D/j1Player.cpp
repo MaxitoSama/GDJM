@@ -36,7 +36,7 @@ j1Player::j1Player():j1Module()
 		idle_right.PushBack({ 2559,111,176,331 });
 
 		idle_right.loop = true;
-		idle_right.speed = 0.5f;
+		idle_right.speed = 30.0f;
 	}
 
 	//IDLE LEFT----------------------------------------------------
@@ -53,7 +53,7 @@ j1Player::j1Player():j1Module()
 		idle_left.PushBack({ 2560,1159,176,329 });
 
 		idle_left.loop = true;
-		idle_left.speed = 0.5f;
+		idle_left.speed = 30.0f;
 	}
 
 	
@@ -71,7 +71,7 @@ j1Player::j1Player():j1Module()
 		right.PushBack({ 2560,472,263,332 });
 
 		right.loop = true;
-		right.speed = 0.5f;
+		right.speed = 30.0f;
 	}
 
 	// MOVE LEFT----------------------------------------------------
@@ -88,7 +88,7 @@ j1Player::j1Player():j1Module()
 		left.PushBack({ 64,813,283,341 });
 
 		left.loop = true;
-		left.speed = 0.5;
+		left.speed = 30.0f;
 	}
 
 	//JUMP_RIGHT----------------------------------------------------
@@ -105,7 +105,7 @@ j1Player::j1Player():j1Module()
 		jump_right.PushBack({ 2560,471,263,332 });
 
 		jump_right.loop = false;
-		jump_right.speed = 0.05f;
+		jump_right.speed = 15.0f;
 	}
 
 	//JUMP_LEFT----------------------------------------------------
@@ -122,7 +122,7 @@ j1Player::j1Player():j1Module()
 		jump_left.PushBack({ 2560,2200,263,332 });
 
 		jump_left.loop = false;
-		jump_left.speed = 0.5f;
+		jump_left.speed = 15.0f;
 	}
 
 	//SLIDE RIGHT----------------------------------------------------
@@ -139,7 +139,7 @@ j1Player::j1Player():j1Module()
 		slide_right.PushBack({ 2610,1521,283,320 });
 
 		slide_right.loop = true;
-		slide_right.speed = 0.5f;
+		slide_right.speed = 30.0f;
 	}
 
 
@@ -157,7 +157,7 @@ j1Player::j1Player():j1Module()
 		slide_left.PushBack({ 2610,1840,283,320 });
 
 		slide_left.loop = true;
-		slide_left.speed = 0.5f;
+		slide_left.speed = 30.0f;
 	}
 
 
@@ -172,8 +172,8 @@ j1Player::j1Player():j1Module()
 		death.PushBack({ 1769,2574,349,346 });
 		death.PushBack({ 2117,2574,349,346 });
 		death.PushBack({ 2468,2574,349,346 });
-		death.loop = true;
-		death.speed = 0.05f;
+		death.loop = false;
+		death.speed = 15.0f;
 	}
 
 
@@ -349,26 +349,15 @@ bool j1Player::Update(float dt)
 			current_animation = &idle_left;
 		}
 	}
-/*
+
 	//DEATH ANIMATION TEST
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
 	{
-			if (position.x < 25600)
-			{
-				speed = (velocity + acceleration);
-				position.x += speed;
-				Acceleration_Method();
-			}
-
-
-			if (current_animation != &right && !Jump)
-			{
-				right.Reset();
+			
 				current_animation = &death;
 				player_last_direction = DEATH;
-			}
 	}
-*/
+
 	//JUMP_ONPLACE----------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && !dead)
 	{

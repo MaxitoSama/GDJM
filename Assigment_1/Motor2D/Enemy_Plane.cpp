@@ -18,43 +18,35 @@ Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
 	//Set animation steps, speed and loop
 	anim.PushBack({ 49, 40, 639, 412 });
 	anim.PushBack({ 806, 40, 639, 412 });
-	anim.speed = 0.3f;
+	anim.speed = 18.0f;
 	anim.loop = true;
 
 	moving.PushBack({ 49, 40, 639, 412 });
 	moving.PushBack({ 49, 37, 639, 412 });
 	moving.PushBack({ 806, 40, 639, 412 });
 	moving.PushBack({ 806, 43, 639, 412 });
-	moving.speed = 0.3f;
+	moving.speed = 18.0f;
 	moving.loop = true;
 
 	dead.PushBack({ 1539, 40, 639, 412 });
-	dead.speed = 0.3f;
+	dead.speed = 18.0f;
 	dead.loop = true;
-	//Set path
-	//path.PushBack({ 0.0f, 0.0f}, 40, &anim); //Si esta quiet en un punt ha de tenir velocitat y = 0.2 per moures a la mateixa velocitat que l'overlay
 
 
-	//Set lives, initial_hp, points adn extra_anim
-	//lives = 25;
-	//initial_hp = lives;
-	//points = 400;
-	extra_anim = false;
-	scale = -0.3;
-	colliderXsize = 639 / 2;
-	//explosion_type = BIG1; //Explosion type
-
-	//shooting mechanic
 	
-	//shoot = particle_type::P_BIG_SHOT;
-	//big_shoot = &App->particles->big_shot_particle;
-	//Shot_Total_time = (Uint32)(2000.0f);
+	scale = -0.3;
+	colliderXsize = (639 * 2) / 5;
+	initial_pos = original_pos.x;
+	
+	right = true;
+	left = false;
+
 	animation = &anim;
 
 	//Add and save collider
 	collider_pos.x = 0;
 	collider_pos.y = 0;
-	collider = App->colliders->AddCollider({ x, y, 639/2, 412/2 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
+	collider = App->colliders->AddCollider({ x, y, (639*2)/5, (412*2)/5 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
 }
 
 Enemy_Plane::~Enemy_Plane()
@@ -70,7 +62,7 @@ void Enemy_Plane::Move()
 	position = original_pos;
 	//original_pos.y += speed.y;
 
-	if (abs((int)App->player->position.x - (int)original_pos.x) <= 600 /*&& !going*/)
+	if (abs((int)App->player->position.x - (int)original_pos.x) <= 600 && !going)
 	{
 		going = true;
 		pathcounter = 0;
@@ -78,10 +70,30 @@ void Enemy_Plane::Move()
 		App->pathfinding->Path(App->player->position.x, App->player->position.y, Enemypath);
 	}
 
-
 	if (!going)
 	{
 		animation = &moving;
+
+		if (original_pos.x<(float)initial_pos + 100 && right == true)
+		{
+			original_pos.x += 1;
+			scale = 0.4;
+			if (original_pos.x >= (float)initial_pos + 100)
+			{
+				left = true;
+				right = false;
+			}
+		}
+		if (original_pos.x>(float)initial_pos - 100 && left == true)
+		{
+			original_pos.x -= 1;
+			scale = -0.4;
+			if (original_pos.x <= (float)initial_pos - 100)
+			{
+				left = false;
+				right = true;
+			}
+		}
 	}
 
 	else
@@ -127,9 +139,10 @@ void Enemy_Plane::Move()
 				pathcounter++;
 			}
 		}
-		else
+		if (abs((int)App->player->position.x - (int)original_pos.x) >= 500)
 		{
 			going = false;
+			initial_pos = original_pos.x;
 		}
 	}
 }

@@ -60,7 +60,7 @@ bool j1Enemies::Update(float dt)
 	{
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 
-			if (enemies[i] != nullptr && (enemies[i]->lower_level)) enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale, enemies[i]->colliderXsize);
+			if (enemies[i] != nullptr) enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale, enemies[i]->colliderXsize);
 	}
 	else
 	{
@@ -68,15 +68,13 @@ bool j1Enemies::Update(float dt)
 		{
 			if (enemies[i] != nullptr)
 			{
-				if (enemies[i]->die)
-					enemies[i]->DeadAnim();
-				else enemies[i]->Move();
+				enemies[i]->Move();
 			}
 		}
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (enemies[i] != nullptr && (enemies[i]->collider == nullptr) && (enemies[i]->lower_level == false))
+			if (enemies[i] != nullptr && (enemies[i]->collider == nullptr))
 			{
 				enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale, enemies[i]->colliderXsize);
 			}
@@ -84,7 +82,7 @@ bool j1Enemies::Update(float dt)
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_ENEMY) && (enemies[i]->lower_level == false))
+			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_ENEMY))
 			{
 				enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale, enemies[i]->colliderXsize);
 			}
@@ -176,10 +174,10 @@ void j1Enemies::SpawnEnemy(const EnemyInfo& info)
 	}
 }
 
-void j1Enemies::OnCollision(Collider* c1, Collider* c2)
+void j1Enemies::OnCollision(Collider* c1, Collider* c2, int distance)
 {
 	
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	/*for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
@@ -191,7 +189,7 @@ void j1Enemies::OnCollision(Collider* c1, Collider* c2)
 			}
 			break;
 		}
-	}
+	}*/
 
 	if (c2->type == COLLIDER_FLOOR)
 	{
@@ -199,7 +197,7 @@ void j1Enemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 			{
-				enemies[i]->original_pos.y-= 10;
+				enemies[i]->original_pos.y-= distance;
 			}
 		}
 	}
@@ -210,7 +208,7 @@ void j1Enemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 			{
-				enemies[i]->original_pos.y -= 10;
+				enemies[i]->original_pos.x += 1;
 			}
 		}
 	}

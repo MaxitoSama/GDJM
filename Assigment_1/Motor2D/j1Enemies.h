@@ -35,7 +35,7 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
-	void OnCollision(Collider* c1, Collider* c2);
+	void OnCollision(Collider* c1, Collider* c2, int distance);
 
 	bool AddEnemy(ENEMY_TYPES type, int x, int y, int wave = 1, int id = 0);
 

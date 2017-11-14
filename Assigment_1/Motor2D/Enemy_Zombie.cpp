@@ -33,7 +33,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	anim.PushBack({ 3154, 432, 240, 342 });
 	anim.PushBack({ 3412, 432, 240, 342 });
 	anim.PushBack({ 3670, 432, 240, 342 });
-	anim.speed = 0.5f;
+	anim.speed = 30.0f;
 	anim.loop = true;
 
 	//dead
@@ -49,7 +49,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	dead.PushBack({ 2765, 0, 380, 367 });
 	dead.PushBack({ 3148, 0, 380, 367 });
 	dead.PushBack({ 3556, 0, 390, 367 });
-	dead.speed = 0.5f;
+	dead.speed = 30.0f;
 	dead.loop = true;
 
 	//walking
@@ -63,7 +63,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	walking.PushBack({ 2069, 809, 264, 360 });
 	walking.PushBack({ 2333, 809, 264, 360 });
 	walking.PushBack({ 2596, 809, 264, 360 });
-	walking.speed = 0.5f;
+	walking.speed = 30.0f;
 	walking.loop = true;
 	
 	//Set path
@@ -74,10 +74,8 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	//path.PushBack({ 0.0f, 0.9f }, 600, &anim);
 
 	//Set lives, initial_hp, points adn extra_anim
-	lives = 1;
-	initial_hp = lives;
 	
-	extra_anim = false;
+
 	animation = &walking;
 	scale = -0.5;
 	colliderXsize = 120;
@@ -86,7 +84,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	right = true;
 	left = false;
 
-	collider = App->colliders->AddCollider({ (int)(position.x-120), (int)position.y, 120, 342/2 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
+	collider = App->colliders->AddCollider({ (int)(position.x-120), (int)position.y, 120, 360/2 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
 }
 
 Enemy_Zombie::~Enemy_Zombie()
@@ -102,7 +100,7 @@ void Enemy_Zombie::Move()
 	position = original_pos;
 	original_pos.y += 10;
 	
-	if (abs((int)App->player->position.x - (int)original_pos.x)<=100 )
+	if (abs((int)App->player->position.x - (int)original_pos.x)<=100 && !going)
 	{
 		going = true;
 		pathcounter = 0;
