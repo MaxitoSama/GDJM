@@ -160,7 +160,7 @@ void j1Map::Draw_Colliders()
 	//App->colliders->AddCollider({ 22112,829,288,32 },COLLIDER_DEATH);
 
 	//map2 death colliders
-	App->colliders->AddCollider({ 21087,828,320,32 }, COLLIDER_DEATH);
+	//App->colliders->AddCollider({ 21087,828,320,32 }, COLLIDER_DEATH);
 	
 }
 
