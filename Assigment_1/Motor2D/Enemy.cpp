@@ -26,23 +26,21 @@ const Collider* Enemy::GetCollider() const
 	return collider;
 }
 
-void Enemy::Draw(SDL_Texture* sprites, float direction)
+void Enemy::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 {
 	Red_now = SDL_GetTicks() - Red_Start_time;
 
 	if (collider != nullptr)
-		collider->SetPos(position.x-120, position.y);
+	{
+		collider->SetPos(position.x, position.y);
+	}
+		
 
 	if (animation != nullptr)
 	{
 		sprites = NormalSprite;
-		if (hit && WhiteSprite != nullptr && white_counter > 3)
-		{
-			sprites = WhiteSprite;
-			hit = false;
-			white_counter = 0;
-		}
-		else if (RedSprite != nullptr && lives <= (initial_hp / 5) && lives > 0 && Red_now >= Red_Total_time && Red_now <= (Red_Total_time + 50))
+		
+		if (RedSprite != nullptr && lives <= (initial_hp / 5) && lives > 0 && Red_now >= Red_Total_time && Red_now <= (Red_Total_time + 50))
 		{
 			sprites = RedSprite;
 		}
@@ -52,7 +50,14 @@ void Enemy::Draw(SDL_Texture* sprites, float direction)
 			Red_Start_time = SDL_GetTicks();
 		}
 		
-		App->render->Blit(sprites, position.x, App->render->camera.y + position.y, &(animation->GetCurrentFrame()), direction,1.0f);
+		if (direction < 0)
+		{
+			App->render->Blit(sprites, position.x + ColliderPosition, position.y, &(animation->GetCurrentFrame()), direction, 1.0f);
+		}
+		else
+		{
+			App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()), direction, 1.0f);
+		}
 	
 		if (extra_anim && lives > 0)
 			ExtraAnim(sprites);
@@ -78,7 +83,6 @@ void Enemy::OnCollision(Collider* collider)
 			lives -= 1;
 			break;
 		}*/
-		hit = true;
 		if (lives <= 0)
 		{
 			if (collider->type == COLLIDER_NONE)
@@ -90,7 +94,7 @@ void Enemy::OnCollision(Collider* collider)
 	}
 	else if (collider->type == COLLIDER_NONE)
 	{
-		Draw(sprites,scale);
+		Draw(sprites,scale,colliderXsize);
 	}
 }
 

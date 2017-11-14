@@ -58,7 +58,10 @@ public:
 	int lives; //Hit points
 	int initial_hp; //To calculate when to turn red
 	float scale;
-	bool hit; //When to turn white
+	int colliderXsize;
+	int initial_pos;
+	bool left;
+	bool right;
 	bool extra_anim = false; //Something moving over basic animation?
 	bool die = false; //enemy is dead if it's true.
 	bool lower_level = false; //Is the enemy behing the overlayed map?
@@ -85,7 +88,7 @@ public:
 	//virtual void ExtraAnim2(SDL_Texture* texture) {};
 	//virtual void ExtraAnim3(SDL_Texture* texture) {};
 	virtual void DeadAnim();
-	virtual void Draw(SDL_Texture* sprites, float direction);
+	virtual void Draw(SDL_Texture* sprites, float direction, int ColliderPosition);
 	virtual void OnCollision(Collider* collider);
 	virtual void Drop();
 };

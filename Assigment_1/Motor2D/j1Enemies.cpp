@@ -60,7 +60,7 @@ bool j1Enemies::Update(float dt)
 	{
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 
-			if (enemies[i] != nullptr && (enemies[i]->lower_level)) enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale);
+			if (enemies[i] != nullptr && (enemies[i]->lower_level)) enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale, enemies[i]->colliderXsize);
 	}
 	else
 	{
@@ -78,7 +78,7 @@ bool j1Enemies::Update(float dt)
 		{
 			if (enemies[i] != nullptr && (enemies[i]->collider == nullptr) && (enemies[i]->lower_level == false))
 			{
-				enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale);
+				enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale, enemies[i]->colliderXsize);
 			}
 		}
 
@@ -86,7 +86,7 @@ bool j1Enemies::Update(float dt)
 		{
 			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_ENEMY) && (enemies[i]->lower_level == false))
 			{
-				enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale);
+				enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale, enemies[i]->colliderXsize);
 			}
 		}
 	}

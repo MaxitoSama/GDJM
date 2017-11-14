@@ -76,18 +76,15 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	//Set lives, initial_hp, points adn extra_anim
 	lives = 1;
 	initial_hp = lives;
-	//points = 400;
+	
 	extra_anim = false;
 	animation = &walking;
 	scale = -0.5;
-	
-	//explosion_type = BIG1; //Explosion type
+	colliderXsize = 120;
+	initial_pos = original_pos.x;
 
-	//shooting mechanic
-	
-	//shoot = particle_type::P_BIG_SHOT;
-	//big_shoot = &App->particles->big_shot_particle;
-	Shot_Total_time = (Uint32)(2000.0f);
+	right = true;
+	left = false;
 
 	collider = App->colliders->AddCollider({ (int)(position.x-120), (int)position.y, 120, 342/2 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
 }
@@ -103,19 +100,44 @@ void Enemy_Zombie::Move()
 	fPoint speed;
 
 	position = original_pos;
-	//original_pos.y += speed.y;
+	original_pos.y += 10;
 	
-	if (abs((int)App->player->position.x - (int)original_pos.x)<=500 && !going)
+	if (abs((int)App->player->position.x - (int)original_pos.x)<=100 )
 	{
 		going = true;
 		pathcounter = 0;
 		App->pathfinding->CreatePath(enemyposition, App->player->position);
 		App->pathfinding->Path(App->player->position.x, App->player->position.y,Enemypath);
 	}
+	else
+	{
+		going = false;
+	}
 
 	if (!going)
 	{
-		animation = &anim;
+		animation = &walking;
+
+		if(original_pos.x<(float)initial_pos+50 && right==true)
+		{
+			original_pos.x += 1;
+			scale = 0.5;
+			if (original_pos.x >= (float)initial_pos + 50)
+			{
+				left = true;
+				right = false;
+			}
+		}
+		if(original_pos.x>(float)initial_pos - 50 && left == true)
+		{
+			original_pos.x -= 1;
+			scale = -0.5;
+			if (original_pos.x <= (float)initial_pos - 50)
+			{
+				left = false;
+				right = true;
+			}
+		}
 	}
 
 	else
@@ -134,14 +156,14 @@ void Enemy_Zombie::Move()
 				speed.x = 4;
 				scale = 0.5;
 			}
-			if (App->player->position.y < enemyposition.y)
+			/*if (App->player->position.y < enemyposition.y)
 			{
 				speed.y = -1;
 			}
 			else
 			{
 				speed.y =1;
-			}
+			}*/
 			
 			iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);
 				
@@ -149,10 +171,10 @@ void Enemy_Zombie::Move()
 			{
 				original_pos.x += speed.x;
 			}
-			if ((int)original_pos.y != PositiontoGo.y)
+			/*if ((int)original_pos.y != PositiontoGo.y)
 			{
 				original_pos.y += speed.y;
-			}
+			}*/
 			
 			if((int)original_pos.x == PositiontoGo.x && (int)original_pos.y == PositiontoGo.y)
 			{

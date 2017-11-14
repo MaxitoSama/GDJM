@@ -171,6 +171,7 @@ bool j1Colliders::Update(float dt)
 			{
 				App->scene->ChangeScene(60,215);
 			}
+			
 			if (c1->type == COLLIDER_WIN2 && c2->type == COLLIDER_FEET && c1->CheckCollision(c2->rect) == true)
 			{
 				App->scene->ChangeScene(60, 215);

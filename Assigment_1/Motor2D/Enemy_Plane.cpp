@@ -40,7 +40,8 @@ Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
 	//initial_hp = lives;
 	//points = 400;
 	extra_anim = false;
-	scale = -0.5;
+	scale = -0.3;
+	colliderXsize = 639 / 2;
 	//explosion_type = BIG1; //Explosion type
 
 	//shooting mechanic
@@ -53,7 +54,7 @@ Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
 	//Add and save collider
 	collider_pos.x = 0;
 	collider_pos.y = 0;
-	collider = App->colliders->AddCollider({ x, y, -639/2, 412/2 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
+	collider = App->colliders->AddCollider({ x, y, 639/2, 412/2 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
 }
 
 Enemy_Plane::~Enemy_Plane()
@@ -69,13 +70,14 @@ void Enemy_Plane::Move()
 	position = original_pos;
 	//original_pos.y += speed.y;
 
-	if (abs((int)App->player->position.x - (int)original_pos.x) <= 500 && !going)
+	if (abs((int)App->player->position.x - (int)original_pos.x) <= 600 /*&& !going*/)
 	{
 		going = true;
 		pathcounter = 0;
 		App->pathfinding->CreatePath(enemyposition, App->player->position);
 		App->pathfinding->Path(App->player->position.x, App->player->position.y, Enemypath);
 	}
+
 
 	if (!going)
 	{
@@ -90,17 +92,20 @@ void Enemy_Plane::Move()
 			if (App->player->position.x < enemyposition.x)
 			{
 				speed.x = -4;
-				scale = -0.5;
+				scale = -0.4f;
 			}
+			
 			else
 			{
 				speed.x = 4;
-				scale = 0.5;
+				scale = 0.4f;
 			}
+			
 			if (App->player->position.y < enemyposition.y)
 			{
 				speed.y = -1;
 			}
+			
 			else
 			{
 				speed.y = 1;
