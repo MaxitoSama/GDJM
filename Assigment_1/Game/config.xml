@@ -32,8 +32,8 @@
   <player>
     <position pos_x="60" pos_y="215"/>
     <gravity  value="500"/>
-    <acceleration value="0"/>
-    <accel_counter value="0"/>
+    <acceleration value="100"/>
+    <accel_counter value="10"/>
     <velocity value="1000"/>
     <slide_counter value="0"/>
     <jump jump_height="300" jump_vel="1000"/>
