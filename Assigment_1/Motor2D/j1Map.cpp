@@ -155,8 +155,12 @@ void j1Map::Draw_Colliders()
 
 	App->colliders->AddCollider({ 0,1080,1000000,10 }, COLLIDER_DEATH);
 	//They both appear in both maps.
+	//map1 death colliders
 	//App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
 	//App->colliders->AddCollider({ 22112,829,288,32 },COLLIDER_DEATH);
+
+	//map2 death colliders
+	App->colliders->AddCollider({ 21087,828,320,32 }, COLLIDER_DEATH);
 	
 }
 
