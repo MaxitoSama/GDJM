@@ -471,9 +471,33 @@ bool j1Player::Update(float dt)
 			break;
 		}
 	}
-
+	/*
 	//Player Colliders Position--------------------------------
-	collider_player->SetPos(position.x,position.y);
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
+	{
+		collider_player->SetPos(position.x, position.y);
+		SDL_Rect slide_rect;
+		slide_rect.h = 150;
+		slide_rect.w = 100;
+		slide_rect.x = position.x;
+		slide_rect.y = position.y + 30;
+		collider_player->rect = slide_rect;
+	}
+
+
+	else
+	{
+		SDL_Rect idle_rect;
+		idle_rect.x = position.x;
+		idle_rect.y = position.y;
+		idle_rect.w = 200 / 2;
+		idle_rect.h = 332 / 2;
+		collider_player->rect = idle_rect;
+	}
+	*/
+	collider_player->SetPos(position.x, position.y);
+	
+
 	collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (310 / 2)-1);
 
 	// Draw everything ----------------------------------------
@@ -558,7 +582,6 @@ int j1Player::Acceleration_Method()
 void j1Player::Slide_Method(float dt)
 {
 	slide_counter += 1;
-
 	if (slide_counter % 10 == 0 && speed>=0)
 	{
 		speed -= 100*dt;
