@@ -201,7 +201,7 @@ int j1Map::MovementCost(int x, int y) const
 
 	if (x >= 0 && x < data.width && y >= 0 && y < data.height)
 	{
-		int id = data.layers.start->next->data->Get(x, y);
+		int id = data.layers.start->next->next->next->next->data->Get(x, y);
 
 		if (id == 0)
 			ret = 3;
