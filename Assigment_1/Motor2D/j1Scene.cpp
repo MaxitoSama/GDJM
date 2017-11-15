@@ -115,7 +115,7 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
 	{
 		App->pathfinding->ResetPath();
-		iPoint PlayerPosition = { App->player->position.x, App->player->position.y };
+		iPoint PlayerPosition = { App->player->position.x, App->player->position.y+50 };
 		
 		if (App->pathfinding->CreatePath({ 0,0 }, PlayerPosition) != -1)
 		{

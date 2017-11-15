@@ -92,7 +92,7 @@ Enemy_Zombie::~Enemy_Zombie()
 	App->tex->UnLoad(NormalSprite);
 }
 
-void Enemy_Zombie::Move()
+void Enemy_Zombie::Move(float dt)
 {
 	iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y };
 	fPoint speed;
@@ -102,10 +102,11 @@ void Enemy_Zombie::Move()
 	
 	if (abs((int)App->player->position.x - (int)original_pos.x)<=300 && !going)
 	{
+		iPoint player = { App->player->position.x, App->player->position.y + 50 };
 		going = true;
 		pathcounter = 0;
-		App->pathfinding->CreatePath(enemyposition, App->player->position);
-		App->pathfinding->Path(App->player->position.x, App->player->position.y,Enemypath);
+		App->pathfinding->CreatePath(enemyposition, player);
+		App->pathfinding->Path(App->player->position.x, App->player->position.y+50,Enemypath);
 	}
 	
 

@@ -12,9 +12,8 @@ public:
 	Enemy_Zombie(int x, int y);
 	~Enemy_Zombie();
 
-	void Move();
+	void Move(float dt);
 	void DeadAnim();
-	void Drop();
 
 public:
 

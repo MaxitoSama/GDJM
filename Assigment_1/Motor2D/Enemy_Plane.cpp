@@ -54,7 +54,7 @@ Enemy_Plane::~Enemy_Plane()
 	App->tex->UnLoad(NormalSprite);
 }
 
-void Enemy_Plane::Move()
+void Enemy_Plane::Move(float dt)
 {
 	iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y };
 	fPoint speed;

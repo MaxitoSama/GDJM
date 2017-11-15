@@ -68,7 +68,7 @@ bool j1Enemies::Update(float dt)
 		{
 			if (enemies[i] != nullptr)
 			{
-				enemies[i]->Move();
+				enemies[i]->Move(dt);
 			}
 		}
 

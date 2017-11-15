@@ -93,7 +93,7 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 	int ret = 0;
 	iPoint goal = App->map->WorldToMap(destination.x, destination.y);
 
-	if (App->map->MovementCost(goal.x, goal.y) == -1)
+	if (App->map->MovementCost(goal.x, goal.y) == -1 || App->map->MovementCost(goal.x, goal.y) == 0)
 	{
 		ret = -1;
 	}

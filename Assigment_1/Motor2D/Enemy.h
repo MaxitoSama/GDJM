@@ -77,7 +77,7 @@ public:
 	uint				pathcounter = 0;
 	bool				going = false;
 
-	virtual void Move() {};
+	virtual void Move(float dt) {};
 	virtual void ExtraAnim(SDL_Texture* texture) {};
 	//virtual void ExtraAnim2(SDL_Texture* texture) {};
 	//virtual void ExtraAnim3(SDL_Texture* texture) {};

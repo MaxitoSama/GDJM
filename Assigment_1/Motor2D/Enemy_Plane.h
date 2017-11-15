@@ -12,9 +12,9 @@ public:
 	Enemy_Plane(int x, int y);
 	~Enemy_Plane();
 
-	void Move();
+	void Move(float dt);
 	void DeadAnim();
-	void Drop();
+
 
 public:
 
