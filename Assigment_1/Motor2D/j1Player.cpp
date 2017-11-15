@@ -478,7 +478,7 @@ bool j1Player::Update(float dt)
 	// Draw everything ----------------------------------------
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),0.5f);
 
-	LOG("player position X = %d and Y = %d", position.x, position.y);
+	//("player position X = %d and Y = %d", position.x, position.y);
 
 	return true;
 }
@@ -541,12 +541,11 @@ int j1Player::Acceleration_Method()
 {
 	int vel = 0;
 
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_IDLE)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_IDLE || App->input->GetKey(SDL_SCANCODE_S)== KEY_REPEAT)
 	{
 		vel = 0;
 	}
-	
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && !Jump && !fall)
+	else 
 	{
 		vel = 500;
 	}

@@ -81,7 +81,8 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	int dist = App->player->win_width / 2;
+	int dist1 = App->player->win_width / 2;
+	int dist2 = App->player->win_height / 2;
 
 	if(App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame();
@@ -116,11 +117,16 @@ bool j1Scene::Update(float dt)
 		LOG("Path created");
 	}
 		
-	if (App->player->position.x > dist && App->player->position.x <= 24630)
+	if (App->player->position.x > dist1 && App->player->position.x <= 24630)
 	{
 		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;
-		//App->render->camera.y = -App->player->position.y + App->player->win_height / 2;
 	}
+	if (App->player->position.y > dist2 && App->player->position.y <App->player->win_height-50)
+	{
+		App->render->camera.y = -App->player->position.y + App->player->win_height / 2;
+	}
+
+
 
 	App->map->Draw();
 	App->pathfinding->DrawPath(path_test);

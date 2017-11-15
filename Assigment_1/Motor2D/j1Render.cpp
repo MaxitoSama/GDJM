@@ -142,17 +142,20 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 	}
 
-	if (img_scale < 0)
+	SDL_RendererFlip flag;
+
+	if (img_scale<0)
 	{
-		rect.w *= img_scale;
+		flag = SDL_FLIP_HORIZONTAL;
+		rect.w *= -img_scale;
 		rect.h *= -img_scale;
 	}
-	else 
+	else
 	{
+		flag = SDL_FLIP_NONE;
 		rect.w *= img_scale;
 		rect.h *= img_scale;
 	}
-	
 
 	SDL_Point* p = NULL;
 	SDL_Point pivot;
@@ -164,7 +167,7 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 		p = &pivot;
 	}
 
-	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flag) != 0)
 	{
  		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;

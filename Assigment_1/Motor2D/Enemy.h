@@ -84,7 +84,6 @@ public:
 	virtual void DeadAnim();
 	virtual void Draw(SDL_Texture* sprites, float direction, int ColliderPosition);
 	virtual void OnCollision(Collider* collider);
-	virtual void Drop();
 };
 
 #endif // __ENEMY_H__

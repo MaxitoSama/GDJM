@@ -202,7 +202,7 @@ void j1App::PrepareUpdate()
 	{
 		dt = 5.0f / (float)framerate_cap;
 	}
-	LOG("Delta time %f", dt);
+	//LOG("Delta time %f", dt);
 	frame_time.Start();
 	ptimer.Start();
 }
@@ -243,7 +243,7 @@ void j1App::FinishUpdate()
 	{
 		SDL_Delay(delay);
 		realTime = ptimer.ReadMs();
-		LOG("we waited for %d and got back in %f", delay, realTime);
+		//LOG("we waited for %d and got back in %f", delay, realTime);
 
 	}
 

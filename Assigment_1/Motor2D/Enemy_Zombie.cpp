@@ -100,44 +100,40 @@ void Enemy_Zombie::Move()
 	position = original_pos;
 	original_pos.y += 10;
 	
-	if (abs((int)App->player->position.x - (int)original_pos.x)<=100 && !going)
+	if (abs((int)App->player->position.x - (int)original_pos.x)<=300 && !going)
 	{
 		going = true;
 		pathcounter = 0;
 		App->pathfinding->CreatePath(enemyposition, App->player->position);
 		App->pathfinding->Path(App->player->position.x, App->player->position.y,Enemypath);
 	}
-	else
-	{
-		going = false;
-	}
+	
 
 	if (!going)
 	{
 		animation = &walking;
 
-		if(original_pos.x<(float)initial_pos+50 && right==true)
+		if(original_pos.x<(float)initial_pos+150 && right==true)
 		{
-			original_pos.x += 1;
+			original_pos.x += 5;
 			scale = 0.5;
-			if (original_pos.x >= (float)initial_pos + 50)
+			if (original_pos.x >= (float)initial_pos + 150)
 			{
 				left = true;
 				right = false;
 			}
 		}
-		if(original_pos.x>(float)initial_pos - 50 && left == true)
+		if(original_pos.x>(float)initial_pos - 150 && left == true)
 		{
-			original_pos.x -= 1;
+			original_pos.x -= 5;
 			scale = -0.5;
-			if (original_pos.x <= (float)initial_pos - 50)
+			if (original_pos.x <= (float)initial_pos - 150)
 			{
 				left = false;
 				right = true;
 			}
 		}
 	}
-
 	else
 	{
 		animation = &walking;
@@ -146,12 +142,12 @@ void Enemy_Zombie::Move()
 		{
 			if (App->player->position.x < enemyposition.x)
 			{
-				speed.x = -4;
+				speed.x = -8;
 				scale = -0.5;
 			}
 			else
 			{
-				speed.x = 4;
+				speed.x = 8;
 				scale = 0.5;
 			}
 			/*if (App->player->position.y < enemyposition.y)
@@ -182,17 +178,15 @@ void Enemy_Zombie::Move()
 		if(abs((int)App->player->position.x - (int)original_pos.x) >= 500)
 		{
 			going = false;
+			initial_pos = original_pos.x;
 		}
 	}
+
+	LOG("Zombie pos %f", original_pos.x);
 }
 
 void Enemy_Zombie::DeadAnim()
 {
 	animation = &dead;
 	position.y += 0.2f; //Perque es mogui a la mateixa velocitat que l'overlay
-}
-
-void Enemy_Zombie::Drop()
-{
-
 }
