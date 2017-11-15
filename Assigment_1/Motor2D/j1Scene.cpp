@@ -116,8 +116,11 @@ bool j1Scene::Update(float dt)
 	{
 		App->pathfinding->ResetPath();
 		iPoint PlayerPosition = { App->player->position.x, App->player->position.y };
-		App->pathfinding->CreatePath({ 0,0 }, PlayerPosition);
-		App->pathfinding->Path(PlayerPosition.x, PlayerPosition.y,path_test);
+		
+		if (App->pathfinding->CreatePath({ 0,0 }, PlayerPosition) != -1)
+		{
+			App->pathfinding->Path(PlayerPosition.x, PlayerPosition.y, path_test);
+		}
 		LOG("Path created");
 	}
 		
