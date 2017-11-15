@@ -60,31 +60,31 @@ bool j1Entities::Update(float dt)
 	{
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 
-			if (enemies[i] != nullptr) enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale, enemies[i]->colliderXsize);
+			if (entities[i] != nullptr) entities[i]->Draw(entities[i]->sprites, entities[i]->scale, entities[i]->colliderXsize);
 	}
 	else
 	{
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (enemies[i] != nullptr)
+			if (entities[i] != nullptr)
 			{
-				enemies[i]->Move(dt);
+				entities[i]->Move(dt);
 			}
 		}
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (enemies[i] != nullptr && (enemies[i]->collider == nullptr))
+			if (entities[i] != nullptr && (entities[i]->collider == nullptr))
 			{
-				enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale, enemies[i]->colliderXsize);
+				entities[i]->Draw(entities[i]->sprites, entities[i]->scale, entities[i]->colliderXsize);
 			}
 		}
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (enemies[i] != nullptr && (enemies[i]->collider != nullptr) && (enemies[i]->collider->type == COLLIDER_ENEMY))
+			if (entities[i] != nullptr && (entities[i]->collider != nullptr) && (entities[i]->collider->type == COLLIDER_ENEMY))
 			{
-				enemies[i]->Draw(enemies[i]->sprites, enemies[i]->scale, enemies[i]->colliderXsize);
+				entities[i]->Draw(entities[i]->sprites, entities[i]->scale, entities[i]->colliderXsize);
 			}
 		}
 	}
@@ -97,14 +97,14 @@ bool j1Entities::PostUpdate()
 	// check camera position to decide what to despawn
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemies[i] != nullptr)
+		if (entities[i] != nullptr)
 		{
-			if (enemies[i]->position.y >(-App->render->camera.y + SCREEN_HEIGHT + (SPAWN_MARGIN + 1)) || enemies[i]->position.y < (-App->render->camera.y - (SPAWN_MARGIN + 1)))
+			if (entities[i]->position.y >(-App->render->camera.y + SCREEN_HEIGHT + (SPAWN_MARGIN + 1)) || entities[i]->position.y < (-App->render->camera.y - (SPAWN_MARGIN + 1)))
 				//if ((abs((int)App->render->camera.y) + SCREEN_HEIGHT + SPAWN_MARGIN) < enemies[i]->position.y)
 			{
-				LOG("DeSpawning enemy at %d", enemies[i]->position.y * SCREEN_SIZE);
-				delete enemies[i];
-				enemies[i] = nullptr;
+				LOG("DeSpawning enemy at %d", entities[i]->position.y * SCREEN_SIZE);
+				delete entities[i];
+				entities[i] = nullptr;
 			}
 		}
 	}
@@ -119,10 +119,10 @@ bool j1Entities::CleanUp()
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemies[i] != nullptr)
+		if (entities[i] != nullptr)
 		{
-			delete enemies[i];
-			enemies[i] = nullptr;
+			delete entities[i];
+			entities[i] = nullptr;
 		}
 		if (queue[i].type != NO_TYPE)
 		{
@@ -158,17 +158,17 @@ void j1Entities::SpawnEnemy(const EnemyInfo& info)
 {
 	// find room for the new enemy
 	uint i = 0;
-	for (; enemies[i] != nullptr && i < MAX_ENEMIES; ++i);
+	for (; entities[i] != nullptr && i < MAX_ENEMIES; ++i);
 
 	if (i != MAX_ENEMIES)
 	{
 		switch (info.type)
 		{
 		case ENEMY_TYPES::ZOMBIE:
-			enemies[i] = new Enemy_Zombie(info.x, info.y);
+			entities[i] = new Enemy_Zombie(info.x, info.y);
 			break;
 		case ENEMY_TYPES::PLANE:
-			enemies[i] = new Enemy_Plane(info.x, info.y);
+			entities[i] = new Enemy_Plane(info.x, info.y);
 			break;
 		}
 	}
@@ -195,9 +195,9 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2, int distance)
 	{
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
+			if (entities[i] != nullptr && entities[i]->GetCollider() == c1)
 			{
-				enemies[i]->original_pos.y-= distance;
+				entities[i]->original_pos.y-= distance;
 			}
 		}
 	}
@@ -206,9 +206,9 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2, int distance)
 	{
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
+			if (entities[i] != nullptr && entities[i]->GetCollider() == c1)
 			{
-				enemies[i]->original_pos.x -= distance;
+				entities[i]->original_pos.x -= distance;
 			}
 		}
 	}
@@ -217,9 +217,9 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2, int distance)
 	{
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
+			if (entities[i] != nullptr && entities[i]->GetCollider() == c1)
 			{
-				enemies[i]->original_pos.x += 1;
+				entities[i]->original_pos.x += 1;
 			}
 		}
 	}

@@ -42,7 +42,7 @@ public:
 public:
 
 	bool draw_underlayed = false;
-	Entity* enemies[MAX_ENEMIES];
+	Entity* entities[MAX_ENEMIES];
 	bool boss_death = false;
 
 private:

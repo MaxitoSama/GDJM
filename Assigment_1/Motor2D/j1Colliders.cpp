@@ -189,9 +189,9 @@ bool j1Colliders::Update(float dt)
 
 			for (uint i = 0; i < MAX_ENEMIES; ++i)
 			{
-				if (App->entities->enemies[i] != nullptr)
+				if (App->entities->entities[i] != nullptr)
 				{
-					if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2, App->entities->enemies[i]->speed.x) == true)
+					if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2, App->entities->entities[i]->speed.x) == true)
 					{
 						App->entities->OnCollision(c2, c1, distance_2);
 					}
@@ -259,9 +259,9 @@ void j1Colliders::DebugDraw()
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (App->entities->enemies[i] != nullptr)
+			if (App->entities->entities[i] != nullptr)
 			{
-				App->pathfinding->DrawPath(App->entities->enemies[i]->Enemypath);
+				App->pathfinding->DrawPath(App->entities->entities[i]->Enemypath);
 			}
 		}
 	}
