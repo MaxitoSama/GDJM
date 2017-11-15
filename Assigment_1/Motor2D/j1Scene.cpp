@@ -44,8 +44,10 @@ bool j1Scene::Start()
 		App->audio->PlayMusic("audio/music/map1_music.ogg");
 		App->map->Draw_Colliders();
 		App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
+
 		//enemies
 		App->enemies->AddEnemy(ZOMBIE, 1500, 0);
+		App->enemies->AddEnemy(ZOMBIE, 11398, 245); 
 		App->colliders->AddCollider({ 32,600,32,1 }, COLLIDER_FLOOR, this);
 		App->colliders->AddCollider({ 64,600,32,1 }, COLLIDER_FLOOR, this);
 		App->enemies->AddEnemy(PLANE, 1500, 100);
@@ -67,6 +69,8 @@ bool j1Scene::Start()
 
 		App->player->Curr_map = 2;
 		//App->enemies->AddEnemy(ZOMBIE, 10, 10);
+		App->enemies->AddEnemy(ZOMBIE, 20076,284);
+		App->enemies->AddEnemy(ZOMBIE, 19088, 60);
 	}
 
 	return true;
