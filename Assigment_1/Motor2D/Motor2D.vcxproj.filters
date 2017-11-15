@@ -7,9 +7,6 @@
     <ClCompile Include="j1Colliders.cpp">
       <Filter>Developement  ========\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="j1Enemies.cpp">
-      <Filter>Developement  ========\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="j1Input.cpp">
       <Filter>Developement  ========\Modules</Filter>
     </ClCompile>
@@ -52,9 +49,6 @@
     <ClCompile Include="p2Log.cpp">
       <Filter>Programming  2 =======</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Developement  ========\Modules\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy_Plane.cpp">
       <Filter>Developement  ========\Modules\Enemy</Filter>
     </ClCompile>
@@ -67,15 +61,21 @@
     <ClCompile Include="j1Main.cpp">
       <Filter>Developement  ========</Filter>
     </ClCompile>
+    <ClCompile Include="j1Entities.cpp">
+      <Filter>Developement  ========\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Developement  ========\Modules\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Developement  ========\Modules\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Audio.h">
       <Filter>Developement  ========\Modules</Filter>
     </ClInclude>
     <ClInclude Include="j1Colliders.h">
-      <Filter>Developement  ========\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="j1Enemies.h">
       <Filter>Developement  ========\Modules</Filter>
     </ClInclude>
     <ClInclude Include="j1Input.h">
@@ -147,9 +147,6 @@
     <ClInclude Include="p2Animation.h">
       <Filter>Programming  2 =======</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Developement  ========\Modules\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy_Plane.h">
       <Filter>Developement  ========\Modules\Enemy</Filter>
     </ClInclude>
@@ -161,6 +158,15 @@
     </ClInclude>
     <ClInclude Include="j1Module.h">
       <Filter>Developement  ========</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Entities.h">
+      <Filter>Developement  ========\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Developement  ========\Modules\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Developement  ========\Modules\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1Map.h"
-#include "j1Enemies.h"
+#include "j1Entities.h"
 #include "j1PathFinding.h"
 
 j1PathFinding::j1PathFinding() : j1Module(), path(DEFAULT_PATH_LENGTH), width(0), height(0)

@@ -1,11 +1,11 @@
 #ifndef __PLANE_H__
 #define __PLANE_H__
 
-#include "Enemy.h"
+#include "Entity.h"
 #include "p2Path.h"
 #include "j1Particle.h"
 
-class Enemy_Plane : public Enemy
+class Enemy_Plane : public Entity
 {
 public:
 

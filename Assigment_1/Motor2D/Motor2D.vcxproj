@@ -76,11 +76,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Enemy_Plane.cpp" />
     <ClCompile Include="Enemy_Zombie.cpp" />
     <ClCompile Include="j1Colliders.cpp" />
-    <ClCompile Include="j1Enemies.cpp" />
+    <ClCompile Include="j1Entities.cpp" />
     <ClCompile Include="j1Main.cpp" />
     <ClCompile Include="j1App.cpp" />
     <ClCompile Include="j1Audio.cpp" />
@@ -97,14 +97,15 @@
     <ClCompile Include="j1Render.cpp" />
     <ClCompile Include="j1Textures.cpp" />
     <ClCompile Include="j1Window.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Enemy_Plane.h" />
     <ClInclude Include="Enemy_Zombie.h" />
     <ClInclude Include="j1Colliders.h" />
-    <ClInclude Include="j1Enemies.h" />
+    <ClInclude Include="j1Entities.h" />
     <ClInclude Include="j1Map.h" />
     <ClInclude Include="j1Particle.h" />
     <ClInclude Include="j1Pathfinding.h" />
@@ -129,6 +130,7 @@
     <ClInclude Include="j1Window.h" />
     <ClInclude Include="p2PQueue.h" />
     <ClInclude Include="p2SString.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
   </ItemGroup>
@@ -136,7 +138,9 @@
     <Xml Include="..\Game\config.xml">
       <SubType>Designer</SubType>
     </Xml>
-    <Xml Include="..\Game\save_game.xml" />
+    <Xml Include="..\Game\save_game.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Game\maps\test1.tmx" />

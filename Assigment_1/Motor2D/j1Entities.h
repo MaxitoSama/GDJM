@@ -11,11 +11,12 @@
 enum ENEMY_TYPES
 {
 	NO_TYPE,
+	PLAYER,
 	ZOMBIE,
 	PLANE
 };
 
-class Enemy;
+class Entity;
 
 struct EnemyInfo
 {
@@ -23,12 +24,12 @@ struct EnemyInfo
 	int x, y, wave, id;
 };
 
-class j1Enemies : public j1Module
+class j1Entities : public j1Module
 {
 public:
 
-	j1Enemies();
-	~j1Enemies();
+	j1Entities();
+	~j1Entities();
 
 	bool Start();
 	bool PreUpdate();
@@ -42,7 +43,7 @@ public:
 public:
 
 	bool draw_underlayed = false;
-	Enemy* enemies[MAX_ENEMIES];
+	Entity* entities[MAX_ENEMIES];
 	bool boss_death = false;
 
 private:

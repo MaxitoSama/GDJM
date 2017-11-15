@@ -9,7 +9,7 @@
 struct SDL_Texture;
 struct Collider;
 
-class Enemy
+class Entity
 {
 protected:
 	Animation* animation = nullptr;
@@ -57,6 +57,7 @@ public:
 
 	
 	float scale;
+	fPoint speed;
 	int colliderXsize;
 	int initial_pos;
 	bool left;
@@ -68,8 +69,8 @@ public:
 
 public:
 	
-	Enemy(int x, int y);
-	virtual ~Enemy();
+	Entity(int x, int y);
+	virtual ~Entity();
 
 	const Collider* GetCollider() const;
 

@@ -1,11 +1,11 @@
 #ifndef __ZOMBIE_H__
 #define __ZOMBIE_H__
 
-#include "Enemy.h"
+#include "Entity.h"
 #include "p2Path.h"
 #include "j1Particle.h"
 
-class Enemy_Zombie : public Enemy
+class Enemy_Zombie : public Entity
 {
 public:
 
