@@ -77,7 +77,7 @@ public:
 	uint			win_scale;
 	uint			acceleration;
 	uint			gravity;
-
+	SDL_Rect		slide_rect;
 	
 	
 	LastDirection	player_last_direction;
