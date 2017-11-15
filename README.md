@@ -7,6 +7,8 @@ Marc: [Github](https://github.com/MaxitoSama)
 
 ## Information about the game.
 Ninja's Path
+
+Short 2D platform game with enemies that make pathfinding.
 There are two types of controls.
 
 For gameplay:
@@ -14,6 +16,7 @@ For gameplay:
  - Right 			= "A"
  - Slide 			= "S + A/D"
  - Jump  			= "Space"
+ - Sprint			= "A/D + Left Shift"
  - Music Volume Up 		= "+"
  - Music Volume Down 		= "-"
  - Save  			= "F5"
@@ -23,9 +26,10 @@ For Testing:
  - First Scene     		= "F1"
  - Start of Scene 		= "F2"
  - See Colliders 		= "F3"
-
-We used the Save and Load buttons as a mechanic to be able to progress
-through the game.
+ - Create Path			= "F8"
+ - Save				= "F5"
+ - Load				= "F6"
+ - God Mode			= "F10"
 
 
 ## Github Link
