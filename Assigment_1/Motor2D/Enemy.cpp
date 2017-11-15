@@ -39,15 +39,9 @@ void Enemy::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 	if (animation != nullptr)
 	{
 		sprites = NormalSprite;
-
-		if (direction < 0)
-		{
-			App->render->Blit(sprites, position.x + ColliderPosition, position.y, &(animation->GetCurrentFrame()), direction, 1.0f);
-		}
-		else
-		{
-			App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()), direction, 1.0f);
-		}
+		
+		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()), direction, 1.0f);
+		
 	}
 }
 
@@ -70,10 +64,4 @@ void Enemy::OnCollision(Collider* collider)
 void Enemy::DeadAnim()
 {
 	animation = nullptr;
-}
-
-
-void Enemy::Drop()
-{
-
 }

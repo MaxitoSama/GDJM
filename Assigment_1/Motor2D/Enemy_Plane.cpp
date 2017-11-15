@@ -74,21 +74,21 @@ void Enemy_Plane::Move()
 	{
 		animation = &moving;
 
-		if (original_pos.x<(float)initial_pos + 100 && right == true)
+		if (original_pos.x<(float)initial_pos + 200 && right == true)
 		{
-			original_pos.x += 1;
+			original_pos.x += 10;
 			scale = 0.4;
-			if (original_pos.x >= (float)initial_pos + 100)
+			if (original_pos.x >= (float)initial_pos + 200)
 			{
 				left = true;
 				right = false;
 			}
 		}
-		if (original_pos.x>(float)initial_pos - 100 && left == true)
+		if (original_pos.x>(float)initial_pos - 200 && left == true)
 		{
-			original_pos.x -= 1;
+			original_pos.x -= 10;
 			scale = -0.4;
-			if (original_pos.x <= (float)initial_pos - 100)
+			if (original_pos.x <= (float)initial_pos - 200)
 			{
 				left = false;
 				right = true;
@@ -103,24 +103,24 @@ void Enemy_Plane::Move()
 		{
 			if (App->player->position.x < enemyposition.x)
 			{
-				speed.x = -4;
+				speed.x = -8;
 				scale = -0.4f;
 			}
 			
 			else
 			{
-				speed.x = 4;
+				speed.x = 8;
 				scale = 0.4f;
 			}
 			
 			if (App->player->position.y < enemyposition.y)
 			{
-				speed.y = -1;
+				speed.y = -8;
 			}
 			
 			else
 			{
-				speed.y = 1;
+				speed.y = 8;
 			}
 
 			iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);
@@ -151,9 +151,4 @@ void Enemy_Plane::DeadAnim()
 {
 	animation = &dead;
 	position.y += 0.2f; //Perque es mogui a la mateixa velocitat que l'overlay
-}
-
-void Enemy_Plane::Drop()
-{
-	//App->powerup->AddPowerUp(UPGRADE, App->render->camera.x + position.x, App->render->camera.y + position.y);
 }
