@@ -64,6 +64,7 @@ public:
 	bool right;
 	
 	Collider* collider = nullptr;
+	Collider* collider_feet = nullptr;
 	int collision_distance_1;
 	
 
@@ -73,6 +74,7 @@ public:
 	virtual ~Entity();
 
 	const Collider* GetCollider() const;
+	const Collider* GetColliderFloor() const;
 
 	p2DynArray<iPoint>	Enemypath;
 	uint				pathcounter = 0;

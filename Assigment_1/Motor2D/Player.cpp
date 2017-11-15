@@ -175,8 +175,8 @@ Player::Player(int x, int y) : Entity(x, y)
 	
 
 	LOG("Loading Player Collider");
-	collider = App->colliders->AddCollider({ position.x, position.y, 200 / 2, 332 / 2 }, COLLIDER_PLAYER, (j1Module*)App->entities);
-	collider_feet = App->colliders->AddCollider({ (position.x + (263 / 4) - 54), position.y + (310 / 2) - 1, 64, 10 }, COLLIDER_FEET, (j1Module*)App->entities);
+	collider = App->colliders->AddCollider({ (int)original_pos.x, (int)original_pos.y, 200 / 2, 332 / 2 }, COLLIDER_PLAYER, (j1Module*)App->entities);
+	collider_feet = App->colliders->AddCollider({ ((int)original_pos.x + (263 / 4) - 54), (int)original_pos.y + (310 / 2) - 1, 64, 10 }, COLLIDER_FEET, (j1Module*)App->entities);
 
 	//Init Screen vars----------------------------------------------------
 	win_width = App->win->screen_surface->w;
@@ -188,7 +188,16 @@ Player::Player(int x, int y) : Entity(x, y)
 	colliderXsize = 100;
 	scale = 0.5f;
 	colliderXsize = 120;
+	velocity = 1000;
+	gravity = 500;
 	initial_pos = original_pos.x;
+	jump_height= 300;
+	jump_vel= 1000;
+	accel_counter=10;
+	slide_counter=0;
+
+	Jump = false;
+	fall = false;
 }
 
 
@@ -213,24 +222,24 @@ void Player::Move(float dt)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
 		{
-			if (position.x >= 0)
+			if (original_pos.x >= 0)
 			{
 
-				speed = -(velocity + Acceleration_Method())*dt;
-				position.x += speed;
+				speed.x = -(velocity + Acceleration_Method())*dt;
+				original_pos.x += speed.x;
 				Acceleration_Method();
 			}
 
-			if (current_animation != &left && !Jump)
+			if (animation != &left && !Jump)
 			{
 				left.Reset();
-				current_animation = &left;
+				animation = &left;
 				player_last_direction = LEFT;
 			}
 		}
 		else
 		{
-			current_animation = &idle_left;
+			animation = &idle_left;
 		}
 
 	}
@@ -240,24 +249,24 @@ void Player::Move(float dt)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE)
 		{
-			if (position.x < 25600)
+			if (original_pos.x < 25600)
 			{
-				speed = (velocity + Acceleration_Method())*dt;
-				position.x += speed;
+				speed.x = (velocity + Acceleration_Method())*dt;
+				original_pos.x += speed.x;
 				Acceleration_Method();
 			}
 
 
-			if (current_animation != &right && !Jump)
+			if (animation != &right && !Jump)
 			{
 				right.Reset();
-				current_animation = &right;
+				animation = &right;
 				player_last_direction = RIGHT;
 			}
 		}
 		else
 		{
-			current_animation = &idle_right;
+			animation = &idle_right;
 		}
 
 	}
@@ -268,47 +277,47 @@ void Player::Move(float dt)
 
 		acceleration = 1;
 		accel_counter = 0;
-		speed = 4;
+		speed.x = 4;
 	}
 
 	//SLIDING_RIGHT--------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
 	{
-		if (speed > 0)
+		if (speed.x > 0)
 		{
 			Slide_Method(dt);
-			position.x += speed;
-			if (current_animation != &slide_right && !Jump)
+			original_pos.x += speed.x;
+			if (animation != &slide_right && !Jump)
 			{
 				slide_right.Reset();
-				current_animation = &slide_right;
+				animation = &slide_right;
 				player_last_direction = RIGHT;
 			}
 		}
 
 		else
 		{
-			current_animation = &idle_right;
+			animation = &idle_right;
 		}
 	}
 
 	//SLIDING_LEFT----------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
 	{
-		if (speed < 0 && position.x >= 0)
+		if (speed.x < 0 && original_pos.x >= 0)
 		{
 			Slide_Method(dt);
-			position.x += speed;
-			if (current_animation != &slide_left && !Jump)
+			original_pos.x += speed.x;
+			if (animation != &slide_left && !Jump)
 			{
 				slide_left.Reset();
-				current_animation = &slide_left;
+				animation = &slide_left;
 				player_last_direction = LEFT;
 			}
 		}
 		else
 		{
-			current_animation = &idle_left;
+			animation = &idle_left;
 		}
 	}
 
@@ -316,7 +325,7 @@ void Player::Move(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
 	{
 
-		current_animation = &death;
+		animation = &death;
 		player_last_direction = DEATH;
 	}
 
@@ -326,27 +335,27 @@ void Player::Move(float dt)
 		App->audio->PlayFx(1);
 		if (!Jump)
 		{
-			Pos_jump = position.y - jump_height;
+			Pos_jump = original_pos.y - jump_height;
 			gravity = 500;
 			Jump = true;
 		}
 
 		if (player_last_direction == RIGHT)
 		{
-			if (current_animation != &jump_right)
+			if (animation != &jump_right)
 			{
 				jump_right.Reset();
-				current_animation = &jump_right;
+				animation = &jump_right;
 				player_last_direction = RIGHT;
 			}
 		}
 
 		if (player_last_direction == LEFT)
 		{
-			if (current_animation != &jump_left)
+			if (animation != &jump_left)
 			{
 				jump_left.Reset();
-				current_animation = &jump_left;
+				animation = &jump_left;
 				player_last_direction = LEFT;
 			}
 		}
@@ -357,15 +366,15 @@ void Player::Move(float dt)
 	{
 		if (!Jump)
 		{
-			Pos_jump = position.y - jump_height;
+			Pos_jump = original_pos.y - jump_height;
 			gravity = 500;
 			Jump = true;
 		}
 
-		if (current_animation != &jump_right)
+		if (animation != &jump_right)
 		{
 			jump_right.Reset();
-			current_animation = &jump_right;
+			animation = &jump_right;
 			player_last_direction = RIGHT;
 		}
 
@@ -375,24 +384,24 @@ void Player::Move(float dt)
 	{
 		if (!Jump)
 		{
-			Pos_jump = position.y - jump_height;
+			Pos_jump = original_pos.y - jump_height;
 			Jump = true;
 		}
 
-		if (current_animation != &jump_left)
+		if (animation != &jump_left)
 		{
 			jump_left.Reset();
-			current_animation = &jump_left;
+			animation = &jump_left;
 			player_last_direction = LEFT;
 		}
 
 	}
 
-	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+	/*if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 	{
 		App->particles->bullet.speed.y = -01.0f;
-		App->particles->AddParticle(App->particles->bullet, position.x, position.y, COLLIDER_FEET);
-	}
+		App->particles->AddParticle(App->particles->bullet, original_pos.x, original_pos.y, COLLIDER_FEET);
+	}*/
 
 	//Call Jump_Method-----------------------------------------
 	Jump_Method(dt);
@@ -407,16 +416,16 @@ void Player::Move(float dt)
 		switch (player_last_direction)
 		{
 		case Player::UP:
-			current_animation = &idle_right;
+			animation = &idle_right;
 			break;
 		case Player::DOWN:
-			current_animation = &idle_right;
+			animation = &idle_right;
 			break;
 		case Player::LEFT:
-			current_animation = &idle_left;
+			animation = &idle_left;
 			break;
 		case Player::RIGHT:
-			current_animation = &idle_right;
+			animation = &idle_right;
 			break;
 		default:
 			break;
@@ -424,37 +433,37 @@ void Player::Move(float dt)
 	}
 
 	//Player Colliders Position--------------------------------
-	collider->SetPos(position.x, position.y);
+	//collider->SetPos(original_pos.x, original_pos.y);
+	
 	if ((App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		collider->rect = slide_rect = { position.x, position.y + 40, 200 / 2, 150 };
+		collider->rect = slide_rect = { (int)original_pos.x, (int)original_pos.y + 40, 200 / 2, 150 };
 	}
 	else
 	{
-		SDL_Rect idle_rect = { position.x, position.y, 200 / 2,332 / 2 };
+		SDL_Rect idle_rect = { original_pos.x, original_pos.y, 200 / 2,332 / 2 };
 		collider->rect = idle_rect;
 	}
 
-	collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (310 / 2) - 1);
-
-	LOG("player position %d", position.x);
+	position = original_pos;
+	LOG("player position %f", original_pos.x);
 
 }
 
 void Player::Jump_Method(float dt)
 {
 	if (!Jump) {
-		position.y += gravity*dt;
+		original_pos.y += gravity*dt;
 	}
 
-	if (Jump == true && position.y != Pos_jump)
+	if (Jump == true && original_pos.y != Pos_jump)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 		{
-			position.y -= jump_vel*dt;
+			original_pos.y -= jump_vel*dt;
 		}
 
-		if (position.y <= Pos_jump || App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+		if (original_pos.y <= Pos_jump || App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 		{
 			gravity = 500;
 			Jump = false;
@@ -485,13 +494,13 @@ void Player::Slide_Method(float dt)
 
 
 	slide_counter += 1;
-	if (slide_counter % 10 == 0 && speed >= 0)
+	if (slide_counter % 10 == 0 && speed.x >= 0)
 	{
-		speed -= 100 * dt;
+		speed.x -= 100 * dt;
 	}
-	if (slide_counter % 10 == 0 && speed <= 0)
+	if (slide_counter % 10 == 0 && speed.x <= 0)
 	{
-		speed += 100 * dt;
+		speed.x += 100 * dt;
 	}
 }
 

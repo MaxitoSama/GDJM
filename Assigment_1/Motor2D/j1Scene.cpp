@@ -46,7 +46,7 @@ bool j1Scene::Start()
 		App->map->Draw_Colliders();
 		App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
 
-		App->entities->AddEnemy(PLAYER, 10, 0);
+		//App->entities->AddEnemy(PLAYER, 10, 0);
 
 		//enemies
 		App->entities->AddEnemy(ZOMBIE, 1500, 0);

@@ -426,11 +426,11 @@ bool j1Player::Update(float dt)
 
 	}
 
-	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+	/*if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 	{
 		App->particles->bullet.speed.y = -01.0f;
 		App->particles->AddParticle(App->particles->bullet, position.x, position.y,COLLIDER_FEET);
-	}
+	}*/
 	
 	//Call Jump_Method-----------------------------------------
 	Jump_Method(dt);

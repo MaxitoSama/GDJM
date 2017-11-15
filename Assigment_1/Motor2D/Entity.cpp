@@ -25,6 +25,11 @@ const Collider* Entity::GetCollider() const
 {
 	return collider;
 }
+const Collider* Entity::GetColliderFloor() const 
+{
+	return collider_feet;
+}
+
 
 void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 {
@@ -33,6 +38,11 @@ void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 	if (collider != nullptr)
 	{
 		collider->SetPos(position.x, position.y);
+	}
+
+	if (collider_feet != nullptr)
+	{
+		collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (310 / 2) - 1);
 	}
 		
 

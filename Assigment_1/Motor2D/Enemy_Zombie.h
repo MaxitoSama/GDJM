@@ -23,7 +23,6 @@ public:
 
 	char* shot_path;
 	//particle_type shoot;
-	Particle* big_shoot;
 };
 
 #endif
