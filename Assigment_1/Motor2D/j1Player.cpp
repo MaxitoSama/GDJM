@@ -214,6 +214,7 @@ bool j1Player::Start()
 	LOG("Loading Player Sheet");
 
 	graphics = App->tex->Load("assets/character/character.png");
+	godmode = App->tex->Load("assets/character/god_mode.png");
 
 	LOG("Loading Player Collider");
 	collider_player = App->colliders->AddCollider({ position.x, position.y, 200/2, 332/2 }, COLLIDER_PLAYER, this);
@@ -223,6 +224,7 @@ bool j1Player::Start()
 	win_width = App->win->screen_surface->w;
 	win_height = App->win->screen_surface->h;
 	win_scale = App->win->GetScale();
+	GOD = false;
 
 	return true;
 }
@@ -232,6 +234,7 @@ bool j1Player::CleanUp()
 {
 	LOG("Unloading player Sheet");
 	App->tex->UnLoad(graphics);
+	App->tex->UnLoad(godmode);
 
 	LOG("Destroying Player Collider");
 	if (collider_feet != nullptr)
@@ -424,6 +427,23 @@ bool j1Player::Update(float dt)
 			player_last_direction = LEFT;
 		}
 
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		if (!GOD)
+		{
+			GOD = true;
+		}
+		else
+		{
+			GOD = false;
+		}
+	}
+
+	if (GOD)
+	{
+		App->render->Blit(godmode, position.x+20, position.y-15);
 	}
 
 	/*if (App->input->GetMouseButtonDown(1) == KEY_DOWN)

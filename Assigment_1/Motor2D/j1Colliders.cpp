@@ -182,7 +182,7 @@ bool j1Colliders::Update(float dt)
 				App->entities->OnCollision(c2, c1, distance_1);
 			}
 			
-			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2, App->player->speed) == true)
+			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2, App->player->speed) == true && !App->player->GOD)
 			{
 				App->player->position.x = 60;
 				App->player->position.y = 215;
