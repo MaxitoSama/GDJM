@@ -4,8 +4,8 @@
 #include "j1Render.h"
 #include "j1Colliders.h"
 #include "j1Player.h"
-#include "j1Enemies.h"
-#include "Enemy.h"
+#include "j1Entities.h"
+#include "Entity.h"
 #include "j1Pathfinding.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
@@ -152,7 +152,7 @@ bool j1Colliders::Update(float dt)
 				}
 			}
 
-			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect,distance_2) == true && (App->input->GetKey(SDL_SCANCODE_D )==KEY_REPEAT 
+			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect,distance_2, App->player->speed) == true && (App->input->GetKey(SDL_SCANCODE_D )==KEY_REPEAT
 				|| App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) && App->input->GetKey(SDL_SCANCODE_S)==KEY_IDLE)
 			{
 				App->player->position.x -= distance_2;
@@ -179,25 +179,24 @@ bool j1Colliders::Update(float dt)
 			
 			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect,distance_1,dt) == true)
 			{
-				App->enemies->OnCollision(c2, c1, distance_1);
+				App->entities->OnCollision(c2, c1, distance_1);
 			}
-			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2) == true)
-			{
-				App->enemies->OnCollision(c2, c1, distance_2);
-			}
-	
 			
-		/*	if (c1->CheckCollision(c2->rect) == true)
+			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2, App->player->speed) == true)
 			{
-				if (c1->to_delete == false && c2->to_delete != true) {
-					if (matrix[COLLIDER_ENEMY][COLLIDER_FLOOR] && c1->callback)
-						c1->callback->OnCollision(c2, c1);
-					if (c1->to_delete == false) {
-						if (matrix[c2->type][c1->type] && c2->callback)
-							c2->callback->OnCollision(c2, c1);
+				App->entities->OnCollision(c2, c1, distance_2);
+			}
+
+			for (uint i = 0; i < MAX_ENEMIES; ++i)
+			{
+				if (App->entities->enemies[i] != nullptr)
+				{
+					if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2, App->entities->enemies[i]->speed.x) == true)
+					{
+						App->entities->OnCollision(c2, c1, distance_2);
 					}
 				}
-			}*/
+			}
 		}
 	}
 
@@ -260,9 +259,9 @@ void j1Colliders::DebugDraw()
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (App->enemies->enemies[i] != nullptr)
+			if (App->entities->enemies[i] != nullptr)
 			{
-				App->pathfinding->DrawPath(App->enemies->enemies[i]->Enemypath);
+				App->pathfinding->DrawPath(App->entities->enemies[i]->Enemypath);
 			}
 		}
 	}
@@ -354,26 +353,26 @@ bool Collider::CheckFutureFallColision(const SDL_Rect& r, int& distance, float d
 	return false;
 }
 
-bool Collider::CheckFutureCrashColision(const SDL_Rect& r,int& distance)
+bool Collider::CheckFutureCrashColision(const SDL_Rect& r,int& distance, float speed)
 {
-	if (App->player->speed >0)
+	if (speed >0)
 	{
-		if (rect.x  < r.x + r.w + App->player->speed && rect.x + rect.w > r.x)
+		if (rect.x  < r.x + r.w + speed && rect.x + rect.w > r.x)
 		{
 			if (rect.y < r.y + r.h  && rect.y + rect.h > r.y)
 			{
-				distance = r.x + r.w + App->player->speed - rect.x;
+				distance = r.x + r.w + speed - rect.x;
 				return true;
 			}
 		}
 	}
-	if (App->player->speed <0)
+	if (speed <0)
 	{
-		if (rect.x < r.x + r.w && rect.x + rect.w > r.x+App->player->speed)
+		if (rect.x < r.x + r.w && rect.x + rect.w > r.x+speed)
 		{
 			if (rect.y < r.y + r.h  && rect.y + rect.h > r.y)
 			{
-				distance = r.x-(rect.x + rect.w - App->player->speed);
+				distance = r.x-(rect.x + rect.w -speed);
 				return true;
 			}
 		}

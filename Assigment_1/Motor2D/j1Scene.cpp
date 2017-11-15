@@ -12,7 +12,7 @@
 #include "j1Scene.h"
 #include "j1Scene2.h"
 #include "j1Player.h"
-#include "j1Enemies.h"
+#include "j1Entities.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -46,12 +46,12 @@ bool j1Scene::Start()
 		App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
 
 		//enemies
-		App->enemies->AddEnemy(ZOMBIE, 1500, 0);
-		//App->enemies->AddEnemy(ZOMBIE, 11398, 245); 
+		App->entities->AddEnemy(ZOMBIE, 1500, 0);
+		App->entities->AddEnemy(ZOMBIE, 11398, 245);
 		App->colliders->AddCollider({ 32,600,32,1 }, COLLIDER_FLOOR, this);
 		App->colliders->AddCollider({ 64,600,32,1 }, COLLIDER_FLOOR, this);
-		App->enemies->AddEnemy(PLANE, 1500, 100);
-		App->enemies->AddEnemy(PLANE, 2000, 100);
+		App->entities->AddEnemy(PLANE, 1500, 100);
+		App->entities->AddEnemy(PLANE, 2000, 100);
 		App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
 		App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
 		App->player->Curr_map = 1;
@@ -69,8 +69,8 @@ bool j1Scene::Start()
 
 		App->player->Curr_map = 2;
 		//App->enemies->AddEnemy(ZOMBIE, 10, 10);
-		App->enemies->AddEnemy(ZOMBIE, 20076,284);
-		App->enemies->AddEnemy(ZOMBIE, 19088, 60);
+		App->entities->AddEnemy(ZOMBIE, 20076,284);
+		App->entities->AddEnemy(ZOMBIE, 19088, 60);
 	}
 
 	return true;
@@ -160,7 +160,7 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 	
-	App->enemies->CleanUp();
+	App->entities->CleanUp();
 	App->colliders->CleanUp();
 	App->map->CleanUp();
 	App->pathfinding->CleanUp();

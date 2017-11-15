@@ -9,7 +9,7 @@
 #include "j1Player.h"
 
 
-Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
+Enemy_Zombie::Enemy_Zombie(int x, int y): Entity(x, y)
 {
 	//Open all textures
 	NormalSprite = App->tex->Load("assets/enemies/zombie/zombie.png");
@@ -84,7 +84,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Enemy(x, y)
 	right = true;
 	left = false;
 
-	collider = App->colliders->AddCollider({ (int)(position.x-120), (int)position.y, 120, 360/2 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
+	collider = App->colliders->AddCollider({ (int)(position.x-120), (int)position.y, 120, 360/2 }, COLLIDER_ENEMY, (j1Module*)App->entities);
 }
 
 Enemy_Zombie::~Enemy_Zombie()
@@ -95,10 +95,10 @@ Enemy_Zombie::~Enemy_Zombie()
 void Enemy_Zombie::Move(float dt)
 {
 	iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y };
-	fPoint speed;
+	speed = { 0,500 };
 
 	position = original_pos;
-	original_pos.y += 10;
+	original_pos.y += speed.y*dt;
 	
 	if (abs((int)App->player->position.x - (int)original_pos.x)<=300 && !going)
 	{
@@ -116,7 +116,8 @@ void Enemy_Zombie::Move(float dt)
 
 		if(original_pos.x<(float)initial_pos+150 && right==true)
 		{
-			original_pos.x += 5;
+			speed.x = 250 * dt;
+			original_pos.x += speed.x;
 			scale = 0.5;
 			if (original_pos.x >= (float)initial_pos + 150)
 			{
@@ -126,7 +127,8 @@ void Enemy_Zombie::Move(float dt)
 		}
 		if(original_pos.x>(float)initial_pos - 150 && left == true)
 		{
-			original_pos.x -= 5;
+			speed.x = -250 * dt;
+			original_pos.x +=speed.x;
 			scale = -0.5;
 			if (original_pos.x <= (float)initial_pos - 150)
 			{
@@ -143,22 +145,14 @@ void Enemy_Zombie::Move(float dt)
 		{
 			if (App->player->position.x < enemyposition.x)
 			{
-				speed.x = -8;
+				speed.x = -300*dt;
 				scale = -0.5;
 			}
 			else
 			{
-				speed.x = 8;
+				speed.x = 300*dt;
 				scale = 0.5;
 			}
-			/*if (App->player->position.y < enemyposition.y)
-			{
-				speed.y = -1;
-			}
-			else
-			{
-				speed.y =1;
-			}*/
 			
 			iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);
 				
@@ -166,10 +160,6 @@ void Enemy_Zombie::Move(float dt)
 			{
 				original_pos.x += speed.x;
 			}
-			/*if ((int)original_pos.y != PositiontoGo.y)
-			{
-				original_pos.y += speed.y;
-			}*/
 			
 			if((int)original_pos.x == PositiontoGo.x && (int)original_pos.y == PositiontoGo.y)
 			{

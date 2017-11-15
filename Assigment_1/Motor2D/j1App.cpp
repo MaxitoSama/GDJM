@@ -14,7 +14,7 @@
 #include "j1Particle.h"
 #include "j1Map.h"
 #include "j1Player.h"
-#include "j1Enemies.h"
+#include "j1Entities.h"
 #include "j1App.h"
 #include "j1Timer.h"
 #include "j1PerfTimer.h"
@@ -40,7 +40,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	particles = new j1Particle();
 	map = new j1Map();
 	player = new j1Player();
-	enemies = new j1Enemies();
+	entities = new j1Entities();
 	pathfinding = new j1PathFinding();
 
 	// Ordered for awake / Start / Update
@@ -56,7 +56,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(colliders);
 	AddModule(particles);
 	AddModule(player);
-	AddModule(enemies);
+	AddModule(entities);
 
 	// render last to swap buffer
 	AddModule(render);

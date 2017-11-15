@@ -21,7 +21,7 @@ class j1Colliders;
 class j1Particle;
 class j1Map;
 class j1Player;
-class j1Enemies;
+class j1Entities;
 class j1PathFinding;
 
 class j1App
@@ -98,7 +98,7 @@ public:
 	j1Particle*			particles;
 	j1Map*				map;
 	j1Player*			player;
-	j1Enemies*			enemies;
+	j1Entities*			entities;
 	j1PathFinding*		pathfinding;
 
 	float				dt;

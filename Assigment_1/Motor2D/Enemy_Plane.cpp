@@ -8,7 +8,7 @@
 #include "j1Pathfinding.h"
 #include "j1Player.h"
 
-Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
+Enemy_Plane::Enemy_Plane(int x, int y): Entity(x, y)
 {
 	//Open all textures
 	NormalSprite = App->tex->Load("assets/enemies/plane/plane.png");
@@ -46,7 +46,7 @@ Enemy_Plane::Enemy_Plane(int x, int y): Enemy(x, y)
 	//Add and save collider
 	collider_pos.x = 0;
 	collider_pos.y = 0;
-	collider = App->colliders->AddCollider({ x, y, (639*2)/5, (412*2)/5 }, COLLIDER_ENEMY, (j1Module*)App->enemies);
+	collider = App->colliders->AddCollider({ x, y, (639*2)/5, (412*2)/5 }, COLLIDER_ENEMY, (j1Module*)App->entities);
 }
 
 Enemy_Plane::~Enemy_Plane()
@@ -57,7 +57,6 @@ Enemy_Plane::~Enemy_Plane()
 void Enemy_Plane::Move(float dt)
 {
 	iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y };
-	fPoint speed;
 
 	position = original_pos;
 	//original_pos.y += speed.y;
@@ -76,7 +75,8 @@ void Enemy_Plane::Move(float dt)
 
 		if (original_pos.x<(float)initial_pos + 200 && right == true)
 		{
-			original_pos.x += 10;
+			speed.x = 100 * dt;
+			original_pos.x += speed.x;
 			scale = 0.4;
 			if (original_pos.x >= (float)initial_pos + 200)
 			{
@@ -86,7 +86,8 @@ void Enemy_Plane::Move(float dt)
 		}
 		if (original_pos.x>(float)initial_pos - 200 && left == true)
 		{
-			original_pos.x -= 10;
+			speed.x = -100 * dt;
+			original_pos.x += speed.x;
 			scale = -0.4;
 			if (original_pos.x <= (float)initial_pos - 200)
 			{
@@ -103,24 +104,24 @@ void Enemy_Plane::Move(float dt)
 		{
 			if (App->player->position.x < enemyposition.x)
 			{
-				speed.x = -8;
+				speed.x = -200*dt;
 				scale = -0.4f;
 			}
 			
 			else
 			{
-				speed.x = 8;
+				speed.x = 200*dt;
 				scale = 0.4f;
 			}
 			
 			if (App->player->position.y < enemyposition.y)
 			{
-				speed.y = -8;
+				speed.y = -8*dt;
 			}
 			
 			else
 			{
-				speed.y = 8;
+				speed.y = 8*dt;
 			}
 
 			iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);

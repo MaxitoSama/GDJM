@@ -1,5 +1,5 @@
 #include "j1App.h"
-#include "Enemy.h"
+#include "Entity.h"
 #include "j1Colliders.h"
 #include "j1Particle.h"
 #include "j1Render.h"
@@ -8,12 +8,12 @@
 #include "SDL/include/SDL_timer.h"
 #include "j1Audio.h"
 
-Enemy::Enemy(int x, int y) : position(x, y), original_pos(x, y), collider_pos(0, 0)
+Entity::Entity(int x, int y) : position(x, y), original_pos(x, y), collider_pos(0, 0)
 {
 
 }
 
-Enemy::~Enemy()
+Entity::~Entity()
 {
 	//App->tex->UnLoad(b1);
 
@@ -21,12 +21,12 @@ Enemy::~Enemy()
 		collider->to_delete = true;
 }
 
-const Collider* Enemy::GetCollider() const
+const Collider* Entity::GetCollider() const
 {
 	return collider;
 }
 
-void Enemy::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
+void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 {
 	Red_now = SDL_GetTicks() - Red_Start_time;
 
@@ -45,7 +45,7 @@ void Enemy::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 	}
 }
 
-void Enemy::OnCollision(Collider* collider)
+void Entity::OnCollision(Collider* collider)
 {
 	if (collider->type == COLLIDER_ENEMY)
 	{
@@ -61,7 +61,7 @@ void Enemy::OnCollision(Collider* collider)
 	}
 }
 
-void Enemy::DeadAnim()
+void Entity::DeadAnim()
 {
 	animation = nullptr;
 }
