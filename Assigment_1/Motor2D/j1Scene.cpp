@@ -38,6 +38,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene::Start()
 {
+	
 	if (Map_1)
 	{
 		App->map->Load("Map_1.tmx");
@@ -45,13 +46,15 @@ bool j1Scene::Start()
 		App->map->Draw_Colliders();
 		App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
 
+		App->entities->AddEnemy(PLAYER, 10, 0);
+
 		//enemies
 		App->entities->AddEnemy(ZOMBIE, 1500, 0);
 		App->entities->AddEnemy(ZOMBIE, 11398, 245);
 		App->colliders->AddCollider({ 32,600,32,1 }, COLLIDER_FLOOR, this);
 		App->colliders->AddCollider({ 64,600,32,1 }, COLLIDER_FLOOR, this);
 		App->entities->AddEnemy(PLANE, 1500, 100);
-		App->entities->AddEnemy(PLANE, 2000, 100);
+		//App->entities->AddEnemy(PLANE, 2000, 100);
 		App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
 		App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
 		App->player->Curr_map = 1;

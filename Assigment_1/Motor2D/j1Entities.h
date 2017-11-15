@@ -11,6 +11,7 @@
 enum ENEMY_TYPES
 {
 	NO_TYPE,
+	PLAYER,
 	ZOMBIE,
 	PLANE
 };

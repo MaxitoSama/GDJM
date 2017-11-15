@@ -12,6 +12,7 @@
 //Include all enemies
 #include "Enemy_Zombie.h"
 #include "Enemy_Plane.h"
+#include "Player.h"
 
 #define SPAWN_MARGIN 2000
 
@@ -82,7 +83,7 @@ bool j1Entities::Update(float dt)
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (entities[i] != nullptr && (entities[i]->collider != nullptr) && (entities[i]->collider->type == COLLIDER_ENEMY))
+			if (entities[i] != nullptr && (entities[i]->collider != nullptr) && ((entities[i]->collider->type == COLLIDER_ENEMY)|| (entities[i]->collider->type == COLLIDER_PLAYER)))
 			{
 				entities[i]->Draw(entities[i]->sprites, entities[i]->scale, entities[i]->colliderXsize);
 			}
@@ -169,6 +170,9 @@ void j1Entities::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENEMY_TYPES::PLANE:
 			entities[i] = new Enemy_Plane(info.x, info.y);
+			break;
+		case ENEMY_TYPES::PLAYER:
+			entities[i] = new Player(info.x, info.y);
 			break;
 		}
 	}
