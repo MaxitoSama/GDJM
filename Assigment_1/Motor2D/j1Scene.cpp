@@ -121,7 +121,7 @@ bool j1Scene::Update(float dt)
 	{
 		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;
 	}
-	if (App->player->position.y > dist2 && App->player->position.y <App->player->win_height-50)
+	if (App->player->position.y > dist2 && App->player->position.y <App->player->win_height-50 && !App->win->fullscreen_window)
 	{
 		App->render->camera.y = -App->player->position.y + App->player->win_height / 2;
 	}
