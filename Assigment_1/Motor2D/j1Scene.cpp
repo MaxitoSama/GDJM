@@ -50,6 +50,8 @@ bool j1Scene::Start()
 		App->colliders->AddCollider({ 64,600,32,1 }, COLLIDER_FLOOR, this);
 		App->enemies->AddEnemy(PLANE, 1500, 100);
 		App->enemies->AddEnemy(PLANE, 2000, 100);
+		App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
+		App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
 		App->player->Curr_map = 1;
 	}
 
@@ -61,6 +63,7 @@ bool j1Scene::Start()
 
 		App->colliders->AddCollider({ 25400,0,50,310 }, COLLIDER_WIN2, this);
 		App->colliders->AddCollider({ 18923,0,50,310 }, COLLIDER_WIN2, this);
+		App->colliders->AddCollider({ 21087,828,320,32 }, COLLIDER_DEATH);
 
 		App->player->Curr_map = 2;
 		//App->enemies->AddEnemy(ZOMBIE, 10, 10);
