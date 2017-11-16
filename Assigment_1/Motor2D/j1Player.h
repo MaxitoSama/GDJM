@@ -42,6 +42,7 @@ public:
 	void Jump_Method(float dt);
 	void Slide_Method(float dt);
 	int Acceleration_Method();
+	void DeadAnim();
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;

@@ -34,7 +34,6 @@ public:
 	~Player();
 
 	void Move(float dt);
-	void DeadAnim();
 
 	bool Awake(pugi::xml_node&);
 	bool Start();

@@ -248,6 +248,8 @@ bool j1Player::CleanUp()
 bool j1Player::Update(float dt)
 {
 	BROFILER_CATEGORY("Update_Player ", Profiler::Color::OldLace)
+
+
 	SDL_Event e;
 	
 	//MOVE_LEFT----------------------------------------------------
@@ -447,6 +449,22 @@ bool j1Player::Update(float dt)
 		App->render->Blit(godmode, position.x+20, position.y-15);
 	}
 
+	if (App->player->dead == true)
+	{
+		App->player->gravity = 0;
+		current_animation = &death;
+		if (death.Finished() == true)
+		{
+			gravity = 500;
+			dead = false;
+			App->player->position.x = 60;
+			App->player->position.y = 215;
+			App->render->camera.x = 0;
+			App->render->camera.y = 0;
+			death.Reset();
+		}
+	}
+
 	/*if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 	{
 		App->particles->bullet.speed.y = -01.0f;
@@ -461,7 +479,8 @@ bool j1Player::Update(float dt)
 		&& App->input->GetKey(SDL_SCANCODE_UP) == KEY_IDLE
 		&& App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
 		&& App->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE
-		&& App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+		&& App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE
+		&& dead == false)
 	{
 		switch (player_last_direction)
 		{
@@ -502,6 +521,11 @@ bool j1Player::Update(float dt)
 	//("player position X = %d and Y = %d", position.x, position.y);
 
 	return true;
+}
+
+void j1Player::DeadAnim()
+{
+
 }
 
 // Load / Save

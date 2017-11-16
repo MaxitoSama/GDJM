@@ -162,11 +162,7 @@ bool j1Colliders::Update(float dt)
 
 			if (c1->type == COLLIDER_DEATH && c2->type == COLLIDER_PLAYER && c1->CheckCollision(c2->rect) == true)
 			{
-				App->player->position.x = 60;
-				App->player->position.y = 215;
-				App->render->camera.x = 0;
-				App->render->camera.y = 0;
-				App->player->dead = true;
+				App->player->dead = true;			
 			}
 
 			if (c1->type == COLLIDER_WIN && c2->type == COLLIDER_FEET && c1->CheckCollision(c2->rect) == true)
@@ -186,11 +182,8 @@ bool j1Colliders::Update(float dt)
 			
 			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2, App->player->speed) == true && !App->player->GOD)
 			{
-				App->player->position.x = 60;
-				App->player->position.y = 215;
-				App->render->camera.x = 0;
-				App->render->camera.y = 0;
-				App->player->dead = true;
+
+				App->player->dead = true;				
 			}
 
 			for (uint i = 0; i < MAX_ENEMIES; ++i)

@@ -503,8 +503,3 @@ void Player::Slide_Method(float dt)
 		speed.x += 100 * dt;
 	}
 }
-
-void Player::DeadAnim()
-{
-	
-}
