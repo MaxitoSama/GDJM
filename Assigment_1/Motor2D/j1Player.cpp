@@ -252,203 +252,203 @@ bool j1Player::Update(float dt)
 
 	SDL_Event e;
 	
-	//MOVE_LEFT----------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT  
-		&& App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE 
-		&& !dead)
-	{
-		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
-		{
-			if (position.x >= 0 )
-			{
+	////MOVE_LEFT----------------------------------------------------
+	//if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT  
+	//	&& App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE 
+	//	&& !dead)
+	//{
+	//	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
+	//	{
+	//		if (position.x >= 0 )
+	//		{
 
-				speed = -(velocity+Acceleration_Method())*dt;
-				position.x += speed;
-				Acceleration_Method();
-			}
+	//			speed = -(velocity+Acceleration_Method())*dt;
+	//			position.x += speed;
+	//			Acceleration_Method();
+	//		}
 
-			if (current_animation != &left && !Jump)
-			{
-				left.Reset();
-				current_animation = &left;
-				player_last_direction = LEFT;
-			}
-		}
-		else
-		{
-			current_animation = &idle_left;
-		}
+	//		if (current_animation != &left && !Jump)
+	//		{
+	//			left.Reset();
+	//			current_animation = &left;
+	//			player_last_direction = LEFT;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		current_animation = &idle_left;
+	//	}
 
-	}
+	//}
 
-	//MOVE_RIGHT---------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT 
-		&& App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE 
-		&& !dead)
-	{
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE)
-		{
-			if (position.x < 25600)
-			{
-				speed = (velocity + Acceleration_Method())*dt;
-				position.x += speed;
-				Acceleration_Method();
-			}
+	////MOVE_RIGHT---------------------------------------------------
+	//if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT 
+	//	&& App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE 
+	//	&& !dead)
+	//{
+	//	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE)
+	//	{
+	//		if (position.x < 25600)
+	//		{
+	//			speed = (velocity + Acceleration_Method())*dt;
+	//			position.x += speed;
+	//			Acceleration_Method();
+	//		}
 
 
-			if (current_animation != &right && !Jump)
-			{
-				right.Reset();
-				current_animation = &right;
-				player_last_direction = RIGHT;
-			}
-		}
-		else
-		{
-			current_animation = &idle_right;
-		}
+	//		if (current_animation != &right && !Jump)
+	//		{
+	//			right.Reset();
+	//			current_animation = &right;
+	//			player_last_direction = RIGHT;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		current_animation = &idle_right;
+	//	}
 
-	}
-	
-	//ACCELERATION RESET---------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP 
-		|| App->input->GetKey(SDL_SCANCODE_A) == KEY_UP 
-		|| App->input->GetKey(SDL_SCANCODE_S) == KEY_UP 
-		|| dead)
-	{
+	//}
+	//
+	////ACCELERATION RESET---------------------------------------
+	//if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP 
+	//	|| App->input->GetKey(SDL_SCANCODE_A) == KEY_UP 
+	//	|| App->input->GetKey(SDL_SCANCODE_S) == KEY_UP 
+	//	|| dead)
+	//{
 
-		acceleration = 1; 
-		accel_counter = 0; 
-		speed = 4; 
-	}
+	//	acceleration = 1; 
+	//	accel_counter = 0; 
+	//	speed = 4; 
+	//}
 
-	//SLIDING_RIGHT--------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT 
-		&& App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT 
-		&& !dead)
-	{
-		if (speed > 0)
-		{
-			Slide_Method(dt);
-			position.x += speed;
-			if (current_animation != &slide_right && !Jump)
-			{
-				slide_right.Reset();
-				current_animation = &slide_right;
-				player_last_direction = RIGHT;
-			}
-		}
+	////SLIDING_RIGHT--------------------------------------------
+	//if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT 
+	//	&& App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT 
+	//	&& !dead)
+	//{
+	//	if (speed > 0)
+	//	{
+	//		Slide_Method(dt);
+	//		position.x += speed;
+	//		if (current_animation != &slide_right && !Jump)
+	//		{
+	//			slide_right.Reset();
+	//			current_animation = &slide_right;
+	//			player_last_direction = RIGHT;
+	//		}
+	//	}
 
-		else
-		{
-			current_animation = &idle_right;
-		}		
-	}
+	//	else
+	//	{
+	//		current_animation = &idle_right;
+	//	}		
+	//}
 
-	//SLIDING_LEFT----------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT 
-		&& App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT 
-		&& !dead)
-	{
-		if (speed < 0 && position.x>=0)
-		{
-			Slide_Method(dt);
-			position.x += speed;
-			if (current_animation != &slide_left && !Jump)
-			{
-				slide_left.Reset();
-				current_animation = &slide_left;
-				player_last_direction = LEFT;
-			}
-		}
-		else
-		{
-			current_animation = &idle_left;
-		}
-	}
+	////SLIDING_LEFT----------------------------------------------
+	//if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT 
+	//	&& App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT 
+	//	&& !dead)
+	//{
+	//	if (speed < 0 && position.x>=0)
+	//	{
+	//		Slide_Method(dt);
+	//		position.x += speed;
+	//		if (current_animation != &slide_left && !Jump)
+	//		{
+	//			slide_left.Reset();
+	//			current_animation = &slide_left;
+	//			player_last_direction = LEFT;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		current_animation = &idle_left;
+	//	}
+	//}
 
-	//DEATH ANIMATION TEST
-	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
-	{
-			
-				current_animation = &death;
-				player_last_direction = DEATH;
-	}
+	////DEATH ANIMATION TEST
+	//if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
+	//{
+	//		
+	//			current_animation = &death;
+	//			player_last_direction = DEATH;
+	//}
 
-	//JUMP_ONPLACE----------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN 
-		&& !fall 
-		&& !dead)
-	{
-		App->audio->PlayFx(1);
-		if (!Jump)
-		{
-           	Pos_jump = position.y - jump_height;
-			gravity = 500;
-			Jump = true;
-		}
-		
-		if (player_last_direction == RIGHT)
-		{
-			if (current_animation != &jump_right)
-			{
-				jump_right.Reset();
-				current_animation = &jump_right;
-				player_last_direction = RIGHT;
-			}
-		}
-		
-		if (player_last_direction == LEFT)
-		{
-			if (current_animation != &jump_left)
-			{
-				jump_left.Reset();
-				current_animation = &jump_left;
-				player_last_direction = LEFT;
-			}
-		}
-	}
+	////JUMP_ONPLACE----------------------------------------------
+	//if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN 
+	//	&& !fall 
+	//	&& !dead)
+	//{
+	//	App->audio->PlayFx(1);
+	//	if (!Jump)
+	//	{
+ //          	Pos_jump = position.y - jump_height;
+	//		gravity = 500;
+	//		Jump = true;
+	//	}
+	//	
+	//	if (player_last_direction == RIGHT)
+	//	{
+	//		if (current_animation != &jump_right)
+	//		{
+	//			jump_right.Reset();
+	//			current_animation = &jump_right;
+	//			player_last_direction = RIGHT;
+	//		}
+	//	}
+	//	
+	//	if (player_last_direction == LEFT)
+	//	{
+	//		if (current_animation != &jump_left)
+	//		{
+	//			jump_left.Reset();
+	//			current_animation = &jump_left;
+	//			player_last_direction = LEFT;
+	//		}
+	//	}
+	//}
 
-	//JUMP_RIGHT------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN 
-		&& !fall && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT 
-		&& !dead)
-	{
-		if (!Jump)
-		{
-			Pos_jump = position.y - jump_height;
-			gravity = 500;
-			Jump = true;
-		}
+	////JUMP_RIGHT------------------------------------------------
+	//if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN 
+	//	&& !fall && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT 
+	//	&& !dead)
+	//{
+	//	if (!Jump)
+	//	{
+	//		Pos_jump = position.y - jump_height;
+	//		gravity = 500;
+	//		Jump = true;
+	//	}
 
-		if (current_animation != &jump_right)
-		{
-			jump_right.Reset();
-			current_animation = &jump_right;
-			player_last_direction = RIGHT;
-		}
-		
-	}
-	//JUMP_LEFT-------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN 
-		&& !fall 
-		&& App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT
-		&& !dead)
-	{
-		if (!Jump)
-		{
-			Pos_jump = position.y - jump_height;
-			Jump = true;
-		}
+	//	if (current_animation != &jump_right)
+	//	{
+	//		jump_right.Reset();
+	//		current_animation = &jump_right;
+	//		player_last_direction = RIGHT;
+	//	}
+	//	
+	//}
+	////JUMP_LEFT-------------------------------------------------
+	//if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN 
+	//	&& !fall 
+	//	&& App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT
+	//	&& !dead)
+	//{
+	//	if (!Jump)
+	//	{
+	//		Pos_jump = position.y - jump_height;
+	//		Jump = true;
+	//	}
 
-		if (current_animation != &jump_left)
-		{
-			jump_left.Reset();
-			current_animation = &jump_left;
-			player_last_direction = LEFT;
-		}
+	//	if (current_animation != &jump_left)
+	//	{
+	//		jump_left.Reset();
+	//		current_animation = &jump_left;
+	//		player_last_direction = LEFT;
+	//	}
 
-	}
+	//}
 
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{

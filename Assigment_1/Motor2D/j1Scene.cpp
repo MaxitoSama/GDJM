@@ -13,6 +13,7 @@
 #include "j1Scene2.h"
 #include "j1Player.h"
 #include "j1Entities.h"
+#include "Player.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -132,13 +133,22 @@ bool j1Scene::Update(float dt)
 		LOG("Path created");
 	}
 		
-	if (App->player->position.x > dist1 && App->player->position.x <= 24630)
+	/*if (App->player->position.x > dist1 && App->player->position.x <= 24630)
 	{
 		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;
 	}
 	if (App->player->position.y > dist2 && App->player->position.y <App->player->win_height-50 && !App->win->fullscreen_window)
 	{
 		App->render->camera.y = -App->player->position.y + App->player->win_height / 2;
+	}*/
+
+	if (App->entities->player->original_pos.x > dist1 && App->entities->player->original_pos.x <= 24630)
+	{
+		App->render->camera.x = -App->entities->player->original_pos.x + App->player->win_width / 2;
+	}
+	if (App->entities->player->original_pos.y > dist2 && App->entities->player->original_pos.y <App->player->win_height - 50 && !App->win->fullscreen_window)
+	{
+		App->render->camera.y = -(int)App->entities->player->original_pos.y + App->player->win_height / 2;
 	}
 
 

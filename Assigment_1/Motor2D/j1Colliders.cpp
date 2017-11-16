@@ -6,6 +6,7 @@
 #include "j1Player.h"
 #include "j1Entities.h"
 #include "Entity.h"
+#include "Player.h"
 #include "j1Pathfinding.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
@@ -123,6 +124,8 @@ bool j1Colliders::Update(float dt)
 
 
 	int distance_2;
+	int distance_3;
+	int distance_4;
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -144,11 +147,8 @@ bool j1Colliders::Update(float dt)
 			PlayerFloorCollision(c1, c2, dt);
 
 
-			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER 
-				&& c1->CheckFutureCrashColision(c2->rect,distance_2, App->player->speed) == true 
-				&& (App->input->GetKey(SDL_SCANCODE_D )==KEY_REPEAT
-				|| App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) 
-				&& App->input->GetKey(SDL_SCANCODE_S)==KEY_IDLE)
+			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect,distance_2, App->player->speed) == true 
+				&& (App->input->GetKey(SDL_SCANCODE_D )==KEY_REPEAT|| App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) && App->input->GetKey(SDL_SCANCODE_S)==KEY_IDLE)
 			{
 				App->player->position.x -= distance_2;
 			}
@@ -168,9 +168,9 @@ bool j1Colliders::Update(float dt)
 				App->scene->ChangeScene(60, 215);
 			}
 			
-			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect,distance_1,dt) == true)
+			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect, distance_4,dt, App->player->gravity) == true)
 			{
-				App->entities->OnCollision(c2, c1, distance_1);
+				App->entities->OnCollision(c2, c1, distance_4);
 			}
 			
 			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2, App->player->speed) == true && !App->player->GOD)
@@ -178,6 +178,24 @@ bool j1Colliders::Update(float dt)
 
 				App->player->dead = true;				
 			}
+
+			if ( App->entities->player != nullptr && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect, distance_3, dt, App->entities->player->gravity) == true)
+			{
+				if(c2 == App->entities->player->collider_feet)
+				{
+					App->entities->OnCollision(c2, c1, distance_3);
+					App->entities->player->original_pos.y -= distance_3;
+					App->entities->player->dead = false;
+
+					if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+					{
+						App->entities->player->Jump = false;
+						App->entities->player->fall = false;
+					}
+				}
+				
+			}
+
 
 			for (uint i = 0; i < MAX_ENEMIES; ++i)
 			{
@@ -187,11 +205,6 @@ bool j1Colliders::Update(float dt)
 					{
 						App->entities->OnCollision(c2, c1, distance_2);
 					}
-					
-					/*if (App->entities->entities[i]->collider_feet!=nullptr && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect, distance_1, dt) == true)
-					{
-						App->entities->OnCollision(c2, c1, distance_1);
-					}*/
 				}
 			}
 		}
@@ -277,9 +290,10 @@ bool j1Colliders::checkColisionList(Collider * enemCollider)
 
 void j1Colliders::PlayerFloorCollision(Collider* collider_floor, Collider* collider_feet, float dt)
 {
-	if (collider_floor->type == COLLIDER_FLOOR
+	if (collider_feet!=App->entities->player->collider_feet
+		&&collider_floor->type == COLLIDER_FLOOR
 		&& collider_feet->type == COLLIDER_FEET
-		&& collider_floor->CheckFutureFallColision(collider_feet->rect, distance_1, dt) == true) //en els arguments llargs posar funció
+		&& collider_floor->CheckFutureFallColision(collider_feet->rect, distance_1, dt, App->entities->player->gravity) == true) //en els arguments llargs posar funció
 	{
 		App->player->position.y -= distance_1;
 		App->player->dead = false;
@@ -354,13 +368,13 @@ bool Collider::CheckCollision(const SDL_Rect& r)const
 	return false;
 }
 
-bool Collider::CheckFutureFallColision(const SDL_Rect& r, int& distance, float dt)
+bool Collider::CheckFutureFallColision(const SDL_Rect& r, int& distance, float dt,float speed)
 {
 	if (rect.x < r.x + r.w && rect.x + rect.w > r.x)
 	{
-		if (rect.y < r.y + r.h + App->player->gravity*dt && rect.y && rect.y + rect.h > r.y)
+		if (rect.y < r.y + r.h + 500*dt && rect.y && rect.y + rect.h > r.y)
 		{
-			distance = r.y + r.h + App->player->gravity*dt - rect.y;
+			distance = r.y + r.h + 500*dt - rect.y;
 			return true;
 		}
 	}

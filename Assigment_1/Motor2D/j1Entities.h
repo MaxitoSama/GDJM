@@ -17,6 +17,7 @@ enum ENEMY_TYPES
 };
 
 class Entity;
+class Player;
 
 struct EnemyInfo
 {
@@ -44,7 +45,7 @@ public:
 
 	bool draw_underlayed = false;
 	Entity* entities[MAX_ENEMIES];
-	bool boss_death = false;
+	Player* player;
 
 private:
 
@@ -53,6 +54,7 @@ private:
 private:
 
 	EnemyInfo queue[MAX_ENEMIES];
+	
 
 };
 

@@ -31,6 +31,7 @@ bool j1Entities::Start()
 	LOG("loading enemies");
 	// Create a prototype for each enemy available so we can copy them around
 	//sprites = App->textures->Load("rtype/enemies.png");
+	player = new Player(10, 100);
 
 	return true;
 }
@@ -52,6 +53,7 @@ bool j1Entities::PreUpdate()
 		}
 	}
 
+
 	return true;
 }
 
@@ -59,38 +61,37 @@ bool j1Entities::PreUpdate()
 bool j1Entities::Update(float dt)
 {
 	BROFILER_CATEGORY("Update Entities", Profiler::Color::OrangeRed);
-	if (draw_underlayed)
+	
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		for (uint i = 0; i < MAX_ENEMIES; ++i)
-
-			if (entities[i] != nullptr) entities[i]->Draw(entities[i]->sprites, entities[i]->scale, entities[i]->colliderXsize);
-	}
-	else
-	{
-		for (uint i = 0; i < MAX_ENEMIES; ++i)
+		if (entities[i] != nullptr)
 		{
-			if (entities[i] != nullptr)
-			{
-				entities[i]->Move(dt);
-			}
-		}
-
-		for (uint i = 0; i < MAX_ENEMIES; ++i)
-		{
-			if (entities[i] != nullptr && (entities[i]->collider == nullptr))
-			{
-				entities[i]->Draw(entities[i]->sprites, entities[i]->scale, entities[i]->colliderXsize);
-			}
-		}
-
-		for (uint i = 0; i < MAX_ENEMIES; ++i)
-		{
-			if (entities[i] != nullptr && (entities[i]->collider != nullptr) && ((entities[i]->collider->type == COLLIDER_ENEMY)|| (entities[i]->collider->type == COLLIDER_PLAYER)))
-			{
-				entities[i]->Draw(entities[i]->sprites, entities[i]->scale, entities[i]->colliderXsize);
-			}
+			entities[i]->Move(dt);
 		}
 	}
+
+	if (player != nullptr)
+	{
+		player->Move(dt);
+		player->Draw(player->sprites, player->scale, player->colliderXsize);
+	}
+
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (entities[i] != nullptr && (entities[i]->collider == nullptr))
+		{
+			entities[i]->Draw(entities[i]->sprites, entities[i]->scale, entities[i]->colliderXsize);
+		}
+	}
+
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (entities[i] != nullptr && (entities[i]->collider != nullptr) && ((entities[i]->collider->type == COLLIDER_ENEMY)|| (entities[i]->collider->type == COLLIDER_PLAYER)))
+		{
+			entities[i]->Draw(entities[i]->sprites, entities[i]->scale, entities[i]->colliderXsize);
+		}
+	}
+
 
 	return true;
 }
@@ -203,10 +204,6 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2, int distance)
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
 			if (entities[i] != nullptr && entities[i]->GetCollider() == c1)
-			{
-				entities[i]->original_pos.y -= distance;
-			}
-			if (entities[i] != nullptr && entities[i]->collider_feet != nullptr && entities[i]->GetColliderFloor() == c1)
 			{
 				entities[i]->original_pos.y -= distance;
 			}
