@@ -64,6 +64,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 
 bool j1Audio::Update(float dt)
 {
+	BROFILER_CATEGORY("Update Audio", Profiler::Color::Lavender)
 	bool ret = true;
 
 	Mix_VolumeMusic(music_volume);

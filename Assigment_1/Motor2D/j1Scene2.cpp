@@ -58,12 +58,14 @@ bool j1Scene2::Start()
 // Called each loop iteration
 bool j1Scene2::PreUpdate()
 {
+	BROFILER_CATEGORY("PreUpdate Scene2", Profiler::Color::Aqua)
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene2::Update(float dt)
 {
+	BROFILER_CATEGORY("Update Scene2", Profiler::Color::Bisque)
 	int dist = App->player->win_width / 2;
 
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)

@@ -247,6 +247,7 @@ bool j1Player::CleanUp()
 // Update: draw background
 bool j1Player::Update(float dt)
 {
+	BROFILER_CATEGORY("Update_Player ", Profiler::Color::OldLace)
 	SDL_Event e;
 	
 	//MOVE_LEFT----------------------------------------------------

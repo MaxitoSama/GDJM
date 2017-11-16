@@ -164,7 +164,7 @@ bool j1App::Update()
 		ret = false;
 
 	if(ret == true)
-		ret = PreUpdate();
+		ret = PreUpdate();	
 
 	if(ret == true)
 		ret = DoUpdate();
@@ -252,6 +252,7 @@ void j1App::FinishUpdate()
 // Call modules before each loop iteration
 bool j1App::PreUpdate()
 {
+
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.start;
@@ -274,6 +275,7 @@ bool j1App::PreUpdate()
 // Call modules on each loop iteration
 bool j1App::DoUpdate()
 {
+
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.start;
