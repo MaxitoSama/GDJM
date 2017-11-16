@@ -253,7 +253,9 @@ bool j1Player::Update(float dt)
 	SDL_Event e;
 	
 	//MOVE_LEFT----------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT  && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && !dead)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT  
+		&& App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE 
+		&& !dead)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
 		{
@@ -280,7 +282,9 @@ bool j1Player::Update(float dt)
 	}
 
 	//MOVE_RIGHT---------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT  && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && !dead)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT 
+		&& App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE 
+		&& !dead)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE)
 		{
@@ -307,7 +311,10 @@ bool j1Player::Update(float dt)
 	}
 	
 	//ACCELERATION RESET---------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP || dead)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP 
+		|| App->input->GetKey(SDL_SCANCODE_A) == KEY_UP 
+		|| App->input->GetKey(SDL_SCANCODE_S) == KEY_UP 
+		|| dead)
 	{
 
 		acceleration = 1; 
@@ -316,7 +323,9 @@ bool j1Player::Update(float dt)
 	}
 
 	//SLIDING_RIGHT--------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT 
+		&& App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT 
+		&& !dead)
 	{
 		if (speed > 0)
 		{
@@ -337,7 +346,9 @@ bool j1Player::Update(float dt)
 	}
 
 	//SLIDING_LEFT----------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT 
+		&& App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT 
+		&& !dead)
 	{
 		if (speed < 0 && position.x>=0)
 		{
@@ -365,7 +376,9 @@ bool j1Player::Update(float dt)
 	}
 
 	//JUMP_ONPLACE----------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && !dead)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN 
+		&& !fall 
+		&& !dead)
 	{
 		App->audio->PlayFx(1);
 		if (!Jump)
@@ -397,7 +410,9 @@ bool j1Player::Update(float dt)
 	}
 
 	//JUMP_RIGHT------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN 
+		&& !fall && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT 
+		&& !dead)
 	{
 		if (!Jump)
 		{
@@ -415,7 +430,10 @@ bool j1Player::Update(float dt)
 		
 	}
 	//JUMP_LEFT-------------------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN 
+		&& !fall 
+		&& App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT
+		&& !dead)
 	{
 		if (!Jump)
 		{
@@ -503,7 +521,9 @@ bool j1Player::Update(float dt)
 
 	//Player Colliders Position--------------------------------
 	collider_player->SetPos(position.x, position.y);
-	if ((App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if ((App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT 
+		|| App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) 
+		&& App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		collider_player->rect = slide_rect = { position.x, position.y + 40, 200 / 2, 150 };
 	}
@@ -572,7 +592,8 @@ void j1Player::Jump_Method(float dt)
  			position.y -= jump_vel*dt;
 		}
 		
-		if (position.y <= Pos_jump || App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+		if (position.y <= Pos_jump 
+			|| App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 		{
 			gravity = 500;
 			Jump = false;
