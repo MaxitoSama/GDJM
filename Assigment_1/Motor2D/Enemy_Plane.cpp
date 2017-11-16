@@ -61,6 +61,7 @@ void Enemy_Plane::Move(float dt)
 	position = original_pos;
 	//original_pos.y += speed.y;
 
+
 	if (abs((int)App->player->position.x - (int)original_pos.x) <= 600 && !going)
 	{
 		going = true;

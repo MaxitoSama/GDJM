@@ -201,7 +201,11 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2, int distance)
 		{
 			if (entities[i] != nullptr && entities[i]->GetCollider() == c1)
 			{
-				entities[i]->original_pos.y-= distance;
+				entities[i]->original_pos.y -= distance;
+			}
+			if (entities[i] != nullptr && entities[i]->collider_feet != nullptr && entities[i]->GetColliderFloor() == c1)
+			{
+				entities[i]->original_pos.y -= distance;
 			}
 		}
 	}
