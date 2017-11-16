@@ -117,11 +117,11 @@ bool j1Colliders::PreUpdate()
 // Called before render is available
 bool j1Colliders::Update(float dt)
 {
-	BROFILER_CATEGORY("PreUpdate Colliders ", Profiler::Color::PaleVioletRed)
+	BROFILER_CATEGORY("Update Colliders ", Profiler::Color::PaleVioletRed)
 	Collider* c1;
 	Collider* c2;
 
-	int distance_1;
+
 	int distance_2;
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
@@ -141,18 +141,8 @@ bool j1Colliders::Update(float dt)
 
 			c2 = colliders[k];
 
-			
-			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect, distance_1,dt) == true)
-			{
-				App->player->position.y -= distance_1;
-				App->player->dead = false;
+			PlayerFloorCollision(c1, c2, dt);
 
-				if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
-				{
-					App->player->Jump = false;
-					App->player->fall = false;
-				}
-			}
 
 			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER 
 				&& c1->CheckFutureCrashColision(c2->rect,distance_2, App->player->speed) == true 
@@ -285,6 +275,23 @@ bool j1Colliders::checkColisionList(Collider * enemCollider)
 	return false;
 }
 
+void j1Colliders::PlayerFloorCollision(Collider* collider_floor, Collider* collider_feet, float dt)
+{
+	if (collider_floor->type == COLLIDER_FLOOR
+		&& collider_feet->type == COLLIDER_FEET
+		&& collider_floor->CheckFutureFallColision(collider_feet->rect, distance_1, dt) == true) //en els arguments llargs posar funció
+	{
+		App->player->position.y -= distance_1;
+		App->player->dead = false;
+
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+		{
+			App->player->Jump = false;
+			App->player->fall = false;
+		}
+	}
+}
+
 // Called before quitting
 bool j1Colliders::CleanUp()
 {
@@ -387,3 +394,5 @@ bool Collider::CheckFutureCrashColision(const SDL_Rect& r,int& distance, float s
 	
 	return false;
 }
+
+

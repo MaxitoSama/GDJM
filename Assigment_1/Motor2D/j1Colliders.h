@@ -66,12 +66,15 @@ public:
 	void DebugDraw();
 
 	bool checkColisionList(Collider* enemCollider);
+
+	void PlayerFloorCollision(Collider* collider_floor, Collider* collider_feet, float dt);
 	
 
 private:
 	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 	bool debug = false;
+	int distance_1;
 };
 
 #endif // __ModuleCollision_H__

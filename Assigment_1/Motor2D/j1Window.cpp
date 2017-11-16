@@ -38,8 +38,12 @@ bool j1Window::Awake(pugi::xml_node& config)
 		bool resizable = config.child("resizable").attribute("value").as_bool(false);
 		fullscreen_window = config.child("fullscreen_window").attribute("value").as_bool(false);
 
-		width = config.child("resolution").attribute("width").as_int(640);
-		height = config.child("resolution").attribute("height").as_int(480);
+		SDL_DisplayMode screen_resolution;
+		SDL_GetCurrentDisplayMode(0, &screen_resolution);
+		width = screen_resolution.w;
+		height = screen_resolution.h;
+		//width = config.child("resolution").attribute("width").as_int(640);
+		//height = config.child("resolution").attribute("height").as_int(480);
 		scale = config.child("resolution").attribute("scale").as_int(1);
 
 		if(fullscreen == true)
@@ -75,6 +79,8 @@ bool j1Window::Awake(pugi::xml_node& config)
 			screen_surface = SDL_GetWindowSurface(window);
 		}
 	}
+
+
 
 	return ret;
 }
