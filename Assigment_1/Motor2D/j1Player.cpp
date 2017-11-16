@@ -536,7 +536,7 @@ bool j1Player::Update(float dt)
 	collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (310 / 2)-1);
 
 	// Draw everything ----------------------------------------
-	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),0.5f);
+	//App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),0.5f);
 
 	//("player position X = %d and Y = %d", position.x, position.y);
 

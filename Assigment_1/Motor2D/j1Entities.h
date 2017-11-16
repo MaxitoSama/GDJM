@@ -38,6 +38,8 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2, int distance);
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
 
 	bool AddEnemy(ENEMY_TYPES type, int x, int y, int wave = 1, int id = 0);
 

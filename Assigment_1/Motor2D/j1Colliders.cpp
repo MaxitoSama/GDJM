@@ -147,15 +147,15 @@ bool j1Colliders::Update(float dt)
 			PlayerFloorCollision(c1, c2, dt);
 
 
-			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect,distance_2, App->player->speed) == true 
+			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect,distance_2, App->entities->player->speed.x) == true
 				&& (App->input->GetKey(SDL_SCANCODE_D )==KEY_REPEAT|| App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) && App->input->GetKey(SDL_SCANCODE_S)==KEY_IDLE)
 			{
-				App->player->position.x -= distance_2;
+				App->entities->player->original_pos.x -= distance_2;
 			}
 
 			if (c1->type == COLLIDER_DEATH && c2->type == COLLIDER_PLAYER && c1->CheckCollision(c2->rect) == true)
 			{
-				App->player->dead = true;			
+				App->entities->player->dead = true;
 			}
 
 			if (c1->type == COLLIDER_WIN && c2->type == COLLIDER_FEET && c1->CheckCollision(c2->rect) == true)
@@ -176,7 +176,7 @@ bool j1Colliders::Update(float dt)
 			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2, App->player->speed) == true && !App->player->GOD)
 			{
 
-				App->player->dead = true;				
+				App->entities->player->dead = true;				
 			}
 
 			if ( App->entities->player != nullptr && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect, distance_3, dt, App->entities->player->gravity) == true)
@@ -262,9 +262,7 @@ void j1Colliders::DebugDraw()
 			case COLLIDER_ENEMY: // light blue
 				App->render->DrawQuad(colliders[i]->rect, 100, 206, 250, alpha, false);
 				break;
-				
 			}
-
 		}
 
 		for (uint i = 0; i < MAX_ENEMIES; ++i)

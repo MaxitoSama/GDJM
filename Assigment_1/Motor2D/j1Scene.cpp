@@ -61,7 +61,6 @@ bool j1Scene::Start()
 		//App->entities->AddEnemy(PLANE, 2000, 100);
 		App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
 		App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
-		App->player->Curr_map = 1;
 	}
 
 	if (Map_2)
@@ -74,7 +73,6 @@ bool j1Scene::Start()
 		App->colliders->AddCollider({ 18923,0,50,310 }, COLLIDER_WIN2, this);
 		App->colliders->AddCollider({ 21087,828,320,32 }, COLLIDER_DEATH);
 
-		App->player->Curr_map = 2;
 		//App->enemies->AddEnemy(ZOMBIE, 10, 10);
 		App->entities->AddEnemy(ZOMBIE, 20076,284);
 		App->entities->AddEnemy(ZOMBIE, 19088, 60);
@@ -190,8 +188,8 @@ bool j1Scene::CleanUp()
 //go to the begining
 void j1Scene::StartCurrentScene()
 {
-	App->player->position.x = 60;
-	App->player->position.y = 215;
+	App->entities->player->original_pos.x = 60;
+	App->entities->player->original_pos.y = 215;
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 }
@@ -200,32 +198,34 @@ void j1Scene::StartCurrentScene()
 void j1Scene::ChangeScene(int x, int y)
 {
 	CleanUp();
-	App->player->speed = 0;
 	
-	if (Map_1 && App->player->Curr_map==1)
+	if (Map_1 && App->entities->player->Curr_map==1)
 	{
 		Map_1 = false;
 		Map_2 = true;
 
 		App->scene->Start();
 		App->pathfinding->Start();
-		App->player->position.y = y;
-		App->player->position.x = x;
+		App->entities->player->original_pos.y = y;
+		App->entities->player->original_pos.x = x;
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
-		App->player->Start();
+		App->entities->player->Curr_map = 2;
+		App->entities->player->Start();
 	}
 	else
 	{
 		Map_1 = true;
 		Map_2 = false;
+
 		App->scene->Start();
 		App->pathfinding->Start();
-		App->player->position.y = y;
-		App->player->position.x = x;
+		App->entities->player->original_pos.y = y;
+		App->entities->player->original_pos.x = x;
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
-		App->player->Start();
+		App->entities->player->Curr_map = 1;
+		App->entities->player->Start();
 	}
 	
 }

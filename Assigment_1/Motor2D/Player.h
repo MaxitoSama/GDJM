@@ -36,7 +36,7 @@ public:
 	void Move(float dt);
 
 	bool Awake(pugi::xml_node&);
-	bool Start();
+	void Start();
 	bool Update(float dt);
 	bool CleanUp();
 	void Jump_Method(float dt);

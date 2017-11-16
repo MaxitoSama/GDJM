@@ -31,7 +31,12 @@ bool j1Entities::Start()
 	LOG("loading enemies");
 	// Create a prototype for each enemy available so we can copy them around
 	//sprites = App->textures->Load("rtype/enemies.png");
-	player = new Player(10, 100);
+	if (player == nullptr)
+	{
+		player = new Player(10, 100);
+		player->Start();
+	}
+	
 
 	return true;
 }
@@ -135,6 +140,11 @@ bool j1Entities::CleanUp()
 		}
 	}
 
+	/*if (player != nullptr)
+	{
+		delete player;
+		player = nullptr;
+	}*/
 	return true;
 }
 
@@ -231,4 +241,35 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2, int distance)
 			}
 		}
 	}
+}
+
+bool j1Entities::Load(pugi::xml_node& data)
+{
+	int map = data.child("player").attribute("Map").as_int();
+	int x = data.child("player").attribute("x").as_int();
+	int y = data.child("player").attribute("y").as_int();
+
+	if (player->Curr_map != map)
+	{
+		App->scene->ChangeScene(x, y);
+	}
+
+	else
+	{
+		player->original_pos.x = data.child("player").attribute("x").as_int();
+		player->original_pos.y = data.child("player").attribute("y").as_int();
+	}
+
+	return true;
+}
+
+bool j1Entities::Save(pugi::xml_node& data) const
+{
+	pugi::xml_node playernode = data.append_child("player");
+
+	playernode.append_attribute("x") = player->original_pos.x;
+	playernode.append_attribute("y") = player->original_pos.y;
+	playernode.append_attribute("Map") = player->Curr_map;
+
+	return true;
 }

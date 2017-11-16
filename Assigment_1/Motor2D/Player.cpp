@@ -16,8 +16,6 @@ Player::Player(int x, int y) : Entity(x, y)
 {
 	LOG("Loading Player Sheet");
 
-	NormalSprite = App->tex->Load("assets/character/character.png");
-
 	//IDLE RIGHT----------------------------------------------------
 	{
 		idle_right.PushBack({ 64,111,176,331 });
@@ -169,14 +167,13 @@ Player::Player(int x, int y) : Entity(x, y)
 		death.PushBack({ 2117,2574,349,346 });
 		death.PushBack({ 2468,2574,349,346 });
 		death.loop = false;
-		death.speed = 15.0f;
+		death.speed = 30.0f;
 	}
 
 	
 
 	LOG("Loading Player Collider");
-	collider = App->colliders->AddCollider({ (int)original_pos.x, (int)original_pos.y, 200 / 2, 332 / 2 }, COLLIDER_PLAYER, (j1Module*)App->entities);
-	collider_feet = App->colliders->AddCollider({ ((int)original_pos.x + (263 / 4) - 54), (int)original_pos.y + (310 / 2) - 1, 64, 10 }, COLLIDER_FEET, (j1Module*)App->entities);
+	
 
 	//Init Screen vars----------------------------------------------------
 	win_width = App->win->screen_surface->w;
@@ -195,6 +192,7 @@ Player::Player(int x, int y) : Entity(x, y)
 	jump_vel= 1000;
 	accel_counter=10;
 	slide_counter=0;
+	Curr_map = 1;
 
 	Jump = false;
 	fall = false;
@@ -211,6 +209,24 @@ Player::~Player()
 		collider_feet->to_delete = true;
 	if (collider_player != nullptr)
 		collider_player->to_delete = true;
+}
+
+void Player::Start()
+{
+	LOG("Loading Player Sheet");
+
+	NormalSprite = App->tex->Load("assets/character/character.png");
+	//godmode = App->tex->Load("assets/character/god_mode.png");
+
+	LOG("Loading Player Collider");
+	collider = App->colliders->AddCollider({ (int)original_pos.x, (int)original_pos.y, 200 / 2, 332 / 2 }, COLLIDER_PLAYER, (j1Module*)App->entities);
+	collider_feet = App->colliders->AddCollider({ ((int)original_pos.x + (263 / 4) - 54), (int)original_pos.y + (310 / 2) - 1, 64, 10 }, COLLIDER_FEET, (j1Module*)App->entities);
+
+	//Init Screen vars----------------------------------------------------
+	win_width = App->win->screen_surface->w;
+	win_height = App->win->screen_surface->h;
+	win_scale = App->win->GetScale();
+	//GOD = false;
 }
 
 void Player::Move(float dt)
@@ -397,6 +413,22 @@ void Player::Move(float dt)
 
 	}
 
+	if (dead == true)
+	{
+		gravity = 0;
+		animation = &death;
+		if (death.Finished() == true)
+		{
+			gravity = 500;
+			dead = false;
+			original_pos.x = 60;
+			original_pos.y = 215;
+			App->render->camera.x = 0;
+			App->render->camera.y = 0;
+			death.Reset();
+		}
+	}
+
 	/*if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 	{
 		App->particles->bullet.speed.y = -01.0f;
@@ -446,7 +478,7 @@ void Player::Move(float dt)
 	}
 
 	position = original_pos;
-	LOG("player position %f", original_pos.y);
+	//LOG("player position %f", original_pos.y);
 
 }
 
