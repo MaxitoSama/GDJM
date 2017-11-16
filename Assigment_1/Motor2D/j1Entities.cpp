@@ -37,6 +37,7 @@ bool j1Entities::Start()
 
 bool j1Entities::PreUpdate()
 {
+	BROFILER_CATEGORY("PreUpdate Entities", Profiler::Color::Orange);
 	// check camera position to decide what to spawn
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -57,6 +58,7 @@ bool j1Entities::PreUpdate()
 // Called before render is available
 bool j1Entities::Update(float dt)
 {
+	BROFILER_CATEGORY("Update Entities", Profiler::Color::OrangeRed);
 	if (draw_underlayed)
 	{
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
@@ -95,6 +97,7 @@ bool j1Entities::Update(float dt)
 
 bool j1Entities::PostUpdate()
 {
+	BROFILER_CATEGORY("PostUpdate Entities", Profiler::Color::DarkOrange);
 	// check camera position to decide what to despawn
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{

@@ -101,6 +101,7 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Brofiler\Brofiler.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Enemy_Plane.h" />
     <ClInclude Include="Enemy_Zombie.h" />

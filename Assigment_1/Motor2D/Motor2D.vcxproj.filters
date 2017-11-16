@@ -168,6 +168,9 @@
     <ClInclude Include="Player.h">
       <Filter>Developement  ========\Modules\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Brofiler\Brofiler.h">
+      <Filter>Developement  ========\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Game\config.xml" />

@@ -100,6 +100,7 @@ bool j1Colliders::Awake()
 
 bool j1Colliders::PreUpdate()
 {
+	BROFILER_CATEGORY("PreUpdate Colliders ", Profiler::Color::Red)
 	// Remove all colliders scheduled for deletion
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -116,6 +117,7 @@ bool j1Colliders::PreUpdate()
 // Called before render is available
 bool j1Colliders::Update(float dt)
 {
+	BROFILER_CATEGORY("PreUpdate Colliders ", Profiler::Color::PaleVioletRed)
 	Collider* c1;
 	Collider* c2;
 
