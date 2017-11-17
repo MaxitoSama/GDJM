@@ -80,7 +80,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Entity(x, y)
 	animation = &walking;
 	scale = -0.5;
 	colliderXsize = 120;
-	initial_pos = original_pos.x;
+	initial_pos.x = original_pos.x;
 
 	right = true;
 	left = false;
@@ -115,23 +115,23 @@ void Enemy_Zombie::Move(float dt)
 	{
 		animation = &walking;
 
-		if(original_pos.x<(float)initial_pos+150 && right==true)
+		if(original_pos.x<initial_pos.x+150 && right==true)
 		{
 			speed.x = 250 * dt;
 			original_pos.x += speed.x;
 			scale = 0.5;
-			if (original_pos.x >= (float)initial_pos + 150)
+			if (original_pos.x >= initial_pos.x + 150)
 			{
 				left = true;
 				right = false;
 			}
 		}
-		if(original_pos.x>(float)initial_pos - 150 && left == true)
+		if(original_pos.x>initial_pos.x - 150 && left == true)
 		{
 			speed.x = -250 * dt;
 			original_pos.x +=speed.x;
 			scale = -0.5;
-			if (original_pos.x <= (float)initial_pos - 150)
+			if (original_pos.x <= initial_pos.x - 150)
 			{
 				left = false;
 				right = true;
@@ -170,7 +170,7 @@ void Enemy_Zombie::Move(float dt)
 		if(abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 500)
 		{
 			going = false;
-			initial_pos = original_pos.x;
+			initial_pos.x = original_pos.x;
 		}
 	}
 	

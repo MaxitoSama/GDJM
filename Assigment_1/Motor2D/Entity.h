@@ -37,7 +37,7 @@ public:
 	float scale;
 	fPoint speed;
 	int colliderXsize;
-	int initial_pos;
+	fPoint initial_pos;
 	bool left;
 	bool right;
 	

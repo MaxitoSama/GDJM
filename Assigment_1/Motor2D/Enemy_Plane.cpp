@@ -37,7 +37,8 @@ Enemy_Plane::Enemy_Plane(int x, int y): Entity(x, y)
 	
 	scale = -0.3;
 	colliderXsize = (639 * 2) / 5;
-	initial_pos = original_pos.x;
+	initial_pos.x = original_pos.x;
+	initial_pos.y = original_pos.y;
 	
 	right = true;
 	left = false;
@@ -67,32 +68,31 @@ void Enemy_Plane::Move(float dt)
 	{
 		going = true;
 		iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y + 50 };
-		pathcounter = 0;
 		App->pathfinding->CreatePath(enemyposition, player);
 		App->pathfinding->Path(App->entities->player->original_pos.x, App->entities->player->original_pos.y, Enemypath);
 	}
 
-	if (!going)
+	if (!going && !goback)
 	{
 		animation = &moving;
 
-		if (original_pos.x<(float)initial_pos + 200 && right == true)
+		if (original_pos.x<(float)initial_pos.x + 200 && right == true)
 		{
 			speed.x = 100 * dt;
 			original_pos.x += speed.x;
 			scale = 0.4;
-			if (original_pos.x >= (float)initial_pos + 200)
+			if (original_pos.x >= (float)initial_pos.x + 200)
 			{
 				left = true;
 				right = false;
 			}
 		}
-		if (original_pos.x>(float)initial_pos - 200 && left == true)
+		if (original_pos.x>(float)initial_pos.x - 200 && left == true)
 		{
 			speed.x = -100 * dt;
 			original_pos.x += speed.x;
 			scale = -0.4;
-			if (original_pos.x <= (float)initial_pos - 200)
+			if (original_pos.x <= (float)initial_pos.x - 200)
 			{
 				left = false;
 				right = true;
@@ -100,53 +100,136 @@ void Enemy_Plane::Move(float dt)
 		}
 	}
 
+	/*else if (!going && goback)
+	{
+		if (goback_x)
+		{
+			if (original_pos.x >= initial_pos.x)
+			{
+				original_pos.x -= 320 * dt;
+				scale = -0.4;
+				if (original_pos.x <= initial_pos.x)
+				{
+					goback_x = false;
+				}
+			}
+			else
+			{
+				original_pos.x += 320 * dt;
+				scale = 0.4;
+				if (original_pos.x >= initial_pos.x)
+				{
+					goback_x = false;
+				}
+			}
+		}
+		
+		if (goback_y)
+		{
+			if (original_pos.y > initial_pos.y)
+			{
+				original_pos.y -= 100 * dt;
+				if (original_pos.y <= initial_pos.y)
+				{
+					goback_y = false;
+				}
+			}
+			else
+			{
+				original_pos.y += 100 * dt;
+				if (original_pos.y >= initial_pos.y)
+				{
+					goback_y = false;
+				}
+			}
+		}
+		
+		if (!goback_x && !goback_y)
+		{
+			goback = false;
+		}
+	}*/
+
+
 	else
 	{
 		
 		if (enemyposition.x != (int)App->entities->player->original_pos.x && enemyposition.y != (int)App->entities->player->original_pos.y)
 		{
-			if (App->entities->player->original_pos.x < enemyposition.x)
-			{
-				speed.x = -200*dt;
-				scale = -0.4f;
-			}
-			
-			else
-			{
-				speed.x = 200*dt;
-				scale = 0.4f;
-			}
-			
-			if (App->entities->player->original_pos.y < enemyposition.y)
-			{
-				speed.y = -200*dt;
-			}
-			
-			else
-			{
-				speed.y = 200*dt;
-			}
-
 			iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);
-
-			if ((int)original_pos.x != PositiontoGo.x)
+			if (App->entities->player->original_pos.x<original_pos.x)
 			{
-				original_pos.x += speed.x;
+				scale = -0.4;
 			}
-			if ((int)original_pos.y != PositiontoGo.y)
+			else
 			{
-				original_pos.y += speed.y;
+				scale = 0.4;
+			}
+			if (go_x)
+			{
+				if (PositiontoGo.x < (int)original_pos.x)
+				{
+					speed.x = -200 * dt;
+					original_pos.x += speed.x;
+					if (PositiontoGo.x >= (int)original_pos.x)
+					{
+						go_x = false;
+					}
+				}
+				else
+				{
+					speed.x = 200 * dt;
+					original_pos.x += speed.x;
+					if (PositiontoGo.x <= (int)original_pos.x)
+					{
+						go_x = false;
+					}
+				}
+			}
+			
+			if (go_y)
+			{
+				if (PositiontoGo.y < (int)original_pos.y)
+				{
+					speed.y = -200 * dt;
+					original_pos.y += speed.y;
+					if (PositiontoGo.y >= (int)original_pos.y)
+					{
+						go_y = false;
+					}
+				}
+				else
+				{
+					speed.y = 200 * dt;
+					original_pos.y += speed.y;
+					if (PositiontoGo.y <= (int)original_pos.y)
+					{
+						go_y = false;
+					}
+				}
 			}
 
-			if ((int)original_pos.x == PositiontoGo.x && (int)original_pos.y == PositiontoGo.y)
+			if (!go_y && !go_x)
 			{
 				pathcounter++;
+				if (pathcounter < Enemypath.Count())
+				{
+					go_x = true;
+					go_y = true;
+				}
+				else
+				{
+					going = false;
+					pathcounter = 0;
+				}
 			}
 		}
 		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 500)
 		{
 			going = false;
-			initial_pos = original_pos.x;
+			/*goback = true;
+			goback_x = true;
+			goback_y = true;*/
 		}
 	}
 }

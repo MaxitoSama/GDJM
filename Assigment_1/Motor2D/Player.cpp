@@ -187,7 +187,7 @@ Player::Player(int x, int y) : Entity(x, y)
 	colliderXsize = 120;
 	velocity = 1000.0f;
 	gravity = 500.0f;
-	initial_pos = original_pos.x;
+	initial_pos.x = original_pos.x;
 	jump_height= 300;
 	jump_vel= 1000;
 	accel_counter=10;

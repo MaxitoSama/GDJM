@@ -90,9 +90,6 @@ public:
 	bool			slide = false;
 	bool			GOD = false;
 
-	//Collider*		collider_feet;
-	//iPoint			position;
-	//int				speed;
 private:
 
 	uint		jump_height;

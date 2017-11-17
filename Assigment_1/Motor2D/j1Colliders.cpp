@@ -170,7 +170,7 @@ bool j1Colliders::Update(float dt)
 				App->scene->ChangeScene(60, 215);
 			}
 			
-			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_6, App->entities->player->speed.x) == true && !App->player->GOD)
+			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_6, App->entities->player->speed.x) == true && !App->entities->player->GOD)
 			{
 				App->entities->player->dead = true;				
 			}
