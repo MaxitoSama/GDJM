@@ -40,9 +40,9 @@ struct Collider
 
 	bool CheckCollision(const SDL_Rect& r) const;
 	
-	bool CheckFutureFallColision(const SDL_Rect& r,int& distance,float dt, float speed);
+	bool CheckFutureFallColision(const SDL_Rect& r,float& distance,float dt, float speed);
 
-	bool CheckFutureCrashColision(const SDL_Rect& r, int& distance, float speed);
+	bool CheckFutureCrashColision(const SDL_Rect& r, float& distance, float speed);
 };
 
 class j1Colliders : public j1Module
@@ -74,7 +74,7 @@ private:
 	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 	bool debug = false;
-	int distance_1;
+	float distance_1;
 };
 
 #endif // __ModuleCollision_H__

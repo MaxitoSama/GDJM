@@ -288,13 +288,13 @@ void Player::Move(float dt)
 	}
 
 	//ACCELERATION RESET---------------------------------------
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP || dead)
+	/*if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP || dead)
 	{
 
 		acceleration = 1;
 		accel_counter = 0;
 		speed.x = 4;
-	}
+	}*/
 
 	//SLIDING_RIGHT--------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
@@ -478,7 +478,7 @@ void Player::Move(float dt)
 	}
 
 	position = original_pos;
-	//LOG("player position %f", original_pos.y);
+	LOG("player position %f", original_pos.x);
 
 }
 
@@ -505,9 +505,9 @@ void Player::Jump_Method(float dt)
 }
 
 //Acceleration Method
-int Player::Acceleration_Method()
+float Player::Acceleration_Method()
 {
-	int vel = 0;
+	float vel = 0;
 
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_IDLE || App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{

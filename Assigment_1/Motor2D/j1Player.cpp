@@ -217,9 +217,9 @@ bool j1Player::Start()
 	godmode = App->tex->Load("assets/character/god_mode.png");
 
 	LOG("Loading Player Collider");
-	collider_player = App->colliders->AddCollider({ position.x, position.y, 200/2, 332/2 }, COLLIDER_PLAYER, this);
+	/*collider_player = App->colliders->AddCollider({ position.x, position.y, 200/2, 332/2 }, COLLIDER_PLAYER, this);
 	collider_feet = App->colliders->AddCollider({ (position.x+(263/4)-54), position.y+ (310 / 2)-1, 64, 10 }, COLLIDER_FEET, this);
-
+*/
 	//Init Screen vars----------------------------------------------------
 	win_width = App->win->screen_surface->w;
 	win_height = App->win->screen_surface->h;
@@ -520,7 +520,7 @@ bool j1Player::Update(float dt)
 	}
 
 	//Player Colliders Position--------------------------------
-	collider_player->SetPos(position.x, position.y);
+	/*collider_player->SetPos(position.x, position.y);
 	if ((App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT 
 		|| App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) 
 		&& App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
@@ -531,9 +531,9 @@ bool j1Player::Update(float dt)
 	{
 		SDL_Rect idle_rect = { position.x, position.y, 200 / 2,332 / 2 };
 		collider_player->rect = idle_rect;
-	}	
+	}	*/
 
-	collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (310 / 2)-1);
+	//collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (310 / 2)-1);
 
 	// Draw everything ----------------------------------------
 	//App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()),0.5f);

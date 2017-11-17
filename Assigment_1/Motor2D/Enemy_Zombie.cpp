@@ -173,7 +173,7 @@ void Enemy_Zombie::Move(float dt)
 		}
 	}
 
-	LOG("Zombie pos %f", original_pos.x);
+	//LOG("Zombie pos %f", original_pos.x);
 }
 
 void Enemy_Zombie::DeadAnim()

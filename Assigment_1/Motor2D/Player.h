@@ -41,7 +41,7 @@ public:
 	bool CleanUp();
 	void Jump_Method(float dt);
 	void Slide_Method(float dt);
-	int Acceleration_Method();
+	float Acceleration_Method();
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
@@ -70,7 +70,7 @@ public:
 
 	//int				speed;
 	int				Pos_jump;
-	int				velocity;
+	float			velocity;
 	int				Curr_map;
 	uint			win_width;
 	uint			win_height;

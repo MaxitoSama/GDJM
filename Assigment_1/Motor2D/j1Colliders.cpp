@@ -123,9 +123,11 @@ bool j1Colliders::Update(float dt)
 	Collider* c2;
 
 
-	int distance_2;
-	int distance_3;
-	int distance_4;
+	float distance_2;
+	float distance_3;
+	float distance_4;
+	float distance_5;
+	float distance_6;
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -144,7 +146,7 @@ bool j1Colliders::Update(float dt)
 
 			c2 = colliders[k];
 
-			PlayerFloorCollision(c1, c2, dt);
+			//PlayerFloorCollision(c1, c2, dt);
 
 
 			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect,distance_2, App->entities->player->speed.x) == true
@@ -173,9 +175,8 @@ bool j1Colliders::Update(float dt)
 				App->entities->OnCollision(c2, c1, distance_4);
 			}
 			
-			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2, App->player->speed) == true && !App->player->GOD)
+			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_6, App->player->speed) == true && !App->player->GOD)
 			{
-
 				App->entities->player->dead = true;				
 			}
 
@@ -183,7 +184,7 @@ bool j1Colliders::Update(float dt)
 			{
 				if(c2 == App->entities->player->collider_feet)
 				{
-					App->entities->OnCollision(c2, c1, distance_3);
+					//App->entities->OnCollision(c2, c1, distance_3);
 					App->entities->player->original_pos.y -= distance_3;
 					App->entities->player->dead = false;
 
@@ -197,16 +198,16 @@ bool j1Colliders::Update(float dt)
 			}
 
 
-			for (uint i = 0; i < MAX_ENEMIES; ++i)
+			/*for (uint i = 0; i < MAX_ENEMIES; ++i)
 			{
 				if (App->entities->entities[i] != nullptr)
 				{
-					if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_2, App->entities->entities[i]->speed.x) == true)
+					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_WALL && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_5, App->entities->entities[i]->speed.x) == true)
 					{
-						App->entities->OnCollision(c2, c1, distance_2);
+						App->entities->OnCollision(c2, c1, distance_5);
 					}
 				}
-			}
+			}*/
 		}
 	}
 
@@ -366,20 +367,22 @@ bool Collider::CheckCollision(const SDL_Rect& r)const
 	return false;
 }
 
-bool Collider::CheckFutureFallColision(const SDL_Rect& r, int& distance, float dt,float speed)
+bool Collider::CheckFutureFallColision(const SDL_Rect& r, float& distance, float dt,float speed)
 {
+	speed = speed*dt;
+
 	if (rect.x < r.x + r.w && rect.x + rect.w > r.x)
 	{
-		if (rect.y < r.y + r.h + 500*dt && rect.y && rect.y + rect.h > r.y)
+		if (rect.y < r.y + r.h + speed && rect.y && rect.y + rect.h > r.y)
 		{
-			distance = r.y + r.h + 500*dt - rect.y;
+			distance = r.y + r.h + speed - rect.y;
 			return true;
 		}
 	}
 	return false;
 }
 
-bool Collider::CheckFutureCrashColision(const SDL_Rect& r,int& distance, float speed)
+bool Collider::CheckFutureCrashColision(const SDL_Rect& r, float& distance, float speed)
 {
 	if (speed >0)
 	{
