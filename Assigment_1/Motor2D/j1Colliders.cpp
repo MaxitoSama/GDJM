@@ -150,7 +150,7 @@ bool j1Colliders::Update(float dt)
 
 
 			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect,distance_2, App->entities->player->speed.x) == true
-				&& (App->input->GetKey(SDL_SCANCODE_D )==KEY_REPEAT|| App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) && App->input->GetKey(SDL_SCANCODE_S)==KEY_IDLE)
+				&& (App->input->GetKey(SDL_SCANCODE_D )==KEY_REPEAT|| App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT))
 			{
 				App->entities->player->original_pos.x -= distance_2;
 			}
@@ -170,9 +170,7 @@ bool j1Colliders::Update(float dt)
 				App->scene->ChangeScene(60, 215);
 			}
 			
-			
-			
-			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_6, App->player->speed) == true && !App->player->GOD)
+			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_6, App->entities->player->speed.x) == true && !App->player->GOD)
 			{
 				App->entities->player->dead = true;				
 			}
@@ -193,7 +191,6 @@ bool j1Colliders::Update(float dt)
 				}
 				
 			}
-
 
 			for (uint i = 0; i < MAX_ENEMIES; ++i)
 			{

@@ -450,7 +450,7 @@ bool j1Player::Update(float dt)
 
 	//}
 
-	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	/*if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
 		if (!GOD)
 		{
@@ -465,7 +465,7 @@ bool j1Player::Update(float dt)
 	if (GOD)
 	{
 		App->render->Blit(godmode, position.x+20, position.y-15);
-	}
+	}*/
 
 	if (App->player->dead == true)
 	{

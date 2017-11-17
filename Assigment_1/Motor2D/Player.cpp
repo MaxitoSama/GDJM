@@ -203,6 +203,7 @@ Player::~Player()
 {
 	LOG("Unloading player Sheet");
 	App->tex->UnLoad(NormalSprite);
+	App->tex->UnLoad(godmode);
 
 	LOG("Destroying Player Collider");
 	if (collider_feet != nullptr)
@@ -216,7 +217,7 @@ void Player::Start()
 	LOG("Loading Player Sheet");
 
 	NormalSprite = App->tex->Load("assets/character/character.png");
-	//godmode = App->tex->Load("assets/character/god_mode.png");
+	godmode = App->tex->Load("assets/character/god_mode.png");
 
 	LOG("Loading Player Collider");
 	collider = App->colliders->AddCollider({ (int)original_pos.x, (int)original_pos.y, 200 / 2, 332 / 2 }, COLLIDER_PLAYER, (j1Module*)App->entities);
@@ -286,15 +287,6 @@ void Player::Move(float dt)
 		}
 
 	}
-
-	//ACCELERATION RESET---------------------------------------
-	/*if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP || App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP || dead)
-	{
-
-		acceleration = 1;
-		accel_counter = 0;
-		speed.x = 4;
-	}*/
 
 	//SLIDING_RIGHT--------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !dead)
@@ -413,6 +405,23 @@ void Player::Move(float dt)
 
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		if (!GOD)
+		{
+			GOD = true;
+		}
+		else
+		{
+			GOD = false;
+		}
+	}
+
+	if (GOD)
+	{
+		App->render->Blit(godmode, original_pos.x + 20, original_pos.y - 15);
+	}
+
 	if (dead == true)
 	{
 		gravity = 0;
@@ -466,18 +475,20 @@ void Player::Move(float dt)
 
 	//Player Colliders Position--------------------------------
 	//collider->SetPos(original_pos.x, original_pos.y);
-	
+	position = original_pos;
+
 	if ((App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		collider->rect = slide_rect = { (int)original_pos.x, (int)original_pos.y + 40, 200 / 2, 150 };
+		slide = true;
+		collider->rect.h = 332 / 2 - 40;
 	}
 	else
 	{
-		SDL_Rect idle_rect = { original_pos.x, original_pos.y, 200 / 2,332 / 2 };
-		collider->rect = idle_rect;
+		slide = false;
+		collider->rect.h = 332 / 2;
 	}
 
-	position = original_pos;
+	
 	LOG("player position %f", original_pos.x);
 
 }
@@ -523,8 +534,6 @@ float Player::Acceleration_Method()
 
 void Player::Slide_Method(float dt)
 {
-
-
 	slide_counter += 1;
 	if (slide_counter % 10 == 0 && speed.x >= 0)
 	{

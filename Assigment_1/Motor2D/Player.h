@@ -51,6 +51,7 @@ public:
 
 	SDL_Texture*	graphics = nullptr;
 	SDL_Texture*	textures = nullptr;
+	SDL_Texture*	godmode = nullptr;
 
 	Mix_Chunk*		jump_sound = NULL;
 
@@ -86,7 +87,8 @@ public:
 	bool			Jump = false;
 	bool			fall = false;
 	bool			dead = false;
-
+	bool			slide = false;
+	bool			GOD = false;
 
 private:
 

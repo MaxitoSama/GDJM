@@ -1,10 +1,11 @@
 #include "j1App.h"
 #include "Entity.h"
+#include "j1Entities.h"
 #include "j1Colliders.h"
 #include "j1Particle.h"
 #include "j1Render.h"
 #include "j1Textures.h"
-#include "j1Player.h"
+#include "Player.h"
 #include "SDL/include/SDL_timer.h"
 #include "j1Audio.h"
 
@@ -37,7 +38,15 @@ void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 
 	if (collider != nullptr)
 	{
-		collider->SetPos((int)position.x, (int)position.y);
+		
+		if (collider->type == COLLIDER_PLAYER && App->entities->player->slide)
+		{
+			collider->SetPos((int)position.x, (int)position.y+40);
+		}
+		else
+		{
+			collider->SetPos((int)position.x, (int)position.y);
+		}
 	}
 
 	if (collider_feet != nullptr)
