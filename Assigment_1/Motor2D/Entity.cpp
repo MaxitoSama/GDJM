@@ -34,7 +34,7 @@ const Collider* Entity::GetColliderFloor() const
 
 void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 {
-	Red_now = SDL_GetTicks() - Red_Start_time;
+	//Red_now = SDL_GetTicks() - Red_Start_time;
 
 	if (collider != nullptr)
 	{

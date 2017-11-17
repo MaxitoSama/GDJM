@@ -66,10 +66,10 @@ public:
 	Animation		slide_left;
 	Animation		death;
 
-	//Collider*		collider_feet;
+
 	Collider*		collider_player;
 
-	//int				speed;
+
 	int				Pos_jump;
 	float			velocity;
 	int				Curr_map;
@@ -82,7 +82,7 @@ public:
 
 
 	LastDirection	player_last_direction;
-	//iPoint			position;
+
 
 	bool			Jump = false;
 	bool			fall = false;
@@ -90,6 +90,9 @@ public:
 	bool			slide = false;
 	bool			GOD = false;
 
+	//Collider*		collider_feet;
+	//iPoint			position;
+	//int				speed;
 private:
 
 	uint		jump_height;

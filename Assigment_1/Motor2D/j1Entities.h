@@ -8,6 +8,8 @@
 #define SCREEN_WIDTH 224
 #define SCREEN_HEIGHT 320
 
+class Entity;
+class Player;
 enum ENEMY_TYPES
 {
 	NO_TYPE,
@@ -15,9 +17,6 @@ enum ENEMY_TYPES
 	ZOMBIE,
 	PLANE
 };
-
-class Entity;
-class Player;
 
 struct EnemyInfo
 {
@@ -42,7 +41,6 @@ public:
 	bool Save(pugi::xml_node&) const;
 
 	bool AddEnemy(ENEMY_TYPES type, int x, int y, int wave = 1, int id = 0);
-
 public:
 
 	bool draw_underlayed = false;
@@ -54,7 +52,6 @@ private:
 	void SpawnEnemy(const EnemyInfo& info);
 
 private:
-
 	EnemyInfo queue[MAX_ENEMIES];
 	
 
