@@ -54,7 +54,7 @@ bool j1Scene::Start()
 		App->entities->AddEnemy(ZOMBIE, 2500, 600);
 		//App->entities->AddEnemy(ZOMBIE, 7000, 600);
 		//App->entities->AddEnemy(ZOMBIE, 1300, 600);
-		//App->entities->AddEnemy(ZOMBIE, 11398, 245);
+		//App->entities->AddEnemy(ZOMBIE, 9812, 668);
 		//App->colliders->AddCollider({ 32,600,32,1 }, COLLIDER_FLOOR, this);
 		//App->colliders->AddCollider({ 64,600,32,1 }, COLLIDER_FLOOR, this);
 		App->entities->AddEnemy(PLANE, 1500, 100);
