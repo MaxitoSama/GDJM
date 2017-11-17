@@ -67,6 +67,9 @@ void Enemy_Plane::Move(float dt)
 	if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) <= 600 && !going)
 	{
 		going = true;
+		go_x = true;
+		go_y = true;
+		goback = false;
 		iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y + 50 };
 		App->pathfinding->CreatePath(enemyposition, player);
 		App->pathfinding->Path(App->entities->player->original_pos.x, App->entities->player->original_pos.y, Enemypath);
@@ -99,57 +102,6 @@ void Enemy_Plane::Move(float dt)
 			}
 		}
 	}
-
-	/*else if (!going && goback)
-	{
-		if (goback_x)
-		{
-			if (original_pos.x >= initial_pos.x)
-			{
-				original_pos.x -= 320 * dt;
-				scale = -0.4;
-				if (original_pos.x <= initial_pos.x)
-				{
-					goback_x = false;
-				}
-			}
-			else
-			{
-				original_pos.x += 320 * dt;
-				scale = 0.4;
-				if (original_pos.x >= initial_pos.x)
-				{
-					goback_x = false;
-				}
-			}
-		}
-		
-		if (goback_y)
-		{
-			if (original_pos.y > initial_pos.y)
-			{
-				original_pos.y -= 100 * dt;
-				if (original_pos.y <= initial_pos.y)
-				{
-					goback_y = false;
-				}
-			}
-			else
-			{
-				original_pos.y += 100 * dt;
-				if (original_pos.y >= initial_pos.y)
-				{
-					goback_y = false;
-				}
-			}
-		}
-		
-		if (!goback_x && !goback_y)
-		{
-			goback = false;
-		}
-	}*/
-
 
 	else
 	{
@@ -219,17 +171,30 @@ void Enemy_Plane::Move(float dt)
 				}
 				else
 				{
-					going = false;
+					if (going)
+					{
+						going = false;
+					}
+					if (goback)
+					{
+						goback = false;
+					}
 					pathcounter = 0;
 				}
 			}
 		}
-		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 500)
+		
+		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 500 && going )
 		{
+			pathcounter = 0;
 			going = false;
-			/*goback = true;
-			goback_x = true;
-			goback_y = true;*/
+			goback = true;
+			go_x = true;
+			go_y = true;
+			
+			iPoint start = { (int)initial_pos.x, (int)initial_pos.y};
+			App->pathfinding->CreatePath(enemyposition, start);
+			App->pathfinding->Path(start.x,start.y, Enemypath);
 		}
 	}
 }
