@@ -167,7 +167,7 @@ Player::Player(int x, int y) : Entity(x, y)
 		death.PushBack({ 2117,2574,349,346 });
 		death.PushBack({ 2468,2574,349,346 });
 		death.loop = false;
-		death.speed = 30.0f;
+		death.speed = 20.0f;
 	}
 
 	
@@ -241,7 +241,6 @@ void Player::Move(float dt)
 		{
 			if (original_pos.x >= 0)
 			{
-
 				speed.x = -(velocity + Acceleration_Method())*dt;
 				original_pos.x += speed.x;
 				Acceleration_Method();
@@ -424,12 +423,17 @@ void Player::Move(float dt)
 
 	if (dead == true)
 	{
-		gravity = 0;
+		if (dead_by_fall == true)
+		{
+			gravity = 0;
+			dead_by_fall = false;
+		}
 		animation = &death;
 		if (death.Finished() == true)
 		{
 			gravity = 500;
 			dead = false;
+			dead_by_entity = false;
 			original_pos.x = 60;
 			original_pos.y = 215;
 			App->render->camera.x = 0;
@@ -438,11 +442,13 @@ void Player::Move(float dt)
 		}
 	}
 
-	/*if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+	/*
+	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 	{
 		App->particles->bullet.speed.y = -01.0f;
 		App->particles->AddParticle(App->particles->bullet, original_pos.x, original_pos.y, COLLIDER_FEET);
-	}*/
+	}
+	*/
 
 	//Call Jump_Method-----------------------------------------
 	Jump_Method(dt);

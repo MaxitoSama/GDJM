@@ -158,6 +158,7 @@ bool j1Colliders::Update(float dt)
 			if (c1->type == COLLIDER_DEATH && c2->type == COLLIDER_PLAYER && c1->CheckCollision(c2->rect) == true)
 			{
 				App->entities->player->dead = true;
+				App->entities->player->dead_by_fall = true;
 			}
 
 			if (c1->type == COLLIDER_WIN && c2->type == COLLIDER_FEET && c1->CheckCollision(c2->rect) == true)
@@ -172,7 +173,8 @@ bool j1Colliders::Update(float dt)
 			
 			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_6, App->entities->player->speed.x) == true && !App->entities->player->GOD)
 			{
-				App->entities->player->dead = true;				
+				App->entities->player->dead = true;
+				App->entities->player->dead_by_entity= true;	
 			}
 
 			if ( App->entities->player != nullptr && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect, distance_3, dt, App->entities->player->gravity) == true)
