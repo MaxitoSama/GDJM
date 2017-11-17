@@ -38,12 +38,19 @@ bool j1Window::Awake(pugi::xml_node& config)
 		bool resizable = config.child("resizable").attribute("value").as_bool(false);
 		fullscreen_window = config.child("fullscreen_window").attribute("value").as_bool(false);
 
-		SDL_DisplayMode screen_resolution;
-		SDL_GetCurrentDisplayMode(0, &screen_resolution);
-		width = screen_resolution.w;
-		height = screen_resolution.h;
-		//width = config.child("resolution").attribute("width").as_int(640);
-		//height = config.child("resolution").attribute("height").as_int(480);
+		SDL_DisplayMode default_resolution;
+		SDL_GetCurrentDisplayMode(0, &default_resolution);
+		bool resolution_manual = config.child("resolution").attribute("default").as_bool(false);
+		if (resolution_manual == true)
+		{
+			width = default_resolution.w;
+			height = default_resolution.h;
+		}
+		else
+		{
+			width = config.child("resolution").attribute("width").as_int(default_resolution.w);
+			height = config.child("resolution").attribute("height").as_int(default_resolution.h);
+		}
 		scale = config.child("resolution").attribute("scale").as_int(1);
 
 		if(fullscreen == true)
