@@ -86,6 +86,8 @@ public:
 
 	bool			Jump = false;
 	bool			fall = false;
+	bool			dead_by_entity = false;
+	bool			dead_by_fall = false;
 	bool			dead = false;
 	bool			slide = false;
 	bool			GOD = false;
