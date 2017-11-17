@@ -109,14 +109,24 @@ void Enemy_Plane::Move(float dt)
 		if (enemyposition.x != (int)App->entities->player->original_pos.x && enemyposition.y != (int)App->entities->player->original_pos.y)
 		{
 			iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);
-			if (App->entities->player->original_pos.x<original_pos.x)
+			
+			if (App->entities->player->original_pos.x<original_pos.x && going && !goback)
 			{
 				scale = -0.4;
 			}
-			else
+			if(App->entities->player->original_pos.x>=original_pos.x && going && !goback)
 			{
 				scale = 0.4;
 			}
+			if (App->entities->player->original_pos.x<initial_pos.x && !going && goback)
+			{
+				scale = 0.4;
+			}
+			if (App->entities->player->original_pos.x>initial_pos.x && !going && goback)
+			{
+				scale = -0.4;
+			}
+
 			if (go_x)
 			{
 				if (PositiontoGo.x < (int)original_pos.x)

@@ -21,8 +21,11 @@ public:
 	Animation dead;
 	Animation walking;
 
-	char* shot_path;
-	//particle_type shoot;
+private:
+
+	bool goback = false;
+	bool go_x = false;
+
 };
 
 #endif

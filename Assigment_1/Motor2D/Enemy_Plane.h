@@ -25,8 +25,6 @@ public:
 private:
 
 	bool goback = false;
-	bool goback_x = false;
-	bool goback_y = false;
 	bool go_x = false;
 	bool go_y = false;
 

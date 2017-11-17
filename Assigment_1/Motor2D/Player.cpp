@@ -496,7 +496,7 @@ void Player::Move(float dt)
 	}
 
 	
-	LOG("player position %f", original_pos.x);
+	//LOG("player position %f", original_pos.x);
 
 }
 

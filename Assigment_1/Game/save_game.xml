@@ -12,10 +12,10 @@
 	<scene2 />
 	<colliders />
 	<player>
-		<player x="60" y="2010" Map="0" />
+		<player x="60" y="1311" Map="0" />
 	</player>
 	<enemies>
-		<player x="10" y="828.166687" Map="1" />
+		<player x="174" y="828.666687" Map="1" />
 	</enemies>
 	<renderer>
 		<camera x="0" y="-298" />

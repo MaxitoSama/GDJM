@@ -96,18 +96,21 @@ Enemy_Zombie::~Enemy_Zombie()
 
 void Enemy_Zombie::Move(float dt)
 {
-	iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y };
+	iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y+10 };
 	
 	
 	original_pos.y += speed.y*dt;
 	
-	if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x)<=300 && !going)
+	if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x)<=500 && !going)
 	{
-		iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y + 50 };
-		going = true;
+		going	= true;
+		go_x	= true;
 		pathcounter = 0;
+		speed = { 0.0f,0.0f };
+
+		iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y};
 		App->pathfinding->CreatePath(enemyposition, player);
-		App->pathfinding->Path(App->entities->player->original_pos.x, App->entities->player->original_pos.y+50,Enemypath);
+		App->pathfinding->Path(App->entities->player->original_pos.x, App->entities->player->original_pos.y,Enemypath);
 	}
 	
 
@@ -138,44 +141,61 @@ void Enemy_Zombie::Move(float dt)
 			}
 		}
 	}
+
 	else
 	{
-		animation = &walking;
 
-		if ((float)enemyposition.x != App->entities->player->original_pos.x)
+		if (enemyposition.x != (int)App->entities->player->original_pos.x && enemyposition.y != (int)App->entities->player->original_pos.y)
 		{
-			if (App->entities->player->original_pos.x < enemyposition.x)
-			{
-				speed.x = -300*dt;
-				scale = -0.5;
-			}
-			else
-			{
-				speed.x = 300*dt;
-				scale = 0.5;
-			}
-			
 			iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);
-				
-			if((int)original_pos.x != PositiontoGo.x)
+
+			if (go_x)
 			{
-				original_pos.x += speed.x;
+				if (PositiontoGo.x < (int)original_pos.x)
+				{
+					speed.x = -200 * dt;
+					original_pos.x += speed.x;
+					scale = -0.5;
+					if (PositiontoGo.x >= (int)original_pos.x)
+					{
+						go_x = false;
+					}
+				}
+				else
+				{
+					speed.x = 200 * dt;
+					original_pos.x += speed.x;
+					scale = 0.5;
+					if (PositiontoGo.x <= (int)original_pos.x)
+					{
+						go_x = false;
+					}
+				}
 			}
-			
-			if((int)original_pos.x == PositiontoGo.x && (int)original_pos.y == PositiontoGo.y)
+
+			if (!go_x)
 			{
-					pathcounter++;
+				pathcounter++;
+				if (pathcounter < Enemypath.Count())
+				{
+					go_x = true;
+				}
+				else
+				{
+					going = false;
+				}
 			}
 		}
-		if(abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 500)
-		{
-			going = false;
-			initial_pos.x = original_pos.x;
-		}
+	}
+
+	if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) > 501 && going)
+	{
+		going = false;
+		initial_pos.x = original_pos.x;
 	}
 	
 	position = original_pos;
-	//LOG("Zombie pos %f", original_pos.y);
+	LOG("Zombie pos %f", original_pos.x-App->entities->player->original_pos.x);
 }
 
 void Enemy_Zombie::DeadAnim()
