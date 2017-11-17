@@ -39,6 +39,7 @@ public:
 
 	bool fullscreen_window;
 
+
 private:
 	p2SString	title;
 	uint		width;
