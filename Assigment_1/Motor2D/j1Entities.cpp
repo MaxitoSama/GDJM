@@ -192,7 +192,7 @@ void j1Entities::SpawnEnemy(const EnemyInfo& info)
 	}
 }
 
-void j1Entities::OnCollision(Collider* c1, Collider* c2, int distance)
+void j1Entities::OnCollision(Collider* c1, Collider* c2, float distance)
 {
 	
 	/*for (uint i = 0; i < MAX_ENEMIES; ++i)
@@ -209,7 +209,7 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2, int distance)
 		}
 	}*/
 
-	if (c2->type == COLLIDER_FLOOR)
+	/*if (c2->type == COLLIDER_FLOOR)
 	{
 		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
@@ -218,7 +218,7 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2, int distance)
 				entities[i]->original_pos.y -= distance;
 			}
 		}
-	}
+	}*/
 
 	if (c2->type == COLLIDER_WALL)
 	{

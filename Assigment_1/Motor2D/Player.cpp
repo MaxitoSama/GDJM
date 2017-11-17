@@ -185,8 +185,8 @@ Player::Player(int x, int y) : Entity(x, y)
 	colliderXsize = 100;
 	scale = 0.5f;
 	colliderXsize = 120;
-	velocity = 1000;
-	gravity = 500;
+	velocity = 1000.0f;
+	gravity = 500.0f;
 	initial_pos = original_pos.x;
 	jump_height= 300;
 	jump_vel= 1000;
@@ -507,15 +507,15 @@ void Player::Jump_Method(float dt)
 //Acceleration Method
 float Player::Acceleration_Method()
 {
-	float vel = 0;
+	float vel = 0.0f;
 
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_IDLE || App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		vel = 0;
+		vel = 0.0f;
 	}
 	else
 	{
-		vel = 500;
+		vel = 500.0f;
 	}
 
 	return vel;

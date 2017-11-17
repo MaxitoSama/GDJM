@@ -6,7 +6,8 @@
 #include "j1Render.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
-#include "j1Player.h"
+#include "j1Entities.h"
+#include "Player.h"
 
 
 Enemy_Zombie::Enemy_Zombie(int x, int y): Entity(x, y)
@@ -83,6 +84,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Entity(x, y)
 
 	right = true;
 	left = false;
+	speed = { 0,500 };
 
 	collider = App->colliders->AddCollider({ (int)(position.x-120), (int)position.y, 120, 360/2 }, COLLIDER_ENEMY, (j1Module*)App->entities);
 }
@@ -95,18 +97,17 @@ Enemy_Zombie::~Enemy_Zombie()
 void Enemy_Zombie::Move(float dt)
 {
 	iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y };
-	speed = { 0,500 };
-
-	position = original_pos;
+	
+	
 	original_pos.y += speed.y*dt;
 	
-	if (abs((int)App->player->position.x - (int)original_pos.x)<=300 && !going)
+	if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x)<=300 && !going)
 	{
-		iPoint player = { App->player->position.x, App->player->position.y + 50 };
+		iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y + 50 };
 		going = true;
 		pathcounter = 0;
 		App->pathfinding->CreatePath(enemyposition, player);
-		App->pathfinding->Path(App->player->position.x, App->player->position.y+50,Enemypath);
+		App->pathfinding->Path(App->entities->player->original_pos.x, App->entities->player->original_pos.y+50,Enemypath);
 	}
 	
 
@@ -141,9 +142,9 @@ void Enemy_Zombie::Move(float dt)
 	{
 		animation = &walking;
 
-		if (enemyposition != App->player->position)
+		if ((float)enemyposition.x != App->entities->player->original_pos.x)
 		{
-			if (App->player->position.x < enemyposition.x)
+			if (App->entities->player->original_pos.x < enemyposition.x)
 			{
 				speed.x = -300*dt;
 				scale = -0.5;
@@ -166,14 +167,15 @@ void Enemy_Zombie::Move(float dt)
 					pathcounter++;
 			}
 		}
-		if(abs((int)App->player->position.x - (int)original_pos.x) >= 500)
+		if(abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 500)
 		{
 			going = false;
 			initial_pos = original_pos.x;
 		}
 	}
-
-	//LOG("Zombie pos %f", original_pos.x);
+	
+	position = original_pos;
+	//LOG("Zombie pos %f", original_pos.y);
 }
 
 void Enemy_Zombie::DeadAnim()

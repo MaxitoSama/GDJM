@@ -6,7 +6,8 @@
 #include "j1Render.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
-#include "j1Player.h"
+#include "j1Entities.h"
+#include "Player.h"
 
 Enemy_Plane::Enemy_Plane(int x, int y): Entity(x, y)
 {
@@ -62,12 +63,13 @@ void Enemy_Plane::Move(float dt)
 	//original_pos.y += speed.y;
 
 
-	if (abs((int)App->player->position.x - (int)original_pos.x) <= 600 && !going)
+	if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) <= 600 && !going)
 	{
 		going = true;
+		iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y + 50 };
 		pathcounter = 0;
-		App->pathfinding->CreatePath(enemyposition, App->player->position);
-		App->pathfinding->Path(App->player->position.x, App->player->position.y, Enemypath);
+		App->pathfinding->CreatePath(enemyposition, player);
+		App->pathfinding->Path(App->entities->player->original_pos.x, App->entities->player->original_pos.y, Enemypath);
 	}
 
 	if (!going)
@@ -101,9 +103,9 @@ void Enemy_Plane::Move(float dt)
 	else
 	{
 		
-		if (enemyposition != App->player->position)
+		if (enemyposition.x != (int)App->entities->player->original_pos.x && enemyposition.y != (int)App->entities->player->original_pos.y)
 		{
-			if (App->player->position.x < enemyposition.x)
+			if (App->entities->player->original_pos.x < enemyposition.x)
 			{
 				speed.x = -200*dt;
 				scale = -0.4f;
@@ -115,14 +117,14 @@ void Enemy_Plane::Move(float dt)
 				scale = 0.4f;
 			}
 			
-			if (App->player->position.y < enemyposition.y)
+			if (App->entities->player->original_pos.y < enemyposition.y)
 			{
-				speed.y = -8*dt;
+				speed.y = -200*dt;
 			}
 			
 			else
 			{
-				speed.y = 8*dt;
+				speed.y = 200*dt;
 			}
 
 			iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);
@@ -141,7 +143,7 @@ void Enemy_Plane::Move(float dt)
 				pathcounter++;
 			}
 		}
-		if (abs((int)App->player->position.x - (int)original_pos.x) >= 500)
+		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 500)
 		{
 			going = false;
 			initial_pos = original_pos.x;

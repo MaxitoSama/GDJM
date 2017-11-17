@@ -37,7 +37,7 @@ void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 
 	if (collider != nullptr)
 	{
-		collider->SetPos(position.x, position.y);
+		collider->SetPos((int)position.x, (int)position.y);
 	}
 
 	if (collider_feet != nullptr)

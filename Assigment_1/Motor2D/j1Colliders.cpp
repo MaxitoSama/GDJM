@@ -170,10 +170,7 @@ bool j1Colliders::Update(float dt)
 				App->scene->ChangeScene(60, 215);
 			}
 			
-			if (c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect, distance_4,dt, App->player->gravity) == true)
-			{
-				App->entities->OnCollision(c2, c1, distance_4);
-			}
+			
 			
 			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_6, App->player->speed) == true && !App->player->GOD)
 			{
@@ -184,7 +181,7 @@ bool j1Colliders::Update(float dt)
 			{
 				if(c2 == App->entities->player->collider_feet)
 				{
-					//App->entities->OnCollision(c2, c1, distance_3);
+					App->entities->OnCollision(c2, c1, distance_3);
 					App->entities->player->original_pos.y -= distance_3;
 					App->entities->player->dead = false;
 
@@ -198,16 +195,20 @@ bool j1Colliders::Update(float dt)
 			}
 
 
-			/*for (uint i = 0; i < MAX_ENEMIES; ++i)
+			for (uint i = 0; i < MAX_ENEMIES; ++i)
 			{
 				if (App->entities->entities[i] != nullptr)
 				{
 					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_WALL && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_5, App->entities->entities[i]->speed.x) == true)
 					{
-						App->entities->OnCollision(c2, c1, distance_5);
+						App->entities->entities[i]->original_pos.x -= distance_5;
+					}
+					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect, distance_4, dt, App->entities->entities[i]->speed.y) == true)
+					{
+						App->entities->entities[i]->original_pos.y -= distance_4;
 					}
 				}
-			}*/
+			}
 		}
 	}
 

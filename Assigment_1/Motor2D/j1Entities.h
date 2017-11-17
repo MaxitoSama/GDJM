@@ -37,7 +37,7 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
-	void OnCollision(Collider* c1, Collider* c2, int distance);
+	void OnCollision(Collider* c1, Collider* c2, float distance);
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 
