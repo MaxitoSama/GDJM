@@ -452,7 +452,8 @@ void Player::Move(float dt)
 		&& App->input->GetKey(SDL_SCANCODE_UP) == KEY_IDLE
 		&& App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
 		&& App->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE
-		&& App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+		&& App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE
+		&& !dead)
 	{
 		switch (player_last_direction)
 		{
