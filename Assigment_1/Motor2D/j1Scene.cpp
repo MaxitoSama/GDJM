@@ -76,6 +76,8 @@ bool j1Scene::Start()
 		//App->enemies->AddEnemy(ZOMBIE, 10, 10);
 		App->entities->AddEnemy(ZOMBIE, 20076,284);
 		App->entities->AddEnemy(ZOMBIE, 19088, 60);
+
+		App->entities->AddEnemy(PLANE, 1500, 100);
 	}
 
 	return true;
