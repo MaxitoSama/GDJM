@@ -139,20 +139,13 @@ bool j1Scene::Update(float dt)
 		{
 			App->Cap_on = true;
 		}
-	}
-		
-	/*if (App->player->position.x > dist1 && App->player->position.x <= 24630)
-	{
-		App->render->camera.x = -App->player->position.x + App->player->win_width / 2;
-	}*/
-	
+	}	
 
 	//Camera Movement--------------------------------------
 	int map_height = App->map->data.height * App->map->data.tile_height;
 	int map_width = App->map->data.width * App->map->data.tile_width;
 	int win_height = App->player->win_height;
 	int win_width = App->player->win_width;
-	int win_position_x = App->render->camera.x;
 	int win_position_y = App->render->camera.y*-1;
 	int limit_y = map_height - win_height;
 	int limit_x = map_width - win_width;
@@ -161,6 +154,7 @@ bool j1Scene::Update(float dt)
 	{
 		App->render->camera.x = App->entities->player->win_width / 2 - App->entities->player->original_pos.x;
 	}
+	
 	if (!App->win->fullscreen_window && App->entities->player->original_pos.y > win_height / 2 && win_position_y+win_height <map_height)
 	{
 		if (App->entities->player->original_pos.y + App->player->win_height / 2 < map_height)
@@ -168,22 +162,6 @@ bool j1Scene::Update(float dt)
 			App->render->camera.y = -App->entities->player->original_pos.y + App->player->win_height / 2;
 		}
 	}
-	
-	/*if (App->entities->player->original_pos.y > win_height/2 && win_position_y <= limit_y * 0.9)
-	{
-		App->render->camera.y = App->entities->player->win_height / 2 - (int)App->entities->player->original_pos.y;
-	}*/
-	
-	//if (App->entities->player->original_pos.y >  && App->entities->player->original_pos.y < App->player->win_height - 50 && !App->win->fullscreen_window)
-	//{
-	//	App->render->camera.y = App->player->win_height / 2 - (int)App->entities->player->original_pos.y;
-	//}
-
-
-
-	
-
-
 
 	App->map->Draw();
 	App->pathfinding->DrawPath(path_test);
