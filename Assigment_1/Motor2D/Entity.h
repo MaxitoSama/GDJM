@@ -43,6 +43,7 @@ public:
 	
 	Collider* collider = nullptr;
 	Collider* collider_feet = nullptr;
+	Collider* collider_head = nullptr;
 	int collision_distance_1;
 
 	p2DynArray<iPoint>	Enemypath;

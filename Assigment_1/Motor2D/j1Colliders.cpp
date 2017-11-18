@@ -263,6 +263,9 @@ void j1Colliders::DebugDraw()
 			case COLLIDER_ENEMY: // light blue
 				App->render->DrawQuad(colliders[i]->rect, 100, 206, 250, alpha, false);
 				break;
+			case COLLIDER_HEAD: // black
+				App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha, false);
+				break;
 			}
 		}
 
@@ -290,7 +293,7 @@ bool j1Colliders::checkColisionList(Collider * enemCollider)
 void j1Colliders::PlayerFloorCollision(Collider* collider_floor, Collider* collider_feet, float dt)
 {
 	if (collider_feet!=App->entities->player->collider_feet
-		&&collider_floor->type == COLLIDER_FLOOR
+		&& collider_floor->type == COLLIDER_FLOOR
 		&& collider_feet->type == COLLIDER_FEET
 		&& collider_floor->CheckFutureFallColision(collider_feet->rect, distance_1, dt, App->entities->player->gravity) == true) //en els arguments llargs posar funció
 	{

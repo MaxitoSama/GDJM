@@ -82,6 +82,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Entity(x, y)
 	initial_pos.x = original_pos.x;
 
 	collider = App->colliders->AddCollider({ (int)(position.x-120), (int)position.y, 120, 360/2 }, COLLIDER_ENEMY, (j1Module*)App->entities);
+	collider_head = App->colliders->AddCollider({ (int)(position.x - 120), (int)position.y, 50, 20 }, COLLIDER_HEAD, (j1Module*)App->entities);
 }
 
 bool Enemy_Zombie::Awake(pugi::xml_node& entity_config)
