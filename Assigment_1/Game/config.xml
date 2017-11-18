@@ -1,7 +1,7 @@
 <!-- Config file for the game -->
 
 <config>
-  <app framerate_cap="30">
+  <app framerate_cap="30" Cap="true">
     <title>Ninja's Path</title>
     <organization>UPC</organization>
   </app>
@@ -12,7 +12,7 @@
   </renderer>
 
   <window>
-    <resolution default="true" width="100" height="100" scale="1"/>
+    <resolution default="false" width="1800" height="900" scale="1"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>

@@ -130,6 +130,18 @@ bool j1Scene::Update(float dt)
 		}
 		LOG("Path created");
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		if (App->Cap_on)
+		{
+			App->Cap_on = false;
+		}
+		else
+		{
+			App->Cap_on = true;
+		}
+	}
 		
 	/*if (App->player->position.x > dist1 && App->player->position.x <= 24630)
 	{
