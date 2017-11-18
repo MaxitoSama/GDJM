@@ -43,6 +43,7 @@ Enemy_Plane::Enemy_Plane(int x, int y): Entity(x, y)
 	collider_pos.x = 0;
 	collider_pos.y = 0;
 	collider = App->colliders->AddCollider({ x, y, (639*2)/5, (412*2)/5 }, COLLIDER_ENEMY, (j1Module*)App->entities);
+	collider_head = App->colliders->AddCollider({ x, y, 200, 5}, COLLIDER_HEAD, (j1Module*)App->entities);
 }
 
 bool Enemy_Plane::Awake(pugi::xml_node& entity_config)
