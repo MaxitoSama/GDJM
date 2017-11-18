@@ -105,6 +105,7 @@ bool j1App::Awake()
 		organization.create(app_config.child("organization").child_value());
 
 		framerate_cap = app_config.attribute("framerate_cap").as_uint(INFINITE);
+		Cap_on = app_config.attribute("Cap").as_bool(true);
 		LOG("Framerate %d", framerate_cap);
 	}
 
@@ -198,7 +199,7 @@ void j1App::PrepareUpdate()
 	last_sec_frame_count++;
 
 	dt = frame_time.ReadSec();
-	if (dt > 5.0f / (float)framerate_cap)
+	if (dt > 5.0f / (float)framerate_cap && Cap_on)
 	{
 		dt = 5.0f / (float)framerate_cap;
 	}
@@ -229,9 +230,20 @@ void j1App::FinishUpdate()
 	uint32 last_frame_ms = frame_time.Read();
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
 
+	char cap[8];
+
+	if (Cap_on)
+	{
+		sprintf_s(cap,8, "ON");
+	}
+	else
+	{
+		sprintf_s(cap, 8, "OFF");
+	}
+
 	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu ",
-	avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
+	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu Cap:%s",
+	avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count,cap);
 	App->win->SetTitle(title);
 
 	uint32 framerate = 1000 / framerate_cap;
@@ -239,7 +251,7 @@ void j1App::FinishUpdate()
 	float realTime;
 
 
-	if (ptimer.ReadMs()<framerate)
+	if (ptimer.ReadMs()<framerate && Cap_on)
 	{
 		SDL_Delay(delay);
 		realTime = ptimer.ReadMs();

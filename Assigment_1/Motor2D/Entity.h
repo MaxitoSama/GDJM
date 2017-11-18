@@ -58,6 +58,7 @@ public:
 	const Collider* GetCollider() const;
 	const Collider* GetColliderFloor() const;
 
+	virtual bool Awake(pugi::xml_node&);
 	virtual void Move(float dt) {};
 	virtual void ExtraAnim(SDL_Texture* texture) {};
 	virtual void DeadAnim();

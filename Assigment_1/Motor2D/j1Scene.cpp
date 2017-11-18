@@ -57,7 +57,7 @@ bool j1Scene::Start()
 		//App->entities->AddEnemy(ZOMBIE, 9812, 668);
 		//App->colliders->AddCollider({ 32,600,32,1 }, COLLIDER_FLOOR, this);
 		//App->colliders->AddCollider({ 64,600,32,1 }, COLLIDER_FLOOR, this);
-		//App->entities->AddEnemy(PLANE, 1500, 100);
+		App->entities->AddEnemy(PLANE, 1500, 100);
 		//App->entities->AddEnemy(PLANE, 2000, 100);
 		App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
 		App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
@@ -127,6 +127,18 @@ bool j1Scene::Update(float dt)
 			App->pathfinding->Path(PlayerPosition.x, PlayerPosition.y, path_test);
 		}
 		LOG("Path created");
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		if (App->Cap_on)
+		{
+			App->Cap_on = false;
+		}
+		else
+		{
+			App->Cap_on = true;
+		}
 	}
 		
 	/*if (App->player->position.x > dist1 && App->player->position.x <= 24630)

@@ -35,13 +35,9 @@ Enemy_Plane::Enemy_Plane(int x, int y): Entity(x, y)
 
 
 	
-	scale = -0.3;
 	colliderXsize = (639 * 2) / 5;
 	initial_pos.x = original_pos.x;
 	initial_pos.y = original_pos.y;
-	
-	right = true;
-	left = false;
 
 	animation = &anim;
 
@@ -49,6 +45,33 @@ Enemy_Plane::Enemy_Plane(int x, int y): Entity(x, y)
 	collider_pos.x = 0;
 	collider_pos.y = 0;
 	collider = App->colliders->AddCollider({ x, y, (639*2)/5, (412*2)/5 }, COLLIDER_ENEMY, (j1Module*)App->entities);
+}
+
+bool Enemy_Plane::Awake(pugi::xml_node& entity_config)
+{
+	LOG("Init Player config");
+	pugi::xml_node plane = entity_config.child("plane");
+
+	//Init Velocity var----------------------------------------------------
+	speed.y = plane.child("speed").attribute("speed_y").as_float(10);
+	speed.x = plane.child("speed").attribute("speed_x").as_float(0);
+	idle_speed = plane.child("idle_speed").attribute("value").as_uint(0);
+	path_speed.x = plane.child("path_speed").attribute("speed_x").as_float(1);
+	path_speed.y = plane.child("path_speed").attribute("speed_y").as_float(1);
+
+	scale = plane.child("scale").attribute("value").as_float(1);
+
+	//Jump vars----------------------------------------------------
+	right = plane.child("right").attribute("value").as_bool(false);
+	left = plane.child("left").attribute("value").as_bool(false);
+	going = plane.child("going").attribute("value").as_bool(false);
+	go_x = plane.child("go_x").attribute("value").as_bool(false);
+	go_y = plane.child("go_y").attribute("value").as_bool(false);
+	goback= plane.child("goback").attribute("value").as_bool(false);
+
+	bool ret = true;
+
+	return ret;
 }
 
 Enemy_Plane::~Enemy_Plane()
@@ -81,7 +104,7 @@ void Enemy_Plane::Move(float dt)
 
 		if (original_pos.x<(float)initial_pos.x + 200 && right == true)
 		{
-			speed.x = 100 * dt;
+			speed.x = idle_speed * dt;
 			original_pos.x += speed.x;
 			scale = 0.4;
 			if (original_pos.x >= (float)initial_pos.x + 200)
@@ -92,7 +115,7 @@ void Enemy_Plane::Move(float dt)
 		}
 		if (original_pos.x>(float)initial_pos.x - 200 && left == true)
 		{
-			speed.x = -100 * dt;
+			speed.x = -idle_speed * dt;
 			original_pos.x += speed.x;
 			scale = -0.4;
 			if (original_pos.x <= (float)initial_pos.x - 200)
@@ -131,7 +154,7 @@ void Enemy_Plane::Move(float dt)
 			{
 				if (PositiontoGo.x < (int)original_pos.x)
 				{
-					speed.x = -200 * dt;
+					speed.x = -path_speed.x * dt;
 					original_pos.x += speed.x;
 					if (PositiontoGo.x >= (int)original_pos.x)
 					{
@@ -140,7 +163,7 @@ void Enemy_Plane::Move(float dt)
 				}
 				else
 				{
-					speed.x = 200 * dt;
+					speed.x = path_speed.x * dt;
 					original_pos.x += speed.x;
 					if (PositiontoGo.x <= (int)original_pos.x)
 					{
@@ -153,7 +176,7 @@ void Enemy_Plane::Move(float dt)
 			{
 				if (PositiontoGo.y < (int)original_pos.y)
 				{
-					speed.y = -200 * dt;
+					speed.y = -path_speed.y * dt;
 					original_pos.y += speed.y;
 					if (PositiontoGo.y >= (int)original_pos.y)
 					{
@@ -162,7 +185,7 @@ void Enemy_Plane::Move(float dt)
 				}
 				else
 				{
-					speed.y = 200 * dt;
+					speed.y = path_speed.y * dt;
 					original_pos.y += speed.y;
 					if (PositiontoGo.y <= (int)original_pos.y)
 					{

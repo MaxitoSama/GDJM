@@ -31,6 +31,7 @@ public:
 	j1Entities();
 	~j1Entities();
 
+	bool Awake(pugi::xml_node&);
 	bool Start();
 	bool PreUpdate();
 	bool Update(float dt);
@@ -46,6 +47,8 @@ public:
 	bool draw_underlayed = false;
 	Entity* entities[MAX_ENEMIES];
 	Player* player;
+	pugi::xml_node entity_config;
+	pugi::xml_document config_file;
 
 private:
 

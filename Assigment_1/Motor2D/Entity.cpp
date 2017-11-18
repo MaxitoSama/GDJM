@@ -14,6 +14,13 @@ Entity::Entity(int x, int y) : position(x, y), original_pos(x, y), collider_pos(
 
 }
 
+bool Entity::Awake(pugi::xml_node& enemy)
+{
+	Awake(enemy);
+
+	return true;
+}
+
 Entity::~Entity()
 {
 	//App->tex->UnLoad(b1);
