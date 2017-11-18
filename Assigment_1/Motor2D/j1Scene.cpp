@@ -92,8 +92,6 @@ bool j1Scene::PreUpdate()
 bool j1Scene::Update(float dt)
 {
 	BROFILER_CATEGORY("Update_Scene1 ", Profiler::Color::MediumOrchid)
-	int dist1 = App->player->win_width / 2;
-	int dist2 = App->player->win_height / 2;
 
 	if(App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame();
@@ -140,14 +138,32 @@ bool j1Scene::Update(float dt)
 		App->render->camera.y = -App->player->position.y + App->player->win_height / 2;
 	}*/
 
-	if (App->entities->player->original_pos.x > dist1 && App->entities->player->original_pos.x <= 24630)
+	//Camera Movement--------------------------------------
+	int map_height = App->map->data.height * App->map->data.tile_height;
+	int map_width = App->map->data.width * App->map->data.tile_width;
+	int win_height = App->player->win_height;
+	int win_width = App->player->win_width;
+	int win_position_x = App->render->camera.x;
+	int win_position_y = App->render->camera.y*-1;
+	int limit_y = map_height - win_height;
+	int limit_x = map_width - win_width;
+
+	if (App->entities->player->original_pos.x > App->player->win_width / 2 && App->entities->player->original_pos.x <= limit_x)
 	{
-		App->render->camera.x = -App->entities->player->original_pos.x + App->player->win_width / 2;
+		App->render->camera.x = App->player->win_width / 2 - App->entities->player->original_pos.x;
 	}
-	if (App->entities->player->original_pos.y > dist2 && App->entities->player->original_pos.y <App->player->win_height - 50 && !App->win->fullscreen_window)
+	if (App->entities->player->original_pos.y > win_height/2 && win_position_y <= limit_y * 0.9)
 	{
-		App->render->camera.y = -(int)App->entities->player->original_pos.y + App->player->win_height / 2;
+		App->render->camera.y = App->player->win_height / 2 - (int)App->entities->player->original_pos.y;
 	}
+	//if (App->entities->player->original_pos.y >  && App->entities->player->original_pos.y < App->player->win_height - 50 && !App->win->fullscreen_window)
+	//{
+	//	App->render->camera.y = App->player->win_height / 2 - (int)App->entities->player->original_pos.y;
+	//}
+
+
+
+	
 
 
 
