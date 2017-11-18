@@ -251,7 +251,7 @@ void Player::Start()
 void Player::Move(float dt)
 {
 	SDL_Event e;
-
+	position;
 	//MOVE_LEFT----------------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT  && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && !dead)
 	{
