@@ -12,6 +12,7 @@ public:
 	Enemy_Zombie(int x, int y);
 	~Enemy_Zombie();
 
+	bool Awake(pugi::xml_node&);
 	void Move(float dt);
 	void DeadAnim();
 
@@ -23,8 +24,10 @@ public:
 
 private:
 
-	bool goback = false;
-	bool go_x = false;
+	bool	goback = false;
+	bool	go_x = false;
+	float	idle_speed = 0;
+	float	path_speed = 0;
 
 };
 

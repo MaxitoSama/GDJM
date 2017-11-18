@@ -18,12 +18,20 @@
 
 j1Entities::j1Entities()
 {
-	name.create("enemies");
+	name.create("entity");
 }
 
 // Destructor
 j1Entities::~j1Entities()
 {
+}
+
+bool j1Entities::Awake(pugi::xml_node& config)
+{
+	config_file.load_file("config.xml");
+	entity_config = config_file.child("config").child("entity");
+
+	return true;
 }
 
 bool j1Entities::Start()
@@ -34,6 +42,7 @@ bool j1Entities::Start()
 	if (player == nullptr)
 	{
 		player = new Player(10, 100);
+		player->Awake(entity_config);
 		player->Start();
 	}
 	
@@ -181,9 +190,11 @@ void j1Entities::SpawnEnemy(const EnemyInfo& info)
 		{
 		case ENEMY_TYPES::ZOMBIE:
 			entities[i] = new Enemy_Zombie(info.x, info.y);
+			entities[i]->Awake(entity_config);
 			break;
 		case ENEMY_TYPES::PLANE:
 			entities[i] = new Enemy_Plane(info.x, info.y);
+			entities[i]->Awake(entity_config);
 			break;
 		case ENEMY_TYPES::PLAYER:
 			entities[i] = new Player(info.x, info.y);

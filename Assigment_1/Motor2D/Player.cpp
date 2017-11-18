@@ -185,17 +185,35 @@ Player::Player(int x, int y) : Entity(x, y)
 	colliderXsize = 100;
 	scale = 0.5f;
 	colliderXsize = 120;
-	velocity = 1000.0f;
-	gravity = 500.0f;
 	initial_pos.x = original_pos.x;
-	jump_height= 300;
-	jump_vel= 1000;
-	accel_counter=10;
-	slide_counter=0;
 	Curr_map = 1;
+}
 
-	Jump = false;
-	fall = false;
+bool Player::Awake(pugi::xml_node& entity_config)
+{
+	LOG("Init Player config");
+	pugi::xml_node player = entity_config.child("player");
+
+	//Init position var----------------------------------------------------
+	original_pos.x = player.child("position").attribute("pos_x").as_float(10);
+	original_pos.y = player.child("position").attribute("pos_y").as_float(10);
+
+	//Init Velocity var----------------------------------------------------
+	gravity = player.child("gravity").attribute("value").as_uint(10);
+	acceleration = player.child("acceleration").attribute("value").as_uint(0);
+	accel_counter = player.child("accel_counter").attribute("value").as_uint(0);
+	velocity = player.child("velocity").attribute("value").as_float(1);
+	slide_counter = player.child("slide_counter").attribute("value").as_uint(0);
+
+	//Jump vars----------------------------------------------------
+	jump_height = player.child("jump").attribute("jump_height").as_uint(300);
+	jump_vel = player.child("jump").attribute("jump_vel").as_uint(10);
+	fall = player.child("jump_bool").attribute("value").as_bool(false);
+	Jump = player.child("fall_bool").attribute("value").as_bool(false);
+
+	bool ret = true;
+
+	return ret;
 }
 
 

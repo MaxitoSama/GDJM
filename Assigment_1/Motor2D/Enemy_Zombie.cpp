@@ -78,16 +78,35 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Entity(x, y)
 	
 
 	animation = &walking;
-	scale = -0.5;
 	colliderXsize = 120;
 	initial_pos.x = original_pos.x;
 
-	right = true;
-	left = false;
-	speed = { 0,500 };
-
 	collider = App->colliders->AddCollider({ (int)(position.x-120), (int)position.y, 120, 360/2 }, COLLIDER_ENEMY, (j1Module*)App->entities);
 }
+
+bool Enemy_Zombie::Awake(pugi::xml_node& entity_config)
+{
+	LOG("Init Player config");
+	pugi::xml_node zombie = entity_config.child("zombie");
+
+	//Init Velocity var----------------------------------------------------
+	speed.y = zombie.child("speed").attribute("speed_y").as_float(10);
+	speed.x = zombie.child("speed").attribute("speed_x").as_float(0);
+	idle_speed = zombie.child("idle_speed").attribute("value").as_float(0);
+	path_speed = zombie.child("path_speed").attribute("value").as_float(1);
+	scale = zombie.child("scale").attribute("value").as_float(1);
+
+	//Jump vars----------------------------------------------------
+	right= zombie.child("right").attribute("value").as_bool(false);
+	left= zombie.child("left").attribute("value").as_bool(false);
+	going = zombie.child("going").attribute("value").as_bool(false);
+	go_x = zombie.child("go_x").attribute("value").as_bool(false);
+
+	bool ret = true;
+
+	return ret;
+}
+
 
 Enemy_Zombie::~Enemy_Zombie()
 {
@@ -106,7 +125,6 @@ void Enemy_Zombie::Move(float dt)
 		going	= true;
 		go_x	= true;
 		pathcounter = 0;
-		speed = { 0.0f,0.0f };
 
 		iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y};
 		App->pathfinding->CreatePath(enemyposition, player);
@@ -120,7 +138,7 @@ void Enemy_Zombie::Move(float dt)
 
 		if(original_pos.x<initial_pos.x+150 && right==true)
 		{
-			speed.x = 250 * dt;
+			speed.x = idle_speed * dt;
 			original_pos.x += speed.x;
 			scale = 0.5;
 			if (original_pos.x >= initial_pos.x + 150)
@@ -131,7 +149,7 @@ void Enemy_Zombie::Move(float dt)
 		}
 		if(original_pos.x>initial_pos.x - 150 && left == true)
 		{
-			speed.x = -250 * dt;
+			speed.x = -idle_speed * dt;
 			original_pos.x +=speed.x;
 			scale = -0.5;
 			if (original_pos.x <= initial_pos.x - 150)
@@ -153,7 +171,7 @@ void Enemy_Zombie::Move(float dt)
 			{
 				if (PositiontoGo.x < (int)original_pos.x)
 				{
-					speed.x = -200 * dt;
+					speed.x = -path_speed * dt;
 					original_pos.x += speed.x;
 					scale = -0.5;
 					if (PositiontoGo.x >= (int)original_pos.x)
@@ -163,7 +181,7 @@ void Enemy_Zombie::Move(float dt)
 				}
 				else
 				{
-					speed.x = 200 * dt;
+					speed.x = path_speed * dt;
 					original_pos.x += speed.x;
 					scale = 0.5;
 					if (PositiontoGo.x <= (int)original_pos.x)
