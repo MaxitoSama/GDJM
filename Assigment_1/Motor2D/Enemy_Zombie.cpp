@@ -51,7 +51,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Entity(x, y)
 	dead.PushBack({ 3148, 0, 380, 367 });
 	dead.PushBack({ 3556, 0, 390, 367 });
 	dead.speed = 30.0f;
-	dead.loop = true;
+	dead.loop = false;
 
 	//walking
 	walking.PushBack({ 11, 809, 264, 361 });
@@ -102,6 +102,8 @@ bool Enemy_Zombie::Awake(pugi::xml_node& entity_config)
 	left= zombie.child("left").attribute("value").as_bool(false);
 	going = zombie.child("going").attribute("value").as_bool(false);
 	go_x = zombie.child("go_x").attribute("value").as_bool(false);
+	alive = zombie.child("alive").attribute("value").as_bool(true);
+	die = zombie.child("dead").attribute("value").as_bool(false);
 
 	bool ret = true;
 
@@ -116,112 +118,124 @@ Enemy_Zombie::~Enemy_Zombie()
 
 void Enemy_Zombie::Move(float dt)
 {
-	iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y+10 };
-	
-	
-	original_pos.y += speed.y*dt;
-	
-	if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x)<=500 && !going)
+	if (alive)
 	{
-		going	= true;
-		go_x	= true;
+		iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y + 10 };
 
-		iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y};
-		App->pathfinding->CreatePath(enemyposition, player);
-		App->pathfinding->Path(App->entities->player->original_pos.x, App->entities->player->original_pos.y,Enemypath);
-		Timepath = SDL_GetTicks() + 100;
-	}
-	
 
-	if (!going && abs((int)App->entities->player->original_pos.x - (int)original_pos.x) > 500)
-	{
-		animation = &walking;
+		original_pos.y += speed.y*dt;
 
-		if(original_pos.x<(float)initial_pos.x+150 && right==true)
+		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) <= 500 && !going)
 		{
-			speed.x = idle_speed * dt;
-			original_pos.x += speed.x;
-			scale = 0.5;
-			if (original_pos.x >= (float)initial_pos.x + 150)
+			going = true;
+			go_x = true;
+
+			iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y };
+			App->pathfinding->CreatePath(enemyposition, player);
+			App->pathfinding->Path(App->entities->player->original_pos.x, App->entities->player->original_pos.y, Enemypath);
+			Timepath = SDL_GetTicks() + 100;
+		}
+
+
+		if (!going && abs((int)App->entities->player->original_pos.x - (int)original_pos.x) > 500)
+		{
+			animation = &walking;
+
+			if (original_pos.x < (float)initial_pos.x + 150 && right == true)
 			{
-				left = true;
-				right = false;
+				speed.x = idle_speed * dt;
+				original_pos.x += speed.x;
+				scale = 0.5;
+				if (original_pos.x >= (float)initial_pos.x + 150)
+				{
+					left = true;
+					right = false;
+				}
+			}
+			if (original_pos.x > initial_pos.x - 150 && left == true)
+			{
+				speed.x = -idle_speed * dt;
+				original_pos.x += speed.x;
+				scale = -0.5;
+				if (original_pos.x <= (float)initial_pos.x - 150)
+				{
+					left = false;
+					right = true;
+				}
 			}
 		}
-		if(original_pos.x>initial_pos.x - 150 && left == true)
+
+		else
 		{
-			speed.x = -idle_speed * dt;
-			original_pos.x +=speed.x;
-			scale = -0.5;
-			if (original_pos.x <= (float)initial_pos.x - 150)
+
+			if (enemyposition.x != (int)App->entities->player->original_pos.x && enemyposition.y != (int)App->entities->player->original_pos.y)
 			{
-				left = false;
-				right = true;
+				iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);
+
+				if (go_x)
+				{
+					if (PositiontoGo.x < (int)original_pos.x)
+					{
+						speed.x = -path_speed * dt;
+						original_pos.x += speed.x;
+						scale = -0.5;
+						if (PositiontoGo.x >= (int)original_pos.x)
+						{
+							go_x = false;
+						}
+					}
+					else
+					{
+						speed.x = path_speed * dt;
+						original_pos.x += speed.x;
+						scale = 0.5;
+						if (PositiontoGo.x <= (int)original_pos.x)
+						{
+							go_x = false;
+						}
+					}
+				}
+
+				if (!go_x)
+				{
+					pathcounter++;
+					if (pathcounter < Enemypath.Count())
+					{
+						go_x = true;
+					}
+					else
+					{
+						going = false;
+						pathcounter = 0;
+					}
+				}
 			}
 		}
-	}
 
+		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 400 && going)
+		{
+			going = false;
+			initial_pos.x = original_pos.x;
+			pathcounter = 0;
+		}
+
+		if (SDL_GetTicks() >= Timepath && (going))
+		{
+			going = false;
+		}
+
+		position = original_pos;
+		//LOG("Zombie pos %f", original_pos.x - App->entities->player->original_pos.x);
+	}
 	else
 	{
-
-		if (enemyposition.x != (int)App->entities->player->original_pos.x && enemyposition.y != (int)App->entities->player->original_pos.y)
+		animation = &dead;
+		if (dead.Finished() == true)
 		{
-			iPoint PositiontoGo = App->map->MapToWorld(Enemypath[pathcounter].x, Enemypath[pathcounter].y);
-
-			if (go_x)
-			{
-				if (PositiontoGo.x < (int)original_pos.x)
-				{
-					speed.x = -path_speed * dt;
-					original_pos.x += speed.x;
-					scale = -0.5;
-					if (PositiontoGo.x >= (int)original_pos.x)
-					{
-						go_x = false;
-					}
-				}
-				else
-				{
-					speed.x = path_speed * dt;
-					original_pos.x += speed.x;
-					scale = 0.5;
-					if (PositiontoGo.x <= (int)original_pos.x)
-					{
-						go_x = false;
-					}
-				}
-			}
-
-			if (!go_x)
-			{
-				pathcounter++;
-				if (pathcounter < Enemypath.Count())
-				{
-					go_x = true;
-				}
-				else
-				{
-					going = false;
-					pathcounter = 0;
-				}
-			}
+			die = true;
+			dead.Reset();
 		}
 	}
-
-	if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 400 && going)
-	{
-		going = false;
-		initial_pos.x = original_pos.x;
-		pathcounter = 0;
-	}
-	
-	if (SDL_GetTicks() >= Timepath && (going))
-	{
-		going = false;
-	}
-
-	position = original_pos;
-	LOG("Zombie pos %f", original_pos.x-App->entities->player->original_pos.x);
 }
 
 void Enemy_Zombie::DeadAnim()

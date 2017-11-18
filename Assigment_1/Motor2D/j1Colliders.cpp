@@ -36,6 +36,8 @@ j1Colliders::j1Colliders() : j1Module()
 	matrix[COLLIDER_PLAYER][COLLIDER_WIN] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_WIN2] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_HEAD] = true;
+
 	
 	matrix[COLLIDER_DEATH][COLLIDER_DEATH] = false;
 	matrix[COLLIDER_DEATH][COLLIDER_WALL] = true;
@@ -82,7 +84,7 @@ j1Colliders::j1Colliders() : j1Module()
 	matrix[COLLIDER_ENEMY][COLLIDER_FLOOR] = false;
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = true;
 
-
+	matrix[COLLIDER_HEAD][COLLIDER_PLAYER] = true;
 }
 
 // Destructor
@@ -206,6 +208,16 @@ bool j1Colliders::Update(float dt)
 					{
 						App->entities->entities[i]->original_pos.y -= distance_4;
 					}
+					if (c2 == App->entities->entities[i]->GetColliderHead() && c1->type == COLLIDER_FEET && c2->type == COLLIDER_HEAD && c1->CheckFutureFallColision(c2->rect, distance_4, dt, App->entities->entities[i]->speed.y) == true)
+					{
+						LOG("DEAD");
+						App->entities->entities[i]->collider->to_delete = true;
+						App->entities->entities[i]->collider = nullptr;
+						App->entities->entities[i]->collider_head->to_delete = true;
+						App->entities->entities[i]->collider_head = nullptr;
+						//App->entities->entities[i]->speed.y = 0;
+						App->entities->entities[i]->alive = false;
+					}
 				}
 			}
 		}
@@ -264,7 +276,7 @@ void j1Colliders::DebugDraw()
 				App->render->DrawQuad(colliders[i]->rect, 100, 206, 250, alpha, false);
 				break;
 			case COLLIDER_HEAD: // black
-				App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha, false);
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha, false);
 				break;
 			}
 		}

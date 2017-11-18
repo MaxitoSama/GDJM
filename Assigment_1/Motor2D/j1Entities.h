@@ -56,8 +56,6 @@ private:
 
 private:
 	EnemyInfo queue[MAX_ENEMIES];
-	
-
 };
 
 #endif // __J1ENEMIES_H__

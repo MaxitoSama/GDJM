@@ -22,25 +22,27 @@ public:
 		//the animation is inverted, but remains the same.
 		BIG1 = 1,
 	};
-	fPoint position;
-	fPoint collider_pos;
-	fPoint original_pos;
-	SDL_Texture* sprites = nullptr;
-	SDL_Texture* NormalSprite = nullptr;
-	SDL_Texture* Shoot = nullptr;
+	fPoint			position;
+	fPoint			collider_pos;
+	fPoint			original_pos;
+	SDL_Texture*	sprites = nullptr;
+	SDL_Texture*	NormalSprite = nullptr;
+	SDL_Texture*	Shoot = nullptr;
 
 
-	float scale;
-	fPoint speed;
-	int colliderXsize;
-	fPoint initial_pos;
-	bool left;
-	bool right;
+	float			scale;
+	fPoint			speed;
+	int				colliderXsize;
+	fPoint			initial_pos;
+	bool			left;
+	bool			right;
+	bool			alive = true;
+	bool			die = false;
 	
-	Collider* collider = nullptr;
-	Collider* collider_feet = nullptr;
-	Collider* collider_head = nullptr;
-	int collision_distance_1;
+	Collider*		collider = nullptr;
+	Collider*		collider_feet = nullptr;
+	Collider*		collider_head = nullptr;
+	int				collision_distance_1;
 
 	p2DynArray<iPoint>	Enemypath;
 	uint				Timepath=0;
@@ -53,8 +55,9 @@ public:
 	Entity(int x, int y);
 	virtual ~Entity();
 
-	const Collider* GetCollider() const;
-	const Collider* GetColliderFloor() const;
+	const Collider*		GetCollider() const;
+	const Collider*		GetColliderFloor() const;
+	const Collider*		GetColliderHead() const;
 
 	virtual bool Awake(pugi::xml_node&);
 	virtual void Move(float dt) {};

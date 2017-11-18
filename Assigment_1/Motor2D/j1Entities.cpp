@@ -106,6 +106,15 @@ bool j1Entities::Update(float dt)
 		}
 	}
 
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (entities[i] != nullptr && entities[i]->die)
+		{
+			delete entities[i];
+			entities[i] = nullptr;
+		}
+	}
+
 
 	return true;
 }

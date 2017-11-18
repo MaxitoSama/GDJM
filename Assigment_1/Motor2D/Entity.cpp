@@ -37,7 +37,10 @@ const Collider* Entity::GetColliderFloor() const
 {
 	return collider_feet;
 }
-
+const Collider* Entity::GetColliderHead() const
+{
+	return collider_head;
+}
 
 void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 {
@@ -63,7 +66,7 @@ void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 
 	if (collider_head != nullptr)
 	{
-		collider_head->SetPos(position.x + 30, position.y-1);
+		collider_head->SetPos(position.x + 30, position.y-3);
 	}
 		
 
@@ -94,5 +97,5 @@ void Entity::OnCollision(Collider* collider)
 
 void Entity::DeadAnim()
 {
-	animation = nullptr;
+
 }
