@@ -29,10 +29,6 @@ public:
 	SDL_Texture* NormalSprite = nullptr;
 	SDL_Texture* Shoot = nullptr;
 
-	//Time between shots
-	//Uint32 Shot_now;
-	//Uint32 Shot_Start_time;
-	//Uint32 Shot_Total_time;
 
 	float scale;
 	fPoint speed;
@@ -47,6 +43,7 @@ public:
 	int collision_distance_1;
 
 	p2DynArray<iPoint>	Enemypath;
+	uint				Timepath=0;
 	uint				pathcounter = 0;
 	bool				going = false;
 	
@@ -65,6 +62,7 @@ public:
 	virtual void DeadAnim();
 	virtual void Draw(SDL_Texture* sprites, float direction, int ColliderPosition);
 	virtual void OnCollision(Collider* collider);
+
 };
 
 #endif // __ENEMY_H__

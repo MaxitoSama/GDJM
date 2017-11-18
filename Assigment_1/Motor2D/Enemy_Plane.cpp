@@ -13,8 +13,6 @@ Enemy_Plane::Enemy_Plane(int x, int y): Entity(x, y)
 {
 	//Open all textures
 	NormalSprite = App->tex->Load("assets/enemies/plane/plane.png");
-	//RedSprite = App->tex->Load("assets/enemies/hitten/hitten_red_Balloon.png");
-	//WhiteSprite = App->tex->Load("assets/enemies/hitten/hitten_white_Balloon.png");
 
 	//Set animation steps, speed and loop
 	anim.PushBack({ 49, 40, 639, 412 });
@@ -93,9 +91,11 @@ void Enemy_Plane::Move(float dt)
 		go_x = true;
 		go_y = true;
 		goback = false;
+
 		iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y + 50 };
 		App->pathfinding->CreatePath(enemyposition, player);
 		App->pathfinding->Path(App->entities->player->original_pos.x, App->entities->player->original_pos.y, Enemypath);
+		Timepath = SDL_GetTicks()+100;
 	}
 
 	if (!going && !goback)
@@ -229,6 +229,12 @@ void Enemy_Plane::Move(float dt)
 			App->pathfinding->CreatePath(enemyposition, start);
 			App->pathfinding->Path(start.x,start.y, Enemypath);
 		}
+	}
+
+	if (SDL_GetTicks() >= Timepath && (going))
+	{
+		going = false;
+		goback = false;
 	}
 }
 

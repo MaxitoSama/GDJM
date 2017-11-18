@@ -16,6 +16,10 @@ public:
 	void Move(float dt);
 	void DeadAnim();
 
+private:
+
+	void timerpathcounter();
+
 public:
 
 	Animation anim;

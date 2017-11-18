@@ -125,24 +125,24 @@ void Enemy_Zombie::Move(float dt)
 	{
 		going	= true;
 		go_x	= true;
-		pathcounter = 0;
 
 		iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y};
 		App->pathfinding->CreatePath(enemyposition, player);
 		App->pathfinding->Path(App->entities->player->original_pos.x, App->entities->player->original_pos.y,Enemypath);
+		Timepath = SDL_GetTicks() + 100;
 	}
 	
 
-	if (!going)
+	if (!going && abs((int)App->entities->player->original_pos.x - (int)original_pos.x) > 500)
 	{
 		animation = &walking;
 
-		if(original_pos.x<initial_pos.x+150 && right==true)
+		if(original_pos.x<(float)initial_pos.x+150 && right==true)
 		{
 			speed.x = idle_speed * dt;
 			original_pos.x += speed.x;
 			scale = 0.5;
-			if (original_pos.x >= initial_pos.x + 150)
+			if (original_pos.x >= (float)initial_pos.x + 150)
 			{
 				left = true;
 				right = false;
@@ -153,7 +153,7 @@ void Enemy_Zombie::Move(float dt)
 			speed.x = -idle_speed * dt;
 			original_pos.x +=speed.x;
 			scale = -0.5;
-			if (original_pos.x <= initial_pos.x - 150)
+			if (original_pos.x <= (float)initial_pos.x - 150)
 			{
 				left = false;
 				right = true;
@@ -202,17 +202,24 @@ void Enemy_Zombie::Move(float dt)
 				else
 				{
 					going = false;
+					pathcounter = 0;
 				}
 			}
 		}
 	}
 
-	if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) > 501 && going)
+	if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 400 && going)
 	{
 		going = false;
 		initial_pos.x = original_pos.x;
+		pathcounter = 0;
 	}
 	
+	if (SDL_GetTicks() >= Timepath && (going))
+	{
+		going = false;
+	}
+
 	position = original_pos;
 	LOG("Zombie pos %f", original_pos.x-App->entities->player->original_pos.x);
 }
