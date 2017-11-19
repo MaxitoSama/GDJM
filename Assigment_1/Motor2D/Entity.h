@@ -4,7 +4,11 @@
 #include "p2Point.h"
 #include "p2DynArray.h"
 #include "p2animation.h"
+#include "p2Log.h"
 #include "SDL/include/SDL_timer.h"
+#include "SDL_mixer\include\SDL_mixer.h"
+
+#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
 struct SDL_Texture;
 struct Collider;

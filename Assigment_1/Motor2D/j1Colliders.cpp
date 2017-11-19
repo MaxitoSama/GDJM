@@ -3,13 +3,11 @@
 #include "j1Input.h"
 #include "j1Render.h"
 #include "j1Colliders.h"
-#include "j1Player.h"
 #include "j1Entities.h"
 #include "Entity.h"
 #include "Player.h"
 #include "j1Pathfinding.h"
 #include "j1Scene.h"
-#include "j1Scene2.h"
 
 j1Colliders::j1Colliders() : j1Module()
 {
@@ -17,74 +15,6 @@ j1Colliders::j1Colliders() : j1Module()
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		colliders[i] = nullptr;
-
-	matrix[COLLIDER_WALL][COLLIDER_WALL] = false;
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_WALL][COLLIDER_DEATH] = false;
-	matrix[COLLIDER_WALL][COLLIDER_FLOOR] = false;
-	matrix[COLLIDER_WALL][COLLIDER_FEET] = false;
-	matrix[COLLIDER_WALL][COLLIDER_WIN] = false;
-	matrix[COLLIDER_WALL][COLLIDER_WIN2] = false;
-	matrix[COLLIDER_WALL][COLLIDER_ENEMY] = true;
-
-
-	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_DEATH] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_FLOOR] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_FEET] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_WIN] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_WIN2] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_HEAD] = true;
-
-	
-	matrix[COLLIDER_DEATH][COLLIDER_DEATH] = false;
-	matrix[COLLIDER_DEATH][COLLIDER_WALL] = true;
-	matrix[COLLIDER_DEATH][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_DEATH][COLLIDER_FLOOR] = true;
-	matrix[COLLIDER_DEATH][COLLIDER_FEET] = true;
-	matrix[COLLIDER_DEATH][COLLIDER_WIN] = false;
-	matrix[COLLIDER_DEATH][COLLIDER_WIN2] = false;
-
-	matrix[COLLIDER_FLOOR][COLLIDER_FLOOR] = false;
-	matrix[COLLIDER_FLOOR][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_FLOOR][COLLIDER_DEATH] = false;
-	matrix[COLLIDER_FLOOR][COLLIDER_WALL] = false;
-	matrix[COLLIDER_FLOOR][COLLIDER_FEET] = true;
-	matrix[COLLIDER_FLOOR][COLLIDER_WIN] = false;
-	matrix[COLLIDER_FLOOR][COLLIDER_WIN2] = false;
-	matrix[COLLIDER_FLOOR][COLLIDER_ENEMY] = true;
-
-	matrix[COLLIDER_FEET][COLLIDER_FEET] = false;
-	matrix[COLLIDER_FEET][COLLIDER_WALL] = false;
-	matrix[COLLIDER_FEET][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_FEET][COLLIDER_DEATH] = true;
-	matrix[COLLIDER_FEET][COLLIDER_FLOOR] = true;
-	matrix[COLLIDER_FEET][COLLIDER_WIN] = true;
-	matrix[COLLIDER_FEET][COLLIDER_WIN2] = true;
-
-	matrix[COLLIDER_WIN][COLLIDER_WIN] = false;
-	matrix[COLLIDER_WIN][COLLIDER_WALL] = false;
-	matrix[COLLIDER_WIN][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_WIN][COLLIDER_DEATH] = true;
-	matrix[COLLIDER_WIN][COLLIDER_FLOOR] = true;
-	matrix[COLLIDER_WIN][COLLIDER_FEET] = true;
-	matrix[COLLIDER_WIN][COLLIDER_WIN2] = false;
-
-	matrix[COLLIDER_WIN2][COLLIDER_WIN2] = false;
-	matrix[COLLIDER_WIN2][COLLIDER_WALL] = false;
-	matrix[COLLIDER_WIN2][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_WIN2][COLLIDER_DEATH] = true;
-	matrix[COLLIDER_WIN2][COLLIDER_FLOOR] = true;
-	matrix[COLLIDER_WIN2][COLLIDER_FEET] = true;
-	matrix[COLLIDER_WIN2][COLLIDER_WIN] = false;
-
-	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY] = false;
-	matrix[COLLIDER_ENEMY][COLLIDER_FLOOR] = false;
-	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = true;
-
-	matrix[COLLIDER_HEAD][COLLIDER_PLAYER] = true;
 }
 
 // Destructor
@@ -173,6 +103,33 @@ bool j1Colliders::Update(float dt)
 				App->scene->ChangeScene(60, 215);
 			}
 			
+			for (uint i = 0; i < MAX_ENEMIES; ++i)
+			{
+				if (App->entities->entities[i] != nullptr)
+				{
+					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_WALL && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_5, App->entities->entities[i]->speed.x) == true)
+					{
+						App->entities->entities[i]->original_pos.x -= distance_5;
+					}
+					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect, distance_4, dt, App->entities->entities[i]->speed.y) == true)
+					{
+						App->entities->entities[i]->original_pos.y -= distance_4;
+					}
+					if (c2 == App->entities->entities[i]->GetColliderHead() && c1->type == COLLIDER_FEET && c2->type == COLLIDER_HEAD && c1->CheckFutureFallColision(c2->rect, distance_4, dt, App->entities->entities[i]->speed.y) == true)
+					{
+						if (!App->entities->player->dead)
+						{
+							App->entities->player->original_pos.y -= distance_4 + 900 * dt;
+							App->entities->entities[i]->collider->to_delete = true;
+							App->entities->entities[i]->collider = nullptr;
+							App->entities->entities[i]->collider_head->to_delete = true;
+							App->entities->entities[i]->collider_head = nullptr;
+							App->entities->entities[i]->alive = false;
+						}
+					}
+				}
+			}
+
 			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_6, App->entities->player->speed.x) == true && !App->entities->player->GOD)
 			{
 				App->entities->player->dead = true;
@@ -191,32 +148,6 @@ bool j1Colliders::Update(float dt)
 					{
 						App->entities->player->Jump = false;
 						App->entities->player->fall = false;
-					}
-				}
-				
-			}
-
-			for (uint i = 0; i < MAX_ENEMIES; ++i)
-			{
-				if (App->entities->entities[i] != nullptr)
-				{
-					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_WALL && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_5, App->entities->entities[i]->speed.x) == true)
-					{
-						App->entities->entities[i]->original_pos.x -= distance_5;
-					}
-					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect, distance_4, dt, App->entities->entities[i]->speed.y) == true)
-					{
-						App->entities->entities[i]->original_pos.y -= distance_4;
-					}
-					if (c2 == App->entities->entities[i]->GetColliderHead() && c1->type == COLLIDER_FEET && c2->type == COLLIDER_HEAD && c1->CheckFutureFallColision(c2->rect, distance_4, dt, App->entities->entities[i]->speed.y) == true)
-					{
-						LOG("DEAD");
-						App->entities->entities[i]->collider->to_delete = true;
-						App->entities->entities[i]->collider = nullptr;
-						App->entities->entities[i]->collider_head->to_delete = true;
-						App->entities->entities[i]->collider_head = nullptr;
-						//App->entities->entities[i]->speed.y = 0;
-						App->entities->entities[i]->alive = false;
 					}
 				}
 			}
@@ -302,23 +233,23 @@ bool j1Colliders::checkColisionList(Collider * enemCollider)
 	return false;
 }
 
-void j1Colliders::PlayerFloorCollision(Collider* collider_floor, Collider* collider_feet, float dt)
-{
-	if (collider_feet!=App->entities->player->collider_feet
-		&& collider_floor->type == COLLIDER_FLOOR
-		&& collider_feet->type == COLLIDER_FEET
-		&& collider_floor->CheckFutureFallColision(collider_feet->rect, distance_1, dt, App->entities->player->gravity) == true) //en els arguments llargs posar funció
-	{
-		App->player->position.y -= distance_1;
-		App->player->dead = false;
-
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
-		{
-			App->player->Jump = false;
-			App->player->fall = false;
-		}
-	}
-}
+//void j1Colliders::PlayerFloorCollision(Collider* collider_floor, Collider* collider_feet, float dt)
+//{
+//	if (collider_feet!=App->entities->player->collider_feet
+//		&& collider_floor->type == COLLIDER_FLOOR
+//		&& collider_feet->type == COLLIDER_FEET
+//		&& collider_floor->CheckFutureFallColision(collider_feet->rect, distance_1, dt, App->entities->player->gravity) == true) //en els arguments llargs posar funció
+//	{
+//		App->player->position.y -= distance_1;
+//		App->player->dead = false;
+//
+//		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+//		{
+//			App->player->Jump = false;
+//			App->player->fall = false;
+//		}
+//	}
+//}
 
 // Called before quitting
 bool j1Colliders::CleanUp()

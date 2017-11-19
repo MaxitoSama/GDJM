@@ -13,16 +13,10 @@
     <ClCompile Include="j1Map.cpp">
       <Filter>Developement  ========\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="j1Particle.cpp">
-      <Filter>Developement  ========\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="j1Pathfinding.cpp">
       <Filter>Developement  ========\Modules</Filter>
     </ClCompile>
     <ClCompile Include="j1PerfTimer.cpp">
-      <Filter>Developement  ========\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="j1Player.cpp">
       <Filter>Developement  ========\Modules</Filter>
     </ClCompile>
     <ClCompile Include="j1Render.cpp">
@@ -36,9 +30,6 @@
     </ClCompile>
     <ClCompile Include="j1Window.cpp">
       <Filter>Developement  ========\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="j1Scene2.cpp">
-      <Filter>Developement  ========\Scene</Filter>
     </ClCompile>
     <ClCompile Include="j1Scene.cpp">
       <Filter>Developement  ========\Scene</Filter>
@@ -84,16 +75,10 @@
     <ClInclude Include="j1Map.h">
       <Filter>Developement  ========\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="j1Particle.h">
-      <Filter>Developement  ========\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="j1Pathfinding.h">
       <Filter>Developement  ========\Modules</Filter>
     </ClInclude>
     <ClInclude Include="j1PerfTimer.h">
-      <Filter>Developement  ========\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="j1Player.h">
       <Filter>Developement  ========\Modules</Filter>
     </ClInclude>
     <ClInclude Include="j1Render.h">
@@ -107,9 +92,6 @@
     </ClInclude>
     <ClInclude Include="j1Window.h">
       <Filter>Developement  ========\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="j1Scene2.h">
-      <Filter>Developement  ========\Scene</Filter>
     </ClInclude>
     <ClInclude Include="j1Scene.h">
       <Filter>Developement  ========\Scene</Filter>

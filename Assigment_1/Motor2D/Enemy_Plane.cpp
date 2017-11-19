@@ -90,10 +90,8 @@ void Enemy_Plane::Move(float dt)
 		iPoint enemyposition = { (int)original_pos.x,(int)original_pos.y };
 
 		position = original_pos;
-		//original_pos.y += speed.y;
 
-
-		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) <= 600 && !going)
+		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) <= 600 && !going && !App->entities->player->GOD)
 		{
 			going = true;
 			go_x = true;

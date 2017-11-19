@@ -6,7 +6,6 @@
 #include "j1Textures.h"
 #include "j1Colliders.h"
 #include "j1Pathfinding.h"
-#include "j1Player.h"
 #include "j1Map.h"
 #include <math.h>
 
@@ -546,7 +545,7 @@ bool j1Map::LoadBackground(pugi::xml_node& Image_node, Image_Background* backgro
 	background->name = Image_node.attribute("name").as_string();
 	background->width = Image_node.child("image").attribute("width").as_uint();
 	background->height = Image_node.child("image").attribute("height").as_uint();
-	background->Pvelocity =App->player->speed *(-1);
+	//background->Pvelocity =App->player->speed *(-1);
 
 	if (image == NULL)
 	{

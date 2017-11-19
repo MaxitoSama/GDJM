@@ -2,7 +2,6 @@
 #include "Entity.h"
 #include "j1Entities.h"
 #include "j1Colliders.h"
-#include "j1Particle.h"
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "Player.h"
@@ -52,6 +51,11 @@ void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 		if (collider->type == COLLIDER_PLAYER && App->entities->player->slide)
 		{
 			collider->SetPos((int)position.x, (int)position.y+40);
+		}
+
+		if (collider->type == COLLIDER_ENEMY)
+		{
+			collider->SetPos((int)position.x, (int)position.y + 10);
 		}
 		else
 		{

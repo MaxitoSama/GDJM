@@ -4,7 +4,6 @@
 #include "j1Render.h"
 #include "j1Colliders.h"
 #include "j1Entities.h"
-#include "j1Particle.h"
 #include "j1Textures.h"
 #include "j1Scene.h"
 #include "Entity.h"

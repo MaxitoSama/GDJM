@@ -66,22 +66,12 @@ Enemy_Zombie::Enemy_Zombie(int x, int y): Entity(x, y)
 	walking.PushBack({ 2596, 809, 264, 360 });
 	walking.speed = 30.0f;
 	walking.loop = true;
-	
-	//Set path
-	//path.PushBack({ 0.0f, 0.0f}, 40, &walking); //Si esta quiet en un punt ha de tenir velocitat y = 0.2 per moures a la mateixa velocitat que l'overlay
-	//path.PushBack({ 0.0f, -0.3f }, 240, &anim);
-	//path.PushBack({ 0.0f, 0.9f }, 60, &anim);
-	//path.PushBack({ 0.0f, -0.3f }, 350, &anim);
-	//path.PushBack({ 0.0f, 0.9f }, 600, &anim);
-
-	//Set lives, initial_hp, points adn extra_anim
-	
 
 	animation = &walking;
 	colliderXsize = 120;
 	initial_pos.x = original_pos.x;
 
-	collider = App->colliders->AddCollider({ (int)(position.x-120), (int)position.y, 120, 360/2 }, COLLIDER_ENEMY, (j1Module*)App->entities);
+	collider = App->colliders->AddCollider({ (int)(position.x-10), (int)position.y - 10, 120, 360/2-10 }, COLLIDER_ENEMY, (j1Module*)App->entities);
 	collider_head = App->colliders->AddCollider({ (int)(position.x - 120), (int)position.y, 50, 20 }, COLLIDER_HEAD, (j1Module*)App->entities);
 }
 
@@ -225,7 +215,6 @@ void Enemy_Zombie::Move(float dt)
 		}
 
 		position = original_pos;
-		//LOG("Zombie pos %f", original_pos.x - App->entities->player->original_pos.x);
 	}
 	else
 	{

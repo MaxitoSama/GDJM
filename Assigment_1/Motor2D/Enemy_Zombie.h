@@ -3,7 +3,6 @@
 
 #include "Entity.h"
 #include "p2Path.h"
-#include "j1Particle.h"
 
 class Enemy_Zombie : public Entity
 {
@@ -15,10 +14,6 @@ public:
 	bool Awake(pugi::xml_node&);
 	void Move(float dt);
 	void DeadAnim();
-
-private:
-
-	void timerpathcounter();
 
 public:
 

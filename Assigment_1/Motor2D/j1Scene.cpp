@@ -10,8 +10,6 @@
 #include "j1Colliders.h"
 #include "j1Pathfinding.h"
 #include "j1Scene.h"
-#include "j1Scene2.h"
-#include "j1Player.h"
 #include "j1Entities.h"
 #include "Player.h"
 
@@ -122,7 +120,7 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
 	{
 		App->pathfinding->ResetPath();
-		iPoint PlayerPosition = { App->player->position.x, App->player->position.y+50 };
+		iPoint PlayerPosition = { (int)App->entities->player->original_pos.x, (int)App->entities->player->position.y+50 };
 		
 		if (App->pathfinding->CreatePath({ 0,0 }, PlayerPosition) != -1)
 		{
@@ -146,22 +144,22 @@ bool j1Scene::Update(float dt)
 	//Camera Movement--------------------------------------
 	int map_height = App->map->data.height * App->map->data.tile_height;
 	int map_width = App->map->data.width * App->map->data.tile_width;
-	int win_height = App->player->win_height;
-	int win_width = App->player->win_width;
+	int win_height = App->entities->player->win_height;
+	int win_width = App->entities->player->win_width;
 	int win_position_y = App->render->camera.y*-1;
 	int limit_y = map_height - win_height;
 	int limit_x = map_width - win_width;
 
-	if (App->entities->player->original_pos.x > App->player->win_width / 2 && App->entities->player->original_pos.x <= limit_x)
+	if (App->entities->player->original_pos.x > win_width / 2 && App->entities->player->original_pos.x <= limit_x)
 	{
 		App->render->camera.x = App->entities->player->win_width / 2 - App->entities->player->original_pos.x;
 	}
 	
 	if (!App->win->fullscreen_window && App->entities->player->original_pos.y > win_height / 2 && win_position_y+win_height <map_height)
 	{
-		if (App->entities->player->original_pos.y + App->player->win_height / 2 < map_height)
+		if (App->entities->player->original_pos.y + win_height / 2 < map_height)
 		{
-			App->render->camera.y = -App->entities->player->original_pos.y + App->player->win_height / 2;
+			App->render->camera.y = -App->entities->player->original_pos.y + win_height / 2;
 		}
 	}
 

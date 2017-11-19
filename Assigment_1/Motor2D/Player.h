@@ -3,7 +3,6 @@
 
 #include "Entity.h"
 #include "p2Path.h"
-#include "j1Particle.h"
 
 #define BULLET_SPEED 5
 #define GRENADE_SPEED 1.3f

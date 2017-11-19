@@ -3,7 +3,6 @@
 
 #include "Entity.h"
 #include "p2Path.h"
-#include "j1Particle.h"
 
 class Enemy_Plane : public Entity
 {

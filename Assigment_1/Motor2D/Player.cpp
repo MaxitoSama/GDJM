@@ -9,7 +9,6 @@
 #include "j1Render.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
-#include "j1Player.h"
 
 
 Player::Player(int x, int y) : Entity(x, y)
