@@ -22,12 +22,13 @@ protected:
 
 public:
 
-	Entity(int x, int y);
+	Entity(int x, int y,ENTITY_TYPES type);
 	virtual ~Entity();
 
 	const Collider*		GetCollider() const;
 	const Collider*		GetColliderFloor() const;
 	const Collider*		GetColliderHead() const;
+	const ENTITY_TYPES	GetType()const;
 
 	bool				Awake(pugi::xml_node&);
 	void				Draw(SDL_Texture* sprites, float direction, int ColliderPosition);
@@ -36,6 +37,8 @@ public:
 
 public:
 	
+	ENTITY_TYPES	type;
+
 	fPoint			position = { 0.0f,0.0f };
 	fPoint			collider_pos = { 0.0f,0.0f };
 	fPoint			original_pos = { 0.0f,0.0f };

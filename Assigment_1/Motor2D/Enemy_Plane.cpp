@@ -9,10 +9,8 @@
 #include "j1Entities.h"
 #include "Player.h"
 
-Enemy_Plane::Enemy_Plane(int x, int y): Entity(x, y)
+Enemy_Plane::Enemy_Plane(int x, int y, ENTITY_TYPES type): Entity(x, y,type)
 {
-	//Open all textures
-	NormalSprite = App->tex->Load("assets/enemies/plane/plane.png");
 
 	//Set animation steps, speed and loop
 	anim.PushBack({ 49, 40, 639, 412 });

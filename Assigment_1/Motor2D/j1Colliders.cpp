@@ -54,37 +54,30 @@ bool j1Colliders::Update(float dt)
 	Collider* c1;
 	Collider* c2;
 
-
-	float distance_2;
-	float distance_3;
-	float distance_4;
-	float distance_5;
-	float distance_6;
-
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		// skip empty colliders
-		if (colliders[i] == nullptr || colliders[i]->type==COLLIDER_NONE)
+		if (colliders[i] == nullptr || colliders[i]->type == COLLIDER_NONE)
+		{
 			continue;
+		}
 
 		c1 = colliders[i];
 
-		// avoid checking collisions already checked
 		for (uint k = i + 1; k < MAX_COLLIDERS; ++k)
 		{
 			// skip empty colliders
 			if (colliders[k] == nullptr)
+			{
 				continue;
+			}
 
 			c2 = colliders[k];
 
-			//PlayerFloorCollision(c1, c2, dt);
-
-
-			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect,distance_2, App->entities->player->speed.x) == true
+			if (c1->type == COLLIDER_WALL && c2->type == COLLIDER_PLAYER && c1->CheckFutureCrashColision(c2->rect, distance, App->entities->player->speed.x) == true
 				&& (App->input->GetKey(SDL_SCANCODE_D )==KEY_REPEAT|| App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT))
 			{
-				App->entities->player->original_pos.x -= distance_2;
+				App->entities->player->original_pos.x -= distance;
 			}
 
 			if (c1->type == COLLIDER_DEATH && c2->type == COLLIDER_PLAYER && c1->CheckCollision(c2->rect) == true)
@@ -107,19 +100,19 @@ bool j1Colliders::Update(float dt)
 			{
 				if (App->entities->entities[i] != nullptr)
 				{
-					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_WALL && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_5, App->entities->entities[i]->speed.x) == true)
+					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_WALL && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance, App->entities->entities[i]->speed.x) == true)
 					{
-						App->entities->entities[i]->original_pos.x -= distance_5;
+						App->entities->entities[i]->original_pos.x -= distance;
 					}
-					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect, distance_4, dt, App->entities->entities[i]->speed.y) == true)
+					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect, distance, dt, App->entities->entities[i]->speed.y) == true)
 					{
-						App->entities->entities[i]->original_pos.y -= distance_4;
+						App->entities->entities[i]->original_pos.y -= distance;
 					}
-					if (c2 == App->entities->entities[i]->GetColliderHead() && c1->type == COLLIDER_FEET && c2->type == COLLIDER_HEAD && c1->CheckFutureFallColision(c2->rect, distance_4, dt, App->entities->entities[i]->speed.y) == true)
+					if (c2 == App->entities->entities[i]->GetColliderHead() && c1->type == COLLIDER_FEET && c2->type == COLLIDER_HEAD && c1->CheckFutureFallColision(c2->rect, distance, dt, App->entities->entities[i]->speed.y) == true)
 					{
 						if (!App->entities->player->dead)
 						{
-							App->entities->player->original_pos.y -= distance_4 + 900 * dt;
+							App->entities->player->original_pos.y -= distance + 900 * dt;
 							App->entities->entities[i]->collider->to_delete = true;
 							App->entities->entities[i]->collider = nullptr;
 							App->entities->entities[i]->collider_head->to_delete = true;
@@ -130,18 +123,17 @@ bool j1Colliders::Update(float dt)
 				}
 			}
 
-			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance_6, App->entities->player->speed.x) == true && !App->entities->player->GOD)
+			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance, App->entities->player->speed.x) == true && !App->entities->player->GOD)
 			{
 				App->entities->player->dead = true;
 				App->entities->player->dead_by_entity= true;	
 			}
 
-			if ( App->entities->player != nullptr && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect, distance_3, dt, App->entities->player->gravity) == true)
+			if ( App->entities->player != nullptr && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect, distance, dt, App->entities->player->gravity) == true)
 			{
 				if(c2 == App->entities->player->collider_feet)
 				{
-					App->entities->OnCollision(c2, c1, distance_3);
-					App->entities->player->original_pos.y -= distance_3;
+					App->entities->player->original_pos.y -= distance;
 					App->entities->player->dead = false;
 
 					if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
@@ -251,7 +243,6 @@ bool j1Colliders::checkColisionList(Collider * enemCollider)
 //	}
 //}
 
-// Called before quitting
 bool j1Colliders::CleanUp()
 {
 	LOG("Freeing all colliders");

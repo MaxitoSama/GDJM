@@ -8,7 +8,7 @@
 #include "SDL/include/SDL_timer.h"
 #include "j1Audio.h"
 
-Entity::Entity(int x, int y) : position(x, y), original_pos(x, y), collider_pos(0, 0)
+Entity::Entity(int x, int y, ENTITY_TYPES type) : position(x, y), original_pos(x, y), collider_pos(0, 0),type(type)
 {
 
 }
@@ -40,10 +40,13 @@ const Collider* Entity::GetColliderHead() const
 {
 	return collider_head;
 }
+const ENTITY_TYPES Entity::GetType()const
+{
+	return type;
+}
 
 void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 {
-	//Red_now = SDL_GetTicks() - Red_Start_time;
 
 	if (collider != nullptr)
 	{
@@ -61,7 +64,6 @@ void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 		{
 			collider->SetPos((int)position.x, (int)position.y + 10);
 		}
-		
 	}
 
 	if (collider_feet != nullptr)
@@ -74,11 +76,8 @@ void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 		collider_head->SetPos(position.x + 30, position.y-3);
 	}
 		
-
 	if (animation != nullptr)
-	{
-		sprites = NormalSprite;
-		
+	{		
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()), direction, 1.0f);
 	}
 }

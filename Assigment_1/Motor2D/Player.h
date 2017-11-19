@@ -30,7 +30,7 @@ class Player : public Entity
 
 public:
 
-	Player(int x, int y);
+	Player(int x, int y, ENTITY_TYPES type);
 	~Player();
 
 	bool Awake(pugi::xml_node&);
@@ -40,8 +40,8 @@ public:
 	void Slide_Method(float dt);
 	float Acceleration_Method();
 
-	/*bool Load(pugi::xml_node&);
-	bool Save(pugi::xml_node&) const;*/
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
 
 
 public:

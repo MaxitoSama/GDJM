@@ -8,7 +8,7 @@ class Enemy_Zombie : public Entity
 {
 public:
 
-	Enemy_Zombie(int x, int y);
+	Enemy_Zombie(int x, int y, ENTITY_TYPES type);
 	~Enemy_Zombie();
 
 	bool Awake(pugi::xml_node&);

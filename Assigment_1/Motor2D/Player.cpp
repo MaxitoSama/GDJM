@@ -8,10 +8,11 @@
 #include "p2Point.h"
 #include "j1Render.h"
 #include "j1Map.h"
+#include "j1Scene.h"
 #include "j1Pathfinding.h"
 
 
-Player::Player(int x, int y) : Entity(x, y)
+Player::Player(int x, int y, ENTITY_TYPES type) : Entity(x, y,type)
 {
 	LOG("Loading Player Sheet");
 
@@ -169,11 +170,6 @@ Player::Player(int x, int y) : Entity(x, y)
 		death.speed = 20.0f;
 	}
 
-	
-
-	LOG("Loading Player Collider");
-	
-
 	//Init Screen vars----------------------------------------------------
 	win_width = App->win->screen_surface->w;
 	win_height = App->win->screen_surface->h;
@@ -233,7 +229,6 @@ bool Player::Start()
 {
 	LOG("Loading Player Sheet");
 
-	NormalSprite = App->tex->Load("assets/character/character.png");
 	godmode = App->tex->Load("assets/character/god_mode.png");
 
 	LOG("Loading Player Collider");
@@ -252,7 +247,7 @@ bool Player::Start()
 bool Player::Update(float dt)
 {
 	SDL_Event e;
-	position;
+
 	//MOVE_LEFT----------------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT  && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && !dead)
 	{
@@ -461,14 +456,6 @@ bool Player::Update(float dt)
 		}
 	}
 
-	/*
-	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
-	{
-		App->particles->bullet.speed.y = -01.0f;
-		App->particles->AddParticle(App->particles->bullet, original_pos.x, original_pos.y, COLLIDER_FEET);
-	}
-	*/
-
 	//Call Jump_Method-----------------------------------------
 	Jump_Method(dt);
 
@@ -500,7 +487,6 @@ bool Player::Update(float dt)
 	}
 
 	//Player Colliders Position--------------------------------
-	//collider->SetPos(original_pos.x, original_pos.y);
 	position = original_pos;
 
 	if ((App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) && App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
@@ -567,4 +553,35 @@ void Player::Slide_Method(float dt)
 	{
 		speed.x += 100 * dt;
 	}
+}
+
+bool Player::Load(pugi::xml_node& data)
+{
+	int map = data.child("player").attribute("Map").as_int();
+	int x = data.child("player").attribute("x").as_int();
+	int y = data.child("player").attribute("y").as_int();
+
+	if (Curr_map != map)
+	{
+		App->scene->ChangeScene(x, y);
+	}
+
+	else
+	{
+		original_pos.x = data.child("player").attribute("x").as_int();
+		original_pos.y = data.child("player").attribute("y").as_int();
+	}
+
+	return true;
+}
+
+bool Player::Save(pugi::xml_node& data) const
+{
+	pugi::xml_node playernode = data.append_child("player");
+
+	playernode.append_attribute("x") = original_pos.x;
+	playernode.append_attribute("y") = original_pos.y;
+	playernode.append_attribute("Map") = Curr_map;
+
+	return true;
 }

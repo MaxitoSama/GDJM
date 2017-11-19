@@ -37,11 +37,19 @@ bool j1Entities::Start()
 {
 	LOG("loading enemies");
 	// Create a prototype for each enemy available so we can copy them around
-	//sprites = App->textures->Load("rtype/enemies.png");
+
+	sprites_zombie = App->tex->Load("assets/enemies/zombie/zombie.png");
+	sprites_plane = App->tex->Load("assets/enemies/plane/plane.png");
+	sprites_player = App->tex->Load("assets/character/character.png");
+
 	if (player == nullptr)
 	{
-		player = new Player(10, 100);
+		player = new Player(10, 100,PLAYER);
 		player->Awake(entity_config);
+		player->Start();
+	}
+	else
+	{
 		player->Start();
 	}
 	
@@ -52,20 +60,19 @@ bool j1Entities::Start()
 bool j1Entities::PreUpdate()
 {
 	BROFILER_CATEGORY("PreUpdate Entities", Profiler::Color::Orange);
-	// check camera position to decide what to spawn
+	
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (queue[i].type != ENEMY_TYPES::NO_TYPE)
+		if (queue[i].type != ENTITY_TYPES::NO_TYPE)
 		{
 			if (-queue[i].y < App->render->camera.y + SPAWN_MARGIN)
 			{
 				SpawnEnemy(queue[i]);
-				queue[i].type = ENEMY_TYPES::NO_TYPE;
+				queue[i].type = ENTITY_TYPES::NO_TYPE;
 				LOG("Spawning enemy at %d", queue[i].y * SCREEN_SIZE);
 			}
 		}
 	}
-
 
 	return true;
 }
@@ -86,22 +93,21 @@ bool j1Entities::Update(float dt)
 	if (player != nullptr)
 	{
 		player->Update(dt);
-		player->Draw(player->sprites, player->scale, player->colliderXsize);
+		player->Draw(sprites_player, player->scale, player->colliderXsize);
 	}
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (entities[i] != nullptr && (entities[i]->collider == nullptr))
+		if (entities[i] != nullptr && (entities[i]->collider != nullptr))
 		{
-			entities[i]->Draw(entities[i]->sprites, entities[i]->scale, entities[i]->colliderXsize);
-		}
-	}
-
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (entities[i] != nullptr && (entities[i]->collider != nullptr) && ((entities[i]->collider->type == COLLIDER_ENEMY)|| (entities[i]->collider->type == COLLIDER_PLAYER)))
-		{
-			entities[i]->Draw(entities[i]->sprites, entities[i]->scale, entities[i]->colliderXsize);
+			if (entities[i]->GetType() == ZOMBIE)
+			{
+				entities[i]->Draw(sprites_zombie, entities[i]->scale, entities[i]->colliderXsize);
+			}
+			if (entities[i]->GetType() == PLANE)
+			{
+				entities[i]->Draw(sprites_plane, entities[i]->scale, entities[i]->colliderXsize);
+			}
 		}
 	}
 
@@ -114,6 +120,20 @@ bool j1Entities::Update(float dt)
 		}
 	}
 
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (entities[i] != nullptr && (entities[i]->collider == nullptr))
+		{
+			if (entities[i]->GetType() == ZOMBIE)
+			{
+				entities[i]->Draw(sprites_zombie, entities[i]->scale, entities[i]->colliderXsize);
+			}
+			if (entities[i]->GetType() == PLANE)
+			{
+				entities[i]->Draw(sprites_plane, entities[i]->scale, entities[i]->colliderXsize);
+			}
+		}
+	}
 
 	return true;
 }
@@ -121,13 +141,12 @@ bool j1Entities::Update(float dt)
 bool j1Entities::PostUpdate()
 {
 	BROFILER_CATEGORY("PostUpdate Entities", Profiler::Color::DarkOrange);
-	// check camera position to decide what to despawn
+	
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (entities[i] != nullptr)
 		{
 			if (entities[i]->position.y >(-App->render->camera.y + SCREEN_HEIGHT + (SPAWN_MARGIN + 1)) || entities[i]->position.y < (-App->render->camera.y - (SPAWN_MARGIN + 1)))
-				//if ((abs((int)App->render->camera.y) + SCREEN_HEIGHT + SPAWN_MARGIN) < enemies[i]->position.y)
 			{
 				LOG("DeSpawning enemy at %d", entities[i]->position.y * SCREEN_SIZE);
 				delete entities[i];
@@ -139,7 +158,6 @@ bool j1Entities::PostUpdate()
 	return true;
 }
 
-// Called before quitting
 bool j1Entities::CleanUp()
 {
 	LOG("Freeing all enemies");
@@ -157,27 +175,24 @@ bool j1Entities::CleanUp()
 		}
 	}
 
-	/*if (player != nullptr)
-	{
-		delete player;
-		player = nullptr;
-	}*/
+	App->tex->UnLoad(sprites_plane);
+	App->tex->UnLoad(sprites_player);
+	App->tex->UnLoad(sprites_player);
+
 	return true;
 }
 
-bool j1Entities::AddEnemy(ENEMY_TYPES type, int x, int y, int wave, int id)
+bool j1Entities::AddEnemy(ENTITY_TYPES type, int x, int y, int wave, int id)
 {
 	bool ret = false;
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (queue[i].type == ENEMY_TYPES::NO_TYPE)
+		if (queue[i].type == ENTITY_TYPES::NO_TYPE)
 		{
 			queue[i].type = type;
 			queue[i].x = x;
 			queue[i].y = y;
-			queue[i].wave = wave;
-			queue[i].id = id;
 			ret = true;
 			break;
 		}
@@ -188,7 +203,7 @@ bool j1Entities::AddEnemy(ENEMY_TYPES type, int x, int y, int wave, int id)
 
 void j1Entities::SpawnEnemy(const EnemyInfo& info)
 {
-	// find room for the new enemy
+
 	uint i = 0;
 	for (; entities[i] != nullptr && i < MAX_ENEMIES; ++i);
 
@@ -196,73 +211,37 @@ void j1Entities::SpawnEnemy(const EnemyInfo& info)
 	{
 		switch (info.type)
 		{
-		case ENEMY_TYPES::ZOMBIE:
-			entities[i] = new Enemy_Zombie(info.x, info.y);
+		case ENTITY_TYPES::ZOMBIE:
+			entities[i] = new Enemy_Zombie(info.x, info.y,info.type);
 			entities[i]->Awake(entity_config);
 			break;
-		case ENEMY_TYPES::PLANE:
-			entities[i] = new Enemy_Plane(info.x, info.y);
+		case ENTITY_TYPES::PLANE:
+			entities[i] = new Enemy_Plane(info.x, info.y,info.type);
 			entities[i]->Awake(entity_config);
 			break;
-		case ENEMY_TYPES::PLAYER:
-			entities[i] = new Player(info.x, info.y);
+		case ENTITY_TYPES::PLAYER:
+			entities[i] = new Player(info.x, info.y, info.type);
 			break;
-		}
-	}
-}
-
-void j1Entities::OnCollision(Collider* c1, Collider* c2, float distance)
-{
-	if (c2->type == COLLIDER_WALL)
-	{
-		for (uint i = 0; i < MAX_ENEMIES; ++i)
-		{
-			if (entities[i] != nullptr && entities[i]->GetCollider() == c1)
-			{
-				entities[i]->original_pos.x -= distance;
-			}
-		}
-	}
-
-	if (c2->type == COLLIDER_PLAYER)
-	{
-		for (uint i = 0; i < MAX_ENEMIES; ++i)
-		{
-			if (entities[i] != nullptr && entities[i]->GetCollider() == c1)
-			{
-				entities[i]->original_pos.x += 1;
-			}
 		}
 	}
 }
 
 bool j1Entities::Load(pugi::xml_node& data)
 {
-	int map = data.child("player").attribute("Map").as_int();
-	int x = data.child("player").attribute("x").as_int();
-	int y = data.child("player").attribute("y").as_int();
-
-	if (player->Curr_map != map)
+	if (player != nullptr)
 	{
-		App->scene->ChangeScene(x, y);
+		player->Load(data);
 	}
-
-	else
-	{
-		player->original_pos.x = data.child("player").attribute("x").as_int();
-		player->original_pos.y = data.child("player").attribute("y").as_int();
-	}
-
+	
 	return true;
 }
 
 bool j1Entities::Save(pugi::xml_node& data) const
 {
-	pugi::xml_node playernode = data.append_child("player");
-
-	playernode.append_attribute("x") = player->original_pos.x;
-	playernode.append_attribute("y") = player->original_pos.y;
-	playernode.append_attribute("Map") = player->Curr_map;
+	if (player != nullptr)
+	{
+		player->Save(data);
+	}
 
 	return true;
 }

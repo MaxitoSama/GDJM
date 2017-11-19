@@ -10,13 +10,8 @@
 #include "Player.h"
 
 
-Enemy_Zombie::Enemy_Zombie(int x, int y): Entity(x, y)
+Enemy_Zombie::Enemy_Zombie(int x, int y, ENTITY_TYPES type): Entity(x, y,type)
 {
-	//Open all textures
-	NormalSprite = App->tex->Load("assets/enemies/zombie/zombie.png");
-	//RedSprite = App->tex->Load("assets/enemies/hitten/hitten_red_Balloon.png");
-	//WhiteSprite = App->tex->Load("assets/enemies/hitten/hitten_white_Balloon.png");
-
 	//Set animation steps, speed and loop
 	//Idle
 	anim.PushBack({ 55, 432, 240, 342 });
@@ -100,10 +95,8 @@ bool Enemy_Zombie::Awake(pugi::xml_node& entity_config)
 	return ret;
 }
 
-
 Enemy_Zombie::~Enemy_Zombie()
 {
-	App->tex->UnLoad(NormalSprite);
 }
 
 bool Enemy_Zombie::Update(float dt)

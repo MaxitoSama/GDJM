@@ -10,7 +10,9 @@
 
 class Entity;
 class Player;
-enum ENEMY_TYPES
+struct SDL_Texture;
+
+enum ENTITY_TYPES
 {
 	NO_TYPE,
 	PLAYER,
@@ -20,8 +22,8 @@ enum ENEMY_TYPES
 
 struct EnemyInfo
 {
-	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
-	int x, y, wave, id;
+	ENTITY_TYPES type = ENTITY_TYPES::NO_TYPE;
+	int x, y;
 };
 
 class j1Entities : public j1Module
@@ -37,11 +39,10 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
-	void OnCollision(Collider* c1, Collider* c2, float distance);
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 
-	bool AddEnemy(ENEMY_TYPES type, int x, int y, int wave = 1, int id = 0);
+	bool AddEnemy(ENTITY_TYPES type, int x, int y, int wave = 1, int id = 0);
 
 private:
 
@@ -49,16 +50,20 @@ private:
 
 public:
 
-	bool draw_underlayed = false;
-	Entity* entities[MAX_ENEMIES];
-	Player* player;
-	pugi::xml_node entity_config;
-	pugi::xml_document config_file;
-
-
+	bool				draw_underlayed = false;
+	Entity*				entities[MAX_ENEMIES];
+	Player*				player = nullptr;
+	pugi::xml_node		entity_config;
+	pugi::xml_document	config_file;
+	
+	SDL_Texture*		sprites_zombie = nullptr;
+	SDL_Texture*		sprites_plane = nullptr;
+	SDL_Texture*		sprites_player = nullptr;
 
 private:
-	EnemyInfo queue[MAX_ENEMIES];
+	
+	EnemyInfo			queue[MAX_ENEMIES];
+
 };
 
 #endif // __J1ENEMIES_H__

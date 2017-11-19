@@ -8,7 +8,7 @@ class Enemy_Plane : public Entity
 {
 public:
 
-	Enemy_Plane(int x, int y);
+	Enemy_Plane(int x, int y, ENTITY_TYPES type);
 	~Enemy_Plane();
 
 	bool Awake(pugi::xml_node&);
