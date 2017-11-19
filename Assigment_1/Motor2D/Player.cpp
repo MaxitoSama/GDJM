@@ -339,14 +339,6 @@ bool Player::Update(float dt)
 		}
 	}
 
-	//DEATH ANIMATION TEST
-	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
-	{
-
-		animation = &death;
-		player_last_direction = DEATH;
-	}
-
 	//JUMP_ONPLACE----------------------------------------------
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !fall && !dead)
 	{

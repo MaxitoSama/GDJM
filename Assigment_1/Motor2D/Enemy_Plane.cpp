@@ -218,7 +218,7 @@ bool Enemy_Plane::Update(float dt)
 			}
 		}
 		
-		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) > 600 && !goback && !idle)
+		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) > 600 && !goback && !idle && original_pos.x > -500)
 		{
 			pathcounter = 0;
 			going = false;
@@ -230,6 +230,10 @@ bool Enemy_Plane::Update(float dt)
 			iPoint start = { (int)initial_pos.x, (int)initial_pos.y };
 			App->pathfinding->CreatePath(enemyposition, start);
 			App->pathfinding->Path(start.x, start.y, Enemypath);
+		}
+		if (original_pos.x < -500)
+		{
+			original_pos.x = -2000;
 		}
 
 		if (SDL_GetTicks() >= Timepath && (going))
@@ -247,6 +251,8 @@ bool Enemy_Plane::Update(float dt)
 			dead.Reset();
 		}
 	}
+
+	LOG("plane position %f", original_pos.x);
 
 	return true;
 }
