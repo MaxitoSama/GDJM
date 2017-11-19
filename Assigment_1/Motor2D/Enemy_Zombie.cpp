@@ -222,7 +222,7 @@ bool Enemy_Zombie::Update(float dt)
 		if (dead.Finished() == true)
 		{
 			die = true;
-			dead.Reset();
+			//dead.Reset();
 		}
 	}
 
