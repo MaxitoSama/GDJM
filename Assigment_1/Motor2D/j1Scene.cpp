@@ -44,8 +44,6 @@ bool j1Scene::Start()
 		App->audio->PlayMusic("audio/music/map1_music.ogg");
 		App->map->Draw_Colliders();
 		App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
-
-		//App->entities->AddEnemy(PLAYER, 10, 0);
 	
 		//enemies
 		App->entities->AddEnemy(ZOMBIE, 1300, 600);
@@ -53,9 +51,8 @@ bool j1Scene::Start()
 		App->entities->AddEnemy(ZOMBIE, 19369, 827);
 		App->entities->AddEnemy(ZOMBIE, 7000, 600);
 		App->entities->AddEnemy(ZOMBIE, 9812, 668);
-		//App->colliders->AddCollider({ 32,600,32,1 }, COLLIDER_FLOOR, this);
-		//App->colliders->AddCollider({ 64,600,32,1 }, COLLIDER_FLOOR, this);
 		App->entities->AddEnemy(PLANE, 2000, 100);
+		
 		App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
 		App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
 	}
@@ -70,7 +67,6 @@ bool j1Scene::Start()
 		App->colliders->AddCollider({ 18923,0,50,310 }, COLLIDER_WIN2, this);
 		App->colliders->AddCollider({ 21087,828,320,32 }, COLLIDER_DEATH);
 
-		//App->enemies->AddEnemy(ZOMBIE, 10, 10);
 		App->entities->AddEnemy(ZOMBIE, 19461,825);
 		App->entities->AddEnemy(ZOMBIE, 18467, 825);
 		App->entities->AddEnemy(ZOMBIE, 4949, 828);
@@ -93,6 +89,16 @@ bool j1Scene::Update(float dt)
 {
 	BROFILER_CATEGORY("Update_Scene1 ", Profiler::Color::MediumOrchid)
 
+	//Camera Movement--------------------------------------
+	int map_height = App->map->data.height * App->map->data.tile_height;
+	int map_width = App->map->data.width * App->map->data.tile_width;
+	int win_height = App->entities->player->win_height;
+	int win_width = App->entities->player->win_width;
+	int win_position_y = App->render->camera.y*-1;
+	int limit_y = map_height - win_height;
+	int limit_x = map_width - win_width / 2;
+	
+		
 	if(App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame();
 
@@ -141,15 +147,6 @@ bool j1Scene::Update(float dt)
 		}
 	}	
 
-	//Camera Movement--------------------------------------
-	int map_height = App->map->data.height * App->map->data.tile_height;
-	int map_width = App->map->data.width * App->map->data.tile_width;
-	int win_height = App->entities->player->win_height;
-	int win_width = App->entities->player->win_width;
-	int win_position_y = App->render->camera.y*-1;
-	int limit_y = map_height - win_height;
-	int limit_x = map_width - win_width;
-
 	if (App->entities->player->original_pos.x > win_width / 2 && App->entities->player->original_pos.x <= limit_x)
 	{
 		App->render->camera.x = App->entities->player->win_width / 2 - App->entities->player->original_pos.x;
@@ -168,7 +165,6 @@ bool j1Scene::Update(float dt)
 
 	p2SString title("%s",App->GetTitle());
 
-	//App->win->SetTitle(title.GetString());
 	return true;
 }
 

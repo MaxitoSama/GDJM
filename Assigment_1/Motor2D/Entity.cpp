@@ -40,7 +40,7 @@ void Entity::Draw(SDL_Texture* sprites, float direction)
 			collider->SetPos((int)position.x, (int)position.y);
 		}
 
-		if (collider->type == COLLIDER_ENEMY)
+		if (collider->type == COLLIDER_ENEMY && alive)
 		{
 			collider->SetPos((int)position.x, (int)position.y + 10);
 		}
@@ -51,7 +51,7 @@ void Entity::Draw(SDL_Texture* sprites, float direction)
 		collider_feet->SetPos((position.x + (263 / 4) - 54), position.y + (310 / 2) - 1);
 	}
 
-	if (collider_head != nullptr)
+	if (collider_head != nullptr && alive)
 	{
 		collider_head->SetPos(position.x + 30, position.y-20);
 	}

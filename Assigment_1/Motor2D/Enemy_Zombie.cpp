@@ -8,6 +8,7 @@
 #include "j1Pathfinding.h"
 #include "j1Entities.h"
 #include "Player.h"
+#include "j1Scene.h"
 
 
 Enemy_Zombie::Enemy_Zombie(int x, int y, ENTITY_TYPES type): Entity(x, y,type)
@@ -113,9 +114,11 @@ bool Enemy_Zombie::Update(float dt)
 			go_x = true;
 			initial_pos.x = original_pos.x;
 
-			iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y };
-			App->pathfinding->CreatePath(enemyposition, player);
+			iPoint player_position = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y };
+			
+			App->pathfinding->CreatePath(enemyposition, player_position);
 			App->pathfinding->Path(App->entities->player->original_pos.x, App->entities->player->original_pos.y, Enemypath);
+			
 			Timepath = SDL_GetTicks() + 100;
 		}
 
@@ -217,6 +220,34 @@ bool Enemy_Zombie::Update(float dt)
 			die = true;
 		}
 	}
+
+	return true;
+}
+
+bool Enemy_Zombie::Load(pugi::xml_node& data)
+{
+	
+	original_pos.x = data.attribute("x").as_float();
+	original_pos.y = data.attribute("y").as_float();
+
+	if (collider == nullptr)
+	{
+		collider = App->colliders->AddCollider({ (int)(position.x - 10), (int)position.y - 10, 120, 360 / 2 - 10 }, COLLIDER_ENEMY, (j1Module*)App->entities);
+	}
+	if (collider_head == nullptr)
+	{
+		collider_head = App->colliders->AddCollider({ (int)(position.x - 120), (int)position.y, 50, 20 }, COLLIDER_HEAD, (j1Module*)App->entities);
+	}
+
+	return true;
+}
+
+bool Enemy_Zombie::Save(pugi::xml_node& data) const
+{
+	pugi::xml_node playernode = data.append_child("position");
+
+	playernode.append_attribute("x") = original_pos.x;
+	playernode.append_attribute("y") = original_pos.y;
 
 	return true;
 }

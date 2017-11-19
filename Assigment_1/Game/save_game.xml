@@ -11,9 +11,17 @@
 	<scene />
 	<colliders />
 	<entity>
-		<player x="16166.7031" y="252.5" Map="1" />
+		<player x="292" y="828.5" Map="2" />
+		<enemy_zombie>
+			<position x="19454.666" y="812.999939" />
+			<position x="18460.666" y="812.999939" />
+			<position x="4942.6665" y="812.999939" />
+		</enemy_zombie>
+		<enemy_plane>
+			<position x="461.967651" y="795.364624" />
+		</enemy_plane>
 	</entity>
 	<renderer>
-		<camera x="-15416" y="-21" />
+		<camera x="-3" y="-117" />
 	</renderer>
 </game_state>

@@ -36,8 +36,8 @@ bool j1Entities::Awake(pugi::xml_node& config)
 bool j1Entities::Start()
 {
 	LOG("loading enemies");
-	// Create a prototype for each enemy available so we can copy them around
 
+	// Create a prototype for each enemy available so we can copy them around
 	sprites_zombie = App->tex->Load("assets/enemies/zombie/zombie.png");
 	sprites_plane = App->tex->Load("assets/enemies/plane/plane.png");
 	sprites_player = App->tex->Load("assets/character/character.png");
@@ -115,8 +115,12 @@ bool j1Entities::Update(float dt)
 	{
 		if (entities[i] != nullptr && entities[i]->die)
 		{
-			delete entities[i];
-			entities[i] = nullptr;
+			entities[i]->position.x = -2000;
+			entities[i]->position.y = 0;
+			entities[i]->original_pos.x = -2000;
+			entities[i]->original_pos.y = 0;
+			entities[i]->die = false;
+			entities[i]->alive = true;
 		}
 	}
 
@@ -142,19 +146,6 @@ bool j1Entities::PostUpdate()
 {
 	BROFILER_CATEGORY("PostUpdate Entities", Profiler::Color::DarkOrange);
 	
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (entities[i] != nullptr)
-		{
-			if (entities[i]->position.y >(-App->render->camera.y + SCREEN_HEIGHT + (SPAWN_MARGIN + 1)) || entities[i]->position.y < (-App->render->camera.y - (SPAWN_MARGIN + 1)))
-			{
-				LOG("DeSpawning enemy at %d", entities[i]->position.y * SCREEN_SIZE);
-				delete entities[i];
-				entities[i] = nullptr;
-			}
-		}
-	}
-
 	return true;
 }
 
@@ -228,9 +219,29 @@ void j1Entities::SpawnEnemy(const EnemyInfo& info)
 
 bool j1Entities::Load(pugi::xml_node& data)
 {
+	pugi::xml_node zombies = data.child("enemy_zombie").first_child();
+	pugi::xml_node planes=data.child("enemy_plane").first_child();
+
 	if (player != nullptr)
 	{
 		player->Load(data);
+	}
+
+	for (uint i = 0; i < MAX_ENEMIES; i++)
+	{
+		if (entities[i] != nullptr)
+		{
+			if (entities[i]->type == ZOMBIE)
+			{
+				entities[i]->Load(zombies);
+				zombies=zombies.next_sibling();
+			}
+			if (entities[i]->type == PLANE)
+			{
+				entities[i]->Load(planes);
+				planes = planes.next_sibling();
+			}
+		}
 	}
 	
 	return true;
@@ -241,6 +252,24 @@ bool j1Entities::Save(pugi::xml_node& data) const
 	if (player != nullptr)
 	{
 		player->Save(data);
+	}
+
+	pugi::xml_node zombies = data.append_child("enemy_zombie");
+	pugi::xml_node planes = data.append_child("enemy_plane");
+
+	for (uint i = 0; i < MAX_ENEMIES; i++)
+	{
+		if (entities[i] != nullptr)
+		{
+			if (entities[i]->type == ZOMBIE)
+			{
+				entities[i]->Save(zombies);
+			}
+			if (entities[i]->type == PLANE)
+			{
+				entities[i]->Save(planes);
+			}
+		}
 	}
 
 	return true;
