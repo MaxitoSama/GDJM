@@ -79,13 +79,13 @@ bool j1Entities::Update(float dt)
 	{
 		if (entities[i] != nullptr)
 		{
-			entities[i]->Move(dt);
+			entities[i]->Update(dt);
 		}
 	}
 
 	if (player != nullptr)
 	{
-		player->Move(dt);
+		player->Update(dt);
 		player->Draw(player->sprites, player->scale, player->colliderXsize);
 	}
 
@@ -213,32 +213,6 @@ void j1Entities::SpawnEnemy(const EnemyInfo& info)
 
 void j1Entities::OnCollision(Collider* c1, Collider* c2, float distance)
 {
-	
-	/*for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
-		{
-			enemies[i]->OnCollision(c2);
-			if (enemies[i]->lives <= 0 && enemies[i]->die == false)
-			{
-				enemies[i]->collider->to_delete = true;
-				enemies[i]->collider = nullptr;
-			}
-			break;
-		}
-	}*/
-
-	/*if (c2->type == COLLIDER_FLOOR)
-	{
-		for (uint i = 0; i < MAX_ENEMIES; ++i)
-		{
-			if (entities[i] != nullptr && entities[i]->GetCollider() == c1)
-			{
-				entities[i]->original_pos.y -= distance;
-			}
-		}
-	}*/
-
 	if (c2->type == COLLIDER_WALL)
 	{
 		for (uint i = 0; i < MAX_ENEMIES; ++i)

@@ -229,7 +229,7 @@ Player::~Player()
 		collider_player->to_delete = true;
 }
 
-void Player::Start()
+bool Player::Start()
 {
 	LOG("Loading Player Sheet");
 
@@ -245,9 +245,11 @@ void Player::Start()
 	win_height = App->win->screen_surface->h;
 	win_scale = App->win->GetScale();
 	//GOD = false;
+	
+	return true;
 }
 
-void Player::Move(float dt)
+bool Player::Update(float dt)
 {
 	SDL_Event e;
 	position;
@@ -512,9 +514,7 @@ void Player::Move(float dt)
 		collider->rect.h = 332 / 2;
 	}
 
-	
-	//LOG("player position %f", original_pos.x);
-
+	return true;
 }
 
 void Player::Jump_Method(float dt)

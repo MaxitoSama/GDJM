@@ -42,6 +42,11 @@ public:
 	bool Save(pugi::xml_node&) const;
 
 	bool AddEnemy(ENEMY_TYPES type, int x, int y, int wave = 1, int id = 0);
+
+private:
+
+	void SpawnEnemy(const EnemyInfo& info);
+
 public:
 
 	bool draw_underlayed = false;
@@ -50,9 +55,7 @@ public:
 	pugi::xml_node entity_config;
 	pugi::xml_document config_file;
 
-private:
 
-	void SpawnEnemy(const EnemyInfo& info);
 
 private:
 	EnemyInfo queue[MAX_ENEMIES];

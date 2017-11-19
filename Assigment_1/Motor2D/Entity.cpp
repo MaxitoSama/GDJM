@@ -52,15 +52,16 @@ void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 		{
 			collider->SetPos((int)position.x, (int)position.y+40);
 		}
+		else
+		{
+			collider->SetPos((int)position.x, (int)position.y);
+		}
 
 		if (collider->type == COLLIDER_ENEMY)
 		{
 			collider->SetPos((int)position.x, (int)position.y + 10);
 		}
-		else
-		{
-			collider->SetPos((int)position.x, (int)position.y);
-		}
+		
 	}
 
 	if (collider_feet != nullptr)
@@ -79,27 +80,5 @@ void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 		sprites = NormalSprite;
 		
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()), direction, 1.0f);
-		
 	}
-}
-
-void Entity::OnCollision(Collider* collider)
-{
-	if (collider->type == COLLIDER_ENEMY)
-	{
-
-	}
-	if ((collider->type == COLLIDER_NONE || collider->type == COLLIDER_NONE) )
-	{
-		
-	}
-	else if (collider->type == COLLIDER_NONE)
-	{
-		Draw(sprites,scale,colliderXsize);
-	}
-}
-
-void Entity::DeadAnim()
-{
-
 }

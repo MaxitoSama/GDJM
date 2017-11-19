@@ -83,7 +83,7 @@ Enemy_Plane::~Enemy_Plane()
 	App->tex->UnLoad(NormalSprite);
 }
 
-void Enemy_Plane::Move(float dt)
+bool Enemy_Plane::Update(float dt)
 {
 	if (alive)
 	{
@@ -252,10 +252,7 @@ void Enemy_Plane::Move(float dt)
 			dead.Reset();
 		}
 	}
+
+	return true;
 }
 
-void Enemy_Plane::DeadAnim()
-{
-	animation = &dead;
-	position.y += 0.2f; //Perque es mogui a la mateixa velocitat que l'overlay
-}

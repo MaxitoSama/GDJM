@@ -1,6 +1,7 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
+#include "j1Entities.h"
 #include "Entity.h"
 #include "p2Path.h"
 
@@ -32,18 +33,15 @@ public:
 	Player(int x, int y);
 	~Player();
 
-	void Move(float dt);
-
 	bool Awake(pugi::xml_node&);
-	void Start();
+	bool Start();
 	bool Update(float dt);
-	bool CleanUp();
 	void Jump_Method(float dt);
 	void Slide_Method(float dt);
 	float Acceleration_Method();
 
-	bool Load(pugi::xml_node&);
-	bool Save(pugi::xml_node&) const;
+	/*bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;*/
 
 
 public:

@@ -12,9 +12,7 @@ public:
 	~Enemy_Plane();
 
 	bool Awake(pugi::xml_node&);
-	void Move(float dt);
-	void DeadAnim();
-
+	bool Update(float dt);
 
 public:
 

@@ -106,7 +106,7 @@ Enemy_Zombie::~Enemy_Zombie()
 	App->tex->UnLoad(NormalSprite);
 }
 
-void Enemy_Zombie::Move(float dt)
+bool Enemy_Zombie::Update(float dt)
 {
 	if (alive)
 	{
@@ -225,10 +225,6 @@ void Enemy_Zombie::Move(float dt)
 			dead.Reset();
 		}
 	}
-}
 
-void Enemy_Zombie::DeadAnim()
-{
-	animation = &dead;
-	position.y += 0.2f; //Perque es mogui a la mateixa velocitat que l'overlay
+	return true;
 }

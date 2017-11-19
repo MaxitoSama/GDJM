@@ -1,6 +1,7 @@
 #ifndef __ENEMY_H__
 #define __ENEMY_H__
 
+#include "j1Entities.h"
 #include "p2Point.h"
 #include "p2DynArray.h"
 #include "p2animation.h"
@@ -13,49 +14,14 @@
 struct SDL_Texture;
 struct Collider;
 
-class Entity
+class Entity:public j1Entities
 {
 protected:
-	Animation* animation = nullptr;
-	//Animation anim_b1;
+	
+	Animation*		animation = nullptr;
 
 public:
-	enum Explosions
-	{
-		//The diference between x1 and x2 is 
-		//the animation is inverted, but remains the same.
-		BIG1 = 1,
-	};
-	fPoint			position;
-	fPoint			collider_pos;
-	fPoint			original_pos;
-	SDL_Texture*	sprites = nullptr;
-	SDL_Texture*	NormalSprite = nullptr;
-	SDL_Texture*	Shoot = nullptr;
 
-
-	float			scale;
-	fPoint			speed;
-	int				colliderXsize;
-	fPoint			initial_pos;
-	bool			left;
-	bool			right;
-	bool			alive = true;
-	bool			die = false;
-	
-	Collider*		collider = nullptr;
-	Collider*		collider_feet = nullptr;
-	Collider*		collider_head = nullptr;
-	int				collision_distance_1;
-
-	p2DynArray<iPoint>	Enemypath;
-	uint				Timepath=0;
-	uint				pathcounter = 0;
-	bool				going = false;
-	
-
-public:
-	
 	Entity(int x, int y);
 	virtual ~Entity();
 
@@ -63,12 +29,42 @@ public:
 	const Collider*		GetColliderFloor() const;
 	const Collider*		GetColliderHead() const;
 
-	virtual bool Awake(pugi::xml_node&);
-	virtual void Move(float dt) {};
-	virtual void ExtraAnim(SDL_Texture* texture) {};
-	virtual void DeadAnim();
-	virtual void Draw(SDL_Texture* sprites, float direction, int ColliderPosition);
-	virtual void OnCollision(Collider* collider);
+	bool				Awake(pugi::xml_node&);
+	void				Draw(SDL_Texture* sprites, float direction, int ColliderPosition);
+
+	virtual bool		Update(float dt)=0;
+
+public:
+	
+	fPoint			position = { 0.0f,0.0f };
+	fPoint			collider_pos = { 0.0f,0.0f };
+	fPoint			original_pos = { 0.0f,0.0f };
+	fPoint			speed = { 0.0f,0.0f }; 
+	fPoint			initial_pos = { 0.0f,0.0f };
+
+	SDL_Texture*	sprites = nullptr;
+	SDL_Texture*	NormalSprite = nullptr;
+	SDL_Texture*	Shoot = nullptr;
+
+	float			scale = 0;
+	
+	int				colliderXsize;
+
+	bool			left = false;
+	bool			right = true;
+	bool			alive = true;
+	bool			die = false;
+	bool			going = false;
+
+	uint			Timepath = 0;
+	uint			pathcounter = 0;
+
+	Collider*		collider = nullptr;
+	Collider*		collider_feet = nullptr;
+	Collider*		collider_head = nullptr;
+
+	p2DynArray<iPoint>	Enemypath = NULL;
+	
 
 };
 
