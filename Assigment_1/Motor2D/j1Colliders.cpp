@@ -20,7 +20,6 @@ j1Colliders::j1Colliders() : j1Module()
 // Destructor
 j1Colliders::~j1Colliders()
 {
-
 }
 
 bool j1Colliders::Awake()
@@ -51,6 +50,7 @@ bool j1Colliders::PreUpdate()
 bool j1Colliders::Update(float dt)
 {
 	BROFILER_CATEGORY("Update Colliders ", Profiler::Color::PaleVioletRed)
+	
 	Collider* c1;
 	Collider* c2;
 

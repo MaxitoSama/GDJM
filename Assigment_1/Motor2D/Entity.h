@@ -45,10 +45,6 @@ public:
 	fPoint			speed = { 0.0f,0.0f }; 
 	fPoint			initial_pos = { 0.0f,0.0f };
 
-	SDL_Texture*	sprites = nullptr;
-	SDL_Texture*	NormalSprite = nullptr;
-	SDL_Texture*	Shoot = nullptr;
-
 	float			scale = 0;
 	
 	int				colliderXsize;
@@ -67,7 +63,6 @@ public:
 	Collider*		collider_head = nullptr;
 
 	p2DynArray<iPoint>	Enemypath = NULL;
-	
 
 };
 

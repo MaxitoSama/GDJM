@@ -53,6 +53,7 @@ public:
 	bool				draw_underlayed = false;
 	Entity*				entities[MAX_ENEMIES];
 	Player*				player = nullptr;
+	
 	pugi::xml_node		entity_config;
 	pugi::xml_document	config_file;
 	

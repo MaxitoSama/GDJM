@@ -78,7 +78,6 @@ bool Enemy_Plane::Awake(pugi::xml_node& entity_config)
 
 Enemy_Plane::~Enemy_Plane()
 {
-	App->tex->UnLoad(NormalSprite);
 }
 
 bool Enemy_Plane::Update(float dt)

@@ -215,7 +215,6 @@ bool Player::Awake(pugi::xml_node& entity_config)
 Player::~Player()
 {
 	LOG("Unloading player Sheet");
-	App->tex->UnLoad(NormalSprite);
 	App->tex->UnLoad(godmode);
 
 	LOG("Destroying Player Collider");
