@@ -28,7 +28,7 @@ public:
 	const ENTITY_TYPES	GetType()const;
 
 	bool				Awake(pugi::xml_node&);
-	void				Draw(SDL_Texture* sprites, float direction, int ColliderPosition);
+	void				Draw(SDL_Texture* sprites, float direction);
 
 	virtual bool		Update(float dt)=0;
 
@@ -37,15 +37,12 @@ public:
 	ENTITY_TYPES	type;
 
 	fPoint			position = { 0.0f,0.0f };
-	fPoint			collider_pos = { 0.0f,0.0f };
 	fPoint			original_pos = { 0.0f,0.0f };
 	fPoint			speed = { 0.0f,0.0f }; 
 	fPoint			initial_pos = { 0.0f,0.0f };
 
 	float			scale = 0;
 	
-	int				colliderXsize;
-
 	bool			left = false;
 	bool			right = true;
 	bool			alive = true;

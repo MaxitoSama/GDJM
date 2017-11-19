@@ -8,9 +8,8 @@
 #include "SDL/include/SDL_timer.h"
 #include "j1Audio.h"
 
-Entity::Entity(int x, int y, ENTITY_TYPES type) : position(x, y), original_pos(x, y), collider_pos(0, 0),type(type)
+Entity::Entity(int x, int y, ENTITY_TYPES type) : position(x, y), original_pos(x, y),type(type)
 {
-
 }
 
 bool Entity::Awake(pugi::xml_node& enemy)
@@ -22,30 +21,11 @@ bool Entity::Awake(pugi::xml_node& enemy)
 
 Entity::~Entity()
 {
-	//App->tex->UnLoad(b1);
-
 	if (collider != nullptr)
 		collider->to_delete = true;
 }
 
-const Collider* Entity::GetCollider() const
-{
-	return collider;
-}
-const Collider* Entity::GetColliderFloor() const 
-{
-	return collider_feet;
-}
-const Collider* Entity::GetColliderHead() const
-{
-	return collider_head;
-}
-const ENTITY_TYPES Entity::GetType()const
-{
-	return type;
-}
-
-void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
+void Entity::Draw(SDL_Texture* sprites, float direction)
 {
 
 	if (collider != nullptr)
@@ -80,4 +60,24 @@ void Entity::Draw(SDL_Texture* sprites, float direction, int ColliderPosition)
 	{		
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()), direction, 1.0f);
 	}
+}
+
+const Collider* Entity::GetCollider() const
+{
+	return collider;
+}
+
+const Collider* Entity::GetColliderFloor() const
+{
+	return collider_feet;
+}
+
+const Collider* Entity::GetColliderHead() const
+{
+	return collider_head;
+}
+
+const ENTITY_TYPES Entity::GetType()const
+{
+	return type;
 }

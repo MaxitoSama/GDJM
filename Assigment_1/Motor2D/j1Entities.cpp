@@ -93,7 +93,7 @@ bool j1Entities::Update(float dt)
 	if (player != nullptr)
 	{
 		player->Update(dt);
-		player->Draw(sprites_player, player->scale, player->colliderXsize);
+		player->Draw(sprites_player, player->scale);
 	}
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
@@ -102,11 +102,11 @@ bool j1Entities::Update(float dt)
 		{
 			if (entities[i]->GetType() == ZOMBIE)
 			{
-				entities[i]->Draw(sprites_zombie, entities[i]->scale, entities[i]->colliderXsize);
+				entities[i]->Draw(sprites_zombie, entities[i]->scale);
 			}
 			if (entities[i]->GetType() == PLANE)
 			{
-				entities[i]->Draw(sprites_plane, entities[i]->scale, entities[i]->colliderXsize);
+				entities[i]->Draw(sprites_plane, entities[i]->scale);
 			}
 		}
 	}
@@ -126,11 +126,11 @@ bool j1Entities::Update(float dt)
 		{
 			if (entities[i]->GetType() == ZOMBIE)
 			{
-				entities[i]->Draw(sprites_zombie, entities[i]->scale, entities[i]->colliderXsize);
+				entities[i]->Draw(sprites_zombie, entities[i]->scale);
 			}
 			if (entities[i]->GetType() == PLANE)
 			{
-				entities[i]->Draw(sprites_plane, entities[i]->scale, entities[i]->colliderXsize);
+				entities[i]->Draw(sprites_plane, entities[i]->scale);
 			}
 		}
 	}

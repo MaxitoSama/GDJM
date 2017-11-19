@@ -26,6 +26,7 @@ private:
 	fPoint path_speed = { 0,0 };
 
 	bool goback = false;
+	bool idle = true;
 	bool go_x = false;
 	bool go_y = false;
 

@@ -32,17 +32,11 @@ Enemy_Plane::Enemy_Plane(int x, int y, ENTITY_TYPES type): Entity(x, y,type)
 	dead.speed = 18.0f;
 	dead.loop = true;
 
-
-	
-	colliderXsize = (639 * 2) / 5;
 	initial_pos.x = original_pos.x;
 	initial_pos.y = original_pos.y;
 
 	animation = &anim;
 
-	//Add and save collider
-	collider_pos.x = 0;
-	collider_pos.y = 0;
 	collider = App->colliders->AddCollider({ x, y-100, (639*2)/5, (412*2)/6 }, COLLIDER_ENEMY, (j1Module*)App->entities);
 	collider_head = App->colliders->AddCollider({ x, y, 200, 40}, COLLIDER_HEAD, (j1Module*)App->entities);
 }
@@ -88,12 +82,13 @@ bool Enemy_Plane::Update(float dt)
 
 		position = original_pos;
 
-		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) <= 600 && !going && !App->entities->player->GOD)
+		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) <= 600 && !going)
 		{
 			going = true;
 			go_x = true;
 			go_y = true;
 			goback = false;
+			idle = false;
 
 			iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y + 50 };
 			App->pathfinding->CreatePath(enemyposition, player);
@@ -101,7 +96,7 @@ bool Enemy_Plane::Update(float dt)
 			Timepath = SDL_GetTicks() + 100;
 		}
 
-		if (!going && !goback)
+		if (!going && !goback && abs((int)App->entities->player->original_pos.x - (int)original_pos.x) > 600 && idle)
 		{
 			animation = &moving;
 
@@ -116,7 +111,7 @@ bool Enemy_Plane::Update(float dt)
 					right = false;
 				}
 			}
-			if (original_pos.x > (float)initial_pos.x - 200 && left == true)
+			else if (original_pos.x > (float)initial_pos.x - 200 && left == true)
 			{
 				speed.x = -idle_speed * dt;
 				original_pos.x += speed.x;
@@ -214,24 +209,26 @@ bool Enemy_Plane::Update(float dt)
 						if (goback)
 						{
 							goback = false;
+							idle = true;
 						}
 						pathcounter = 0;
 					}
 				}
 			}
+		}
+		
+		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) > 600 && !goback && !idle)
+		{
+			pathcounter = 0;
+			going = false;
+			goback = true;
+			idle = false;
+			go_x = true;
+			go_y = true;
 
-			if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 500 && going)
-			{
-				pathcounter = 0;
-				going = false;
-				goback = true;
-				go_x = true;
-				go_y = true;
-
-				iPoint start = { (int)initial_pos.x, (int)initial_pos.y };
-				App->pathfinding->CreatePath(enemyposition, start);
-				App->pathfinding->Path(start.x, start.y, Enemypath);
-			}
+			iPoint start = { (int)initial_pos.x, (int)initial_pos.y };
+			App->pathfinding->CreatePath(enemyposition, start);
+			App->pathfinding->Path(start.x, start.y, Enemypath);
 		}
 
 		if (SDL_GetTicks() >= Timepath && (going))

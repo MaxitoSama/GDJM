@@ -9,15 +9,11 @@
 	<map />
 	<pathfinding />
 	<scene />
-	<scene2 />
 	<colliders />
-	<player>
-		<player x="10" y="20" Map="0" />
-	</player>
 	<entity>
-		<player x="60" y="828.666687" Map="1" />
+		<player x="16166.7031" y="252.5" Map="1" />
 	</entity>
 	<renderer>
-		<camera x="0" y="-40" />
+		<camera x="-15416" y="-21" />
 	</renderer>
 </game_state>

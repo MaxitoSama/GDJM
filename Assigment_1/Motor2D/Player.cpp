@@ -177,9 +177,7 @@ Player::Player(int x, int y, ENTITY_TYPES type) : Entity(x, y,type)
 
 
 	animation = &idle_right;
-	colliderXsize = 100;
 	scale = 0.5f;
-	colliderXsize = 120;
 	initial_pos.x = original_pos.x;
 	Curr_map = 1;
 }

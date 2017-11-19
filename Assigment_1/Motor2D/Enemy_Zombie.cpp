@@ -63,7 +63,6 @@ Enemy_Zombie::Enemy_Zombie(int x, int y, ENTITY_TYPES type): Entity(x, y,type)
 	walking.loop = true;
 
 	animation = &walking;
-	colliderXsize = 120;
 	initial_pos.x = original_pos.x;
 
 	collider = App->colliders->AddCollider({ (int)(position.x-10), (int)position.y - 10, 120, 360/2-10 }, COLLIDER_ENEMY, (j1Module*)App->entities);
@@ -112,6 +111,7 @@ bool Enemy_Zombie::Update(float dt)
 		{
 			going = true;
 			go_x = true;
+			initial_pos.x = original_pos.x;
 
 			iPoint player = { (int)App->entities->player->original_pos.x, (int)App->entities->player->original_pos.y };
 			App->pathfinding->CreatePath(enemyposition, player);
@@ -195,10 +195,9 @@ bool Enemy_Zombie::Update(float dt)
 			}
 		}
 
-		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) >= 400 && going)
+		if (abs((int)App->entities->player->original_pos.x - (int)original_pos.x) > 500 && going )
 		{
 			going = false;
-			initial_pos.x = original_pos.x;
 			pathcounter = 0;
 		}
 
@@ -212,10 +211,10 @@ bool Enemy_Zombie::Update(float dt)
 	else
 	{
 		animation = &dead;
+		
 		if (dead.Finished() == true)
 		{
 			die = true;
-			//dead.Reset();
 		}
 	}
 
