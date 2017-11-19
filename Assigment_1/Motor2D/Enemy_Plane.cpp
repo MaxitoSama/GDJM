@@ -14,7 +14,7 @@ Enemy_Plane::Enemy_Plane(int x, int y, ENTITY_TYPES type): Entity(x, y,type)
 
 	//Set animation steps, speed and loop
 	anim.PushBack({ 49, 40, 639, 412 });
-	anim.PushBack({ 806, 40, 639, 412 });
+	//anim.PushBack({ 806, 40, 639, 412 });
 	anim.speed = 18.0f;
 	anim.loop = true;
 
@@ -43,8 +43,8 @@ Enemy_Plane::Enemy_Plane(int x, int y, ENTITY_TYPES type): Entity(x, y,type)
 	//Add and save collider
 	collider_pos.x = 0;
 	collider_pos.y = 0;
-	collider = App->colliders->AddCollider({ x, y, (639*2)/5, (412*2)/5 }, COLLIDER_ENEMY, (j1Module*)App->entities);
-	collider_head = App->colliders->AddCollider({ x, y, 200, 5}, COLLIDER_HEAD, (j1Module*)App->entities);
+	collider = App->colliders->AddCollider({ x, y-100, (639*2)/5, (412*2)/6 }, COLLIDER_ENEMY, (j1Module*)App->entities);
+	collider_head = App->colliders->AddCollider({ x, y, 200, 40}, COLLIDER_HEAD, (j1Module*)App->entities);
 }
 
 bool Enemy_Plane::Awake(pugi::xml_node& entity_config)
