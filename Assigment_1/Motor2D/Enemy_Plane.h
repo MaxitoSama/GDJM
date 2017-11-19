@@ -2,7 +2,7 @@
 #define __PLANE_H__
 
 #include "Entity.h"
-#include "p2Path.h"
+
 
 class Enemy_Plane : public Entity
 {

@@ -8,6 +8,7 @@
 #include "p2Log.h"
 #include "SDL/include/SDL_timer.h"
 #include "SDL_mixer\include\SDL_mixer.h"
+#include "p2Path.h"
 
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
@@ -16,10 +17,6 @@ struct Collider;
 
 class Entity:public j1Entities
 {
-protected:
-	
-	Animation*		animation = nullptr;
-
 public:
 
 	Entity(int x, int y,ENTITY_TYPES type);
@@ -64,6 +61,9 @@ public:
 
 	p2DynArray<iPoint>	Enemypath = NULL;
 
+protected:
+
+	Animation*		animation = nullptr;
 };
 
 #endif // __ENEMY_H__
