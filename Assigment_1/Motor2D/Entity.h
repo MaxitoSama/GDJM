@@ -38,7 +38,7 @@ public:
 
 	fPoint			position = { 0.0f,0.0f };
 	fPoint			original_pos = { 0.0f,0.0f };
-	fPoint			speed = { 0.0f,0.0f }; 
+	fPoint			speed;
 	fPoint			initial_pos = { 0.0f,0.0f };
 
 	float			scale = 0;

@@ -133,7 +133,7 @@ private:
 
 	pugi::xml_document	map_file;
 	p2SString			folder;
-	bool				map_loaded;
+	bool				map_loaded=false;
 	SDL_Texture*		PathTile = nullptr;
 };
 #endif // __j1MAP_H__

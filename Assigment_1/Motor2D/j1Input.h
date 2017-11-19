@@ -32,25 +32,14 @@ public:
 
 	j1Input();
 
-	// Destructor
 	virtual ~j1Input();
-
-	// Called before render is available
+	
 	bool Awake(pugi::xml_node&);
-
-	// Called before the first frame
 	bool Start();
-
-	// Called each loop iteration
 	bool PreUpdate();
-
-	// Called before quitting
 	bool CleanUp();
-
-	// Gather relevant win events
 	bool GetWindowEvent(j1EventWindow ev);
-
-	// Check key states (includes mouse and joy buttons)
+	
 	j1KeyState GetKey(int id) const
 	{
 		return keyboard[id];
@@ -69,13 +58,17 @@ public:
 	void GetMouseMotion(int& x, int& y);
 
 private:
+
 	bool		windowEvents[WE_COUNT];
+	
 	j1KeyState*	keyboard;
 	j1KeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
+	
 	int			mouse_motion_x;
 	int			mouse_motion_y;
 	int			mouse_x;
 	int			mouse_y;
+
 };
 
 #endif // __j1INPUT_H__

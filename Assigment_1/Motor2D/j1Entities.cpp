@@ -65,12 +65,11 @@ bool j1Entities::PreUpdate()
 	{
 		if (queue[i].type != ENTITY_TYPES::NO_TYPE)
 		{
-			if (-queue[i].y < App->render->camera.y + SPAWN_MARGIN)
-			{
+			
 				SpawnEnemy(queue[i]);
 				queue[i].type = ENTITY_TYPES::NO_TYPE;
 				LOG("Spawning enemy at %d", queue[i].y * SCREEN_SIZE);
-			}
+			
 		}
 	}
 

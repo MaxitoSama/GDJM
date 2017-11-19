@@ -18,7 +18,6 @@ private:
 
 public:
 
-	// Constructors
 	p2SString()
 	{
 		Alloc(1);
@@ -50,7 +49,6 @@ public:
 			static char tmp[TMP_STRING_SIZE];
 			static va_list  ap;
 
-			// Construct the string from variable arguments
 			va_start(ap, format);
 			int res = vsprintf_s(tmp, TMP_STRING_SIZE, format, ap);
 			va_end(ap);
@@ -69,7 +67,6 @@ public:
 		}
 	}
 	
-	// Destructor
 	virtual ~p2SString()
 	{
 		if(str != NULL)
@@ -85,7 +82,6 @@ public:
 			static char tmp[TMP_STRING_SIZE];
 			static va_list  ap;
 
-			// Construct the string from variable arguments
 			va_start(ap, format);
 			int res = vsprintf_s(tmp, TMP_STRING_SIZE, format, ap);
 			va_end(ap);
@@ -106,7 +102,6 @@ public:
 		return *this;
 	}
 
-	// Operators
 	bool operator== (const p2SString& string) const
 	{
 		return strcmp(string.str, str) == 0;
@@ -209,7 +204,6 @@ public:
 		return(*this);
 	}
 
-	// Utils
 	unsigned int Length() const
 	{
 		return strlen(str);
@@ -250,11 +244,9 @@ public:
 
 	void Trim()
 	{
-		// cut right --
 		char* end = str + size;
 		while(*--end == ' ') *end = '\0';
 
-		// cut left --
 		char* start = str;
 		while(*++start == ' ');
 
@@ -290,13 +282,11 @@ public:
 			{
 				if(strncmp(src, &str[i], src_len) == 0)
 				{
-					// make room
 					for(uint j = strlen(str) + diff; j > i + diff; --j)
 					{
 						str[j] = str[j - diff];
 					}
 
-					// copy
 					for(uint j = 0; j < dst_len; ++j)
 					{
 						str[i++] = dst[j];
@@ -330,9 +320,7 @@ public:
 		return ret;
 	}
 
-	/**
-	* Paste a substring into buffer
-	*/
+	
 	uint SubString(unsigned int start, unsigned int end, p2SString& buffer) const
 	{
 		if(str != NULL)

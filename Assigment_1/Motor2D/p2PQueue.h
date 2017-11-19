@@ -3,9 +3,7 @@
 
 #include "p2Defs.h"
 
-/**
-* Contains items from double linked list
-*/
+
 template<class tdata>
 struct p2PQueue_item
 {
@@ -17,9 +15,6 @@ struct p2PQueue_item
 	{}
 };
 
-/**
-* Manages a double linked list
-*/
 template<class tdata>
 class p2PQueue
 {
@@ -30,23 +25,17 @@ public:
 
 public:
 
-	/**
-	* Constructor
-	*/
+	
 	inline p2PQueue() : start(NULL)
 	{}
 
-	/**
-	* Destructor
-	*/
+	
 	~p2PQueue()
 	{
 		Clear();
 	}
 
-	/**
-	* Get Size
-	*/
+	
 	unsigned int Count() const
 	{
 		unsigned int result = 0;
@@ -58,9 +47,7 @@ public:
 		return result;
 	}
 
-	/**
-	* Get last item
-	*/
+	
 	p2PQueue_item<tdata>* GetLast()
 	{
 		p2PQueue_item<tdata>* tmp = start;
@@ -71,9 +58,7 @@ public:
 		return tmp;
 	}
 
-	/**
-	* push new item
-	*/
+
 	void Push(const tdata& item, int priority)
 	{
 		p2PQueue_item<tdata>*   p_data_item;
@@ -104,9 +89,7 @@ public:
 		}
 	}
 
-	/**
-	* Deletes an item from the list
-	*/
+	
 	bool Pop(tdata& item)
 	{
 		bool result = false;
@@ -123,9 +106,7 @@ public:
 		return result;
 	}
 
-	/**
-	* Reads one of the values
-	*/
+	
 	const tdata* Peek(unsigned int index) const
 	{
 		unsigned int i = 0;
@@ -140,9 +121,7 @@ public:
 		return NULL;
 	}
 
-	/**
-	* Destroy and free all mem
-	*/
+	
 	void Clear()
 	{
 		p2PQueue_item<tdata>*   p_data;

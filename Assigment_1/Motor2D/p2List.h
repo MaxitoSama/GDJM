@@ -3,9 +3,7 @@
 
 #include "p2Defs.h"
 
-/**
-* Contains items from double linked list
-*/
+
 template<class tdata>
 struct p2List_item
 {
@@ -23,9 +21,7 @@ struct p2List_item
 	{}
 };
 
-/**
-* Manages a double linked list
-*/
+
 template<class tdata>
 class p2List
 {
@@ -41,34 +37,23 @@ private:
 
 public:
 
-	/**
-	* Constructor
-	*/
 	inline p2List()
 	{
 		start = end = NULL;
 		size = 0;
 	}
 
-	/**
-	* Destructor
-	*/
 	~p2List()
 	{
 		clear();
 	}
 
-	/**
-	* Get Size
-	*/
+
 	unsigned int count() const
 	{
 		return size;
 	}
 
-	/**
-	* Add new item
-	*/
 	p2List_item<tdata>* add(const tdata& item)
 	{
 		p2List_item<tdata>*   p_data_item;
@@ -89,9 +74,7 @@ public:
 		return(p_data_item);
 	}
 
-	/**
-	* Deletes an item from the list
-	*/
+	
 	bool del(p2List_item<tdata>* item)
 	{
 		if(item == NULL)
@@ -99,7 +82,6 @@ public:
 			return (false);
 		}
 
-		// Now reconstruct the list
 		if(item->prev != NULL)
 		{
 			item->prev->next = item->next;
@@ -131,9 +113,7 @@ public:
 		return(true);
 	}
 
-	/**
-	* Destroy and free all mem
-	*/
+	
 	void clear()
 	{
 		p2List_item<tdata>*   p_data;
@@ -151,9 +131,7 @@ public:
 		size = 0;
 	}
 
-	/**
-	* read / write operator access directly to a position in the list
-	*/
+	
 	tdata& operator  [](const unsigned int index)
 	{
 		long                  pos;
@@ -175,9 +153,7 @@ public:
 		return(p_item->data);
 	}
 
-	/**
-	* const read operator access directly to a position in the list
-	*/
+	
 	const tdata& operator  [](const unsigned int index) const
 	{
 		long                  pos;
@@ -201,9 +177,7 @@ public:
 		return(p_item->data);
 	}
 
-	/**
-	* const read operator access directly to a position in the list
-	*/
+
 	const p2List<tdata>& operator +=(const p2List<tdata>& other_list)
 	{
 		p2List_item<tdata>*   p_item = other_list.start;
@@ -217,9 +191,7 @@ public:
 		return(*this);
 	}
 
-	/**
-	* const access to a node in a position in the list
-	*/
+
 	const p2List_item<tdata>* At(unsigned int index) const
 	{
 		long                  pos = 0;
@@ -236,9 +208,7 @@ public:
 		return p_item;
 	}
 
-	/**
-	* access to a node in a position in the list
-	*/
+	
 	p2List_item<tdata>* At(unsigned int index)
 	{
 		long                  pos = 0;
@@ -255,7 +225,6 @@ public:
 		return p_item;
 	}
 
-	// Sort
 	int BubbleSort()
 	{
 		int ret = 0;
@@ -282,9 +251,6 @@ public:
 		return ret;
 	}
 
-	/**
-	* returns the first apperance of data as index (-1 if not found)
-	*/
 	int find(const tdata& data)
 	{
 		p2List_item<tdata>* tmp = start;
