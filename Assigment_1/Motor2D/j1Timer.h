@@ -7,6 +7,7 @@ class j1Timer
 {
 public:
 
+	// Constructor
 	j1Timer();
 
 	void Start();
@@ -15,9 +16,7 @@ public:
 	void Reset();
 
 private:
-
 	uint32	started_at;
-
 };
 
 #endif //__j1TIMER_H__

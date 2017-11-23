@@ -4,6 +4,9 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "Brofiler\Brofiler.h"
+
+// This is needed here because SDL redefines main function
+// do not add any other libraries here, instead put them in their modules
 #include "SDL/include/SDL.h"
 
 #pragma comment( lib, "SDL/libx86/SDL2.lib" )
@@ -34,6 +37,7 @@ int main(int argc, char* args[])
 		switch(state)
 		{
 
+			// Allocate the engine --------------------------------------------
 			case CREATE:
 			LOG("CREATION PHASE ===============================");
 
@@ -46,6 +50,7 @@ int main(int argc, char* args[])
 
 			break;
 
+			// Awake all modules -----------------------------------------------
 			case AWAKE:
 			LOG("AWAKE PHASE ===============================");
 			if(App->Awake() == true)
@@ -58,6 +63,7 @@ int main(int argc, char* args[])
 
 			break;
 
+			// Call all modules before first frame  ----------------------------
 			case START:
 			LOG("START PHASE ===============================");
 			if(App->Start() == true)
@@ -74,6 +80,7 @@ int main(int argc, char* args[])
 			}
 			break;
 
+			// Loop all modules until we are asked to leave ---------------------
 			case LOOP:
 			{
 				BROFILER_FRAME("Ninjas Path");
@@ -83,6 +90,7 @@ int main(int argc, char* args[])
 
 			break;
 
+			// Cleanup allocated memory -----------------------------------------
 			case CLEAN:
 			LOG("CLEANUP PHASE ===============================");
 			if(App->CleanUp() == true)
@@ -96,15 +104,17 @@ int main(int argc, char* args[])
 
 			break;
 
+			// Exit with errors and shame ---------------------------------------
 			case FAIL:
-			LOG("Exiting with errors");
+			LOG("Exiting with errors :(");
 			result = EXIT_FAILURE;
 			state = EXIT;
 			break;
 		}
 	}
 
-	LOG("... Bye!\n");
+	LOG("... Bye! :)\n");
 
+	// Dump memory leaks
 	return result;
 }

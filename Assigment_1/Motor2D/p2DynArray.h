@@ -20,6 +20,7 @@ private:
 
 public:
 
+	// Constructors
 	p2DynArray() : mem_capacity(0), num_elements(0), data(NULL)
 	{
 		Alloc(DYN_ARRAY_BLOCK_SIZE);
@@ -30,11 +31,13 @@ public:
 		Alloc(capacity);
 	}
 
+	// Destructor
 	~p2DynArray()
 	{
 		delete[] data;
 	}
 
+	// Operators
 	VALUE& operator[](unsigned int index)
 	{
 		//assert(index < num_elements);
@@ -58,6 +61,7 @@ public:
 		return(*this);
 	}
 
+	// Data Management
 	void PushBack(const VALUE& element)
 	{
 		if(num_elements >= mem_capacity)

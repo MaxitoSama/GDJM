@@ -13,26 +13,38 @@ public:
 
 	j1Scene();
 
+	// Destructor
 	virtual ~j1Scene();
 
+	// Called before render is available
 	bool Awake(pugi::xml_node&);
+
+	// Called before the first frame
 	bool Start();
+
+	// Called before all Updates
 	bool PreUpdate();
+
+	// Called each loop iteration
 	bool Update(float dt);
+
+	// Called before all Updates
 	bool PostUpdate();
+
+	// Called before quitting
 	bool CleanUp();
 
+	//Change to scene 1
 	void ChangeScene(int x, int y);
+
+	//Start again
 	void StartCurrentScene();
 
 public:
-
 	p2DynArray<iPoint> path_test;
-
 private:
-
-	bool Map_1=true;
-	bool Map_2=false;
+	bool Map_1;
+	bool Map_2;
 };
 
 #endif // __j1SCENE_H__

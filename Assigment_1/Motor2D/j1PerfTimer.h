@@ -7,6 +7,7 @@ class j1PerfTimer
 {
 public:
 
+	// Constructor
 	j1PerfTimer();
 
 	void Start();
@@ -14,10 +15,8 @@ public:
 	uint64 ReadTicks() const;
 
 private:
-
 	uint64	started_at;
 	static uint64 frequency;
-
 };
 
 #endif //__j1PERFTIMER_H__

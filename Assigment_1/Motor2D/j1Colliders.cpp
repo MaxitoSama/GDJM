@@ -225,6 +225,24 @@ bool j1Colliders::checkColisionList(Collider * enemCollider)
 	return false;
 }
 
+//void j1Colliders::PlayerFloorCollision(Collider* collider_floor, Collider* collider_feet, float dt)
+//{
+//	if (collider_feet!=App->entities->player->collider_feet
+//		&& collider_floor->type == COLLIDER_FLOOR
+//		&& collider_feet->type == COLLIDER_FEET
+//		&& collider_floor->CheckFutureFallColision(collider_feet->rect, distance_1, dt, App->entities->player->gravity) == true) //en els arguments llargs posar funció
+//	{
+//		App->player->position.y -= distance_1;
+//		App->player->dead = false;
+//
+//		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+//		{
+//			App->player->Jump = false;
+//			App->player->fall = false;
+//		}
+//	}
+//}
+
 bool j1Colliders::CleanUp()
 {
 	LOG("Freeing all colliders");

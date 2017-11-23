@@ -59,6 +59,8 @@ public:
 
 	bool checkColisionList(Collider* enemCollider);
 
+	void PlayerFloorCollision(Collider* collider_floor, Collider* collider_feet, float dt);
+	
 private:
 
 	Collider*	colliders[MAX_COLLIDERS];
