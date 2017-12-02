@@ -20,6 +20,8 @@ class j1Colliders;
 class j1Map;
 class j1Entities;
 class j1PathFinding;
+class j1Fonts;
+class j1Gui;
 
 class j1App
 {
@@ -94,6 +96,9 @@ public:
 	j1Map*				map = nullptr;
 	j1Entities*			entities = nullptr;
 	j1PathFinding*		pathfinding = nullptr;
+	j1Fonts*			font = nullptr;
+	j1Gui*				gui = nullptr;
+
 
 	float				dt;
 

@@ -81,6 +81,8 @@
     <ClCompile Include="Enemy_Zombie.cpp" />
     <ClCompile Include="j1Colliders.cpp" />
     <ClCompile Include="j1Entities.cpp" />
+    <ClCompile Include="j1Fonts.cpp" />
+    <ClCompile Include="j1Gui.cpp" />
     <ClCompile Include="j1Main.cpp" />
     <ClCompile Include="j1App.cpp" />
     <ClCompile Include="j1Audio.cpp" />
@@ -96,6 +98,13 @@
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="UIBackground.cpp" />
+    <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UIElements.cpp" />
+    <ClCompile Include="UIImage.cpp" />
+    <ClCompile Include="UIText.cpp" />
+    <ClCompile Include="UITextBox.cpp" />
+    <ClCompile Include="UIWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brofiler\Brofiler.h" />
@@ -104,6 +113,8 @@
     <ClInclude Include="Enemy_Zombie.h" />
     <ClInclude Include="j1Colliders.h" />
     <ClInclude Include="j1Entities.h" />
+    <ClInclude Include="j1Fonts.h" />
+    <ClInclude Include="j1Gui.h" />
     <ClInclude Include="j1Map.h" />
     <ClInclude Include="j1Pathfinding.h" />
     <ClInclude Include="j1PerfTimer.h" />
@@ -128,6 +139,13 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="UIBackground.h" />
+    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UIElements.h" />
+    <ClInclude Include="UIImage.h" />
+    <ClInclude Include="UIText.h" />
+    <ClInclude Include="UITextBox.h" />
+    <ClInclude Include="UIWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Game\config.xml">
