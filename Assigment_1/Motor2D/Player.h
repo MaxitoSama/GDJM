@@ -64,7 +64,7 @@ public:
 	Animation		death;
 
 
-	Collider*		collider_player;
+	Collider*		collider_player=nullptr;
 
 
 	int				Pos_jump;

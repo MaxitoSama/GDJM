@@ -18,6 +18,11 @@
 j1Entities::j1Entities()
 {
 	name.create("entity");
+	
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		entities[i] = nullptr;
+	}
 }
 
 // Destructor

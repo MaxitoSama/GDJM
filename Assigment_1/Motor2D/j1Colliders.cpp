@@ -14,7 +14,9 @@ j1Colliders::j1Colliders() : j1Module()
 	name.create("colliders");
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
 		colliders[i] = nullptr;
+	}
 }
 
 // Destructor
@@ -51,8 +53,8 @@ bool j1Colliders::Update(float dt)
 {
 	BROFILER_CATEGORY("Update Colliders ", Profiler::Color::PaleVioletRed)
 	
-	Collider* c1;
-	Collider* c2;
+	Collider* c1=nullptr;
+	Collider* c2=nullptr;
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
