@@ -56,6 +56,15 @@ bool j1Colliders::Update(float dt)
 	Collider* c1=nullptr;
 	Collider* c2=nullptr;
 
+	if (App->entities->Slowmo)
+	{
+		Slowdt = dt / 4;
+	}
+	else
+	{
+		Slowdt = dt;
+	}
+
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		// skip empty colliders
@@ -86,6 +95,7 @@ bool j1Colliders::Update(float dt)
 			{
 				App->entities->player->dead = true;
 				App->entities->player->dead_by_fall = true;
+				App->entities->Slowmo = false;
 			}
 
 			if (c1->type == COLLIDER_WIN && c2->type == COLLIDER_FEET && c1->CheckCollision(c2->rect) == true)
@@ -106,7 +116,7 @@ bool j1Colliders::Update(float dt)
 					{
 						App->entities->entities[i]->original_pos.x -= distance;
 					}
-					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect, distance, dt, App->entities->entities[i]->speed.y) == true)
+					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_ENEMY && c1->CheckFutureFallColision(c2->rect, distance,Slowdt, App->entities->entities[i]->speed.y) == true)
 					{
 						App->entities->entities[i]->original_pos.y -= distance;
 					}
@@ -128,7 +138,8 @@ bool j1Colliders::Update(float dt)
 			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckFutureCrashColision(c2->rect, distance, App->entities->player->speed.x) == true && !App->entities->player->GOD)
 			{
 				App->entities->player->dead = true;
-				App->entities->player->dead_by_entity= true;	
+				App->entities->player->dead_by_entity = true;
+				App->entities->Slowmo = false;
 			}
 
 			if ( App->entities->player != nullptr && c1->type == COLLIDER_FLOOR && c2->type == COLLIDER_FEET && c1->CheckFutureFallColision(c2->rect, distance, dt, App->entities->player->gravity) == true)
@@ -227,24 +238,6 @@ bool j1Colliders::checkColisionList(Collider * enemCollider)
 	return false;
 }
 
-//void j1Colliders::PlayerFloorCollision(Collider* collider_floor, Collider* collider_feet, float dt)
-//{
-//	if (collider_feet!=App->entities->player->collider_feet
-//		&& collider_floor->type == COLLIDER_FLOOR
-//		&& collider_feet->type == COLLIDER_FEET
-//		&& collider_floor->CheckFutureFallColision(collider_feet->rect, distance_1, dt, App->entities->player->gravity) == true) //en els arguments llargs posar funció
-//	{
-//		App->player->position.y -= distance_1;
-//		App->player->dead = false;
-//
-//		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
-//		{
-//			App->player->Jump = false;
-//			App->player->fall = false;
-//		}
-//	}
-//}
-
 bool j1Colliders::CleanUp()
 {
 	LOG("Freeing all colliders");
@@ -320,6 +313,7 @@ bool Collider::CheckFutureFallColision(const SDL_Rect& r, float& distance, float
 	}
 	return false;
 }
+
 
 bool Collider::CheckFutureCrashColision(const SDL_Rect& r, float& distance, float speed)
 {

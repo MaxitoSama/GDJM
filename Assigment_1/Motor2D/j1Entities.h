@@ -50,7 +50,6 @@ private:
 
 public:
 
-	bool				draw_underlayed = false;
 	Entity*				entities[MAX_ENEMIES];
 	Player*				player = nullptr;
 	
@@ -60,6 +59,13 @@ public:
 	SDL_Texture*		sprites_zombie = nullptr;
 	SDL_Texture*		sprites_plane = nullptr;
 	SDL_Texture*		sprites_player = nullptr;
+
+	bool				draw_underlayed = false;
+	bool				Slowmo = false;
+
+	uint				SlowAnimationCap = 1;
+
+	float				Slowmo_dt = 0;
 
 private:
 	

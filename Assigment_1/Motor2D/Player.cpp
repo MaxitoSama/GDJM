@@ -423,6 +423,18 @@ bool Player::Update(float dt)
 	{
 		App->render->Blit(godmode, original_pos.x + 20, original_pos.y - 15);
 	}
+	
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	{
+		if (!App->entities->Slowmo)
+		{
+			App->entities->Slowmo = true;
+		}
+		else
+		{
+			App->entities->Slowmo = false;
+		}
+	}
 
 	if (dead == true)
 	{

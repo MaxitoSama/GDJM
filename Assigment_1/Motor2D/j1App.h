@@ -104,6 +104,7 @@ public:
 
 	bool				Cap_on = false;
 	bool				GamePaused = false;
+	
 
 private:
 

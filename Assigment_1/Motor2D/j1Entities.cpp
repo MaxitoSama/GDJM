@@ -86,19 +86,28 @@ bool j1Entities::PreUpdate()
 bool j1Entities::Update(float dt)
 {
 	BROFILER_CATEGORY("Update Entities", Profiler::Color::OrangeRed);
+
+	if (Slowmo)
+	{
+		Slowmo_dt = dt / 4;
+	}
+	else 
+	{
+		Slowmo_dt = dt;
+	}
 	
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (entities[i] != nullptr)
 		{
-			entities[i]->Update(dt);
+			entities[i]->Update(Slowmo_dt);
 		}
 	}
 
 	if (player != nullptr)
 	{
 		player->Update(dt);
-		player->Draw(sprites_player, player->scale);
+		player->Draw(sprites_player, player->scale,dt);
 	}
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
@@ -107,11 +116,11 @@ bool j1Entities::Update(float dt)
 		{
 			if (entities[i]->GetType() == ZOMBIE)
 			{
-				entities[i]->Draw(sprites_zombie, entities[i]->scale);
+				entities[i]->Draw(sprites_zombie, entities[i]->scale, Slowmo_dt);
 			}
 			if (entities[i]->GetType() == PLANE)
 			{
-				entities[i]->Draw(sprites_plane, entities[i]->scale);
+				entities[i]->Draw(sprites_plane, entities[i]->scale, Slowmo_dt);
 			}
 		}
 	}
@@ -135,11 +144,11 @@ bool j1Entities::Update(float dt)
 		{
 			if (entities[i]->GetType() == ZOMBIE)
 			{
-				entities[i]->Draw(sprites_zombie, entities[i]->scale);
+				entities[i]->Draw(sprites_zombie, entities[i]->scale, Slowmo_dt);
 			}
 			if (entities[i]->GetType() == PLANE)
 			{
-				entities[i]->Draw(sprites_plane, entities[i]->scale);
+				entities[i]->Draw(sprites_plane, entities[i]->scale, Slowmo_dt);
 			}
 		}
 	}

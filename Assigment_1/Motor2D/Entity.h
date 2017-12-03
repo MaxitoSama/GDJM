@@ -28,7 +28,7 @@ public:
 	const ENTITY_TYPES	GetType()const;
 
 	bool				Awake(pugi::xml_node&);
-	void				Draw(SDL_Texture* sprites, float direction);
+	void				Draw(SDL_Texture* sprites, float direction,float dt);
 
 	virtual bool		Update(float dt)=0;
 

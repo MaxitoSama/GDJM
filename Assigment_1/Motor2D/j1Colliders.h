@@ -58,14 +58,13 @@ public:
 	void DebugDraw();
 
 	bool checkColisionList(Collider* enemCollider);
-
-	void PlayerFloorCollision(Collider* collider_floor, Collider* collider_feet, float dt);
 	
 private:
 
 	Collider*	colliders[MAX_COLLIDERS];
 	bool		debug = false;
 	float		distance = 0;
+	float		Slowdt;
 
 };
 

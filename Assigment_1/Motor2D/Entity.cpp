@@ -25,7 +25,7 @@ Entity::~Entity()
 		collider->to_delete = true;
 }
 
-void Entity::Draw(SDL_Texture* sprites, float direction)
+void Entity::Draw(SDL_Texture* sprites, float direction, float dt)
 {
 
 	if (collider != nullptr)
@@ -58,7 +58,7 @@ void Entity::Draw(SDL_Texture* sprites, float direction)
 		
 	if (animation != nullptr)
 	{		
-		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()), direction, 1.0f);
+		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame(dt)), direction, 1.0f);
 	}
 }
 
