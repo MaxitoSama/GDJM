@@ -103,6 +103,7 @@ public:
 	float				dt;
 
 	bool				Cap_on = false;
+	bool				GamePaused = false;
 
 private:
 

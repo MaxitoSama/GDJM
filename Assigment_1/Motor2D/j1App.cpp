@@ -49,8 +49,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(map);
 	AddModule(pathfinding);
+	AddModule(scene); 
 	AddModule(colliders);
-	AddModule(scene);
 	AddModule(entities);
 	AddModule(font);
 	AddModule(gui);
@@ -196,13 +196,20 @@ void j1App::PrepareUpdate()
 {
 	frame_count++;
 	last_sec_frame_count++;
-
-	dt = frame_time.ReadSec();
-	if (dt > 5.0f / (float)framerate_cap && Cap_on)
+	
+	if (!GamePaused)
 	{
-		dt = 5.0f / (float)framerate_cap;
+		dt = frame_time.ReadSec();
+		if (dt > 5.0f / (float)framerate_cap && Cap_on)
+		{
+			dt = 5.0f / (float)framerate_cap;
+		}
 	}
-	//LOG("Delta time %f", dt);
+	else
+	{
+		dt = 0;
+	}
+	
 	frame_time.Start();
 	ptimer.Start();
 }
@@ -254,8 +261,6 @@ void j1App::FinishUpdate()
 	{
 		SDL_Delay(delay);
 		realTime = ptimer.ReadMs();
-		//LOG("we waited for %d and got back in %f", delay, realTime);
-
 	}
 
 }

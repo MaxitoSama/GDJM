@@ -147,6 +147,18 @@ bool j1Scene::Update(float dt)
 		}
 	}	
 
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		if (App->GamePaused)
+		{
+			App->GamePaused = false;
+		}
+		else
+		{
+			App->GamePaused = true;
+		}
+	}
+
 	if (App->entities->player->original_pos.x > win_width / 2 && App->entities->player->original_pos.x <= limit_x)
 	{
 		App->render->camera.x = App->entities->player->win_width / 2 - App->entities->player->original_pos.x;
