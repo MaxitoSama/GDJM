@@ -54,6 +54,8 @@ private:
 	GuiText* text = nullptr;
 
 	UIElements* QuitButton = nullptr;
+
+	SDL_Rect button_play;
 };
 
 #endif // __j1SCENE_H__

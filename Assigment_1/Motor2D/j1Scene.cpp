@@ -60,7 +60,8 @@ bool j1Scene::Start()
 			App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
 
 			//gui
-			//App->gui->AddElementButton(0, 0, BUTTON, BUTTON_1, this);
+			button_play = { 400, 972, 183, 191 };
+			App->gui->AddElementButton(1000, 100, BUTTON, &button_play, this);
 		}
 
 		if (Map_2)

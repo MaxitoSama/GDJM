@@ -24,7 +24,9 @@
     <fx_volume value="100"/>
   </audio>
 
-  <atlas file="gui/login_background.png"/>
+  <gui>
+    <atlas file="gui/Button.png"/>
+  </gui>
 	
   <entity>
     <player>

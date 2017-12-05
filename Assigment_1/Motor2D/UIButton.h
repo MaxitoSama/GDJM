@@ -6,17 +6,11 @@
 class SDL_Rect;
 class SDL_Texture;
 
-enum ButtonType {
-
-	BUTTON_1,
-	BUTTON_2
-};
-
 class UIButton : public UIElements
 {
 public:
 
-	UIButton(int x, int y, UIElementType type, ButtonType buttontype, const char* text, j1Module* modul);
+	UIButton(int x, int y, UIElementType type, SDL_Rect* RecTex, const char* text, j1Module* modul);
 	~UIButton();
 
 	void Draw();
@@ -26,13 +20,13 @@ private:
 
 	const char* buttontext = nullptr;
 
-	ButtonType btype;
-
 	SDL_Texture*	ButtonTex;
 	SDL_Texture*	ButtonText;
 
 	uint sizeTx;
 	uint sizeTy;
+
+	SDL_Rect*		RectTexture;
 
 	bool light = false;
 
