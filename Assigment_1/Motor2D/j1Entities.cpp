@@ -5,6 +5,7 @@
 #include "j1Colliders.h"
 #include "j1Entities.h"
 #include "j1Textures.h"
+#include "j1Menu.h"
 #include "j1Scene.h"
 #include "Entity.h"
 
@@ -47,15 +48,19 @@ bool j1Entities::Start()
 	sprites_plane = App->tex->Load("assets/enemies/plane/plane.png");
 	sprites_player = App->tex->Load("assets/character/character.png");
 
-	if (player == nullptr)
+	if (!App->menu->active)
 	{
-		player = new Player(10, 100,PLAYER);
-		player->Awake(entity_config);
-		player->Start();
-	}
-	else
-	{
-		player->Start();
+		if (player == nullptr)
+		{
+			player = new Player(10, 100, PLAYER);
+			player->Awake(entity_config);
+			player->Start();
+		}
+		else
+		{
+			player->Start();
+		}
+
 	}
 	
 

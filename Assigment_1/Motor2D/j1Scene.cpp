@@ -9,6 +9,7 @@
 #include "j1Map.h"
 #include "j1Colliders.h"
 #include "j1Pathfinding.h"
+#include "j1Menu.h"
 #include "j1Scene.h"
 #include "j1Entities.h"
 #include "Player.h"
@@ -32,51 +33,52 @@ bool j1Scene::Awake(pugi::xml_node& config)
 	Map_1 = true;
 	Map_2 = false;
 
-
 	return ret;
 }
 
 // Called before the first frame
 bool j1Scene::Start()
 {
-
-	if (Map_1)
+	if (!App->menu->active)
 	{
-		App->map->Load("Map_1.tmx");
-		App->audio->PlayMusic("audio/music/map1_music.ogg");
-		App->map->Draw_Colliders();
-		App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
-	
-		//enemies
-		App->entities->AddEnemy(ZOMBIE, 1300, 600);
-		App->entities->AddEnemy(ZOMBIE, 2500, 600);
-		App->entities->AddEnemy(ZOMBIE, 19369, 827);
-		App->entities->AddEnemy(ZOMBIE, 7000, 600);
-		App->entities->AddEnemy(ZOMBIE, 9812, 668);
-		App->entities->AddEnemy(PLANE, 2000, 100);
-		
-		App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
-		App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
+		if (Map_1)
+		{
+			App->map->Load("Map_1.tmx");
+			App->audio->PlayMusic("audio/music/map1_music.ogg");
+			App->map->Draw_Colliders();
+			App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
 
-		//gui
-		App->gui->AddElementButton(0, 0, BUTTON, BUTTON_1, this);
-	}
+			//enemies
+			App->entities->AddEnemy(ZOMBIE, 1300, 600);
+			App->entities->AddEnemy(ZOMBIE, 2500, 600);
+			App->entities->AddEnemy(ZOMBIE, 19369, 827);
+			App->entities->AddEnemy(ZOMBIE, 7000, 600);
+			App->entities->AddEnemy(ZOMBIE, 9812, 668);
+			App->entities->AddEnemy(PLANE, 2000, 100);
 
-	if (Map_2)
-	{
-		App->map->Load("Map_2.tmx");
-		App->audio->PlayMusic("audio/music/map1_music.ogg");
-		App->map->Draw_Colliders();
+			App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
+			App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
 
-		App->colliders->AddCollider({ 25400,0,50,310 }, COLLIDER_WIN2, this);
-		App->colliders->AddCollider({ 18923,0,50,310 }, COLLIDER_WIN2, this);
-		App->colliders->AddCollider({ 21087,828,320,32 }, COLLIDER_DEATH);
+			//gui
+			//App->gui->AddElementButton(0, 0, BUTTON, BUTTON_1, this);
+		}
 
-		App->entities->AddEnemy(ZOMBIE, 19461,825);
-		App->entities->AddEnemy(ZOMBIE, 18467, 825);
-		App->entities->AddEnemy(ZOMBIE, 4949, 828);
+		if (Map_2)
+		{
+			App->map->Load("Map_2.tmx");
+			App->audio->PlayMusic("audio/music/map1_music.ogg");
+			App->map->Draw_Colliders();
 
-		App->entities->AddEnemy(PLANE, 1500, 100);
+			App->colliders->AddCollider({ 25400,0,50,310 }, COLLIDER_WIN2, this);
+			App->colliders->AddCollider({ 18923,0,50,310 }, COLLIDER_WIN2, this);
+			App->colliders->AddCollider({ 21087,828,320,32 }, COLLIDER_DEATH);
+
+			App->entities->AddEnemy(ZOMBIE, 19461, 825);
+			App->entities->AddEnemy(ZOMBIE, 18467, 825);
+			App->entities->AddEnemy(ZOMBIE, 4949, 828);
+
+			App->entities->AddEnemy(PLANE, 1500, 100);
+		}
 	}
 
 	return true;

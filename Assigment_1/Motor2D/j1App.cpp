@@ -8,6 +8,7 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Audio.h"
+#include "j1Menu.h"
 #include "j1Scene.h"
 #include "j1Colliders.h"
 #include "j1Map.h"
@@ -33,6 +34,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	render = new j1Render();
 	tex = new j1Textures();
 	audio = new j1Audio();
+	menu = new j1Menu();
 	scene = new j1Scene();
 	colliders = new j1Colliders();
 	map = new j1Map();
@@ -49,13 +51,12 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(map);
 	AddModule(pathfinding);
+	AddModule(menu);
 	AddModule(scene); 
 	AddModule(colliders);
 	AddModule(entities);
 	AddModule(font);
 	AddModule(gui);
-
-	
 
 	// render last to swap buffer
 	AddModule(render);

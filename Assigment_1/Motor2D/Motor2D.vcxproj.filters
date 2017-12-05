@@ -88,6 +88,9 @@
     <ClCompile Include="UIWindow.cpp">
       <Filter>Developement  ========\Modules\UI</Filter>
     </ClCompile>
+    <ClCompile Include="j1Menu.cpp">
+      <Filter>Developement  ========\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Audio.h">
@@ -206,6 +209,9 @@
     </ClInclude>
     <ClInclude Include="UIWindow.h">
       <Filter>Developement  ========\Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Menu.h">
+      <Filter>Developement  ========\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
