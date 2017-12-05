@@ -56,6 +56,10 @@ private:
 	UIElements* QuitButton = nullptr;
 
 	SDL_Rect button_play;
+	SDL_Rect display_score;
+
+	int score;
+	p2SString score_string;
 };
 
 #endif // __j1SCENE_H__

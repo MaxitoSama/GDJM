@@ -35,6 +35,10 @@ bool j1Menu::Awake(pugi::xml_node& config)
 bool j1Menu::Start()
 {
 	App->scene->active = false;
+	button_play = { 400, 972, 183, 191 };
+	button_options = { 3093, 318, 183, 191 };
+	button_exit = { 2556,1407,183,191 };
+;
 	return true;
 }
 
@@ -44,6 +48,10 @@ bool j1Menu::Update(float dt)
 	{
 		StartGame();
 	}
+
+	App->gui->AddElementButton(300, 450, BUTTON, &button_play, this);
+	App->gui->AddElementButton(300, 600, BUTTON, &button_options, this);
+	App->gui->AddElementButton(300, 750, BUTTON, &button_exit, this);
 	return true;
 }
 
@@ -73,4 +81,17 @@ void j1Menu::StartGame()
 	App->scene->active = true;
 	App->scene->Start();
 	App->entities->Start();
+}
+
+void j1Menu::StartButton()
+{
+	StartGame();
+}
+
+void j1Menu::OptionsButton()
+{
+}
+
+void j1Menu::ExitButtion()
+{
 }

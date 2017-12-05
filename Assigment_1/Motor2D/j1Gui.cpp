@@ -41,8 +41,8 @@ bool j1Gui::Start()
 
 	background = App->tex->Load("gui/login_background.png");
 
-	fonts.PushBack(App->font->Load("fonts/wow/ARIALN.ttf", 30));
-	fonts.PushBack(App->font->Load("fonts/wow/ARIALN.ttf", 20));
+	fonts.PushBack(App->font->Load("fonts/ninja_naruto/njnaruto.ttf", 60));
+	fonts.PushBack(App->font->Load("fonts/ninja_naruto/njnaruto.ttf", 50));
 
 	buttons.PushBack(App->tex->Load("gui/UIButton.png"));
 	buttons.PushBack(App->tex->Load("gui/UIButton_light.png"));

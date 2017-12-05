@@ -17,10 +17,16 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 	void StartGame();
+	void StartButton();
+	void OptionsButton();
+	void ExitButtion();
 	bool GUIEvent(UIEvents eventType, UIElements* element);
+	
 
 private:
-
+	SDL_Rect button_play;
+	SDL_Rect button_options;
+	SDL_Rect button_exit;
 };
 
 #endif // __J1MENU_H__

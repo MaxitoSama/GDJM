@@ -62,6 +62,8 @@ bool j1Scene::Start()
 			//gui
 			button_play = { 400, 972, 183, 191 };
 			App->gui->AddElementButton(1000, 100, BUTTON, &button_play, this);
+			display_score = { 173, 3149, 397, 133 };
+			App->gui->AddElementImage(250, 100, TEXTBOX, &display_score, this);
 		}
 
 		if (Map_2)
@@ -185,6 +187,11 @@ bool j1Scene::Update(float dt)
 	App->pathfinding->DrawPath(path_test);
 
 	p2SString title("%s",App->GetTitle());
+
+	//gui
+	score++;
+	score_string.create("%i", score);
+	App->gui->AddElementText(260, 65, TEXT, this, score_string.GetString());
 
 	return true;
 }

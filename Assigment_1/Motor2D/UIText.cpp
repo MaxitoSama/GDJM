@@ -10,9 +10,9 @@ UIText::UIText(int x, int y, UIElementType type, const char* text, j1Module* mod
 {
 	string = text;
 
-	texture = App->font->Print(string, { 255,255,0 }, App->gui->fonts[0]);
+	texture = App->font->Print(string, { 255,255,0 }, App->gui->fonts[1]);
 
-	BlackBackground = App->font->Print(string, { 0,0,0 }, App->gui->fonts[0]);
+	BlackBackground = App->font->Print(string, { 0,0,0 }, App->gui->fonts[1]);
 
 	App->tex->GetSize(texture, size_x, size_y);
 
@@ -30,8 +30,13 @@ UIText::~UIText()
 
 void UIText::Draw()
 {
+
 	App->render->Blit(BlackBackground, position.x - App->render->camera.x - size_x / 2 + 2, position.y - App->render->camera.y + 2);
 	App->render->Blit(texture, position.x - App->render->camera.x - size_x / 2, position.y - App->render->camera.y);
+
+	//so it dosn't blit over the same square
+	BlackBackground = NULL;
+	texture = NULL;
 
 	if (debug == true)
 	{

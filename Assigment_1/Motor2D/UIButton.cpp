@@ -19,7 +19,7 @@ UIButton::UIButton(int x, int y, UIElementType type, SDL_Rect* RecTex, const cha
 	RectTexture = RecTex;
 	ElementTexture = App->gui->GetAtlas();
 
-	scale = 1.0f;
+	scale = 0.7f;
 	size_x = RectTexture->w;
 	size_y = RectTexture->h;
 }
@@ -64,4 +64,5 @@ void UIButton::Action()
 	{
 		light = false;
 	}
+	
 }
