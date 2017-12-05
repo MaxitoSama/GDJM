@@ -6,6 +6,10 @@
 #include "p2Point.h"
 
 struct SDL_Texture;
+class GuiImage;
+class GuiText;
+class GuiWindw;
+
 
 class j1Scene : public j1Module
 {
@@ -42,9 +46,14 @@ public:
 
 public:
 	p2DynArray<iPoint> path_test;
+
 private:
 	bool Map_1;
 	bool Map_2;
+
+	GuiText* text = nullptr;
+
+	UIElements* QuitButton = nullptr;
 };
 
 #endif // __j1SCENE_H__

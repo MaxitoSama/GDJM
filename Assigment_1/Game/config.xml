@@ -5,7 +5,7 @@
     <title>Ninja's Path</title>
     <organization>UPC</organization>
   </app>
-	
+  
   <renderer>
     <vsync value="false"/>
     <camera camera_x="0" camera_y="0"/>
@@ -24,6 +24,8 @@
     <fx_volume value="100"/>
   </audio>
 
+  <atlas file="gui/login_background.png"/>
+	
   <entity>
     <player>
       <position pos_x="60" pos_y="215"/>

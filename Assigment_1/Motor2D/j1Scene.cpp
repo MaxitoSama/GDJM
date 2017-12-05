@@ -12,6 +12,8 @@
 #include "j1Scene.h"
 #include "j1Entities.h"
 #include "Player.h"
+#include "j1Gui.h"
+#include "UIButton.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -37,7 +39,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene::Start()
 {
-	
+
 	if (Map_1)
 	{
 		App->map->Load("Map_1.tmx");
@@ -55,6 +57,9 @@ bool j1Scene::Start()
 		
 		App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
 		App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
+
+		//gui
+		App->gui->AddElementButton(0, 0, BUTTON, BUTTON_1, this);
 	}
 
 	if (Map_2)
