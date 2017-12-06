@@ -252,6 +252,7 @@ void j1Scene::ChangeScene(int x, int y)
 		App->render->camera.y = 0;
 		App->entities->player->Curr_map = 2;
 		App->entities->Start();
+		App->gui->Start();
 	}
 	else
 	{
@@ -266,6 +267,7 @@ void j1Scene::ChangeScene(int x, int y)
 		App->render->camera.y = 0;
 		App->entities->player->Curr_map = 1;
 		App->entities->Start();
+		App->gui->Start();
 	}
 	
 }

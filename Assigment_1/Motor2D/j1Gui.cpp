@@ -45,10 +45,6 @@ bool j1Gui::Start()
 	fonts.PushBack(App->font->Load("fonts/ninja_naruto/njnaruto.ttf", 60));
 	fonts.PushBack(App->font->Load("fonts/ninja_naruto/njnaruto.ttf", 50));
 
-	buttons.PushBack(App->tex->Load("gui/UIButton.png"));
-	buttons.PushBack(App->tex->Load("gui/UIButton_light.png"));
-	textbox = App->tex->Load("gui/UITextBox.png");
-
 	return true;
 }
 
