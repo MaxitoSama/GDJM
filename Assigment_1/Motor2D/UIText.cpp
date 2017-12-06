@@ -35,8 +35,9 @@ void UIText::Draw()
 	App->render->Blit(texture, position.x - App->render->camera.x - size_x / 2, position.y - App->render->camera.y);
 
 	//so it dosn't blit over the same square
-	BlackBackground = NULL;
-	texture = NULL;
+	SDL_DestroyTexture(BlackBackground);
+	SDL_DestroyTexture(texture);
+	
 
 	if (debug == true)
 	{

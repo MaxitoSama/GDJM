@@ -8,20 +8,25 @@
 	</audio>
 	<map />
 	<pathfinding />
+	<gui />
+	<menu />
 	<scene />
 	<colliders />
 	<entity>
-		<player x="292" y="828.5" Map="2" />
+		<player x="60" y="828.5" Map="1" />
 		<enemy_zombie>
-			<position x="19454.666" y="812.999939" />
-			<position x="18460.666" y="812.999939" />
-			<position x="4942.6665" y="812.999939" />
+			<position x="1520.94983" y="812.333252" />
+			<position x="2575.25" y="620" />
+			<position x="19444.25" y="812.999878" />
+			<position x="7075.25" y="9193.66602" />
+			<position x="9887.25" y="652" />
 		</enemy_zombie>
 		<enemy_plane>
-			<position x="461.967651" y="795.364624" />
+			<position x="2024.83142" y="87.599823" />
 		</enemy_plane>
 	</entity>
+	<fonts />
 	<renderer>
-		<camera x="-3" y="-117" />
+		<camera x="0" y="-107" />
 	</renderer>
 </game_state>

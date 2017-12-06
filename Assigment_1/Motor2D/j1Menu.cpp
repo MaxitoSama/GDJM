@@ -35,10 +35,15 @@ bool j1Menu::Awake(pugi::xml_node& config)
 bool j1Menu::Start()
 {
 	App->scene->active = false;
-	button_play = { 400, 972, 183, 191 };
-	button_options = { 3093, 318, 183, 191 };
-	button_exit = { 2556,1407,183,191 };
-;
+	rect_button_play = { 400, 972, 183, 191 };
+	rect_button_options = { 3093, 318, 183, 191 };
+	rect_button_exit = { 2556,1407,183,191 };
+
+	App->gui->AddBackground(0, 0, BACKGROUND, this);
+	button_play=App->gui->AddElementButton(150, 450, BUTTON, &rect_button_play, this);
+	button_options=App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options, this);
+	button_exit=App->gui->AddElementButton(150, 750, BUTTON, &rect_button_exit, this);
+
 	return true;
 }
 
@@ -49,20 +54,16 @@ bool j1Menu::Update(float dt)
 		StartGame();
 	}
 
-	App->gui->AddElementButton(300, 450, BUTTON, &button_play, this);
-	App->gui->AddElementButton(300, 600, BUTTON, &button_options, this);
-	App->gui->AddElementButton(300, 750, BUTTON, &button_exit, this);
 	return true;
 }
 
 bool j1Menu::PostUpdate()
 {
-	bool ret = true;
 	BROFILER_CATEGORY("PosUpdate_Scene1 ", Profiler::Color::DarkOrchid)
 		if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-			ret = false;
+			exit=false;
 
-	return ret;
+	return exit;
 }
 
 bool j1Menu::CleanUp()
@@ -72,6 +73,67 @@ bool j1Menu::CleanUp()
 
 bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 {
+	switch (eventType)
+	{
+	case MOUSE_ENTER:
+		if (element == button_play)
+		{
+
+		}
+		if (element == button_options)
+		{
+
+		}
+		if (element == button_exit)
+		{
+
+		}
+		break;
+	case MOUSE_LEAVE:
+		if (element == button_play)
+		{
+
+		}
+		if (element == button_options)
+		{
+
+		}
+		if (element == button_exit)
+		{
+
+		}
+		break;
+	case MOUSE_CLICK:
+		if (element == button_play)
+		{
+			
+		}
+		if (element == button_options)
+		{
+
+		}
+		if (element == button_exit)
+		{
+
+		}
+		break;
+	case MOUSE_STOP_CLICK:
+		if (element == button_play)
+		{
+			App->gui->startgame = true;
+		}
+		if (element == button_options)
+		{
+
+		}
+		if (element == button_exit)
+		{
+			exit = false;
+		}
+		break;
+	default:
+		break;
+	}
 	return true;
 }
 
@@ -92,6 +154,4 @@ void j1Menu::OptionsButton()
 {
 }
 
-void j1Menu::ExitButtion()
-{
-}
+

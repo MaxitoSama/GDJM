@@ -20,8 +20,10 @@ UIButton::UIButton(int x, int y, UIElementType type, SDL_Rect* RecTex, const cha
 	ElementTexture = App->gui->GetAtlas();
 
 	scale = 0.7f;
+	
 	size_x = RectTexture->w;
 	size_y = RectTexture->h;
+	
 }
 
 
@@ -34,12 +36,19 @@ void UIButton::Draw()
 {
 	if (!isWindowElement)
 	{
-		int rect_x = position.x - (size_x / 2)*scale;
-		int rect_y = position.y;
+		int rect_x;
+		int rect_y;
 
-		Elementrect = { rect_x,rect_y,(int)size_x*(int)scale,(int)size_y*(int)scale };
-		App->render->Blit(ElementTexture, position.x - App->render->camera.x - size_x, position.y - App->render->camera.y,RectTexture, scale);
-		App->render->Blit(ButtonText, position.x - App->render->camera.x - sizeTx / 2, position.y - App->render->camera.y + sizeTy / 2);
+		rect_x = position.x - (size_x / 2)*scale - App->render->camera.x;
+		rect_y = position.y - App->render->camera.y;
+
+		Elementrect = { rect_x,rect_y,(int)(size_x*scale),(int)(size_y*scale)};
+		App->render->Blit(ElementTexture, rect_x, rect_y,RectTexture, scale);
+
+		if (buttontext != nullptr)
+		{
+			App->render->Blit(ButtonText, position.x - App->render->camera.x - sizeTx / 2, position.y - App->render->camera.y + sizeTy / 2);
+		}
 
 		if (debug == true)
 		{

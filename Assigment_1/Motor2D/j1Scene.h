@@ -54,6 +54,7 @@ private:
 	GuiText* text = nullptr;
 
 	UIElements* QuitButton = nullptr;
+	UIElements* Score = nullptr;
 
 	SDL_Rect button_play;
 	SDL_Rect display_score;

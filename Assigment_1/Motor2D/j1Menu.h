@@ -19,14 +19,21 @@ public:
 	void StartGame();
 	void StartButton();
 	void OptionsButton();
-	void ExitButtion();
 	bool GUIEvent(UIEvents eventType, UIElements* element);
 	
 
 private:
-	SDL_Rect button_play;
-	SDL_Rect button_options;
-	SDL_Rect button_exit;
+
+	SDL_Rect rect_button_play;
+	SDL_Rect rect_button_options;
+	SDL_Rect rect_button_exit;
+
+	UIElements* button_play=nullptr;
+	UIElements* button_options=nullptr;
+	UIElements* button_exit=nullptr;
+
+	bool exit = true;
+
 };
 
 #endif // __J1MENU_H__

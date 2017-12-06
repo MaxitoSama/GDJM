@@ -81,6 +81,9 @@ bool j1Scene::Start()
 			App->entities->AddEnemy(ZOMBIE, 4949, 828);
 
 			App->entities->AddEnemy(PLANE, 1500, 100);
+
+			display_score = { 173, 3149, 397, 133 };
+			App->gui->AddElementImage(250, 100, TEXTBOX, &display_score, this);
 		}
 	}
 
@@ -191,7 +194,7 @@ bool j1Scene::Update(float dt)
 	//gui
 	score++;
 	score_string.create("%i", score);
-	App->gui->AddElementText(260, 65, TEXT, this, score_string.GetString());
+	Score=App->gui->AddElementText(260, 65, TEXT, this, score_string.GetString());
 
 	return true;
 }
@@ -216,6 +219,7 @@ bool j1Scene::CleanUp()
 	App->colliders->CleanUp();
 	App->map->CleanUp();
 	App->pathfinding->CleanUp();
+	App->gui->CleanUp();
 	App->tex->CleanUp();
 
 	return true;
