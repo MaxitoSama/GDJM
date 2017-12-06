@@ -39,6 +39,8 @@ bool j1Menu::Start()
 	App->scene->active = false;
 	rect_button_play = { 400, 972, 183, 191 };
 	rect_button_options = { 3093, 318, 183, 191 };
+	rect_button_options_in = { 3093 + 205, 318, 183, 191 };
+	rect_button_options_click = { 3093 + 410,318,183,191 };
 	rect_button_exit = { 2556,1407,183,191 };
 
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
@@ -75,66 +77,69 @@ bool j1Menu::CleanUp()
 
 bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 {
-	switch (eventType)
+	if (App->menu->active == true)
 	{
-	case MOUSE_ENTER:
-		if (element == button_play)
+		switch (eventType)
 		{
+		case MOUSE_ENTER:
+			if (element == button_play)
+			{
 
-		}
-		if (element == button_options)
-		{
+			}
+			if (element == button_options)
+			{
+				button_options_in = App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options_in, this);
+			}
+			if (element == button_exit)
+			{
 
-		}
-		if (element == button_exit)
-		{
+			}
+			break;
+		case MOUSE_LEAVE:
+			if (element == button_play)
+			{
 
-		}
-		break;
-	case MOUSE_LEAVE:
-		if (element == button_play)
-		{
+			}
+			if (element == button_options)
+			{
+				button_options = App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options, this);
+			}
+			if (element == button_exit)
+			{
 
-		}
-		if (element == button_options)
-		{
+			}
+			break;
+		case MOUSE_CLICK:
+			if (element == button_play)
+			{
 
-		}
-		if (element == button_exit)
-		{
+			}
+			if (element == button_options)
+			{
+				button_options_click = App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options_click, this);
+			}
+			if (element == button_exit)
+			{
 
+			}
+			break;
+		case MOUSE_STOP_CLICK:
+			if (element == button_play)
+			{
+				App->gui->startgame = true;
+			}
+			if (element == button_options)
+			{
+				StartOptions();
+			}
+			if (element == button_exit)
+			{
+				exit = false;
+			}
+			break;
+		default:
+			break;
 		}
-		break;
-	case MOUSE_CLICK:
-		if (element == button_play)
-		{
-			
-		}
-		if (element == button_options)
-		{
-
-		}
-		if (element == button_exit)
-		{
-
-		}
-		break;
-	case MOUSE_STOP_CLICK:
-		if (element == button_play)
-		{
-			App->gui->startgame = true;
-		}
-		if (element == button_options)
-		{
-			StartOptions();
-		}
-		if (element == button_exit)
-		{
-			exit = false;
-		}
-		break;
-	default:
-		break;
 	}
 	return true;
 }
