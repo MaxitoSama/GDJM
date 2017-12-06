@@ -91,6 +91,9 @@
     <ClCompile Include="j1Menu.cpp">
       <Filter>Developement  ========\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="j1Options.cpp">
+      <Filter>Developement  ========\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Audio.h">
@@ -211,6 +214,9 @@
       <Filter>Developement  ========\Modules\UI</Filter>
     </ClInclude>
     <ClInclude Include="j1Menu.h">
+      <Filter>Developement  ========\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Options.h">
       <Filter>Developement  ========\Scene</Filter>
     </ClInclude>
   </ItemGroup>

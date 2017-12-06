@@ -23,6 +23,7 @@ class j1Entities;
 class j1PathFinding;
 class j1Fonts;
 class j1Gui;
+class j1Options;
 
 class j1App
 {
@@ -93,6 +94,7 @@ public:
 	j1Textures*			tex = nullptr;
 	j1Audio*			audio = nullptr;
 	j1Menu*				menu = nullptr;
+	j1Options*			options = nullptr;
 	j1Scene*			scene = nullptr;
 	j1Colliders*		colliders = nullptr;
 	j1Map*				map = nullptr;

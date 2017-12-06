@@ -78,6 +78,7 @@ public:
 	p2DynArray<SDL_Texture*> buttons;
 
 	bool startgame = false;
+	bool startoptions = false;
 
 private:
 

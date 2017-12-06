@@ -19,6 +19,7 @@
 #include "j1Fonts.h"
 #include "j1Gui.h"
 #include "j1Pathfinding.h"
+#include "j1Options.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -35,6 +36,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new j1Textures();
 	audio = new j1Audio();
 	menu = new j1Menu();
+	options = new j1Options();
 	scene = new j1Scene();
 	colliders = new j1Colliders();
 	map = new j1Map();
@@ -53,6 +55,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	AddModule(gui);
 	AddModule(menu);
+	AddModule(options);
 	AddModule(scene); 
 	AddModule(colliders);
 	AddModule(entities);
