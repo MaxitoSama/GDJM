@@ -174,7 +174,7 @@ Player::Player(int x, int y, ENTITY_TYPES type) : Entity(x, y,type)
 	win_width = App->win->screen_surface->w;
 	win_height = App->win->screen_surface->h;
 	win_scale = App->win->GetScale();
-
+	score = 0;
 
 	animation = &idle_right;
 	scale = 0.5f;
@@ -236,6 +236,7 @@ bool Player::Start()
 	win_width = App->win->screen_surface->w;
 	win_height = App->win->screen_surface->h;
 	win_scale = App->win->GetScale();
+
 	//GOD = false;
 	
 	return true;
@@ -500,6 +501,8 @@ bool Player::Update(float dt)
 		slide = false;
 		collider->rect.h = 332 / 2;
 	}
+
+	LOG("Score %d", score);
 
 	return true;
 }

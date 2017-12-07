@@ -94,6 +94,9 @@
     <ClCompile Include="j1Options.cpp">
       <Filter>Developement  ========\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>Developement  ========\Modules\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Audio.h">
@@ -218,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="j1Options.h">
       <Filter>Developement  ========\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Coin.h">
+      <Filter>Developement  ========\Modules\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

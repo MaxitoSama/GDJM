@@ -17,7 +17,8 @@ enum ENTITY_TYPES
 	NO_TYPE,
 	PLAYER,
 	ZOMBIE,
-	PLANE
+	PLANE,
+	COIN
 };
 
 struct EnemyInfo
@@ -59,6 +60,7 @@ public:
 	SDL_Texture*		sprites_zombie = nullptr;
 	SDL_Texture*		sprites_plane = nullptr;
 	SDL_Texture*		sprites_player = nullptr;
+	SDL_Texture*		sprites_coin = nullptr;
 
 	bool				draw_underlayed = false;
 	bool				Slowmo = false;

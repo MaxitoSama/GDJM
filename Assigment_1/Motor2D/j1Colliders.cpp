@@ -132,6 +132,15 @@ bool j1Colliders::Update(float dt)
 							App->entities->entities[i]->alive = false;
 						}
 					}
+					if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_COIN && c1->CheckCollision(c2->rect) == true)
+					{
+						if (!App->entities->player->dead && App->entities->entities[i]->GetType()==COIN)
+						{
+							App->entities->player->score += 100;
+							EraseCollider(App->entities->entities[i]->collider);
+							App->entities->entities[i]->alive = false;
+						}
+					}
 				}
 			}
 
@@ -213,6 +222,9 @@ void j1Colliders::DebugDraw()
 				break;
 			case COLLIDER_HEAD: // black
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha, false);
+				break;
+			case COLLIDER_COIN: // black
+				App->render->DrawQuad(colliders[i]->rect, 0, 100, 0, alpha, false);
 				break;
 			}
 		}
