@@ -59,6 +59,8 @@ void UIButton::Draw()
 		{
 			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x - 12, position.y - App->render->camera.y - 12, RectTexture, scale);
 		}
+		//reset texture
+		ElementTexture = nullptr;
 	}
 }
 

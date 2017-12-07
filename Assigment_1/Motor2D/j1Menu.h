@@ -2,6 +2,12 @@
 #define __J1MENU_H__
 
 #include "j1Module.h"
+enum MenuState
+{
+	MAIN_MENU,
+	OPTIONS_MENU,
+	HIDE_MENU
+};
 
 class j1Menu:public j1Module
 {
@@ -20,6 +26,7 @@ public:
 	void StartButton();
 	void OptionsButton();
 	void StartOptions();
+	void StartMainMenu();
 	bool GUIEvent(UIEvents eventType, UIElements* element);
 	
 
@@ -43,7 +50,10 @@ private:
 	UIElements* button_exit=nullptr;
 	UIElements* button_back = nullptr;
 
+	MenuState menu_state;
+
 	bool exit = true;
+	
 
 };
 

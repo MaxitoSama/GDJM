@@ -14,7 +14,7 @@
 #include "UITextBox.h"
 #include "UIWindow.h"
 #include "j1Menu.h"
-#include "j1Options.h"
+
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -118,12 +118,6 @@ bool j1Gui::PostUpdate()
 		startgame = false;
 		CleanUp();
 		App->menu->StartGame();
-	}
-	if (startoptions)
-	{
-		startoptions = false;
-		CleanUp();
-		App->menu->StartOptions();
 	}
 	return true;
 }
