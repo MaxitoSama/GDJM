@@ -106,6 +106,7 @@ bool j1Colliders::Update(float dt)
 			if (c1->type == COLLIDER_WIN2 && c2->type == COLLIDER_FEET && c1->CheckCollision(c2->rect) == true)
 			{
 				App->scene->ChangeScene(60, 215);
+				App->entities->player->score = 0;
 			}
 			
 			for (uint i = 0; i < MAX_ENEMIES; ++i)
@@ -130,16 +131,22 @@ bool j1Colliders::Update(float dt)
 							App->entities->entities[i]->collider_head->to_delete = true;
 							App->entities->entities[i]->collider_head = nullptr;
 							App->entities->entities[i]->alive = false;
+
+							/*if (App->entities->entities[i]->GetType() == ZOMBIE)
+							{
+								App->entities->player->score += 500;
+							}
+							else
+							{
+								App->entities->player->score += 1000;
+							}*/
 						}
 					}
-					if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_COIN && c1->CheckCollision(c2->rect) == true)
+					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_COIN && c1->CheckCollision(c2->rect) == true)
 					{
-						if (!App->entities->player->dead && App->entities->entities[i]->GetType()==COIN)
-						{
-							App->entities->player->score += 100;
-							EraseCollider(App->entities->entities[i]->collider);
-							App->entities->entities[i]->alive = false;
-						}
+						App->entities->player->score += 100;
+						EraseCollider(App->entities->entities[i]->collider);
+						App->entities->entities[i]->alive = false;
 					}
 				}
 			}

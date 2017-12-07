@@ -135,7 +135,8 @@ void j1Map::Draw_Colliders()
 						for (uint indx = 0; indx < data.tilesets[tile_indx]->colliders.count(); indx++)
 						{
 							uint collider_num = data.tilesets[tile_indx]->colliders[indx]->tile_id;
-							if (id - data.tilesets[tile_indx]->firstgid == collider_num && data.tilesets[tile_indx]->colliders[indx]->type == COLLIDER_WALL )
+							if (id - data.tilesets[tile_indx]->firstgid == collider_num && data.tilesets[tile_indx]->colliders[indx]->type == COLLIDER_WALL && 
+								data.tilesets[tile_indx]->colliders[indx]->entype != COIN)
 							{
 								int x = MapToWorld(i , j - counter_y).x;
 								int y = MapToWorld(i , j - counter_y).y;
@@ -152,6 +153,44 @@ void j1Map::Draw_Colliders()
 
 	App->colliders->AddCollider({ 0,1080,1000000,10 }, COLLIDER_DEATH);
 }
+
+void j1Map::LoadEntities()
+{
+	int counter_x = 0;
+	int counter_y = 0;
+
+	uint tile_indx = 0;
+	uint layer_indx;
+
+	//draw the horizontal colliders together
+	for (layer_indx = 0; layer_indx < data.layers.count(); layer_indx++)
+	{
+		for (int j = 0; j < data.height; j++)
+		{
+			for (int i = 0; i < data.width; i++)
+			{
+				uint id = data.layers[layer_indx]->Get(i, j);
+				if (id != 0)
+				{
+
+					for (uint indx = 0; indx < data.tilesets[tile_indx]->colliders.count(); indx++)
+					{
+						uint collider_num = data.tilesets[tile_indx]->colliders[indx]->tile_id;
+						if (id - data.tilesets[tile_indx]->firstgid == collider_num && data.tilesets[tile_indx]->colliders[indx]->entype == COIN)
+						{
+							int x = MapToWorld(i,j).x;
+							int y = MapToWorld(i,j).y;
+							App->entities->AddEnemy(COIN, x, y);
+						}
+					}
+
+				}
+			}
+		}
+
+	}
+}
+
 
 TileSet* j1Map::GetTilesetFromTileId(int id) const
 {
@@ -452,6 +491,10 @@ bool j1Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 		else if (type == "COLLIDER_FLOOR")
 		{
 			aux_collider->type = COLLIDER_FLOOR;
+		}
+		else if (type == "COIN")
+		{
+			aux_collider->entype = COIN;
 		}
 		else
 		{

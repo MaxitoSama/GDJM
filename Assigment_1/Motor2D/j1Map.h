@@ -6,6 +6,7 @@
 #include "p2Point.h"
 #include "j1Module.h"
 #include "j1Colliders.h"
+#include "j1Entities.h"
 
 struct MapLayer 
 {
@@ -24,6 +25,7 @@ struct MapLayer
 struct TileCollider
 {
 	COLLIDER_TYPE		type;
+	ENTITY_TYPES		entype;
 	uint				tile_id;
 	int					collider_x;
 	int					collider_y;
@@ -115,6 +117,9 @@ public:
 	
 	// Draw colliders
 	void Draw_Colliders();
+
+	//Load Entities from Tiel
+	void LoadEntities();
 
 private:
 

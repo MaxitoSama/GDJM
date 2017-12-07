@@ -46,6 +46,7 @@ bool j1Scene::Start()
 			App->map->Load("Map_1.tmx");
 			App->audio->PlayMusic("audio/music/map1_music.ogg");
 			App->map->Draw_Colliders();
+			App->map->LoadEntities();
 			App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
 
 			//enemies
@@ -56,7 +57,7 @@ bool j1Scene::Start()
 			App->entities->AddEnemy(ZOMBIE, 9812, 668);
 			App->entities->AddEnemy(PLANE, 2000, 100);
 			App->entities->AddEnemy(COIN, 1000, 900);
-
+			App->entities->AddEnemy(COIN, 1200, 900);
 			App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
 			App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
 
