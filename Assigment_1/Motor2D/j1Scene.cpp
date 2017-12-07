@@ -192,7 +192,7 @@ bool j1Scene::Update(float dt)
 	p2SString title("%s",App->GetTitle());
 
 	//gui
-	score++;
+	//score++;
 	score_string.create("%i", score);
 	Score=App->gui->AddElementText(260, 65, TEXT, this, score_string.GetString());
 
