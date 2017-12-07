@@ -75,6 +75,7 @@ public:
 	uint			win_scale;
 	uint			acceleration;
 	uint			gravity;
+	uint			score;
 	SDL_Rect		slide_rect;
 
 

@@ -38,15 +38,19 @@ bool j1Menu::Start()
 
 	App->scene->active = false;
 	rect_button_play = { 400, 972, 183, 191 };
+
 	rect_button_options = { 3093, 318, 183, 191 };
 	rect_button_options_in = { 3093 + 205, 318, 183, 191 };
 	rect_button_options_click = { 3093 + 410,318,183,191 };
+
 	rect_button_exit = { 2556,1407,183,191 };
+	rect_button_back = { 3094,101,179,182 };
 
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
 	button_play = App->gui->AddElementButton(150, 450, BUTTON, &rect_button_play, this);
 	button_options = App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options, this);
 	button_exit = App->gui->AddElementButton(150, 750, BUTTON, &rect_button_exit, this);
+	button_back = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this);
 	
 	return true;
 }

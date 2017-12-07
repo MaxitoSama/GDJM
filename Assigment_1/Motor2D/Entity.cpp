@@ -44,6 +44,10 @@ void Entity::Draw(SDL_Texture* sprites, float direction, float dt)
 		{
 			collider->SetPos((int)position.x, (int)position.y + 10);
 		}
+		if (collider->type == COLLIDER_COIN )
+		{
+			collider->SetPos((int)position.x, (int)position.y);
+		}
 	}
 
 	if (collider_feet != nullptr)
@@ -59,6 +63,11 @@ void Entity::Draw(SDL_Texture* sprites, float direction, float dt)
 	if (animation != nullptr)
 	{		
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame(dt)), direction, 1.0f);
+	}
+	
+	if (type == COIN)
+	{
+		App->render->Blit(sprites, position.x, position.y,NULL, scale);
 	}
 }
 

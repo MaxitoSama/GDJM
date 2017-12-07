@@ -13,6 +13,7 @@
 #include "Enemy_Zombie.h"
 #include "Enemy_Plane.h"
 #include "Player.h"
+#include "Coin.h"
 
 #define SPAWN_MARGIN 2000
 
@@ -47,6 +48,7 @@ bool j1Entities::Start()
 	sprites_zombie = App->tex->Load("assets/enemies/zombie/zombie.png");
 	sprites_plane = App->tex->Load("assets/enemies/plane/plane.png");
 	sprites_player = App->tex->Load("assets/character/character.png");
+	sprites_coin = App->tex->Load("assets/entities/coin.png");
 
 	if (!App->menu->active)
 	{
@@ -127,6 +129,10 @@ bool j1Entities::Update(float dt)
 			{
 				entities[i]->Draw(sprites_plane, entities[i]->scale, Slowmo_dt);
 			}
+			if (entities[i]->GetType() == COIN)
+			{
+				entities[i]->Draw(sprites_coin, entities[i]->scale, Slowmo_dt);
+			}
 		}
 	}
 
@@ -187,7 +193,8 @@ bool j1Entities::CleanUp()
 
 	App->tex->UnLoad(sprites_plane);
 	App->tex->UnLoad(sprites_player);
-	App->tex->UnLoad(sprites_player);
+	App->tex->UnLoad(sprites_zombie);
+	App->tex->UnLoad(sprites_coin);
 
 	return true;
 }
@@ -231,6 +238,9 @@ void j1Entities::SpawnEnemy(const EnemyInfo& info)
 			break;
 		case ENTITY_TYPES::PLAYER:
 			entities[i] = new Player(info.x, info.y, info.type);
+			break;
+		case ENTITY_TYPES::COIN:
+			entities[i] = new Coin(info.x, info.y, info.type);
 			break;
 		}
 	}

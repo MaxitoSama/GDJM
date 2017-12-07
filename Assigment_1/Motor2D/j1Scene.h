@@ -55,9 +55,11 @@ private:
 
 	UIElements* QuitButton = nullptr;
 	UIElements* Score = nullptr;
+	UIElements* button_back = nullptr;
 
 	SDL_Rect button_play;
 	SDL_Rect display_score;
+	SDL_Rect rect_button_back;
 
 	int score;
 	p2SString score_string;
