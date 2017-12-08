@@ -60,8 +60,6 @@ bool j1Scene::Start()
 			App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
 
 			//gui
-			button_play = { 400, 972, 183, 191 };
-			App->gui->AddElementButton(1000, 100, BUTTON, &button_play, this);
 			display_score = { 173, 3149, 397, 133 };
 			App->gui->AddElementImage(250, 100, TEXTBOX, &display_score, this);
 		}

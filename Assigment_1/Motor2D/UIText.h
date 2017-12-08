@@ -11,7 +11,7 @@ class UIText :public UIElements
 {
 public:
 
-	UIText(int x, int y, UIElementType type, const char* text, j1Module* modul);
+	UIText(int x, int y, UIElementType type, const char* text, j1Module* modul, bool show);
 	~UIText();
 
 	void Draw();

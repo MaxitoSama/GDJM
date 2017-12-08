@@ -23,10 +23,7 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 	void StartGame();
-	void StartButton();
 	void OptionsButton();
-	void StartOptions();
-	void StartMainMenu();
 	bool GUIEvent(UIEvents eventType, UIElements* element);
 	
 
@@ -49,6 +46,10 @@ private:
 	UIElements* button_options_click=nullptr;
 	UIElements* button_exit=nullptr;
 	UIElements* button_back = nullptr;
+	UIElements* text_start = nullptr;
+	UIElements* text_option = nullptr;
+	UIElements* text_exit = nullptr;
+
 
 	MenuState menu_state;
 

@@ -6,8 +6,9 @@
 #include "UIText.h"
 
 
-UIText::UIText(int x, int y, UIElementType type, const char* text, j1Module* modul) :UIElements(x, y, type, modul)
+UIText::UIText(int x, int y, UIElementType type, const char* text, j1Module* modul, bool _show) :UIElements(x, y, type, modul)
 {
+	show = _show;
 	string = text;
 
 	texture = App->font->Print(string, { 255,255,0 }, App->gui->fonts[1]);
@@ -30,17 +31,20 @@ UIText::~UIText()
 
 void UIText::Draw()
 {
-
-	App->render->Blit(BlackBackground, position.x - App->render->camera.x - size_x / 2 + 2, position.y - App->render->camera.y + 2);
-	App->render->Blit(texture, position.x - App->render->camera.x - size_x / 2, position.y - App->render->camera.y);
-
-	//so it dosn't blit over the same square
-	SDL_DestroyTexture(BlackBackground);
-	SDL_DestroyTexture(texture);
-	
-
-	if (debug == true)
+	if (show)
 	{
-		App->render->DrawQuad(Elementrect, 0, 255, 255, 80);
+
+		App->render->Blit(BlackBackground, position.x - App->render->camera.x - size_x / 2 + 2, position.y - App->render->camera.y + 2);
+		App->render->Blit(texture, position.x - App->render->camera.x - size_x / 2, position.y - App->render->camera.y);
+
+		////so it dosn't blit over the same square
+		//SDL_DestroyTexture(BlackBackground);
+		//SDL_DestroyTexture(texture);
+
+
+		if (debug == true)
+		{
+			App->render->DrawQuad(Elementrect, 0, 255, 255, 80);
+		}
 	}
 }

@@ -46,8 +46,11 @@ bool j1Menu::Start()
 
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
 	button_play = App->gui->AddElementButton(150, 450, BUTTON, &rect_button_play, this);
+	text_start = App->gui->AddElementText(370, 490, TEXT, this, "Start Game");
 	button_options = App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options, this);
+	text_option = App->gui->AddElementText(330, 640, TEXT, this, "Option");
 	button_exit = App->gui->AddElementButton(150, 750, BUTTON, &rect_button_exit, this);
+	text_exit = App->gui->AddElementText(300, 790, TEXT, this, "Exit");
 	button_back = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this,nullptr,false);
 
 	return true;
@@ -163,13 +166,22 @@ void j1Menu::OptionsButton()
 		button_exit->show = false;
 		button_options->show = false;
 		button_play->show = false;
+		text_start->show = false;
+		text_option->show = false;
+		text_exit->show = false;
+
 		button_back->show = true;
+		
 	}
 	else
 	{
 		button_exit->show = true;
 		button_options->show = true;
 		button_play->show = true;
+		text_start->show = true;
+		text_option->show = true;
+		text_exit->show = true;
+
 		button_back->show = false;
 	}
 
