@@ -1,5 +1,6 @@
 #include "Coin.h"
 #include "j1App.h"
+#include "j1Audio.h"
 #include "j1Textures.h"
 #include "j1Colliders.h"
 #include "p2Point.h"
@@ -30,6 +31,7 @@ bool Coin::Update(float dt)
 {
 	if (!alive)
 	{
+		App->audio->PlayFx(2);
 		die = true;
 	}
 	return true;

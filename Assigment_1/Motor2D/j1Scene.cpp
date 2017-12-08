@@ -56,8 +56,6 @@ bool j1Scene::Start()
 			App->entities->AddEnemy(ZOMBIE, 7000, 600);
 			App->entities->AddEnemy(ZOMBIE, 9812, 668);
 			App->entities->AddEnemy(PLANE, 2000, 100);
-			App->entities->AddEnemy(COIN, 1000, 900);
-			App->entities->AddEnemy(COIN, 1200, 900);
 			App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
 			App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
 

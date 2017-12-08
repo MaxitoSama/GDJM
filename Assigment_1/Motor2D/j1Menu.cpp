@@ -39,12 +39,16 @@ bool j1Menu::Start()
 	//MAIN_MENU
 	rect_button_play = { 400, 972, 183, 191 };
 	rect_button_options = { 3093, 318, 183, 191 };
-	rect_button_options_in = { 3093 + 205, 318, 183, 191 };
-	rect_button_options_click = { 3093 + 410,318,183,191 };
 	rect_button_exit = { 2556,1407,183,191 };
 
 	//OPTIONS_MENU
 	rect_button_back = { 3094,101,179,182 };
+
+	App->gui->AddBackground(0, 0, BACKGROUND, this);
+	button_play = App->gui->AddElementButton(150, 450, BUTTON, &rect_button_play, this);
+	button_options = App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options, this);
+	button_exit = App->gui->AddElementButton(150, 750, BUTTON, &rect_button_exit, this);
+	button_back = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this,nullptr,false);
 
 	return true;
 }
@@ -53,25 +57,9 @@ bool j1Menu::Update(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		StartGame();
+		App->gui->startgame = true;
 	}
-	switch (menu_state)
-	{
-	case MAIN_MENU:
-		App->gui->AddBackground(0, 0, BACKGROUND, this);
-		button_play = App->gui->AddElementButton(150, 450, BUTTON, &rect_button_play, this);
-		button_options = App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options, this);
-		button_exit = App->gui->AddElementButton(150, 750, BUTTON, &rect_button_exit, this);
-		break;
 
-	case OPTIONS_MENU:
-		button_back = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this);
-		break;
-
-	case HIDE_MENU:
-
-		break;
-	}
 	return true;
 }
 
@@ -92,92 +80,71 @@ bool j1Menu::CleanUp()
 
 bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 {
-	if (App->menu->active == true)
-	{
-		switch (eventType)
+	switch (eventType)
 		{
 		case MOUSE_ENTER:
-			if (menu_state == MAIN_MENU)
+			if (element == button_play && element->show)
 			{
-				if (element == button_play)
-				{
-
-				}
-				if (element == button_options)
-				{
-					button_options_in = App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options_in, this);
-				}
-				if (element == button_exit)
-				{
-
-				}
 			}
-
+			if (element == button_options && element->show)
+			{
+				
+			}
+			if (element == button_exit && element->show)
+			{
+				
+			}
 			break;
+
 		case MOUSE_LEAVE:
-			if (menu_state == MAIN_MENU)
+			if (element == button_play && element->show)
 			{
-				if (element == button_play)
-				{
-
-				}
-				if (element == button_options)
-				{
-					button_options = App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options, this);
-				}
-				if (element == button_exit)
-				{
-
-				}
 			}
+			if (element == button_options && element->show)
+			{
+				
+			}
+			if (element == button_exit && element->show)
+			{
 
+			}
 			break;
+
 		case MOUSE_CLICK:
-			if (menu_state == MAIN_MENU)
+			if (element == button_play && element->show)
 			{
-				if (element == button_play)
-				{
-
-				}
-				if (element == button_options)
-				{
-					button_options_click = App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options_click, this);
-				}
-				if (element == button_exit)
-				{
-
-				}
 			}
-
+			if (element == button_options && element->show)
+			{
+				
+			}
+			if (element == button_exit && element->show)
+			{
+			}
 			break;
+
 		case MOUSE_STOP_CLICK:
-			if (menu_state == MAIN_MENU)
+			if (element == button_play && element->show)
 			{
-				if (element == button_play)
-				{
-					App->gui->startgame = true;
-				}
-				if (element == button_options)
-				{
-					StartOptions();
-				}
-				if (element == button_exit)
-				{
-					exit = false;
-				}
+				App->gui->startgame = true;
 			}
-			if (menu_state == OPTIONS_MENU)
+			if (element == button_options && element->show)
 			{
-				if (element == button_back)
-				{
-					StartMainMenu();
-				}
+				OptionsButton();
+			}
+			if (element == button_exit && element->show)
+			{
+				exit = false;
+			}
+			if (element == button_back && element->show)
+			{
+				OptionsButton();
 			}
 			break;
+		
 		default:
 			break;
 		}
-	}
 	return true;
 }
 
@@ -189,23 +156,21 @@ void j1Menu::StartGame()
 	App->entities->Start();
 }
 
-void j1Menu::StartButton()
-{
-	StartGame();
-}
-
 void j1Menu::OptionsButton()
 {
-	StartOptions();
-}
+	if (button_options->show)
+	{
+		button_exit->show = false;
+		button_options->show = false;
+		button_play->show = false;
+		button_back->show = true;
+	}
+	else
+	{
+		button_exit->show = true;
+		button_options->show = true;
+		button_play->show = true;
+		button_back->show = false;
+	}
 
-void j1Menu::StartOptions()
-{
-	menu_state = OPTIONS_MENU;
-
-}
-
-void j1Menu::StartMainMenu()
-{
-	menu_state = MAIN_MENU;
 }

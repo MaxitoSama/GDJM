@@ -58,7 +58,7 @@ public:
 	UIElements* AddElementText(int x, int y, UIElementType type, j1Module* modul, const char* text = nullptr);
 	UIElements* AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text = nullptr);
 	void AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* modul);
-	UIElements* AddElementButton(int x, int y, UIElementType type, SDL_Rect* RecTex, j1Module* modul, const char* text = nullptr, bool iswinelem = false);
+	UIElements* AddElementButton(int x, int y, UIElementType type, SDL_Rect* RecTex, j1Module* modul, const char* text = nullptr, bool show = true);
 	UIElements* AddElementWindow(int x, int y, UIElementType type, j1Module* modul, p2List<UIElements*>* elementslist);
 
 	void DeleteElements(UIElements* element);

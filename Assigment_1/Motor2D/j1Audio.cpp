@@ -56,8 +56,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	}
 
 	LoadFx("audio/fx/Jump_Sound.wav");
-
-	
+	LoadFx("audio/fx/Coin_Sound.wav");
 
 	return ret;
 }

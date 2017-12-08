@@ -178,11 +178,10 @@ void j1Gui::AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect, j1
 	elements.add(element_created);
 }
 
-UIElements* j1Gui::AddElementButton(int x, int y, UIElementType type, SDL_Rect* RecTex, j1Module* modul, const char* text, bool iswinelem)
+UIElements* j1Gui::AddElementButton(int x, int y, UIElementType type, SDL_Rect* RecTex, j1Module* modul, const char* text, bool show)
 {
 	UIElements* element_created;
-	element_created = new UIButton(x, y, type, RecTex, text, modul);
-	element_created->isWindowElement = iswinelem;
+	element_created = new UIButton(x, y, type, RecTex, text, modul,show);
 	elements.add(element_created);
 
 	return element_created;

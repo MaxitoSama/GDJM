@@ -7,8 +7,10 @@
 #include "UIButton.h"
 
 
-UIButton::UIButton(int x, int y, UIElementType type, SDL_Rect* RecTex, const char* text, j1Module* modul) :UIElements(x, y, type, modul)
+UIButton::UIButton(int x, int y, UIElementType type, SDL_Rect* RecTex, const char* text, j1Module* modul, bool show) :UIElements(x, y, type, modul)
 {
+	this->show = show;
+
 	if (text != nullptr)
 	{
 		buttontext = text;
@@ -34,7 +36,7 @@ UIButton::~UIButton()
 
 void UIButton::Draw()
 {
-	if (!isWindowElement)
+	if (show)
 	{
 		int rect_x;
 		int rect_y;
@@ -59,8 +61,6 @@ void UIButton::Draw()
 		{
 			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x - 12, position.y - App->render->camera.y - 12, RectTexture, scale);
 		}
-		//reset texture
-		ElementTexture = nullptr;
 	}
 }
 

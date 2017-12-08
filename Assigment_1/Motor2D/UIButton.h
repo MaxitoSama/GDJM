@@ -10,7 +10,7 @@ class UIButton : public UIElements
 {
 public:
 
-	UIButton(int x, int y, UIElementType type, SDL_Rect* RecTex, const char* text, j1Module* modul);
+	UIButton(int x, int y, UIElementType type, SDL_Rect* RecTex, const char* text, j1Module* modul,bool show=true);
 	~UIButton();
 
 	void Draw();
