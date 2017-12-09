@@ -1,5 +1,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
+#include "p2Animation.h"
+#include "p2Path.h"
 #include "j1App.h"
 #include "j1Input.h"
 #include "j1Textures.h"
@@ -20,6 +22,20 @@
 j1Menu::j1Menu()
 {
 	name.create("menu");
+
+	ninja.PushBack({ 64,111,176,331 });
+	ninja.PushBack({ 310,111,176,331 });
+	ninja.PushBack({ 575,111,176,331 });
+	ninja.PushBack({ 845,111,176,331 });
+	ninja.PushBack({ 1138,111,176,331 });
+	ninja.PushBack({ 1450,111,176,331 });
+	ninja.PushBack({ 1735,111,176,331 });
+	ninja.PushBack({ 2019,111,176,331 });
+	ninja.PushBack({ 2284,111,176,331 });
+	ninja.PushBack({ 2559,111,176,331 });
+
+	ninja.loop = true;
+	ninja.speed = 30.0f;
 }
 
 j1Menu::~j1Menu()
@@ -34,6 +50,9 @@ bool j1Menu::Awake(pugi::xml_node& config)
 
 bool j1Menu::Start()
 {
+	sprites_ninja = App->tex->Load("assets/character/character.png");
+	animation = &ninja;
+
 	App->scene->active = false;
 
 	//MAIN_MENU
@@ -53,11 +72,14 @@ bool j1Menu::Start()
 	text_exit = App->gui->AddElementText(300, 790, TEXT, this, "Exit");
 	button_back = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this,nullptr,false);
 
+
+
 	return true;
 }
 
 bool j1Menu::Update(float dt)
 {
+	this->dt = dt;
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		App->gui->startgame = true;
@@ -72,12 +94,15 @@ bool j1Menu::PostUpdate()
 		if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 			exit=false;
 
+	App->render->Blit(sprites_ninja, 900, 350, &(animation->GetCurrentFrame(dt)),-1.6f);
+
 	return exit;
 }
 
 bool j1Menu::CleanUp()
 {
-	
+	App->tex->UnLoad(sprites_ninja);
+
 	return true;
 }
 

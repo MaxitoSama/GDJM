@@ -2,6 +2,7 @@
 #define __J1MENU_H__
 
 #include "j1Module.h"
+#include "p2Animation.h"
 enum MenuState
 {
 	MAIN_MENU,
@@ -29,6 +30,8 @@ public:
 
 private:
 
+	SDL_Texture* sprites_ninja = nullptr;
+
 	SDL_Rect rect_button_play;
 
 	SDL_Rect rect_button_options;
@@ -52,6 +55,11 @@ private:
 
 
 	MenuState menu_state;
+
+	Animation* animation = nullptr;
+	Animation ninja;
+
+	float dt;
 
 	bool exit = true;
 	
