@@ -83,6 +83,12 @@ bool j1Scene::Start()
 			display_score = { 173, 3149, 397, 133 };
 			App->gui->AddElementImage(250, 100, TEXTBOX, &display_score, this);
 		}
+		
+		rect_button_exit = { 2556,1407,183,191 };
+		exit_button= App->gui->AddElementButton(150, 200, BUTTON, &rect_button_exit, this,nullptr,false);
+		pause_buttons.add(exit_button);
+
+		pause_window = App->gui->AddElementWindow(300,200,WINDOWS,this,&pause_buttons,{ 1055,160,930,742 },false);
 	}
 
 	return true;
@@ -162,10 +168,12 @@ bool j1Scene::Update(float dt)
 	{
 		if (App->GamePaused)
 		{
+			pause_window->show = false;
 			App->GamePaused = false;
 		}
 		else
 		{
+			pause_window->show = true;
 			App->GamePaused = true;
 		}
 	}
@@ -204,12 +212,11 @@ bool j1Scene::Update(float dt)
 // Called each loop iteration
 bool j1Scene::PostUpdate()
 {
-	bool ret = true;
 	BROFILER_CATEGORY("PosUpdate_Scene1 ", Profiler::Color::DarkOrchid)
 	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+		exit = false;
 
-	return ret;
+	return exit;
 }
 
 // Called before quitting
@@ -271,5 +278,46 @@ void j1Scene::ChangeScene(int x, int y)
 		App->entities->Start();
 		App->gui->Start();
 	}
-	
 }
+
+bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
+{
+	switch (eventType)
+	{
+	case MOUSE_ENTER:
+		if (element == exit_button && element->show)
+		{
+
+		}
+
+	case MOUSE_LEAVE:
+		if (element == exit_button && element->show)
+		{
+
+		}
+		break;
+
+	case MOUSE_CLICK:
+		if (element == exit_button && element->show)
+		{
+
+		}
+		break;
+
+	case MOUSE_STOP_CLICK:
+		if (element == exit_button && element->show)
+		{
+			exit = false;
+		}
+		if (element == button_back && element->show)
+		{
+		
+		}
+		break;
+
+	default:
+		break;
+	}
+	return true;
+}
+

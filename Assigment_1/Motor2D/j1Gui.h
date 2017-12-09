@@ -59,7 +59,7 @@ public:
 	UIElements* AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text = nullptr);
 	void AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* modul);
 	UIElements* AddElementButton(int x, int y, UIElementType type, SDL_Rect* RecTex, j1Module* modul, const char* text = nullptr, bool show = true);
-	UIElements* AddElementWindow(int x, int y, UIElementType type, j1Module* modul, p2List<UIElements*>* elementslist);
+	UIElements* AddElementWindow(int x, int y, UIElementType type, j1Module* modul, p2List<UIElements*>* elementslist, SDL_Rect rect,bool show=true);
 
 	void DeleteElements(UIElements* element);
 
@@ -72,8 +72,11 @@ public:
 public:
 
 	p2List<UIElements*> elements;
+
 	SDL_Texture* background = nullptr;
+	SDL_Texture* window = nullptr;
 	SDL_Texture* textbox = nullptr;
+
 	p2DynArray<_TTF_Font*> fonts;
 	p2DynArray<SDL_Texture*> buttons;
 

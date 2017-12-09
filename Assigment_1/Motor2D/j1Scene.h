@@ -44,22 +44,31 @@ public:
 	//Start again
 	void StartCurrentScene();
 
+	bool GUIEvent(UIEvents eventType, UIElements* element);
+
 public:
+
 	p2DynArray<iPoint> path_test;
+	p2List<UIElements*> pause_buttons;
 
 private:
+
 	bool Map_1;
 	bool Map_2;
+	bool exit=true;
 
 	GuiText* text = nullptr;
 
 	UIElements* QuitButton = nullptr;
 	UIElements* Score = nullptr;
 	UIElements* button_back = nullptr;
+	UIElements* pause_window = nullptr;
+	UIElements* exit_button = nullptr;
 
 	SDL_Rect button_play;
 	SDL_Rect display_score;
 	SDL_Rect rect_button_back;
+	SDL_Rect rect_button_exit;
 
 	int score;
 	p2SString score_string;

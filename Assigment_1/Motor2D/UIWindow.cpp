@@ -7,12 +7,13 @@
 #include "UIWindow.h"
 
 
-UIWindow::UIWindow(int x, int y, UIElementType type, j1Module* modul, p2List<UIElements*>* elementslist) :UIElements(x, y, type, modul)
+UIWindow::UIWindow(int x, int y, UIElementType type, j1Module* modul, p2List<UIElements*>* elementslist, SDL_Rect rect,bool _show) :UIElements(x, y, type, modul)
 {
-	window = { 32,542,420,452 };
+	window_rect = rect;
+	show = _show;
 
-	size_x = window.w;
-	size_y = window.h;
+	size_x = window_rect.w;
+	size_y = window_rect.h;
 
 	windowelements = elementslist;
 
@@ -43,7 +44,7 @@ void UIWindow::Draw()
 
 		Elementrect = { rect_x,rect_y,(int)size_x*(int)scale,(int)size_y*(int)scale };
 
-		App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y,&window, 1.0f);
+		App->render->Blit(App->gui->window, position.x - App->render->camera.x, position.y - App->render->camera.y,&window_rect, 1.0f);
 
 		if (debug)
 		{
@@ -54,7 +55,7 @@ void UIWindow::Draw()
 
 		while (item != nullptr)
 		{
-			item->data->isWindowElement = false;
+			item->data->show = true;
 			item->data->Draw();
 
 			item = item->next;
@@ -72,7 +73,7 @@ void UIWindow::Draw()
 		p2List_item<UIElements*>* item = windowelements->start;
 		while (item != nullptr)
 		{
-			item->data->isWindowElement = true;
+			item->data->show = false;
 			item = item->next;
 		}
 	}

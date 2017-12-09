@@ -42,6 +42,7 @@ bool j1Gui::Start()
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
 	background = App->tex->Load("gui/BG.png");
+	window = App->tex->Load("gui/windows.png");
 
 	fonts.PushBack(App->font->Load("fonts/ninja_naruto/njnaruto.ttf", 60));
 	fonts.PushBack(App->font->Load("fonts/ninja_naruto/njnaruto.ttf", 50));
@@ -196,10 +197,10 @@ UIElements* j1Gui::AddElementTextBox(int x, int y, UIElementType type, j1Module*
 	return element_created;
 }
 
-UIElements* j1Gui::AddElementWindow(int x, int y, UIElementType type, j1Module* modul, p2List<UIElements*>* elementslist)
+UIElements* j1Gui::AddElementWindow(int x, int y, UIElementType type, j1Module* modul, p2List<UIElements*>* elementslist,SDL_Rect rect,bool show)
 {
 	UIElements* element_created;
-	element_created = new UIWindow(x, y, type, modul, elementslist);
+	element_created = new UIWindow(x, y, type, modul, elementslist,rect,show);
 	elements.add(element_created);
 
 	return element_created;
