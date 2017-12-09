@@ -229,7 +229,7 @@ bool Player::Start()
 	godmode = App->tex->Load("assets/character/god_mode.png");
 
 	LOG("Loading Player Collider");
-	collider = App->colliders->AddCollider({ (int)original_pos.x, (int)original_pos.y, 200 / 2, 332 / 2 }, COLLIDER_PLAYER, (j1Module*)App->entities);
+	collider = App->colliders->AddCollider({ (int)original_pos.x, (int)original_pos.y, 200 / 4, 332 / 2 }, COLLIDER_PLAYER, (j1Module*)App->entities);
 	collider_feet = App->colliders->AddCollider({ ((int)original_pos.x + (263 / 4) - 54), (int)original_pos.y + (310 / 2) - 1, 64, 10 }, COLLIDER_FEET, (j1Module*)App->entities);
 
 	//Init Screen vars----------------------------------------------------

@@ -38,7 +38,7 @@ Enemy_Plane::Enemy_Plane(int x, int y, ENTITY_TYPES type): Entity(x, y,type)
 
 	animation = &anim;
 
-	collider = App->colliders->AddCollider({ x, y-100, (639*2)/5, (412*2)/6 }, COLLIDER_ENEMY, (j1Module*)App->entities);
+	collider = App->colliders->AddCollider({ x, y, (639*2)/5, (412*2)/6 }, COLLIDER_ENEMY, (j1Module*)App->entities);
 	collider_head = App->colliders->AddCollider({ x, y, 200, 40}, COLLIDER_HEAD, (j1Module*)App->entities);
 }
 

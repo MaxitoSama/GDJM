@@ -152,6 +152,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			break;
 
 		case MOUSE_STOP_CLICK:
+			App->audio->PlayFx(3);
 			if (element == button_play && element->show)
 			{
 				App->gui->startgame = true;

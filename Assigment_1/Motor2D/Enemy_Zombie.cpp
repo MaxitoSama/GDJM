@@ -9,6 +9,7 @@
 #include "j1Entities.h"
 #include "Player.h"
 #include "j1Scene.h"
+#include "j1Audio.h"
 
 
 Enemy_Zombie::Enemy_Zombie(int x, int y, ENTITY_TYPES type): Entity(x, y,type)
@@ -66,7 +67,7 @@ Enemy_Zombie::Enemy_Zombie(int x, int y, ENTITY_TYPES type): Entity(x, y,type)
 	animation = &walking;
 	initial_pos.x = original_pos.x;
 
-	collider = App->colliders->AddCollider({ (int)(position.x-10), (int)position.y - 10, 120, 360/2-10 }, COLLIDER_ENEMY, (j1Module*)App->entities);
+	collider = App->colliders->AddCollider({ (int)(position.x-10), (int)position.y - 10, 60, 360/2-10/2 }, COLLIDER_ENEMY, (j1Module*)App->entities);
 	collider_head = App->colliders->AddCollider({ (int)(position.x - 120), (int)position.y, 50, 20 }, COLLIDER_HEAD, (j1Module*)App->entities);
 }
 
@@ -213,10 +214,12 @@ bool Enemy_Zombie::Update(float dt)
 	}
 	else
 	{
+
 		animation = &dead;
 		
 		if (dead.Finished() == true)
 		{
+			App->audio->PlayFx(4);
 			die = true;
 		}
 	}

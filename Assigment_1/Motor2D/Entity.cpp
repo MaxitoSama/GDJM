@@ -33,7 +33,7 @@ void Entity::Draw(SDL_Texture* sprites, float direction, float dt)
 		
 		if (collider->type == COLLIDER_PLAYER && App->entities->player->slide)
 		{
-			collider->SetPos((int)position.x, (int)position.y+40);
+			collider->SetPos((int)position.x+25, (int)position.y+40);
 		}
 		else
 		{
@@ -42,7 +42,7 @@ void Entity::Draw(SDL_Texture* sprites, float direction, float dt)
 
 		if (collider->type == COLLIDER_ENEMY && alive)
 		{
-			collider->SetPos((int)position.x, (int)position.y + 10);
+			collider->SetPos((int)position.x+25, (int)position.y + 5);
 		}
 		if (collider->type == COLLIDER_COIN )
 		{
