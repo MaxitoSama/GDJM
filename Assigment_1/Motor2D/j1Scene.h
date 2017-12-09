@@ -46,6 +46,8 @@ public:
 
 	bool GUIEvent(UIEvents eventType, UIElements* element);
 
+	void GoToMenu();
+
 public:
 
 	p2DynArray<iPoint> path_test;
@@ -65,6 +67,7 @@ private:
 	UIElements* Score = nullptr;
 	UIElements* button_back = nullptr;
 	UIElements* pause_window = nullptr;
+	UIElements* back_menu_button = nullptr;
 	UIElements* exit_button = nullptr;
 
 	SDL_Rect button_play;

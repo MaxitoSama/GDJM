@@ -14,6 +14,7 @@
 #include "UITextBox.h"
 #include "UIWindow.h"
 #include "j1Menu.h"
+#include "j1Scene.h"
 
 
 j1Gui::j1Gui() : j1Module()
@@ -118,7 +119,14 @@ bool j1Gui::PostUpdate()
 	{
 		startgame = false;
 		CleanUp();
-		App->menu->StartGame();
+		if (App->menu->active)
+		{
+			App->menu->StartGame();
+		}
+		else
+		{
+			App->scene->GoToMenu();
+		}
 	}
 	return true;
 }

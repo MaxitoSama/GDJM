@@ -58,7 +58,6 @@ bool j1Scene::Start()
 			App->entities->AddEnemy(PLANE, 2000, 100);
 			App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
 			App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
-
 		}
 
 		if (Map_2)
@@ -85,10 +84,15 @@ bool j1Scene::Start()
 		Score = App->gui->AddElementText(200, 65, TEXT, this, score_string.GetString(), true, true);
 		
 		rect_button_exit = { 2556,1407,183,191 };
-		exit_button= App->gui->AddElementButton(150, 200, BUTTON, &rect_button_exit, this,nullptr,false);
+		exit_button= App->gui->AddElementButton(150, 250, BUTTON, &rect_button_exit, this,nullptr,false);
+		rect_button_back = { 3094,101,179,182 };
+		back_menu_button = App->gui->AddElementButton(150, 400, BUTTON, &rect_button_back, this, nullptr, false);
 		pause_buttons.add(exit_button);
+		pause_buttons.add(back_menu_button);
 
 		pause_window = App->gui->AddElementWindow(300,200,WINDOWS,this,&pause_buttons,{ 1055,160,930,742 },false);
+
+		App->GamePaused = false;
 	}
 
 	return true;
@@ -221,6 +225,8 @@ bool j1Scene::PostUpdate()
 bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
+
+	pause_buttons.clear();
 	
 	App->entities->CleanUp();
 	App->colliders->CleanUp();
@@ -307,9 +313,9 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 		{
 			exit = false;
 		}
-		if (element == button_back && element->show)
+		if (element == back_menu_button && element->show)
 		{
-		
+			App->gui->startgame = true;
 		}
 		break;
 
@@ -318,4 +324,20 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 	}
 	return true;
 }
+void j1Scene::GoToMenu()
+{
+	if (Map_1 && App->entities->player->Curr_map == 1)
+	{
+		StartCurrentScene();
+	}
+	else
+	{
+		ChangeScene(60,215);
+	}
 
+	App->menu->active = true;
+	App->scene->active = false;
+	App->scene->CleanUp();
+	App->gui->Start();
+	App->menu->Start();
+}
