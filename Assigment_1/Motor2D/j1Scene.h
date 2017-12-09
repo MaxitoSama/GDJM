@@ -51,6 +51,8 @@ public:
 	p2DynArray<iPoint> path_test;
 	p2List<UIElements*> pause_buttons;
 
+	p2SString score_string;
+
 private:
 
 	bool Map_1;
@@ -70,8 +72,6 @@ private:
 	SDL_Rect rect_button_back;
 	SDL_Rect rect_button_exit;
 
-	int score;
-	p2SString score_string;
 };
 
 #endif // __j1SCENE_H__

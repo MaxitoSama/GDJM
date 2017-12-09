@@ -162,10 +162,10 @@ void j1Gui::AddBackground(int x, int y, UIElementType type, j1Module* modul)
 	elements.add(element_created);
 }
 
-UIElements* j1Gui::AddElementText(int x, int y, UIElementType type, j1Module* modul, const char* text, bool show)
+UIElements* j1Gui::AddElementText(int x, int y, UIElementType type, j1Module* modul, const char* text,bool actualize, bool show)
 {
 	UIElements* element_created;
-	element_created = new UIText(x, y, type, text, modul,show);
+	element_created = new UIText(x, y, type, text, modul,actualize,show);
 	elements.add(element_created);
 
 	return element_created;
