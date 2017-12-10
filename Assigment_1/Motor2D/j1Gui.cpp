@@ -42,7 +42,7 @@ bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
-	background = App->tex->Load("gui/BG.png");
+	background = App->tex->Load("gui/Background.png");
 	window = App->tex->Load("gui/windows.png");
 
 	fonts.PushBack(App->font->Load("fonts/ninja_naruto/njnaruto.ttf", 60));

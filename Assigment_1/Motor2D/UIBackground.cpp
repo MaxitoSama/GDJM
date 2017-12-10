@@ -14,5 +14,5 @@ UIBackground::~UIBackground()
 
 void UIBackground::Draw()
 {
-	App->render->Blit(App->gui->GetBackground(), position.x, position.y);
+	App->render->Blit(App->gui->GetBackground(), position.x, position.y, {},1.1f);
 }

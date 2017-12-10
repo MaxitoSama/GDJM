@@ -133,7 +133,7 @@ bool j1Menu::PostUpdate()
 			exit=false;
 	if (button_play->show == true)
 	{
-		App->render->Blit(sprites_ninja, 900, 350, &(animation->GetCurrentFrame(dt)), -1.6f);
+		App->render->Blit(sprites_ninja, 870, 331, &(animation->GetCurrentFrame(dt)), -1.6f);
 	}
 
 	return exit;
