@@ -148,6 +148,12 @@ bool j1Gui::CleanUp()
 
 	elements.clear();
 
+	if (!active)
+	{
+		App->tex->UnLoad(background);
+		App->tex->UnLoad(atlas);
+	}
+	
 	return true;
 }
 

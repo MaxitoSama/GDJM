@@ -94,76 +94,78 @@ bool j1Entities::Update(float dt)
 {
 	BROFILER_CATEGORY("Update Entities", Profiler::Color::OrangeRed);
 
-	if (Slowmo)
+	if (App->scene->active)
 	{
-		Slowmo_dt = dt / 4;
-	}
-	else 
-	{
-		Slowmo_dt = dt;
-	}
-	
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (entities[i] != nullptr)
+		if (Slowmo)
 		{
-			entities[i]->Update(Slowmo_dt);
+			Slowmo_dt = dt / 4;
 		}
-	}
-
-	if (player != nullptr)
-	{
-		player->Update(dt);
-		player->Draw(sprites_player, player->scale,dt);
-	}
-
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (entities[i] != nullptr && (entities[i]->collider != nullptr))
+		else
 		{
-			if (entities[i]->GetType() == ZOMBIE)
+			Slowmo_dt = dt;
+		}
+
+		for (uint i = 0; i < MAX_ENEMIES; ++i)
+		{
+			if (entities[i] != nullptr)
 			{
-				entities[i]->Draw(sprites_zombie, entities[i]->scale, Slowmo_dt);
-			}
-			if (entities[i]->GetType() == PLANE)
-			{
-				entities[i]->Draw(sprites_plane, entities[i]->scale, Slowmo_dt);
-			}
-			if (entities[i]->GetType() == COIN)
-			{
-				entities[i]->Draw(sprites_coin, entities[i]->scale, Slowmo_dt);
+				entities[i]->Update(Slowmo_dt);
 			}
 		}
-	}
 
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (entities[i] != nullptr && entities[i]->die)
+		if (player != nullptr)
 		{
-			entities[i]->position.x = -2000;
-			entities[i]->position.y = 0;
-			entities[i]->original_pos.x = -2000;
-			entities[i]->original_pos.y = 0;
-			entities[i]->die = false;
-			entities[i]->alive = true;
+			player->Update(dt);
+			player->Draw(sprites_player, player->scale, dt);
 		}
-	}
 
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (entities[i] != nullptr && (entities[i]->collider == nullptr))
+		for (uint i = 0; i < MAX_ENEMIES; ++i)
 		{
-			if (entities[i]->GetType() == ZOMBIE)
+			if (entities[i] != nullptr && (entities[i]->collider != nullptr))
 			{
-				entities[i]->Draw(sprites_zombie, entities[i]->scale, Slowmo_dt);
-			}
-			if (entities[i]->GetType() == PLANE)
-			{
-				entities[i]->Draw(sprites_plane, entities[i]->scale, Slowmo_dt);
+				if (entities[i]->GetType() == ZOMBIE)
+				{
+					entities[i]->Draw(sprites_zombie, entities[i]->scale, Slowmo_dt);
+				}
+				if (entities[i]->GetType() == PLANE)
+				{
+					entities[i]->Draw(sprites_plane, entities[i]->scale, Slowmo_dt);
+				}
+				if (entities[i]->GetType() == COIN)
+				{
+					entities[i]->Draw(sprites_coin, entities[i]->scale, Slowmo_dt);
+				}
 			}
 		}
-	}
 
+		for (uint i = 0; i < MAX_ENEMIES; ++i)
+		{
+			if (entities[i] != nullptr && entities[i]->die)
+			{
+				entities[i]->position.x = -2000;
+				entities[i]->position.y = 0;
+				entities[i]->original_pos.x = -2000;
+				entities[i]->original_pos.y = 0;
+				entities[i]->die = false;
+				entities[i]->alive = true;
+			}
+		}
+
+		for (uint i = 0; i < MAX_ENEMIES; ++i)
+		{
+			if (entities[i] != nullptr && (entities[i]->collider == nullptr))
+			{
+				if (entities[i]->GetType() == ZOMBIE)
+				{
+					entities[i]->Draw(sprites_zombie, entities[i]->scale, Slowmo_dt);
+				}
+				if (entities[i]->GetType() == PLANE)
+				{
+					entities[i]->Draw(sprites_plane, entities[i]->scale, Slowmo_dt);
+				}
+			}
+		}
+	}
 	return true;
 }
 
@@ -190,11 +192,11 @@ bool j1Entities::CleanUp()
 			queue[i].type = NO_TYPE;
 		}
 	}
-
+	
+	App->tex->UnLoad(sprites_coin);
 	App->tex->UnLoad(sprites_plane);
 	App->tex->UnLoad(sprites_player);
 	App->tex->UnLoad(sprites_zombie);
-	App->tex->UnLoad(sprites_coin);
 
 	return true;
 }

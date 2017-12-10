@@ -231,7 +231,7 @@ bool j1Scene::CleanUp()
 	App->colliders->CleanUp();
 	App->map->CleanUp();
 	App->pathfinding->CleanUp();
-	App->gui->CleanUp();
+	//App->gui->CleanUp();
 	App->tex->CleanUp();
 
 	return true;

@@ -44,6 +44,8 @@ private:
 	UIElements* button_credits = nullptr;
 	UIElements* button_back_credits = nullptr;
 	
+	UIElements* License_window = nullptr;
+	p2List<UIElements*> License_text;
 	UIElements* License_1 = nullptr;
 	UIElements* License_2 = nullptr;
 	UIElements* License_3 = nullptr;
@@ -60,7 +62,6 @@ private:
 	UIElements* License_14 = nullptr;
 	UIElements* License_15 = nullptr;
 	UIElements* License_16 = nullptr;
-
 
 	UIElements* text_start = nullptr;
 	UIElements* text_option = nullptr;

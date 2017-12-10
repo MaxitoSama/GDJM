@@ -93,6 +93,25 @@ bool j1Menu::Start()
 	License_15 = App->gui->AddElementText(50, 620, TEXT, 2, this, "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,", false, false);
 	License_16 = App->gui->AddElementText(50, 640, TEXT, 2, this, "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE", false, false);
 
+	License_text.add(License_1);
+	License_text.add(License_2);
+	License_text.add(License_3);
+	License_text.add(License_4);
+	License_text.add(License_5);
+	License_text.add(License_6);
+	License_text.add(License_7);
+	License_text.add(License_8);
+	License_text.add(License_9);
+	License_text.add(License_10);
+	License_text.add(License_11);
+	License_text.add(License_12);
+	License_text.add(License_13);
+	License_text.add(License_14);
+	License_text.add(License_15);
+	License_text.add(License_16);
+
+	License_window = App->gui->AddElementWindow(300, 200, WINDOWS, this, &License_text, { 1055,160,930,742 }, false);
+
 	return true;
 }
 
@@ -121,6 +140,8 @@ bool j1Menu::PostUpdate()
 bool j1Menu::CleanUp()
 {
 	App->tex->UnLoad(sprites_ninja);
+	
+	License_text.clear();
 
 	return true;
 }
@@ -206,6 +227,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 
 void j1Menu::StartGame()
 {
+	CleanUp();
 	App->menu->active = false;
 	App->scene->active = true;
 	App->scene->Start();
@@ -261,7 +283,8 @@ void j1Menu::CreditsButton()
 		text_credits->show = false;
 
 		button_back_credits->show = true;
-		License_1->show = true;
+		License_window->show = true;
+		/*License_1->show = true;
 		License_2->show = true;
 		License_3->show = true;
 		License_4->show = true;
@@ -275,7 +298,7 @@ void j1Menu::CreditsButton()
 		License_12->show = true;
 		License_13->show = true;
 		License_15->show = true;
-		License_16->show = true;
+		License_16->show = true;*/
 
 	}
 	else
@@ -291,7 +314,8 @@ void j1Menu::CreditsButton()
 		text_credits->show = true;
 
 		button_back_credits->show = false;
-		License_1->show = false;
+		License_window->show = false;
+		/*License_1->show = false;
 		License_2->show = false;
 		License_3->show = false;
 		License_4->show = false;
@@ -305,6 +329,6 @@ void j1Menu::CreditsButton()
 		License_12->show = false;
 		License_13->show = false;
 		License_15->show = false;
-		License_16->show = false;
+		License_16->show = false;*/
 	}
 }
