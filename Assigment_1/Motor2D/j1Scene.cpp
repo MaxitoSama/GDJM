@@ -75,13 +75,12 @@ bool j1Scene::Start()
 			App->entities->AddEnemy(ZOMBIE, 4949, 828);
 
 			App->entities->AddEnemy(PLANE, 1500, 100);
-
 		}
 		
 		display_score = { 173, 3149, 397, 133 };
 		App->gui->AddElementImage(250, 100, TEXTBOX, &display_score, this);
 		
-		Score = App->gui->AddElementText(200, 65, TEXT, this, score_string.GetString(), true, true);
+		Score = App->gui->AddElementText(200, 65, TEXT, 1, this, score_string.GetString(), true, true);
 		
 		rect_button_exit = { 2556,1407,183,191 };
 		exit_button= App->gui->AddElementButton(150, 250, BUTTON, &rect_button_exit, this,nullptr,false);

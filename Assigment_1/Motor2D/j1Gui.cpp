@@ -47,6 +47,7 @@ bool j1Gui::Start()
 
 	fonts.PushBack(App->font->Load("fonts/ninja_naruto/njnaruto.ttf", 60));
 	fonts.PushBack(App->font->Load("fonts/ninja_naruto/njnaruto.ttf", 50));
+	fonts.PushBack(App->font->Load("fonts/ninja_naruto/SKURRI.ttf", 20));
 
 	return true;
 }
@@ -170,10 +171,10 @@ void j1Gui::AddBackground(int x, int y, UIElementType type, j1Module* modul)
 	elements.add(element_created);
 }
 
-UIElements* j1Gui::AddElementText(int x, int y, UIElementType type, j1Module* modul, const char* text,bool actualize, bool show)
+UIElements* j1Gui::AddElementText(int x, int y, UIElementType type,uint font, j1Module* modul, const char* text,bool actualize, bool show)
 {
 	UIElements* element_created;
-	element_created = new UIText(x, y, type, text, modul,actualize,show);
+	element_created = new UIText(x, y, type, text,font, modul,actualize,show);
 	elements.add(element_created);
 
 	return element_created;

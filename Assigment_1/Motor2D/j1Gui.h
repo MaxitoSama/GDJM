@@ -55,7 +55,7 @@ public:
 	// Gui creation functions
 
 	void AddBackground(int x, int y, UIElementType type, j1Module* modul);
-	UIElements* AddElementText(int x, int y, UIElementType type, j1Module* modul, const char* text = nullptr,bool actualize=false, bool show=true);
+	UIElements* AddElementText(int x, int y, UIElementType type, uint font, j1Module* modul, const char* text = nullptr,bool actualize=false, bool show=true);
 	UIElements* AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text = nullptr);
 	void AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* modul);
 	UIElements* AddElementButton(int x, int y, UIElementType type, SDL_Rect* RecTex, j1Module* modul, const char* text = nullptr, bool show = true);

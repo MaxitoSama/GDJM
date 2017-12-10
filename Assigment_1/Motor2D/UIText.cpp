@@ -7,16 +7,17 @@
 #include "UIText.h"
 
 
-UIText::UIText(int x, int y, UIElementType type, const char* text, j1Module* modul, bool actualize, bool _show) :UIElements(x, y, type, modul)
+UIText::UIText(int x, int y, UIElementType type, const char* text, uint fonttype, j1Module* modul, bool actualize, bool _show) :UIElements(x, y, type, modul)
 {
 	show = _show;
 	actualizable = actualize;
 
 	string = text;
+	font = fonttype;
 
-	texture = App->font->Print(string, { 255,255,0 }, App->gui->fonts[1]);
+	texture = App->font->Print(string, { 255,255,0 }, App->gui->fonts[font]);
 
-	BlackBackground = App->font->Print(string, { 0,0,0 }, App->gui->fonts[1]);
+	BlackBackground = App->font->Print(string, { 0,0,0 }, App->gui->fonts[font]);
 
 	App->tex->GetSize(texture, size_x, size_y);
 
@@ -38,14 +39,14 @@ void UIText::Draw()
 	{
 		if (!actualizable)
 		{
-			App->render->Blit(BlackBackground, position.x - App->render->camera.x - size_x / 2 + 2, position.y - App->render->camera.y + 2);
-			App->render->Blit(texture, position.x - App->render->camera.x - size_x / 2, position.y - App->render->camera.y);
+			App->render->Blit(BlackBackground, position.x - App->render->camera.x + 2, position.y - App->render->camera.y + 2);
+			App->render->Blit(texture, position.x - App->render->camera.x , position.y - App->render->camera.y);
 		}
 		else
 		{
 			string = App->scene->score_string.GetString();
-			texture = App->font->Print(string, { 255,255,0 }, App->gui->fonts[1]);
-			BlackBackground = App->font->Print(string, { 0,0,0 }, App->gui->fonts[1]);
+			texture = App->font->Print(string, { 255,255,0 }, App->gui->fonts[font]);
+			BlackBackground = App->font->Print(string, { 0,0,0 }, App->gui->fonts[font]);
 
 			App->render->Blit(BlackBackground, position.x - App->render->camera.x + 2, position.y - App->render->camera.y + 2);
 			App->render->Blit(texture, position.x - App->render->camera.x, position.y - App->render->camera.y);

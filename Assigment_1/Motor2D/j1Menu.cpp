@@ -59,20 +59,39 @@ bool j1Menu::Start()
 	rect_button_play = { 400, 972, 183, 191 };
 	rect_button_options = { 3093, 318, 183, 191 };
 	rect_button_exit = { 2556,1407,183,191 };
+	rect_button_credits = { 1142,1191,183,191 };
 
 	//OPTIONS_MENU
 	rect_button_back = { 3094,101,179,182 };
 
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
-	button_play = App->gui->AddElementButton(150, 450, BUTTON, &rect_button_play, this);
-	text_start = App->gui->AddElementText(370, 490, TEXT, this, "Start Game");
-	button_options = App->gui->AddElementButton(150, 600, BUTTON, &rect_button_options, this);
-	text_option = App->gui->AddElementText(330, 640, TEXT, this, "Option");
+	button_play = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_play, this);
+	text_start = App->gui->AddElementText(250, 340, TEXT, 1, this, "Start Game");
+	button_options = App->gui->AddElementButton(150, 450, BUTTON, &rect_button_options, this);
+	text_option = App->gui->AddElementText(250, 490, TEXT, 1, this, "Option");
 	button_exit = App->gui->AddElementButton(150, 750, BUTTON, &rect_button_exit, this);
-	text_exit = App->gui->AddElementText(300, 790, TEXT, this, "Exit");
+	text_exit = App->gui->AddElementText(250, 640, TEXT,1, this, "Credits");
+	button_credits = App->gui->AddElementButton(150, 600, BUTTON,&rect_button_credits, this);
+	text_credits = App->gui->AddElementText(250, 790, TEXT, 1, this, "Exit");
 	button_back = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this,nullptr,false);
+	button_back_credits = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this, nullptr, false);
 
-
+	License_1 = App->gui->AddElementText(50, 310,TEXT, 2, this, "MIT License",false,false);
+	License_2 = App->gui->AddElementText(50, 340, TEXT, 2, this, "Copyright (c) 2017 Marc Garcia, Josep Pi", false, false);
+	License_3 = App->gui->AddElementText(50, 380, TEXT, 2, this, "Permission is hereby granted, free of charge, to any person obtaining a copy", false, false);
+	License_4 = App->gui->AddElementText(50, 400, TEXT, 2, this, "of this software and associated documentation files (the \"Software\"), to deal", false, false);
+	License_5 = App->gui->AddElementText(50, 420, TEXT, 2, this, "in the Software without restriction, including without limitation the rights", false, false);
+	License_6 = App->gui->AddElementText(50, 440, TEXT, 2, this, "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell", false, false);
+	License_7 = App->gui->AddElementText(50, 460, TEXT, 2, this, "copies of the Software, and to permit persons to whom the Software is", false, false);
+	License_8 = App->gui->AddElementText(50, 480, TEXT, 2, this, "furnished to do so, subject to the following conditions:", false, false);
+	License_9 = App->gui->AddElementText(50, 500, TEXT, 2, this, "The above copyright notice and this permission notice shall be included in all", false, false);
+	License_10 = App->gui->AddElementText(50, 520, TEXT, 2, this, "copies or substantial portions of the Software.", false, false);
+	License_11 = App->gui->AddElementText(50, 540, TEXT, 2, this, "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR", false, false);
+	License_12 = App->gui->AddElementText(50, 560, TEXT, 2, this, "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,", false, false);
+	License_13 = App->gui->AddElementText(50, 580, TEXT, 2, this, "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE", false, false);
+	License_14 = App->gui->AddElementText(50, 600, TEXT, 2, this, "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER", false, false);
+	License_15 = App->gui->AddElementText(50, 620, TEXT, 2, this, "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,", false, false);
+	License_16 = App->gui->AddElementText(50, 640, TEXT, 2, this, "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE", false, false);
 
 	return true;
 }
@@ -169,6 +188,14 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			{
 				OptionsButton();
 			}
+			if (element == button_credits && element->show)
+			{
+				CreditsButton();
+			}
+			if (element == button_back_credits && element->show)
+			{
+				CreditsButton();
+			}
 			break;
 		
 		default:
@@ -192,9 +219,12 @@ void j1Menu::OptionsButton()
 		button_exit->show = false;
 		button_options->show = false;
 		button_play->show = false;
+		button_credits->show = false;
+
 		text_start->show = false;
 		text_option->show = false;
 		text_exit->show = false;
+		text_credits->show = false;
 
 		button_back->show = true;
 		
@@ -204,11 +234,77 @@ void j1Menu::OptionsButton()
 		button_exit->show = true;
 		button_options->show = true;
 		button_play->show = true;
+		button_credits->show = true;
+
 		text_start->show = true;
 		text_option->show = true;
 		text_exit->show = true;
+		text_credits->show = true;
 
 		button_back->show = false;
 	}
 
+}
+
+void j1Menu::CreditsButton()
+{
+	if (button_options->show)
+	{
+		button_exit->show = false;
+		button_options->show = false;
+		button_play->show = false;
+		button_credits->show = false;
+
+		text_start->show = false;
+		text_option->show = false;
+		text_exit->show = false;
+		text_credits->show = false;
+
+		button_back_credits->show = true;
+		License_1->show = true;
+		License_2->show = true;
+		License_3->show = true;
+		License_4->show = true;
+		License_5->show = true;
+		License_6->show = true;
+		License_7->show = true;
+		License_8->show = true;
+		License_9->show = true;
+		License_10->show = true;
+		License_11->show = true;
+		License_12->show = true;
+		License_13->show = true;
+		License_15->show = true;
+		License_16->show = true;
+
+	}
+	else
+	{
+		button_exit->show = true;
+		button_options->show = true;
+		button_play->show = true;
+		button_credits->show = true;
+
+		text_start->show = true;
+		text_option->show = true;
+		text_exit->show = true;
+		text_credits->show = true;
+
+		button_back_credits->show = false;
+		License_1->show = false;
+		License_2->show = false;
+		License_3->show = false;
+		License_4->show = false;
+		License_5->show = false;
+		License_6->show = false;
+		License_7->show = false;
+		License_8->show = false;
+		License_9->show = false;
+		License_10->show = false;
+		License_11->show = false;
+		License_12->show = false;
+		License_13->show = false;
+		License_15->show = false;
+		License_16->show = false;
+	}
 }
