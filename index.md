@@ -26,8 +26,8 @@ Some of the goals we want to accomplish for the main core subsystems are:
 - Creating behaviours in the enemies using the pathfinding code.
 
 ## Links
-- Repository: (https://github.com/MaxitoSama/GDJM)
-- Release: (https://github.com/MaxitoSama/GDJM/releases)
+- Repository: [Link](https://github.com/MaxitoSama/GDJM)
+- Release: [Link](https://github.com/MaxitoSama/GDJM/releases)
 
 ## Gameplay Video
 
