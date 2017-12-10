@@ -131,8 +131,10 @@ bool j1Menu::PostUpdate()
 	BROFILER_CATEGORY("PosUpdate_Scene1 ", Profiler::Color::DarkOrchid)
 		if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 			exit=false;
-
-	App->render->Blit(sprites_ninja, 900, 350, &(animation->GetCurrentFrame(dt)),-1.6f);
+	if (button_play->show == true)
+	{
+		App->render->Blit(sprites_ninja, 900, 350, &(animation->GetCurrentFrame(dt)), -1.6f);
+	}
 
 	return exit;
 }
