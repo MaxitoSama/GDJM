@@ -274,10 +274,23 @@ bool j1Map::CleanUp()
 
 	while (item != NULL)
 	{
+		App->tex->UnLoad(item->data->texture);
 		RELEASE(item->data);
 		item = item->next;
 	}
 	
+	while (item_l != NULL)
+	{
+		RELEASE(item_l->data);
+		item_l = item_l->next;
+	}
+
+	while (item_I != NULL)
+	{
+		App->tex->UnLoad(item_I->data->Image);
+		item_I = item_I->next;
+	}
+
 	data.tilesets.clear();
 
 	data.layers.clear();

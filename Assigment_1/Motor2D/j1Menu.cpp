@@ -76,22 +76,22 @@ bool j1Menu::Start()
 	button_back = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this,nullptr,false);
 	button_back_credits = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this, nullptr, false);
 
-	License_1 = App->gui->AddElementText(50, 310,TEXT, 2, this, "MIT License",false,false);
-	License_2 = App->gui->AddElementText(50, 340, TEXT, 2, this, "Copyright (c) 2017 Marc Garcia, Josep Pi", false, false);
-	License_3 = App->gui->AddElementText(50, 380, TEXT, 2, this, "Permission is hereby granted, free of charge, to any person obtaining a copy", false, false);
-	License_4 = App->gui->AddElementText(50, 400, TEXT, 2, this, "of this software and associated documentation files (the \"Software\"), to deal", false, false);
-	License_5 = App->gui->AddElementText(50, 420, TEXT, 2, this, "in the Software without restriction, including without limitation the rights", false, false);
-	License_6 = App->gui->AddElementText(50, 440, TEXT, 2, this, "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell", false, false);
-	License_7 = App->gui->AddElementText(50, 460, TEXT, 2, this, "copies of the Software, and to permit persons to whom the Software is", false, false);
-	License_8 = App->gui->AddElementText(50, 480, TEXT, 2, this, "furnished to do so, subject to the following conditions:", false, false);
-	License_9 = App->gui->AddElementText(50, 500, TEXT, 2, this, "The above copyright notice and this permission notice shall be included in all", false, false);
-	License_10 = App->gui->AddElementText(50, 520, TEXT, 2, this, "copies or substantial portions of the Software.", false, false);
-	License_11 = App->gui->AddElementText(50, 540, TEXT, 2, this, "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR", false, false);
-	License_12 = App->gui->AddElementText(50, 560, TEXT, 2, this, "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,", false, false);
-	License_13 = App->gui->AddElementText(50, 580, TEXT, 2, this, "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE", false, false);
-	License_14 = App->gui->AddElementText(50, 600, TEXT, 2, this, "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER", false, false);
-	License_15 = App->gui->AddElementText(50, 620, TEXT, 2, this, "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,", false, false);
-	License_16 = App->gui->AddElementText(50, 640, TEXT, 2, this, "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE", false, false);
+	License_1 = App->gui->AddElementText(50, 110,TEXT, 2, this, "MIT License",false,false);
+	License_2 = App->gui->AddElementText(50, 140, TEXT, 2, this, "Copyright (c) 2017 Marc Garcia, Josep Pi", false, false);
+	License_3 = App->gui->AddElementText(50, 180, TEXT, 2, this, "Permission is hereby granted, free of charge, to any person obtaining a copy", false, false);
+	License_4 = App->gui->AddElementText(50, 200, TEXT, 2, this, "of this software and associated documentation files (the \"Software\"), to deal", false, false);
+	License_5 = App->gui->AddElementText(50, 220, TEXT, 2, this, "in the Software without restriction, including without limitation the rights", false, false);
+	License_6 = App->gui->AddElementText(50, 240, TEXT, 2, this, "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell", false, false);
+	License_7 = App->gui->AddElementText(50, 260, TEXT, 2, this, "copies of the Software, and to permit persons to whom the Software is", false, false);
+	License_8 = App->gui->AddElementText(50, 280, TEXT, 2, this, "furnished to do so, subject to the following conditions:", false, false);
+	License_9 = App->gui->AddElementText(50, 300, TEXT, 2, this, "The above copyright notice and this permission notice shall be included in all", false, false);
+	License_10 = App->gui->AddElementText(50, 320, TEXT, 2, this, "copies or substantial portions of the Software.", false, false);
+	License_11 = App->gui->AddElementText(50, 340, TEXT, 2, this, "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR", false, false);
+	License_12 = App->gui->AddElementText(50, 360, TEXT, 2, this, "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,", false, false);
+	License_13 = App->gui->AddElementText(50, 380, TEXT, 2, this, "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE", false, false);
+	License_14 = App->gui->AddElementText(50, 400, TEXT, 2, this, "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER", false, false);
+	License_15 = App->gui->AddElementText(50, 420, TEXT, 2, this, "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,", false, false);
+	License_16 = App->gui->AddElementText(50, 440, TEXT, 2, this, "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE", false, false);
 
 	License_text.add(License_1);
 	License_text.add(License_2);

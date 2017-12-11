@@ -232,7 +232,7 @@ bool j1Scene::CleanUp()
 	App->map->CleanUp();
 	App->pathfinding->CleanUp();
 	//App->gui->CleanUp();
-	App->tex->CleanUp();
+	//App->tex->CleanUp();
 
 	return true;
 }
@@ -264,7 +264,7 @@ void j1Scene::ChangeScene(int x, int y)
 		App->render->camera.y = 0;
 		App->entities->player->Curr_map = 2;
 		App->entities->Start();
-		App->gui->Start();
+		//App->gui->Start();
 	}
 	else
 	{
@@ -279,7 +279,7 @@ void j1Scene::ChangeScene(int x, int y)
 		App->render->camera.y = 0;
 		App->entities->player->Curr_map = 1;
 		App->entities->Start();
-		App->gui->Start();
+		//App->gui->Start();
 	}
 }
 
@@ -337,6 +337,6 @@ void j1Scene::GoToMenu()
 	App->menu->active = true;
 	App->scene->active = false;
 	App->scene->CleanUp();
-	App->gui->Start();
+	//App->gui->Start();
 	App->menu->Start();
 }
