@@ -34,6 +34,8 @@ private:
 	SDL_Rect rect_button_credits;
 	SDL_Rect rect_button_exit;
 	SDL_Rect rect_button_back;
+	SDL_Rect rect_button_sound;
+	SDL_Rect rect_button_music;
 
 	UIElements* button_play=nullptr;
 	UIElements* button_options=nullptr;
@@ -43,6 +45,9 @@ private:
 	UIElements* button_back = nullptr;
 	UIElements* button_credits = nullptr;
 	UIElements* button_back_credits = nullptr;
+	UIElements* img_slide = nullptr;
+	UIElements* button_music = nullptr;
+	UIElements* button_sound = nullptr;
 	
 	UIElements* License_window = nullptr;
 	p2List<UIElements*> License_text;
@@ -67,6 +72,8 @@ private:
 	UIElements* text_option = nullptr;
 	UIElements* text_exit = nullptr;
 	UIElements* text_credits = nullptr;
+	UIElements* text_sound = nullptr;
+	UIElements* text_music = nullptr;
 
 	Animation* animation = nullptr;
 	Animation ninja;

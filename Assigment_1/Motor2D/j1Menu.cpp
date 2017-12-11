@@ -63,6 +63,8 @@ bool j1Menu::Start()
 
 	//OPTIONS_MENU
 	rect_button_back = { 3094,101,179,182 };
+	rect_button_music = { 2148,1844,183,191 };
+	rect_button_sound = { 2148,2062,183,191 };
 
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
 	button_play = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_play, this);
@@ -75,6 +77,11 @@ bool j1Menu::Start()
 	text_credits = App->gui->AddElementText(250, 790, TEXT, 1, this, "Exit");
 	button_back = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this,nullptr,false);
 	button_back_credits = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this, nullptr, false);
+
+	button_sound = App->gui->AddElementButton(150, 150, BUTTON, &rect_button_sound, this,nullptr,false);
+	text_sound = App->gui->AddElementText(250, 190, TEXT, 1, this, "Volume", false, false);
+	button_music = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_music, this, nullptr,false);
+	text_music = App->gui->AddElementText(250, 340, TEXT, 1, this, "Music", false, false);
 
 	License_1 = App->gui->AddElementText(50, 110,TEXT, 2, this, "MIT License",false,false);
 	License_2 = App->gui->AddElementText(50, 140, TEXT, 2, this, "Copyright (c) 2017 Marc Garcia, Josep Pi", false, false);
@@ -251,6 +258,11 @@ void j1Menu::OptionsButton()
 		text_credits->show = false;
 
 		button_back->show = true;
+		button_sound->show = true;
+		button_music->show = true;
+
+		text_sound->show = true;
+		text_music->show = true;
 		
 	}
 	else
@@ -266,6 +278,11 @@ void j1Menu::OptionsButton()
 		text_credits->show = true;
 
 		button_back->show = false;
+		button_sound->show = false;
+		button_music->show = false;
+
+		text_sound->show = false;
+		text_music->show = false;
 	}
 
 }
@@ -286,6 +303,7 @@ void j1Menu::CreditsButton()
 
 		button_back_credits->show = true;
 		License_window->show = true;
+
 		/*License_1->show = true;
 		License_2->show = true;
 		License_3->show = true;
@@ -317,6 +335,7 @@ void j1Menu::CreditsButton()
 
 		button_back_credits->show = false;
 		License_window->show = false;
+
 		/*License_1->show = false;
 		License_2->show = false;
 		License_3->show = false;
