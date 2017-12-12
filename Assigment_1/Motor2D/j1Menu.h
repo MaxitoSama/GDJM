@@ -48,6 +48,7 @@ private:
 	UIElements* img_slide = nullptr;
 	UIElements* button_music = nullptr;
 	UIElements* button_sound = nullptr;
+	UIElements* slide_horizontal = nullptr;
 	
 	UIElements* License_window = nullptr;
 	p2List<UIElements*> License_text;

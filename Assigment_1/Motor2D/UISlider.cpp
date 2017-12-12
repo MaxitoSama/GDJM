@@ -19,4 +19,5 @@ UISlider::~UISlider()
 void UISlider::Draw()
 {
 	App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x - rectangle->w / 2, position.y - App->render->camera.y - rectangle->h / 2, rectangle, 0.9f);
+	App->render->Blit(App->gui->window, position.x - App->render->camera.x - rectangle->w / 2, position.y - App->render->camera.y - rectangle->h / 2, rectangle, 0.9f);
 }
