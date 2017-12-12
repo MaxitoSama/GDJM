@@ -36,6 +36,10 @@ private:
 	SDL_Rect rect_button_back;
 	SDL_Rect rect_button_sound;
 	SDL_Rect rect_button_music;
+	SDL_Rect rect_button_slider;
+
+	SDL_Rect rect_slider_rectangle;
+	
 
 	UIElements* button_play=nullptr;
 	UIElements* button_options=nullptr;

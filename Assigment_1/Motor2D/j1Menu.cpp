@@ -66,6 +66,8 @@ bool j1Menu::Start()
 	rect_button_back = { 3094,101,179,182 };
 	rect_button_music = { 2148,1844,183,191 };
 	rect_button_sound = { 2148,2062,183,191 };
+	rect_slider_rectangle = { 1534, 2977,12,602 };
+	rect_button_slider;
 
 
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
@@ -87,7 +89,7 @@ bool j1Menu::Start()
 	button_sound = App->gui->AddElementButton(150, 150, BUTTON, &rect_button_sound, this,nullptr,false);
 	text_sound = App->gui->AddElementText(250, 190, TEXT, 1, 255, 255, 0, this, "Volume", false, false);
 	button_music = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_music, this, nullptr,false);
-	//slide_horizontal = App->gui->AddSlider(300,150,IMAGE, )
+	slide_horizontal = App->gui->AddSlider(300, 150, IMAGE, &rect_slider_rectangle, this, false);
 
 	//use xml to insert the licence once everything is done (ric feedback)
 	{
@@ -279,6 +281,8 @@ void j1Menu::OptionsButton()
 
 		text_sound->show = true;
 		text_music->show = true;
+
+		slide_horizontal->show = false;
 		
 	}
 	else
@@ -293,12 +297,14 @@ void j1Menu::OptionsButton()
 		text_exit->show = true;
 		text_credits->show = true;
 
+		
 		button_back->show = false;
 		button_sound->show = false;
 		button_music->show = false;
 
 		text_sound->show = false;
 		text_music->show = false;
+		slide_horizontal->show = false;
 	}
 
 }
