@@ -81,6 +81,7 @@ bool j1Menu::Start()
 	button_sound = App->gui->AddElementButton(150, 150, BUTTON, &rect_button_sound, this,nullptr,false);
 	text_sound = App->gui->AddElementText(250, 190, TEXT, 1, 255, 255, 0, this, "Volume", false, false);
 	button_music = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_music, this, nullptr,false);
+
 	text_music = App->gui->AddElementText(250, 340, TEXT, 1, 255, 255, 0, this, "Music", false, false);
 
 	License_1 = App->gui->AddElementText(60, 180,TEXT, 2, 0, 0, 0, this, "MIT License",false,false);
