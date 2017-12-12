@@ -61,6 +61,7 @@ bool j1Menu::Start()
 	rect_button_options = { 3093, 318, 183, 191 };
 	rect_button_exit = { 2556,1407,183,191 };
 	rect_button_credits = { 1142,1191,183,191 };
+	rect_button_continue = { 197,2498,183,191 };
 
 	//OPTIONS_MENU
 	rect_button_back = { 3094,101,179,182 };
@@ -72,8 +73,10 @@ bool j1Menu::Start()
 
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
 	//MAIN_MENU
-	button_play = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_play, this);
-	text_start = App->gui->AddElementText(250, 340, TEXT, 1,255,255,0, this, "Start Game");
+	button_play = App->gui->AddElementButton(150, 150, BUTTON, &rect_button_play, this);
+	text_start = App->gui->AddElementText(250, 190, TEXT, 1,255,255,0, this, "Start Game");
+	button_continue = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_continue, this);
+	text_continue= App->gui->AddElementText(250, 340, TEXT, 1, 255, 255, 0, this, "Continue");
 	button_options = App->gui->AddElementButton(150, 450, BUTTON, &rect_button_options, this);
 	text_option = App->gui->AddElementText(250, 490, TEXT, 1, 255, 255, 0, this, "Option");
 	button_exit = App->gui->AddElementButton(150, 750, BUTTON, &rect_button_exit, this);
@@ -167,6 +170,7 @@ bool j1Menu::PostUpdate()
 bool j1Menu::CleanUp()
 {
 	App->tex->UnLoad(sprites_ninja);
+	animation = nullptr;
 	
 	License_text.clear();
 
@@ -223,6 +227,12 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			if (element == button_play && element->show)
 			{
 				App->gui->startgame = true;
+				continue_game = false;
+			}
+			if (element == button_continue && element->show)
+			{
+				App->gui->startgame = true;
+				continue_game = true;
 			}
 			if (element == button_options && element->show)
 			{
@@ -259,6 +269,11 @@ void j1Menu::StartGame()
 	App->scene->active = true;
 	App->scene->Start();
 	App->entities->Start();
+	if (continue_game)
+	{
+		continue_game = false;
+		App->LoadGame();
+	}
 }
 
 void j1Menu::OptionsButton()
@@ -266,6 +281,7 @@ void j1Menu::OptionsButton()
 	if (button_options->show)
 	{
 		button_exit->show = false;
+		button_continue->show = false;
 		button_options->show = false;
 		button_play->show = false;
 		button_credits->show = false;
@@ -274,6 +290,7 @@ void j1Menu::OptionsButton()
 		text_option->show = false;
 		text_exit->show = false;
 		text_credits->show = false;
+		text_continue->show = false;
 
 		button_back->show = true;
 		button_sound->show = true;
@@ -291,11 +308,13 @@ void j1Menu::OptionsButton()
 		button_options->show = true;
 		button_play->show = true;
 		button_credits->show = true;
+		button_continue->show = true;
 
 		text_start->show = true;
 		text_option->show = true;
 		text_exit->show = true;
 		text_credits->show = true;
+		text_continue->show = true;
 
 		
 		button_back->show = false;
@@ -314,11 +333,13 @@ void j1Menu::CreditsButton()
 	if (button_options->show)
 	{
 		button_exit->show = false;
+		button_continue->show = false;
 		button_options->show = false;
 		button_play->show = false;
 		button_credits->show = false;
 
 		text_start->show = false;
+		text_continue->show = false;
 		text_option->show = false;
 		text_exit->show = false;
 		text_credits->show = false;
@@ -326,31 +347,17 @@ void j1Menu::CreditsButton()
 		button_back_credits->show = true;
 		License_window->show = true;
 
-		/*License_1->show = true;
-		License_2->show = true;
-		License_3->show = true;
-		License_4->show = true;
-		License_5->show = true;
-		License_6->show = true;
-		License_7->show = true;
-		License_8->show = true;
-		License_9->show = true;
-		License_10->show = true;
-		License_11->show = true;
-		License_12->show = true;
-		License_13->show = true;
-		License_15->show = true;
-		License_16->show = true;*/
-
 	}
 	else
 	{
 		button_exit->show = true;
+		button_continue->show = true;
 		button_options->show = true;
 		button_play->show = true;
 		button_credits->show = true;
 
 		text_start->show = true;
+		text_continue->show = true;
 		text_option->show = true;
 		text_exit->show = true;
 		text_credits->show = true;
@@ -358,20 +365,5 @@ void j1Menu::CreditsButton()
 		button_back_credits->show = false;
 		License_window->show = false;
 
-		/*License_1->show = false;
-		License_2->show = false;
-		License_3->show = false;
-		License_4->show = false;
-		License_5->show = false;
-		License_6->show = false;
-		License_7->show = false;
-		License_8->show = false;
-		License_9->show = false;
-		License_10->show = false;
-		License_11->show = false;
-		License_12->show = false;
-		License_13->show = false;
-		License_15->show = false;
-		License_16->show = false;*/
 	}
 }

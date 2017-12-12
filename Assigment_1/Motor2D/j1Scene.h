@@ -60,6 +60,7 @@ private:
 	bool Map_1;
 	bool Map_2;
 	bool exit=true;
+	bool LoadUI = true;
 
 	GuiText* text = nullptr;
 

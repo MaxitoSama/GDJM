@@ -573,7 +573,7 @@ bool Player::Load(pugi::xml_node& data)
 	else
 	{
 		original_pos.x = data.child("player").attribute("x").as_int();
-		original_pos.y = data.child("player").attribute("y").as_int();
+		original_pos.y = data.child("player").attribute("y").as_int()-50;
 	}
 
 	return true;

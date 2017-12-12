@@ -76,22 +76,27 @@ bool j1Scene::Start()
 
 			App->entities->AddEnemy(PLANE, 1500, 100);
 		}
-		
-		display_score = { 173, 3149, 397, 133 };
-		App->gui->AddElementImage(250, 100, TEXTBOX, &display_score, this);
-		
-		Score = App->gui->AddElementText(200, 65, TEXT, 1,255,255,0, this, score_string.GetString(), true, true);
+		if (LoadUI)
+		{
+			LoadUI = false;
 
+			display_score = { 173, 3149, 397, 133 };
+			App->gui->AddElementImage(250, 100, TEXTBOX, &display_score, this);
+
+			Score = App->gui->AddElementText(200, 65, TEXT, 1, 255, 255, 0, this, score_string.GetString(), true, true);
+
+
+			rect_button_exit = { 2556,1407,183,191 };
+			exit_button = App->gui->AddElementButton(150, 250, BUTTON, &rect_button_exit, this, nullptr, false);
+			rect_button_back = { 3094,101,179,182 };
+			back_menu_button = App->gui->AddElementButton(150, 400, BUTTON, &rect_button_back, this, nullptr, false);
+			pause_buttons.add(exit_button);
+			pause_buttons.add(back_menu_button);
+
+			pause_window = App->gui->AddElementWindow(300, 200, WINDOWS, this, &pause_buttons, { 1055,160,930,742 }, false);
+
+		}
 		
-		rect_button_exit = { 2556,1407,183,191 };
-		exit_button= App->gui->AddElementButton(150, 250, BUTTON, &rect_button_exit, this,nullptr,false);
-		rect_button_back = { 3094,101,179,182 };
-		back_menu_button = App->gui->AddElementButton(150, 400, BUTTON, &rect_button_back, this, nullptr, false);
-		pause_buttons.add(exit_button);
-		pause_buttons.add(back_menu_button);
-
-		pause_window = App->gui->AddElementWindow(300,200,WINDOWS,this,&pause_buttons,{ 1055,160,930,742 },false);
-
 		App->GamePaused = false;
 	}
 
@@ -204,10 +209,6 @@ bool j1Scene::Update(float dt)
 	
 	score_string.create("%i", App->entities->player->score);
 
-	/*
-	score_string.create("%i", App->entities->player->score);
-	Score=App->gui->AddElementText(260, 65, TEXT, this, score_string.GetString());
-	*/
 	return true;
 }
 
@@ -226,14 +227,10 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	pause_buttons.clear();
-	
 	App->entities->CleanUp();
 	App->colliders->CleanUp();
 	App->map->CleanUp();
 	App->pathfinding->CleanUp();
-	//App->gui->CleanUp();
-	//App->tex->CleanUp();
 
 	return true;
 }
@@ -265,7 +262,6 @@ void j1Scene::ChangeScene(int x, int y)
 		App->render->camera.y = 0;
 		App->entities->player->Curr_map = 2;
 		App->entities->Start();
-		//App->gui->Start();
 	}
 	else
 	{
@@ -280,7 +276,6 @@ void j1Scene::ChangeScene(int x, int y)
 		App->render->camera.y = 0;
 		App->entities->player->Curr_map = 1;
 		App->entities->Start();
-		//App->gui->Start();
 	}
 }
 
@@ -335,9 +330,11 @@ void j1Scene::GoToMenu()
 		ChangeScene(60,215);
 	}
 
+	LoadUI = true;
+	pause_buttons.clear();
+
 	App->menu->active = true;
 	App->scene->active = false;
 	App->scene->CleanUp();
-	//App->gui->Start();
 	App->menu->Start();
 }

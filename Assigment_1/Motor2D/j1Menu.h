@@ -32,6 +32,7 @@ private:
 	SDL_Rect rect_button_options_in;
 	SDL_Rect rect_button_options_click;
 	SDL_Rect rect_button_credits;
+	SDL_Rect rect_button_continue;
 	SDL_Rect rect_button_exit;
 	SDL_Rect rect_button_back;
 	SDL_Rect rect_button_sound;
@@ -48,6 +49,7 @@ private:
 	UIElements* button_exit=nullptr;
 	UIElements* button_back = nullptr;
 	UIElements* button_credits = nullptr;
+	UIElements* button_continue = nullptr;
 	UIElements* button_back_credits = nullptr;
 	UIElements* img_slide = nullptr;
 	UIElements* button_music = nullptr;
@@ -75,6 +77,7 @@ private:
 	UIElements* License_17 = nullptr;
 
 	UIElements* text_start = nullptr;
+	UIElements* text_continue = nullptr;
 	UIElements* text_option = nullptr;
 	UIElements* text_exit = nullptr;
 	UIElements* text_credits = nullptr;
@@ -83,6 +86,8 @@ private:
 
 	Animation* animation = nullptr;
 	Animation ninja;
+
+	bool continue_game = false;
 
 	float dt;
 
