@@ -13,6 +13,7 @@
 #include "UIButton.h"
 #include "UITextBox.h"
 #include "UIWindow.h"
+#include "UISlider.h"
 #include "j1Menu.h"
 #include "j1Scene.h"
 
@@ -220,6 +221,15 @@ UIElements* j1Gui::AddElementWindow(int x, int y, UIElementType type, j1Module* 
 
 	return element_created;
 }
+
+UIElements * j1Gui::AddSlider(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* modul,  bool show)
+{
+	UIElements* element_created;
+	element_created = new UISlider(x, y, type, rect, modul, show);
+	elements.add(element_created);
+	return element_created;
+}
+
 
 void j1Gui::DeleteElements(UIElements* element)
 {

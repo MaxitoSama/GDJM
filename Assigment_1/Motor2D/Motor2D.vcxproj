@@ -104,6 +104,7 @@
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIElements.cpp" />
     <ClCompile Include="UIImage.cpp" />
+    <ClCompile Include="UISlider.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="UITextBox.cpp" />
     <ClCompile Include="UIWindow.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIElements.h" />
     <ClInclude Include="UIImage.h" />
+    <ClInclude Include="UISlider.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="UITextBox.h" />
     <ClInclude Include="UIWindow.h" />

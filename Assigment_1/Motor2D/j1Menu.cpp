@@ -54,6 +54,7 @@ bool j1Menu::Start()
 	animation = &ninja;
 
 	App->scene->active = false;
+	//Put fade to black once everything is done (ric feedback)
 
 	//MAIN_MENU
 	rect_button_play = { 400, 972, 183, 191 };
@@ -82,6 +83,8 @@ bool j1Menu::Start()
 	text_sound = App->gui->AddElementText(250, 190, TEXT, 1, this, "Volume", false, false);
 	button_music = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_music, this, nullptr,false);
 	text_music = App->gui->AddElementText(250, 340, TEXT, 1, this, "Music", false, false);
+
+	//use xml to insert the licence once everything is done (ric feedback)
 	int i = 180;
 	License_1 = App->gui->AddElementText(50, i,TEXT, 2, this, "MIT License",false,false);
 	License_2 = App->gui->AddElementText(50, i = i + 30, TEXT, 2, this, "Copyright (c) 2017 Marc Garcia, Josep Pi", false, false);

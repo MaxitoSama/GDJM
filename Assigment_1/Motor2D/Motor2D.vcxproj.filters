@@ -94,6 +94,9 @@
     <ClCompile Include="Coin.cpp">
       <Filter>Developement  ========\Modules\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="UISlider.cpp">
+      <Filter>Developement  ========\Modules\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Audio.h">
@@ -218,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="Coin.h">
       <Filter>Developement  ========\Modules\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="UISlider.h">
+      <Filter>Developement  ========\Modules\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
