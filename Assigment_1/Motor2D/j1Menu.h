@@ -67,6 +67,7 @@ private:
 	UIElements* License_14 = nullptr;
 	UIElements* License_15 = nullptr;
 	UIElements* License_16 = nullptr;
+	UIElements* License_17 = nullptr;
 
 	UIElements* text_start = nullptr;
 	UIElements* text_option = nullptr;

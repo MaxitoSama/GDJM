@@ -79,7 +79,9 @@ bool j1Scene::Start()
 		
 		display_score = { 173, 3149, 397, 133 };
 		App->gui->AddElementImage(250, 100, TEXTBOX, &display_score, this);
-		Score = App->gui->AddElementText(200, 65, TEXT, 1, this, score_string.GetString(), true, true);
+		
+		Score = App->gui->AddElementText(200, 65, TEXT, 1,255,255,0, this, score_string.GetString(), true, true);
+
 		
 		rect_button_exit = { 2556,1407,183,191 };
 		exit_button= App->gui->AddElementButton(150, 250, BUTTON, &rect_button_exit, this,nullptr,false);

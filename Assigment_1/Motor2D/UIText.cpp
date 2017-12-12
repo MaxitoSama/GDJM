@@ -7,7 +7,7 @@
 #include "UIText.h"
 
 
-UIText::UIText(int x, int y, UIElementType type, const char* text, uint fonttype, j1Module* modul, bool actualize, bool _show) :UIElements(x, y, type, modul)
+UIText::UIText(int x, int y, UIElementType type, const char* text, uint fonttype,  int _r, int _g, int _b, j1Module* modul, bool actualize, bool _show) :UIElements(x, y, type, modul)
 {
 	show = _show;
 	actualizable = actualize;
@@ -15,9 +15,17 @@ UIText::UIText(int x, int y, UIElementType type, const char* text, uint fonttype
 	string = text;
 	font = fonttype;
 
-	texture = App->font->Print(string, { 255,255,0 }, App->gui->fonts[font]);
+	r = _r;
+	g = _g;
+	b = _b;
 
-	BlackBackground = App->font->Print(string, { 0,0,0 }, App->gui->fonts[font]);
+	texture = App->font->Print(string, { r,g,b }, App->gui->fonts[font]);
+
+	if (font == 0 || font == 1)
+	{
+		BlackBackground = App->font->Print(string, { 0,0,0 }, App->gui->fonts[font]);
+	}
+
 
 	App->tex->GetSize(texture, size_x, size_y);
 
@@ -39,7 +47,10 @@ void UIText::Draw()
 	{
 		if (!actualizable)
 		{
-			App->render->Blit(BlackBackground, position.x - App->render->camera.x + 2, position.y - App->render->camera.y + 2);
+			if(BlackBackground!=nullptr)
+			{
+				App->render->Blit(BlackBackground, position.x - App->render->camera.x + 2, position.y - App->render->camera.y + 2);
+			}
 			App->render->Blit(texture, position.x - App->render->camera.x , position.y - App->render->camera.y);
 		}
 		else
@@ -47,8 +58,11 @@ void UIText::Draw()
 			string = App->scene->score_string.GetString();
 			texture = App->font->Print(string, { 255,255,0 }, App->gui->fonts[font]);
 			BlackBackground = App->font->Print(string, { 0,0,0 }, App->gui->fonts[font]);
-
-			App->render->Blit(BlackBackground, position.x - App->render->camera.x + 2, position.y - App->render->camera.y + 2);
+			
+			if (BlackBackground != nullptr)
+			{
+				App->render->Blit(BlackBackground, position.x - App->render->camera.x + 2, position.y - App->render->camera.y + 2);
+			}
 			App->render->Blit(texture, position.x - App->render->camera.x, position.y - App->render->camera.y);
 			SDL_DestroyTexture(texture);
 			SDL_DestroyTexture(BlackBackground);
