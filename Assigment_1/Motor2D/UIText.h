@@ -11,7 +11,7 @@ class UIText :public UIElements
 {
 public:
 
-	UIText(int x, int y, UIElementType type, const char* text, uint fonttype, j1Module* modul, bool actualize, bool show);
+	UIText(int x, int y, UIElementType type, const char* text, uint fonttype,int _r, int _g,int _b, j1Module* modul, bool actualize, bool show);
 	~UIText();
 
 	void Draw();
@@ -29,6 +29,10 @@ public:
 	uint			text_width;
 	uint			text_height;
 	uint			font;
+	
+	Uint8			r;
+	Uint8			g;
+	Uint8			b;
 
 	bool			actualizable = false;
 
