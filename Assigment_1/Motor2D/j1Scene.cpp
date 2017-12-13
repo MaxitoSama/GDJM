@@ -241,6 +241,7 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
+	
 	App->entities->CleanUp();
 	App->colliders->CleanUp();
 	App->map->CleanUp();

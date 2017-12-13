@@ -58,10 +58,11 @@ public:
 	char coins[256];
 	char lives[8];
 
-private:
-
 	bool Map_1;
 	bool Map_2;
+
+private:
+
 	bool exit=true;
 	bool LoadUI = true;
 

@@ -272,10 +272,22 @@ void j1Menu::StartGame()
 	App->scene->active = true;
 	App->scene->Start();
 	App->entities->Start();
+	
 	if (continue_game)
 	{
 		continue_game = false;
 		App->LoadGame();
+	}
+	else
+	{
+		if (App->scene->Map_1)
+		{
+			App->scene->StartCurrentScene();
+		}
+		else
+		{
+			App->scene->ChangeScene(60, 215);
+		}
 	}
 }
 
