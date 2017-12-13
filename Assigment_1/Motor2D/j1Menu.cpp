@@ -53,6 +53,9 @@ bool j1Menu::Start()
 	sprites_ninja = App->tex->Load("assets/character/character.png");
 	animation = &ninja;
 
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
 	App->scene->active = false;
 	//Put fade to black once everything is done (ric feedback)
 

@@ -76,15 +76,22 @@ bool j1Scene::Start()
 
 			App->entities->AddEnemy(PLANE, 1500, 100);
 		}
+
 		if (LoadUI)
 		{
 			LoadUI = false;
 
 			display_score = { 173, 3149, 397, 133 };
-			App->gui->AddElementImage(250, 100, TEXTBOX, &display_score, this);
+			display_coins = { 187,2976,383,132 };
+			live_icon = { 683,2985,83,79 };
+			
+			App->gui->AddElementImage(200, 100, TEXTBOX, &display_coins, this);
+			App->gui->AddElementImage(400, 100, TEXTBOX, &display_score, this);
+			App->gui->AddElementImage(1317, 100, TEXTBOX, &live_icon, this);
 
-			Score = App->gui->AddElementText(200, 65, TEXT, 1, 255, 255, 0, this, score_string.GetString(), true, true);
-
+			Coins = App->gui->AddElementText(120, 65, TEXT, 1, 255, 255, 0, this, coins, true, true);
+			Score = App->gui->AddElementText(340, 65, TEXT, 1, 255, 255, 0, this, score_string, true, true);
+			Lives = App->gui->AddElementText(1350, 80, TEXT, 1, 0, 0, 0, this, lives, true, true);
 
 			rect_button_exit = { 2556,1407,183,191 };
 			exit_button = App->gui->AddElementButton(150, 250, BUTTON, &rect_button_exit, this, nullptr, false);
@@ -94,9 +101,7 @@ bool j1Scene::Start()
 			pause_buttons.add(back_menu_button);
 
 			pause_window = App->gui->AddElementWindow(300, 200, WINDOWS, this, &pause_buttons, { 1055,160,930,742 }, false);
-
 		}
-		
 		App->GamePaused = false;
 	}
 
@@ -204,10 +209,19 @@ bool j1Scene::Update(float dt)
 	App->map->Draw();
 	App->pathfinding->DrawPath(path_test);
 
-	p2SString title("%s",App->GetTitle());
+	//p2SString title("%s",App->GetTitle());
 
-	
-	score_string.create("%i", App->entities->player->score);
+	sprintf_s(score_string,256,"%d",App->entities->player->score);
+	sprintf_s(coins, 256, "%d", App->entities->player->coins);
+	sprintf_s(lives, 256, "x0%d", App->entities->player->lives);
+
+	if (App->entities->player->lives < 1)
+	{
+		App->gui->startgame = true;
+		App->entities->player->lives = 3;
+		App->entities->player->score = 0;
+		App->entities->player->coins=0;
+	}
 
 	return true;
 }
@@ -321,15 +335,6 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 }
 void j1Scene::GoToMenu()
 {
-	if (Map_1 && App->entities->player->Curr_map == 1)
-	{
-		StartCurrentScene();
-	}
-	else
-	{
-		ChangeScene(60,215);
-	}
-
 	LoadUI = true;
 	pause_buttons.clear();
 

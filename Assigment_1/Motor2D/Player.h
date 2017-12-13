@@ -63,24 +63,25 @@ public:
 	Animation		slide_left;
 	Animation		death;
 
-
 	Collider*		collider_player=nullptr;
-
-
+	
 	int				Pos_jump;
-	float			velocity;
 	int				Curr_map;
+
+	float			velocity;
+	
 	uint			win_width;
 	uint			win_height;
 	uint			win_scale;
 	uint			acceleration;
 	uint			gravity;
 	uint			score;
+	uint			coins;
+	uint			lives;
+
 	SDL_Rect		slide_rect;
 
-
 	LastDirection	player_last_direction;
-
 
 	bool			Jump = false;
 	bool			fall = false;

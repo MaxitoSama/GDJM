@@ -53,7 +53,10 @@ public:
 	p2DynArray<iPoint> path_test;
 	p2List<UIElements*> pause_buttons;
 
-	p2SString score_string;
+	//p2SString score_string;
+	char score_string[256];
+	char coins[256];
+	char lives[8];
 
 private:
 
@@ -66,6 +69,8 @@ private:
 
 	UIElements* QuitButton = nullptr;
 	UIElements* Score = nullptr;
+	UIElements* Lives = nullptr;
+	UIElements* Coins = nullptr;
 	UIElements* button_back = nullptr;
 	UIElements* pause_window = nullptr;
 	UIElements* back_menu_button = nullptr;
@@ -73,6 +78,8 @@ private:
 
 	SDL_Rect button_play;
 	SDL_Rect display_score;
+	SDL_Rect live_icon;
+	SDL_Rect display_coins;
 	SDL_Rect rect_button_back;
 	SDL_Rect rect_button_exit;
 

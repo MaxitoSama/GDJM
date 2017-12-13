@@ -175,6 +175,8 @@ Player::Player(int x, int y, ENTITY_TYPES type) : Entity(x, y,type)
 	win_height = App->win->screen_surface->h;
 	win_scale = App->win->GetScale();
 	score = 0;
+	coins = 0;
+	lives = 3;
 
 	animation = &idle_right;
 	scale = 0.5f;
@@ -455,6 +457,7 @@ bool Player::Update(float dt)
 			App->render->camera.x = 0;
 			App->render->camera.y = 0;
 			death.Reset();
+			App->entities->player->lives--;
 		}
 	}
 

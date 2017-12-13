@@ -132,19 +132,19 @@ bool j1Colliders::Update(float dt)
 							App->entities->entities[i]->collider_head = nullptr;
 							App->entities->entities[i]->alive = false;
 
-							/*if (App->entities->entities[i]->GetType() == ZOMBIE)
+							if (App->entities->entities[i]->GetType() == ZOMBIE)
 							{
 								App->entities->player->score += 500;
 							}
 							else
 							{
 								App->entities->player->score += 1000;
-							}*/
+							}
 						}
 					}
 					if (c2 == App->entities->entities[i]->GetCollider() && c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_COIN && c1->CheckCollision(c2->rect) == true)
 					{
-						App->entities->player->score += 100;
+						App->entities->player->coins ++;
 						EraseCollider(App->entities->entities[i]->collider);
 						App->entities->entities[i]->alive = false;
 					}

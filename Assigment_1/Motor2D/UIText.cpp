@@ -55,7 +55,6 @@ void UIText::Draw()
 		}
 		else
 		{
-			string = App->scene->score_string.GetString();
 			texture = App->font->Print(string, { 255,255,0 }, App->gui->fonts[font]);
 			BlackBackground = App->font->Print(string, { 0,0,0 }, App->gui->fonts[font]);
 			
