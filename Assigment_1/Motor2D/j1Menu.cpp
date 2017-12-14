@@ -71,17 +71,16 @@ bool j1Menu::Start()
 	rect_button_continue = { 197,2498,183,191 };
 
 	//OPTIONS_MENU
-	rect_button_back = { 3094,101,179,182 };
-	rect_button_music = { 2148,1844,183,191 };
-	rect_button_sound = { 2148,2062,183,191 };
-	rect_slider_vertical = { 1534, 2977,12,602 };
-	rect_button_vertical;
+	rect_button_back = { 3094, 101, 179, 182 };
+	rect_button_music = { 2148, 1844,183, 191 };
+	rect_button_sound = { 2148, 2062,183, 191 };
+	rect_slider_vertical = { 1534, 2977, 12, 602 };
 
-	rect_slider_horizontal = { 2981,3626,604,14 };
-	rect_button_horizontal = { 3094,2280,183,191 };
-
+	rect_slider_horizontal = { 2981, 3626, 604, 14 };
+	rect_button_horizontal = { 3094, 2280, 183, 191 };
 
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
+
 	//MAIN_MENU
 	button_play = App->gui->AddElementButton(150, 150, BUTTON, &rect_button_play, this);
 	text_start = App->gui->AddElementText(250, 190, TEXT, 1,255,255,0, this, "Start Game");
@@ -102,9 +101,7 @@ bool j1Menu::Start()
 	button_sound = App->gui->AddElementButton(150, 150, BUTTON, &rect_button_sound, this,nullptr,false);
 	text_sound = App->gui->AddElementText(250, 190, TEXT, 1, 255, 255, 0, this, "Volume", false, false);
 	button_music = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_music, this, nullptr,false);
-	slider_horizontal_list.add(slider_horizontal);
-	slider_horizontal_list.add(slider_button_horizontal);
-	slider_horizontal = App->gui->AddElementSlider(800, 220, IMAGE, &rect_slider_horizontal, &rect_button_horizontal, this, false);
+	slider_horizontal = App->gui->AddElementSlider(800, 220, BUTTON, &rect_slider_horizontal, &rect_button_horizontal, this, slider_button_horizontal);
 
 	//use xml to insert the licence once everything is done (ric feedback)
 	{
@@ -205,6 +202,10 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			{
 				
 			}
+			if (element == slider_horizontal && element->show)
+			{
+				element->Action();
+			}
 			break;
 
 		case MOUSE_LEAVE:
@@ -232,6 +233,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			if (element == button_exit && element->show)
 			{
 			}
+
 			break;
 
 		case MOUSE_STOP_CLICK:
@@ -268,10 +270,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			{
 				CreditsButton();
 			}
-			if (element)
-			{
-				
-			}
+
 			break;
 		
 		default:

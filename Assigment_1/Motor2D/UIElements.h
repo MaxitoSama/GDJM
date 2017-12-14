@@ -34,8 +34,8 @@ public:
 
 	j1Module*		callback = nullptr;
 
-	uint			size_x;
-	uint			size_y;
+	uint			collider_size_x;
+	uint			collider_size_y;
 
 	bool			mousein = false;
 	bool			mouseout = true;

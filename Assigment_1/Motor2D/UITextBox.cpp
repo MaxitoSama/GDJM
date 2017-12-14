@@ -15,15 +15,15 @@ UITextBox::UITextBox(int x, int y, UIElementType type, const char* text, j1Modul
 		hidentexture = App->font->Print(text, { 70,70,70 }, App->gui->fonts[1]);
 	}
 
-	App->tex->GetSize(App->gui->textbox, size_x, size_y);
+	App->tex->GetSize(App->gui->textbox, collider_size_x, collider_size_y);
 	App->tex->GetSize(hidentexture, sizeTx, sizeTy);
 
 	scale = 2.0f;
 
-	int rect_x = position.x - (size_x / 2)*scale;
+	int rect_x = position.x - (collider_size_x / 2)*scale;
 	int rect_y = position.y;
 
-	Elementrect = { rect_x,rect_y,(int)size_x*(int)scale,(int)size_y*(int)scale };
+	Elementrect = { rect_x,rect_y,(int)collider_size_x*(int)scale,(int)collider_size_y*(int)scale };
 
 }
 
@@ -33,7 +33,7 @@ UITextBox::~UITextBox()
 
 void UITextBox::Draw()
 {
-	App->render->Blit(App->gui->textbox, position.x - App->render->camera.x - size_x / 2 * scale, position.y - App->render->camera.y,NULL, scale);
+	App->render->Blit(App->gui->textbox, position.x - App->render->camera.x - collider_size_x / 2 * scale, position.y - App->render->camera.y,NULL, scale);
 
 	if (debug == true)
 	{

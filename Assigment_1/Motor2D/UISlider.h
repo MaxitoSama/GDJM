@@ -10,7 +10,7 @@ class UISlider :public UIElements
 {
 public:
 
-	UISlider(int x, int y, UIElementType type, SDL_Rect* slider, SDL_Rect* button, j1Module* modul, p2List<UIElements*>* elementslist, bool show = false);
+	UISlider(int x, int y, UIElementType type, SDL_Rect* slider, SDL_Rect* button, j1Module* modul, UIElements* element_button, bool show = false);
 	~UISlider();
 
 	void Draw();
@@ -21,10 +21,11 @@ public:
 	SDL_Rect* slider;
 	SDL_Rect* button;
 	SDL_Texture* texture;
-	p2List<UIElements*>* sliderelements;
 
 	iPoint mousestart;
 	iPoint mouseend = { 0,0 };
+	iPoint button_point;
+	int mouse_button = 0;
 };
 
 #endif //__UIIMAGE_H__

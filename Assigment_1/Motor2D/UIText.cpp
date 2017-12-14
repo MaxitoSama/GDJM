@@ -27,14 +27,14 @@ UIText::UIText(int x, int y, UIElementType type, const char* text, uint fonttype
 	}
 
 
-	App->tex->GetSize(texture, size_x, size_y);
+	App->tex->GetSize(texture, collider_size_x, collider_size_y);
 
 	scale = 2.0f;
 
-	int rect_x = position.x - (size_x / 2);
+	int rect_x = position.x - (collider_size_x / 2);
 	int rect_y = position.y;
 
-	Elementrect = { rect_x,rect_y,(int)size_x,(int)size_y };
+	Elementrect = { rect_x,rect_y,(int)collider_size_x,(int)collider_size_y };
 }
 
 UIText::~UIText()

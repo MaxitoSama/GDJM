@@ -23,8 +23,8 @@ UIButton::UIButton(int x, int y, UIElementType type, SDL_Rect* RecTex, const cha
 
 	scale = 0.7f;
 	
-	size_x = RectTexture->w;
-	size_y = RectTexture->h;
+	collider_size_x = RectTexture->w;
+	collider_size_y = RectTexture->h;
 	
 }
 
@@ -41,10 +41,10 @@ void UIButton::Draw()
 		int rect_x;
 		int rect_y;
 
-		rect_x = position.x - (size_x / 2)*scale - App->render->camera.x;
+		rect_x = position.x - (collider_size_x / 2)*scale - App->render->camera.x;
 		rect_y = position.y - App->render->camera.y;
 
-		Elementrect = { rect_x,rect_y,(int)(size_x*scale),(int)(size_y*scale)};
+		Elementrect = { rect_x,rect_y,(int)(collider_size_x*scale),(int)(collider_size_y*scale)};
 		App->render->Blit(ElementTexture, rect_x, rect_y,RectTexture, scale);
 
 		if (buttontext != nullptr)
@@ -59,7 +59,7 @@ void UIButton::Draw()
 
 		if (light)
 		{
-			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x - 12, position.y - App->render->camera.y - 12, RectTexture, scale);
+			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - collider_size_x - 12, position.y - App->render->camera.y - 12, RectTexture, scale);
 		}
 	}
 }

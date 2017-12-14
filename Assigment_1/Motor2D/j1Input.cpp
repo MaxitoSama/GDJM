@@ -109,13 +109,17 @@ bool j1Input::PreUpdate()
 			break;
 
 			case SDL_MOUSEBUTTONDOWN:
+			{
 				mouse_buttons[event.button.button - 1] = KEY_DOWN;
-				//LOG("Mouse button %d down", event.button.button-1);
+
+				LOG("Mouse button %d down", event.button.button-1);
+			}
+
 			break;
 
 			case SDL_MOUSEBUTTONUP:
 				mouse_buttons[event.button.button - 1] = KEY_UP;
-				//LOG("Mouse button %d up", event.button.button-1);
+				LOG("Mouse button %d up", event.button.button-1);
 			break;
 
 			case SDL_MOUSEMOTION:

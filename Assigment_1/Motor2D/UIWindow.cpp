@@ -12,8 +12,8 @@ UIWindow::UIWindow(int x, int y, UIElementType type, j1Module* modul, p2List<UIE
 	window_rect = rect;
 	show = _show;
 
-	size_x = window_rect.w;
-	size_y = window_rect.h;
+	collider_size_x = window_rect.w;
+	collider_size_y = window_rect.h;
 
 	windowelements = elementslist;
 
@@ -42,7 +42,7 @@ void UIWindow::Draw()
 		int rect_x = position.x;
 		int rect_y = position.y;
 
-		Elementrect = { rect_x,rect_y,(int)size_x*(int)scale,(int)size_y*(int)scale };
+		Elementrect = { rect_x,rect_y,(int)collider_size_x*(int)scale,(int)collider_size_y*(int)scale };
 
 		App->render->Blit(App->gui->window, position.x - App->render->camera.x, position.y - App->render->camera.y,&window_rect, 1.0f);
 
