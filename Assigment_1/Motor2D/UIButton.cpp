@@ -56,24 +56,19 @@ void UIButton::Draw()
 		{
 			App->render->DrawQuad(Elementrect, 255, 0, 255, 80);
 		}
-
-		if (light)
-		{
-			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - collider_size_x - 12, position.y - App->render->camera.y - 12, RectTexture, scale);
-		}
 	}
 }
 
 void UIButton::Action()
 {
-
 	if (!light)
 	{
 		light = true;
+		RectTexture->x = RectTexture->x + 204;
 	}
 	else
 	{
 		light = false;
+		RectTexture->x = RectTexture->x - 204;
 	}
-	
 }

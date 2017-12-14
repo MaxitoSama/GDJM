@@ -28,6 +28,7 @@ private:
 	SDL_Texture* sprites_ninja = nullptr;
 
 	SDL_Rect rect_button_play;
+	SDL_Rect rect_button_play_2;
 	SDL_Rect rect_button_options;
 	SDL_Rect rect_button_options_in;
 	SDL_Rect rect_button_options_click;

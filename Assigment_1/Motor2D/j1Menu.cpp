@@ -64,7 +64,8 @@ bool j1Menu::Start()
 	//Put fade to black once everything is done (ric feedback)
 
 	//MAIN_MENU
-	rect_button_play = { 400, 972, 183, 191 };
+	rect_button_play_2 = { 400, 972, 183, 191 };
+	rect_button_play = { 196, 972, 183, 191 };
 	rect_button_options = { 3093, 318, 183, 191 };
 	rect_button_exit = { 2556,1407,183,191 };
 	rect_button_credits = { 1142,1191,183,191 };
@@ -193,14 +194,23 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 		case MOUSE_ENTER:
 			if (element == button_play && element->show)
 			{
+				element->Action();
+			}
+			if (element == button_continue && element->show)
+			{
+				element->Action();
+			}
+			if (element == button_credits && element->show)
+			{
+				element->Action();
 			}
 			if (element == button_options && element->show)
 			{
-				
+				element->Action();
 			}
 			if (element == button_exit && element->show)
 			{
-				
+				element->Action();
 			}
 
 			break;
@@ -208,14 +218,23 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 		case MOUSE_LEAVE:
 			if (element == button_play && element->show)
 			{
+				element->Action();
+			}
+			if (element == button_continue && element->show)
+			{
+				element->Action();
+			}
+			if (element == button_credits && element->show)
+			{
+				element->Action();
 			}
 			if (element == button_options && element->show)
 			{
-				
+				element->Action();
 			}
 			if (element == button_exit && element->show)
 			{
-
+				element->Action();
 			}
 			break;
 
@@ -242,7 +261,10 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			break;
 
 		case MOUSE_STOP_CLICK:
-			App->audio->PlayFx(3);
+			if (element->show == true)
+			{
+				App->audio->PlayFx(3);
+			}
 			if (element == button_play && element->show)
 			{
 				App->gui->startgame = true;
