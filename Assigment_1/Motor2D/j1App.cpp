@@ -10,6 +10,7 @@
 #include "j1Audio.h"
 #include "j1Menu.h"
 #include "j1Scene.h"
+#include "j1Transition.h"
 #include "j1Colliders.h"
 #include "j1Map.h"
 #include "j1Entities.h"
@@ -36,6 +37,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new j1Audio();
 	menu = new j1Menu();
 	scene = new j1Scene();
+	transit = new j1Transition();
 	colliders = new j1Colliders();
 	map = new j1Map();
 	entities = new j1Entities();
@@ -56,6 +58,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene); 
 	AddModule(colliders);
 	AddModule(entities);
+	AddModule(transit);
 	AddModule(font);
 	
 

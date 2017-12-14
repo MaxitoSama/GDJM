@@ -97,6 +97,9 @@
     <ClCompile Include="UISlider.cpp">
       <Filter>Developement  ========\Modules\UI</Filter>
     </ClCompile>
+    <ClCompile Include="j1Transition.cpp">
+      <Filter>Developement  ========\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Audio.h">
@@ -224,6 +227,9 @@
     </ClInclude>
     <ClInclude Include="UISlider.h">
       <Filter>Developement  ========\Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Transition.h">
+      <Filter>Developement  ========\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

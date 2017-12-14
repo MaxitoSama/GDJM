@@ -17,6 +17,7 @@ class j1Textures;
 class j1Audio;
 class j1Menu;
 class j1Scene;
+class j1Transition;
 class j1Colliders;
 class j1Map;
 class j1Entities;
@@ -94,6 +95,7 @@ public:
 	j1Audio*			audio = nullptr;
 	j1Menu*				menu = nullptr;
 	j1Scene*			scene = nullptr;
+	j1Transition*		transit = nullptr;
 	j1Colliders*		colliders = nullptr;
 	j1Map*				map = nullptr;
 	j1Entities*			entities = nullptr;

@@ -11,22 +11,23 @@
 	<gui />
 	<menu />
 	<scene />
+	<:anonymous />
 	<colliders />
 	<entity>
-		<player x="60" y="828.5" Map="1" />
+		<player x="60" y="5630.3335" Map="1" />
 		<enemy_zombie>
-			<position x="1520.94983" y="812.333252" />
-			<position x="2575.25" y="620" />
-			<position x="19444.25" y="812.999878" />
-			<position x="7075.25" y="9193.66602" />
-			<position x="9887.25" y="652" />
+			<position x="1337.16663" y="812.333313" />
+			<position x="2537.16675" y="620" />
+			<position x="19406.166" y="812.999939" />
+			<position x="7037.1665" y="5998.83301" />
+			<position x="9849.16699" y="652" />
 		</enemy_zombie>
 		<enemy_plane>
-			<position x="2024.83142" y="87.599823" />
+			<position x="2135.36768" y="100" />
 		</enemy_plane>
 	</entity>
 	<fonts />
 	<renderer>
-		<camera x="0" y="-107" />
+		<camera x="0" y="-106" />
 	</renderer>
 </game_state>

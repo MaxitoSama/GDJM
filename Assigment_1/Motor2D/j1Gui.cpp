@@ -121,14 +121,6 @@ bool j1Gui::PostUpdate()
 	{
 		startgame = false;
 		CleanUp();
-		if (App->menu->active)
-		{
-			App->menu->StartGame();
-		}
-		else
-		{
-			App->scene->GoToMenu();
-		}
 	}
 	return true;
 }

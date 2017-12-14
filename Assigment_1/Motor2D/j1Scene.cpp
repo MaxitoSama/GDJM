@@ -11,6 +11,7 @@
 #include "j1Pathfinding.h"
 #include "j1Menu.h"
 #include "j1Scene.h"
+#include "j1Transition.h"
 #include "j1Entities.h"
 #include "Player.h"
 #include "j1Gui.h"
@@ -326,6 +327,7 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 		if (element == back_menu_button && element->show)
 		{
 			App->gui->startgame = true;
+			App->transit->Transition(this, App->menu);
 		}
 		break;
 
@@ -339,8 +341,6 @@ void j1Scene::GoToMenu()
 	LoadUI = true;
 	pause_buttons.clear();
 
-	App->menu->active = true;
-	App->scene->active = false;
 	App->scene->CleanUp();
 	App->menu->Start();
 }

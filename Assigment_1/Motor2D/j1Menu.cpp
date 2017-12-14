@@ -13,6 +13,7 @@
 #include "j1Pathfinding.h"
 #include "j1Menu.h"
 #include "j1Scene.h"
+#include "j1Transition.h"
 #include "j1Entities.h"
 #include "Player.h"
 #include "j1Gui.h"
@@ -50,7 +51,9 @@ bool j1Menu::Awake(pugi::xml_node& config)
 
 bool j1Menu::Start()
 {
+	App->GamePaused = false;
 	sprites_ninja = App->tex->Load("assets/character/character.png");
+	ninja.Reset();
 	animation = &ninja;
 
 	App->render->camera.x = 0;
@@ -162,7 +165,7 @@ bool j1Menu::PostUpdate()
 	BROFILER_CATEGORY("PosUpdate_Scene1 ", Profiler::Color::DarkOrchid)
 		if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 			exit=false;
-	if (button_play->show == true)
+	if (active && button_play->show)
 	{
 		App->render->Blit(sprites_ninja, 870, 340, &(animation->GetCurrentFrame(dt)), -1.6f);
 	}
@@ -231,11 +234,13 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			{
 				App->gui->startgame = true;
 				continue_game = false;
+				App->transit->Transition(this, App->scene);
 			}
 			if (element == button_continue && element->show)
 			{
 				App->gui->startgame = true;
 				continue_game = true;
+				App->transit->Transition(this, App->scene);
 			}
 			if (element == button_options && element->show)
 			{
@@ -268,8 +273,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 void j1Menu::StartGame()
 {
 	CleanUp();
-	App->menu->active = false;
-	App->scene->active = true;
+
 	App->scene->Start();
 	App->entities->Start();
 	
