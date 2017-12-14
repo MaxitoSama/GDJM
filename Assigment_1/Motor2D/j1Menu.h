@@ -37,9 +37,11 @@ private:
 	SDL_Rect rect_button_back;
 	SDL_Rect rect_button_sound;
 	SDL_Rect rect_button_music;
-	SDL_Rect rect_button_slider;
+	SDL_Rect rect_button_vertical;
+	SDL_Rect rect_slider_vertical;
 
-	SDL_Rect rect_slider_rectangle;
+	SDL_Rect rect_slider_horizontal;
+	SDL_Rect rect_button_horizontal;
 	
 
 	UIElements* button_play=nullptr;
@@ -54,7 +56,18 @@ private:
 	UIElements* img_slide = nullptr;
 	UIElements* button_music = nullptr;
 	UIElements* button_sound = nullptr;
-	UIElements* slide_horizontal = nullptr;
+	p2List<UIElements*> slider_horizontal_list;
+	UIElements* slider_horizontal = nullptr;
+	UIElements* slider_button_horizontal = nullptr;
+	
+	UIElements* text_start = nullptr;
+	UIElements* text_continue = nullptr;
+	UIElements* text_option = nullptr;
+	UIElements* text_exit = nullptr;
+	UIElements* text_credits = nullptr;
+	UIElements* text_sound = nullptr;
+	UIElements* text_music = nullptr;
+
 	
 	UIElements* License_window = nullptr;
 	p2List<UIElements*> License_text;
@@ -75,14 +88,7 @@ private:
 	UIElements* License_15 = nullptr;
 	UIElements* License_16 = nullptr;
 	UIElements* License_17 = nullptr;
-
-	UIElements* text_start = nullptr;
-	UIElements* text_continue = nullptr;
-	UIElements* text_option = nullptr;
-	UIElements* text_exit = nullptr;
-	UIElements* text_credits = nullptr;
-	UIElements* text_sound = nullptr;
-	UIElements* text_music = nullptr;
+	
 
 	Animation* animation = nullptr;
 	Animation ninja;

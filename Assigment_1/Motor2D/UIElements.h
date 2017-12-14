@@ -12,7 +12,8 @@ enum UIElementType
 	IMAGE,
 	BUTTON,
 	TEXTBOX,
-	WINDOWS
+	WINDOWS,
+	SLIDER
 };
 
 class UIElements :public j1Gui

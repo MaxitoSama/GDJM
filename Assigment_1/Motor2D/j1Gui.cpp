@@ -222,10 +222,10 @@ UIElements* j1Gui::AddElementWindow(int x, int y, UIElementType type, j1Module* 
 	return element_created;
 }
 
-UIElements * j1Gui::AddSlider(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* modul,  bool show)
+UIElements* j1Gui::AddElementSlider(int x, int y, UIElementType type, SDL_Rect* slider, SDL_Rect* button, j1Module* modul, p2List<UIElements*>* elementslist, bool show)
 {
 	UIElements* element_created;
-	element_created = new UISlider(x, y, type, rect, modul, show);
+	element_created = new UISlider(x, y, type, slider, button, modul, elementslist, show);
 	elements.add(element_created);
 	return element_created;
 }
