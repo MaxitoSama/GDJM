@@ -85,6 +85,10 @@ bool j1Gui::PostUpdate()
 			{
 				element->data->callback->GUIEvent(MOUSE_STOP_CLICK, element->data);
 			}
+			if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
+			{
+				element->data->callback->GUIEvent(MOUSE_REPEAT, element->data);
+			}
 		}
 		
 		if (element != nullptr)

@@ -202,10 +202,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			{
 				
 			}
-			if (element == slider_horizontal && element->show)
-			{
-				element->Action();
-			}
+
 			break;
 
 		case MOUSE_LEAVE:
@@ -234,6 +231,14 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			{
 			}
 
+			break;
+
+		case MOUSE_REPEAT:
+			if (element == slider_horizontal && element->show)
+			{
+				
+				element->Action();
+			}
 			break;
 
 		case MOUSE_STOP_CLICK:

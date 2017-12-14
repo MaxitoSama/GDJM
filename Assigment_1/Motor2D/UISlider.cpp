@@ -51,6 +51,10 @@ void UISlider::Draw()
 		{
 			App->render->DrawQuad(Elementrect, 255, 0, 255, 80);
 		}
+		if (action == false)
+		{
+			App->input->GetMousePosition(mouse_origin.x, mouse_origin.y);
+		}
 		
 	}
 
@@ -59,14 +63,14 @@ void UISlider::Draw()
 void UISlider::Action()
 {
 	App->input->GetMouseButtonDown(mouse_button);
-
-
 	if (mouse_button == 0)
 	{
-		App->input->GetMousePosition(mousestart.x, mousestart.y);
-		//button_point.x += mousestart.x - mouseend.x;
+		App->input->GetMousePosition(mouse_vector.x, mouse_vector.y);
+
+		button_point.x += mouse_vector.x - mouse_origin.x;
 	}
-	LOG("Mouse initial position %d %d. Mouse final position %d %d", mousestart.x, mousestart.y, mouseend.x, mouseend.y);
+	
+	LOG("origin %d final %d ", mouse_origin.x, mouse_vector.x);
 
 	
 	

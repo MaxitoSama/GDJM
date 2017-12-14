@@ -22,8 +22,8 @@ public:
 	SDL_Rect* button;
 	SDL_Texture* texture;
 
-	iPoint mousestart;
-	iPoint mouseend = { 0,0 };
+	iPoint mouse_origin;
+	iPoint mouse_vector;
 	iPoint button_point;
 	int mouse_button = 0;
 };
