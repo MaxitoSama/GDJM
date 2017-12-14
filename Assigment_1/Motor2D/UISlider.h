@@ -10,16 +10,21 @@ class UISlider :public UIElements
 {
 public:
 
-	UISlider(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* modul, bool show = false);
+	UISlider(int x, int y, UIElementType type, SDL_Rect* slider, SDL_Rect* button, j1Module* modul, p2List<UIElements*>* elementslist, bool show = false);
 	~UISlider();
 
 	void Draw();
+	void Action();
 
 public:
 
-	SDL_Rect* rectangle;
+	SDL_Rect* slider;
+	SDL_Rect* button;
 	SDL_Texture* texture;
+	p2List<UIElements*>* sliderelements;
 
+	iPoint mousestart;
+	iPoint mouseend = { 0,0 };
 };
 
 #endif //__UIIMAGE_H__
