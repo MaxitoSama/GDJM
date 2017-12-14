@@ -61,7 +61,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(transit);
 	AddModule(font);
 	
-
 	// render last to swap buffer
 	AddModule(render);
 }
@@ -468,5 +467,6 @@ bool j1App::SavegameNow() const
 
 	data.reset();
 	want_to_save = false;
+	
 	return ret;
 }

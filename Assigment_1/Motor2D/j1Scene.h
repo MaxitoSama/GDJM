@@ -57,6 +57,7 @@ public:
 	char score_string[256];
 	char coins[256];
 	char lives[8];
+	char time[128];
 
 	bool Map_1;
 	bool Map_2;
@@ -67,6 +68,7 @@ private:
 	bool LoadUI = true;
 
 	GuiText* text = nullptr;
+	j1Timer timer;
 
 	UIElements* QuitButton = nullptr;
 	UIElements* Score = nullptr;
@@ -76,6 +78,7 @@ private:
 	UIElements* pause_window = nullptr;
 	UIElements* back_menu_button = nullptr;
 	UIElements* exit_button = nullptr;
+	UIElements* Clock = nullptr;
 
 	SDL_Rect button_play;
 	SDL_Rect display_score;
@@ -83,7 +86,6 @@ private:
 	SDL_Rect display_coins;
 	SDL_Rect rect_button_back;
 	SDL_Rect rect_button_exit;
-
 };
 
 #endif // __j1SCENE_H__

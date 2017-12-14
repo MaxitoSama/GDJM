@@ -51,6 +51,7 @@ bool j1Menu::Awake(pugi::xml_node& config)
 
 bool j1Menu::Start()
 {
+	App->audio->PlayMusic("audio/music/menu_music.ogg");
 	App->GamePaused = false;
 	sprites_ninja = App->tex->Load("assets/character/character.png");
 	ninja.Reset();
@@ -289,10 +290,15 @@ void j1Menu::StartGame()
 	if (continue_game)
 	{
 		continue_game = false;
+		App->entities->PreUpdate();
 		App->LoadGame();
 	}
 	else
 	{
+		App->entities->player->lives = 3;
+		App->entities->player->score = 0;
+		App->entities->player->coins = 0;
+
 		if (App->scene->Map_1)
 		{
 			App->scene->StartCurrentScene();

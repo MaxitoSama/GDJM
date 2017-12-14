@@ -49,7 +49,8 @@ bool j1Gui::Start()
 	fonts.PushBack(App->font->Load("fonts/ninja_naruto/njnaruto.ttf", 60));
 	fonts.PushBack(App->font->Load("fonts/ninja_naruto/njnaruto.ttf", 50));
 	fonts.PushBack(App->font->Load("fonts/ninja_naruto/SKURRI.ttf", 20));
-
+	fonts.PushBack(App->font->Load("fonts/ninja_naruto/clock.ttf", 60));
+	
 	return true;
 }
 

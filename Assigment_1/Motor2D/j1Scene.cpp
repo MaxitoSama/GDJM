@@ -42,6 +42,7 @@ bool j1Scene::Start()
 {
 	if (!App->menu->active)
 	{
+		timer.Start();
 		if (Map_1)
 		{
 			App->map->Load("Map_1.tmx");
@@ -93,6 +94,7 @@ bool j1Scene::Start()
 			Coins = App->gui->AddElementText(120, 65, TEXT, 1, 255, 255, 0, this, coins, true, true);
 			Score = App->gui->AddElementText(340, 65, TEXT, 1, 255, 255, 0, this, score_string, true, true);
 			Lives = App->gui->AddElementText(1350, 80, TEXT, 1, 0, 0, 0, this, lives, true, true);
+			Clock = App->gui->AddElementText(1000, 80, TEXT, 3, 0, 0, 0, this, time, true, true);
 
 			rect_button_exit = { 2556,1407,183,191 };
 			exit_button = App->gui->AddElementButton(150, 250, BUTTON, &rect_button_exit, this, nullptr, false);
@@ -215,13 +217,21 @@ bool j1Scene::Update(float dt)
 	sprintf_s(score_string,256,"%d",App->entities->player->score);
 	sprintf_s(coins, 256, "%d", App->entities->player->coins);
 	sprintf_s(lives, 256, "x0%d", App->entities->player->lives);
+	sprintf_s(time, 128, "%i", (int)timer.ReadSec());
 
 	if (App->entities->player->lives < 1)
 	{
 		App->gui->startgame = true;
+		App->transit->Transition(this, App->menu);
 		App->entities->player->lives = 3;
 		App->entities->player->score = 0;
 		App->entities->player->coins=0;
+	}
+	
+	if (App->entities->player->coins == 20)
+	{
+		App->entities->player->lives++;
+		App->entities->player->coins = 0;
 	}
 
 	return true;
@@ -242,7 +252,6 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	
 	App->entities->CleanUp();
 	App->colliders->CleanUp();
 	App->map->CleanUp();

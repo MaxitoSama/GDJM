@@ -579,6 +579,10 @@ bool Player::Load(pugi::xml_node& data)
 		original_pos.y = data.child("player").attribute("y").as_int()-50;
 	}
 
+	score = data.child("player").attribute("score").as_uint();
+	lives = data.child("player").attribute("lives").as_uint();
+	coins = data.child("player").attribute("coins").as_uint();
+
 	return true;
 }
 
@@ -589,6 +593,9 @@ bool Player::Save(pugi::xml_node& data) const
 	playernode.append_attribute("x") = original_pos.x;
 	playernode.append_attribute("y") = original_pos.y;
 	playernode.append_attribute("Map") = Curr_map;
+	playernode.append_attribute("score") = score;
+	playernode.append_attribute("lives") = lives;
+	playernode.append_attribute("coins") = coins;
 
 	return true;
 }
