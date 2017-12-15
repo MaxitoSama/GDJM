@@ -279,6 +279,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			}
 			if (element == button_options && element->show)
 			{
+				element->Action();
 				OptionsButton();
 			}
 			if (element == button_exit && element->show)
@@ -287,14 +288,17 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			}
 			if (element == button_back && element->show)
 			{
+				element->Action();
 				OptionsButton();
 			}
 			if (element == button_credits && element->show)
 			{
+				element->Action();
 				CreditsButton();
 			}
 			if (element == button_back_credits && element->show)
 			{
+				element->Action();
 				CreditsButton();
 			}
 
