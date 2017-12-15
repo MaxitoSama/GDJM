@@ -249,14 +249,10 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			if (element == button_exit && element->show)
 			{
 			}
-
-			break;
-
-		case MOUSE_REPEAT:
 			if (element == slider_horizontal && element->show)
 			{
-				
-				element->Action();
+
+				element->action = true;
 			}
 			break;
 
@@ -301,7 +297,11 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 				element->Action();
 				CreditsButton();
 			}
+			if (element == slider_horizontal && element->show)
+			{
 
+				element->action = false;
+			}
 			break;
 		
 		default:

@@ -20,8 +20,7 @@ enum UIEvents
 	MOUSE_ENTER,
 	MOUSE_LEAVE,
 	MOUSE_CLICK,
-	MOUSE_STOP_CLICK,
-	MOUSE_REPEAT
+	MOUSE_STOP_CLICK
 };
 
 class j1Gui : public j1Module

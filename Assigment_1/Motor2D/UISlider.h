@@ -23,9 +23,10 @@ public:
 	SDL_Texture* texture;
 
 	iPoint mouse_origin;
-	iPoint mouse_vector;
+	iPoint mouse_position;
 	iPoint button_point;
 	int mouse_button = 0;
+	bool mouse_button_state;
 };
 
 #endif //__UIIMAGE_H__
