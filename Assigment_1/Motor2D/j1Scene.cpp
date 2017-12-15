@@ -222,6 +222,7 @@ bool j1Scene::Update(float dt)
 	if (App->entities->player->lives < 1)
 	{
 		App->gui->startgame = true;
+		App->GamePaused = true;
 		App->transit->Transition(this, App->menu);
 		App->entities->player->lives = 3;
 		App->entities->player->score = 0;

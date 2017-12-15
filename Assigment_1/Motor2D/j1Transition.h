@@ -11,7 +11,7 @@ public:
 	~j1Transition();
 
 	bool Start();
-	bool Update(float dt);
+	bool PostUpdate();
 	bool Transition(j1Module* module_off, j1Module* module_on);
 
 private:
@@ -30,6 +30,8 @@ private:
 	SDL_Rect screen;
 
 	uint transp;
+
+	bool free_gui=false;
 
 	j1Module* to_enable = nullptr;
 	j1Module* to_disable = nullptr;
