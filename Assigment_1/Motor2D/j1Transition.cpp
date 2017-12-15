@@ -11,6 +11,7 @@
 
 j1Transition::j1Transition()
 {
+	name.create("transition");
 	screen = { 0, 0,1500, 1000 };
 }
 
@@ -68,7 +69,8 @@ bool j1Transition::Update(float dt)
 		break;
 		}
 
-		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, 255);
+		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, transp);
+		transp+=2;
 		SDL_RenderFillRect(App->render->renderer, &screen);
 	}
 
@@ -82,6 +84,7 @@ bool j1Transition::Transition(j1Module* module_off, j1Module* module_on)
 	if (current_step == fade_step::none)
 	{
 		current_step = fade_step::fade_to_black;
+		transp = 0;
 		to_disable = module_off;
 		to_enable = module_on;
 		clock.Start();

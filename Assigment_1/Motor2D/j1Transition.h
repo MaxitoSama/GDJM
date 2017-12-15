@@ -29,6 +29,8 @@ private:
 
 	SDL_Rect screen;
 
+	uint transp;
+
 	j1Module* to_enable = nullptr;
 	j1Module* to_disable = nullptr;
 };

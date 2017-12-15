@@ -192,23 +192,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 	switch (eventType)
 		{
 		case MOUSE_ENTER:
-			if (element == button_play && element->show)
-			{
-				element->Action();
-			}
-			if (element == button_continue && element->show)
-			{
-				element->Action();
-			}
-			if (element == button_credits && element->show)
-			{
-				element->Action();
-			}
-			if (element == button_options && element->show)
-			{
-				element->Action();
-			}
-			if (element == button_exit && element->show)
+			if (element->type == BUTTON && element->show)
 			{
 				element->Action();
 			}
@@ -216,38 +200,16 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			break;
 
 		case MOUSE_LEAVE:
-			if (element == button_play && element->show)
-			{
-				element->Action();
-			}
-			if (element == button_continue && element->show)
-			{
-				element->Action();
-			}
-			if (element == button_credits && element->show)
-			{
-				element->Action();
-			}
-			if (element == button_options && element->show)
-			{
-				element->Action();
-			}
-			if (element == button_exit && element->show)
+			if (element->type == BUTTON && element->show)
 			{
 				element->Action();
 			}
 			break;
 
 		case MOUSE_CLICK:
-			if (element == button_play && element->show)
+			if (element->type == BUTTON && element->show)
 			{
-			}
-			if (element == button_options && element->show)
-			{
-				
-			}
-			if (element == button_exit && element->show)
-			{
+				element->action = true;
 			}
 
 			break;
@@ -255,15 +217,15 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 		case MOUSE_REPEAT:
 			if (element == slider_horizontal && element->show)
 			{
-				
 				element->Action();
 			}
 			break;
 
 		case MOUSE_STOP_CLICK:
-			if (element->show == true)
+			if (element->type == BUTTON && element->show == true)
 			{
 				App->audio->PlayFx(3);
+				element->action = false;
 			}
 			if (element == button_play && element->show)
 			{
@@ -301,9 +263,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 				element->Action();
 				CreditsButton();
 			}
-
 			break;
-		
 		default:
 			break;
 		}
