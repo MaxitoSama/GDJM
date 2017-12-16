@@ -40,6 +40,11 @@ bool j1Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene::Start()
 {
+	//Camera Movement--------------------------------------
+	
+	win_height = App->win->screen_surface->h;
+	win_width = App->win->screen_surface->w;
+
 	if (!App->menu->active)
 	{
 		timer.Start();
@@ -50,6 +55,11 @@ bool j1Scene::Start()
 			App->map->Draw_Colliders();
 			App->map->LoadEntities();
 			App->colliders->AddCollider({ 25400,0,50,380 }, COLLIDER_WIN, this);
+
+			map_height = App->map->data.height * App->map->data.tile_height;
+			map_width = App->map->data.width * App->map->data.tile_width;
+			limit_y = map_height - win_height;
+			limit_x = map_width - win_width / 2;
 
 			//enemies
 			App->entities->AddEnemy(ZOMBIE, 1300, 600);
@@ -67,6 +77,11 @@ bool j1Scene::Start()
 			App->map->Load("Map_2.tmx");
 			App->audio->PlayMusic("audio/music/map1_music.ogg");
 			App->map->Draw_Colliders();
+			
+			map_height = App->map->data.height * App->map->data.tile_height;
+			map_width = App->map->data.width * App->map->data.tile_width;
+			limit_y = map_height - win_height;
+			limit_x = map_width - win_width / 2;
 
 			App->colliders->AddCollider({ 25400,0,50,310 }, COLLIDER_WIN2, this);
 			App->colliders->AddCollider({ 18923,0,50,310 }, COLLIDER_WIN2, this);
@@ -86,15 +101,17 @@ bool j1Scene::Start()
 			display_score = { 173, 3149, 397, 133 };
 			display_coins = { 187,2976,383,132 };
 			live_icon = { 683,2985,83,79 };
+			rect_clock = { 853,2984,215,76 };
 			
-			App->gui->AddElementImage(200, 100, TEXTBOX, &display_coins, this);
-			App->gui->AddElementImage(400, 100, TEXTBOX, &display_score, this);
-			App->gui->AddElementImage(1317, 100, TEXTBOX, &live_icon, this);
+			App->gui->AddElementImage(200, 100, IMAGE, &display_coins, this);
+			App->gui->AddElementImage(400, 100, IMAGE, &display_score, this);
+			App->gui->AddElementImage(1317, 100, IMAGE, &live_icon, this);
+			App->gui->AddElementImage(win_width/2, 100, IMAGE, &rect_clock, this);
 
 			Coins = App->gui->AddElementText(120, 65, TEXT, 1, 255, 255, 0, this, coins, true, true);
 			Score = App->gui->AddElementText(340, 65, TEXT, 1, 255, 255, 0, this, score_string, true, true);
 			Lives = App->gui->AddElementText(1350, 80, TEXT, 1, 0, 0, 0, this, lives, true, true);
-			Clock = App->gui->AddElementText(1000, 80, TEXT, 3, 0, 0, 0, this, time, true, true);
+			Clock = App->gui->AddElementText(750, 70, TEXT, 3, 0, 0, 0, this, time, true, true);
 
 			rect_button_exit = { 2556,1407,183,191 };
 			exit_button = App->gui->AddElementButton(150, 250, BUTTON, &rect_button_exit, this, nullptr, false);
@@ -123,16 +140,8 @@ bool j1Scene::Update(float dt)
 {
 	BROFILER_CATEGORY("Update_Scene1 ", Profiler::Color::MediumOrchid)
 
-	//Camera Movement--------------------------------------
-	int map_height = App->map->data.height * App->map->data.tile_height;
-	int map_width = App->map->data.width * App->map->data.tile_width;
-	int win_height = App->entities->player->win_height;
-	int win_width = App->entities->player->win_width;
-	int win_position_y = App->render->camera.y*-1;
-	int limit_y = map_height - win_height;
-	int limit_x = map_width - win_width / 2;
-	
-		
+ 	win_position_y = App->render->camera.y*-1;
+
 	if(App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame();
 

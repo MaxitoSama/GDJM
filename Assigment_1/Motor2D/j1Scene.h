@@ -78,6 +78,7 @@ private:
 	UIElements* pause_window = nullptr;
 	UIElements* back_menu_button = nullptr;
 	UIElements* exit_button = nullptr;
+	UIElements* clockframe = nullptr;
 	UIElements* Clock = nullptr;
 
 	SDL_Rect button_play;
@@ -86,6 +87,15 @@ private:
 	SDL_Rect display_coins;
 	SDL_Rect rect_button_back;
 	SDL_Rect rect_button_exit;
+	SDL_Rect rect_clock;
+
+	int map_height;
+	int map_width;
+	int win_height ;
+	int win_width;
+	int win_position_y;
+	int limit_y;
+	int limit_x;
 };
 
 #endif // __j1SCENE_H__
