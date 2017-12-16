@@ -5,6 +5,7 @@
 #include "j1Fonts.h"
 #include "j1Gui.h"
 #include "UIButton.h"
+#include "j1Window.h"
 
 
 UIButton::UIButton(int x, int y, UIElementType type, SDL_Rect* RecTex, const char* text, j1Module* modul, bool show) :UIElements(x, y, type, modul)
@@ -21,7 +22,13 @@ UIButton::UIButton(int x, int y, UIElementType type, SDL_Rect* RecTex, const cha
 	RectTexture = RecTex;
 	ElementTexture = App->gui->GetAtlas();
 
-	scale = 0.7f;
+
+	RectTexture->h;
+	while (RectTexture->h*scale <= App->win->screen_surface->h*0.135)
+	{
+		scale += 0.01f;
+	}
+	//scale = 0.7f; 
 	
 	collider_size_x = RectTexture->w;
 	collider_size_y = RectTexture->h;

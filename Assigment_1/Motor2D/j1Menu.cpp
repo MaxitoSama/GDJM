@@ -53,15 +53,20 @@ bool j1Menu::Start()
 {
 	App->audio->PlayMusic("audio/music/menu_music.ogg");
 	App->GamePaused = false;
+
 	sprites_ninja = App->tex->Load("assets/character/character.png");
 	ninja.Reset();
 	animation = &ninja;
+	while (331* scale_ninja <= App->win->screen_surface->h* 0.529)
+	{
+		scale_ninja += 0.01f;//scale_ninja = -1.6f
+	}
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
 	App->scene->active = false;
-	//Put fade to black once everything is done (ric feedback)
+	//Put fade to black once everything is done (ric feedback) 
 
 	//MAIN_MENU
 	rect_button_play_2 = { 400, 972, 183, 191 };
@@ -82,33 +87,21 @@ bool j1Menu::Start()
 
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
 
-	//MAIN_MENU
-	button_play = App->gui->AddElementButton(150, 150, BUTTON, &rect_button_play, this);
-	text_start = App->gui->AddElementText(250, 190, TEXT, 1,255,255,0, this, "Start Game");
-	button_continue = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_continue, this);
-	text_continue= App->gui->AddElementText(250, 340, TEXT, 1, 255, 255, 0, this, "Continue");
-	button_options = App->gui->AddElementButton(150, 450, BUTTON, &rect_button_options, this);
-	text_option = App->gui->AddElementText(250, 490, TEXT, 1, 255, 255, 0, this, "Option");
-	button_exit = App->gui->AddElementButton(150, 750, BUTTON, &rect_button_exit, this);
-	text_exit = App->gui->AddElementText(250, 640, TEXT,1, 255, 255, 0, this, "Credits");
-
-	//CREDITS
-	button_credits = App->gui->AddElementButton(150, 600, BUTTON,&rect_button_credits, this);
-	text_credits = App->gui->AddElementText(250, 790, TEXT, 1, 255, 255, 0, this, "Exit");
-	button_back = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this,nullptr,false);
-	button_back_credits = App->gui->AddElementButton(1300, 750, BUTTON, &rect_button_back, this, nullptr, false);
-
-	//OPTIONS_MENU
-	button_sound = App->gui->AddElementButton(150, 150, BUTTON, &rect_button_sound, this,nullptr,false);
-	text_sound = App->gui->AddElementText(250, 190, TEXT, 1, 255, 255, 0, this, "Volume", false, false);
-	button_music = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_music, this, nullptr,false);
-	slider_horizontal_sound = App->gui->AddElementSlider(800, 220, BUTTON, &rect_slider_horizontal, &rect_button_horizontal, this, slider_button_horizontal);
-	slider_horizontal_music = App->gui->AddElementSlider(800, 360, BUTTON, &rect_slider_horizontal, &rect_button_horizontal, this, slider_button_horizontal);
+	//MAIN_MENU 768
+	button_play = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.25*App->win->screen_surface->h, BUTTON, &rect_button_play, this);
+	text_start = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.30*App->win->screen_surface->h, TEXT, 1,255,255,0, this, "Start Game");
+	button_continue = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.40*App->win->screen_surface->h, BUTTON, &rect_button_continue, this);
+	text_continue= App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.45*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Continue");
+	button_options = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.55*App->win->screen_surface->h, BUTTON, &rect_button_options, this);
+	text_option = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.60*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Options");
+	button_credits = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.70*App->win->screen_surface->h, BUTTON, &rect_button_credits, this);
+	text_exit = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.75*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Credits");
+	button_exit = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.85*App->win->screen_surface->h, BUTTON, &rect_button_exit, this);
+	text_credits = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.90*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Exit");
+	
 
 	//use xml to insert the licence once everything is done (ric feedback)
 	{
-		text_music = App->gui->AddElementText(250, 340, TEXT, 1, 255, 255, 0, this, "Music", false, false);
-
 		License_1 = App->gui->AddElementText(60, 180, TEXT, 2, 0, 0, 0, this, "MIT License", false, false);
 		License_2 = App->gui->AddElementText(60, 210, TEXT, 2, 0, 0, 0, this, "Copyright (c) 2017 Marc Garcia, Josep Pi", false, false);
 		License_3 = App->gui->AddElementText(60, 250 + 5, TEXT, 2, 0, 0, 0, this, "Permission is hereby granted, free of charge, to any person obtaining a copy", false, false);
@@ -147,8 +140,24 @@ bool j1Menu::Start()
 		License_text.add(License_16);
 		License_text.add(License_17);
 
-		License_window = App->gui->AddElementWindow(300, 50, WINDOWS, this, &License_text, { 1055,160,930,742 }, false);
+		License_window = App->gui->AddElementWindow((App->win->screen_surface->w - 930) / 2, (App->win->screen_surface->h - 742) / 2, WINDOWS, this, &License_text, { 1055,160,930,742 }, false);
 	}
+
+	//CREDITS
+	button_back_credits = App->gui->AddElementButton(App->win->screen_surface->w- rect_button_back.w, 1*App->win->screen_surface->h - rect_button_back.h, BUTTON, &rect_button_back, this, nullptr, false);
+
+	//OPTIONS_MENU
+	button_sound = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.15*App->win->screen_surface->h, BUTTON, &rect_button_sound, this,nullptr,false);
+	text_sound = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.19*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Volume", false, false);
+	slider_horizontal_sound = App->gui->AddElementSlider(0.7*App->win->screen_surface->w, 0.21*App->win->screen_surface->h, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 1);
+
+	button_music = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.30*App->win->screen_surface->h, BUTTON, &rect_button_music, this, nullptr,false);
+	text_music = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.34*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Music", false, false);
+	slider_horizontal_music = App->gui->AddElementSlider(0.7*App->win->screen_surface->w, 0.36*App->win->screen_surface->h, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 2);
+	
+
+	button_back = App->gui->AddElementButton(App->win->screen_surface->w- rect_button_back.w, 1*App->win->screen_surface->h - rect_button_back.h, BUTTON, &rect_button_back, this, nullptr, false);
+
 
 	
 	return true;
@@ -172,7 +181,7 @@ bool j1Menu::PostUpdate()
 			exit=false;
 	if (active && button_play->show)
 	{
-		App->render->Blit(sprites_ninja, 870, 340, &(animation->GetCurrentFrame(dt)), -1.6f);
+		App->render->Blit(sprites_ninja, 0.55*App->win->screen_surface->w, 0.339*App->win->screen_surface->h, &(animation->GetCurrentFrame(dt)), -scale_ninja);//-1.6f
 	}
 
 	return exit;
@@ -215,6 +224,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			if (element == slider_horizontal_sound && element->show)
 			{
 				element->action = true;
+				
 			}
 			if (element == slider_horizontal_music && element->show)
 			{
@@ -268,6 +278,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			if (element == slider_horizontal_sound && element->show)
 			{
 				element->action = false;
+				
 			}
 			if (element == slider_horizontal_music && element->show)
 			{

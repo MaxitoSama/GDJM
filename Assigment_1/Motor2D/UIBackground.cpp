@@ -16,7 +16,7 @@ UIBackground::~UIBackground()
 void UIBackground::Draw()
 {
 	//Adapts the background to the screen
-	h_background = 907;
+	h_background = 907;//size of the background
 	while (h_background*scale <= App->win->screen_surface->h)
 	{
 		scale += 0.01f;
