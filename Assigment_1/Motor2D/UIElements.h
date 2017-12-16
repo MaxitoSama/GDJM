@@ -43,6 +43,8 @@ public:
 	bool			debug = false;
 	bool			show = false;
 	bool			isWindowElement = false;
+	bool			tab = false;
+	bool			tabed = false;
 
 	SDL_Texture*	ElementTexture = nullptr;
 

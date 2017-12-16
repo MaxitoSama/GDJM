@@ -374,7 +374,6 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 			pause_window->show = false;
 			App->GamePaused = false;
 		}
-		
 		break;
 
 	default:
