@@ -104,13 +104,15 @@ bool j1Scene::Start()
 			rect_clock = { 853,2984,215,76 };
 			
 			App->gui->AddElementImage(200, 100, IMAGE, &display_coins, this);
-			App->gui->AddElementImage(400, 100, IMAGE, &display_score, this);
-			App->gui->AddElementImage(1317, 100, IMAGE, &live_icon, this);
-			App->gui->AddElementImage(win_width/2, 100, IMAGE, &rect_clock, this);
-
 			Coins = App->gui->AddElementText(120, 65, TEXT, 1, 255, 255, 0, this, coins, true, true);
+
+			App->gui->AddElementImage(400, 100, IMAGE, &display_score, this);
 			Score = App->gui->AddElementText(340, 65, TEXT, 1, 255, 255, 0, this, score_string, true, true);
+
+			App->gui->AddElementImage(1317, 100, IMAGE, &live_icon, this);
 			Lives = App->gui->AddElementText(1350, 80, TEXT, 1, 0, 0, 0, this, lives, true, true);
+
+			App->gui->AddElementImage(App->win->screen_surface->w/2, 100, IMAGE, &rect_clock, this);
 			Clock = App->gui->AddElementText(750, 70, TEXT, 3, 0, 0, 0, this, time, true, true);
 
 			rect_button_exit = { 2556,1407,183,191 };
