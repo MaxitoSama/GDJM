@@ -69,12 +69,29 @@ bool j1Audio::Update(float dt)
 	bool ret = true;
 
 	Mix_VolumeMusic(music_volume);
+	Mix_Volume(-1,fx_volume);
+
 
 	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN && App->audio->music_volume <= 128)
-		App->audio->music_volume += 10;
+	{
+		music_volume += 8;
+		fx_volume += 8;
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_KP_MINUS) == KEY_DOWN && App->audio->music_volume >= 0)
-		App->audio->music_volume -= 10;
+	{
+		music_volume -= 8;
+		fx_volume -= 8;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN && App->audio->fx_volume <= 128)
+	{
+		fx_volume += 8;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_KP_MINUS) == KEY_DOWN && App->audio->fx_volume >= 0)
+	{
+		fx_volume -= 8;
+	}
 
 	return ret;
 }
@@ -204,6 +221,7 @@ bool j1Audio::Save(pugi::xml_node& node)const
 	bool ret = true;
 
 	node.append_child("music_volume").append_attribute("value").set_value(music_volume);
+	node.append_child("fx_volume").append_attribute("value").set_value(fx_volume);
 	LOG("Saving music");
 
 	return ret;
@@ -215,6 +233,7 @@ bool  j1Audio::Load(const pugi::xml_node& node)
 	bool ret = true;
 
 	music_volume = node.child("music_volume").attribute("value").as_int();
+	fx_volume = node.child("fx_volume").attribute("value").as_int();
 	LOG("Loading music");
 
 	return ret;

@@ -20,8 +20,8 @@
   </window>
 
   <audio>
-    <music_volume value="128"/>
-    <fx_volume value="100"/>
+    <music_volume value="64"/>
+    <fx_volume value="128"/>
   </audio>
 
   <gui>
