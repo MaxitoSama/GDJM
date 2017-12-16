@@ -103,28 +103,28 @@ bool j1Scene::Start()
 			live_icon = { 683,2985,83,79 };
 			rect_clock = { 853,2984,215,76 };
 			
-			App->gui->AddElementImage(200, 100, IMAGE, &display_coins, this);
-			Coins = App->gui->AddElementText(120, 65, TEXT, 1, 255, 255, 0, this, coins, true, true);
+			App->gui->AddElementImage(0.13*win_width, 0.1*win_height, IMAGE, &display_coins, this);
+			Coins = App->gui->AddElementText(0.08*win_width, 0.065*win_height, TEXT, 1, 255, 255, 0, this, coins, true, true);
 
-			App->gui->AddElementImage(400, 100, IMAGE, &display_score, this);
-			Score = App->gui->AddElementText(340, 65, TEXT, 1, 255, 255, 0, this, score_string, true, true);
+			App->gui->AddElementImage(0.27*win_width, 0.1*win_height, IMAGE, &display_score, this);
+			Score = App->gui->AddElementText(0.23*win_width, 0.065*win_height, TEXT, 1, 255, 255, 0, this, score_string, true, true);
 
-			App->gui->AddElementImage(1317, 100, IMAGE, &live_icon, this);
-			Lives = App->gui->AddElementText(1350, 80, TEXT, 1, 0, 0, 0, this, lives, true, true);
+			App->gui->AddElementImage(0.88*win_width, 0.1*win_height, IMAGE, &live_icon, this);
+			Lives = App->gui->AddElementText(0.9*win_width, 0.08*win_height, TEXT, 1, 0, 0, 0, this, lives, true, true);
 
-			App->gui->AddElementImage(App->win->screen_surface->w/2, 100, IMAGE, &rect_clock, this);
-			Clock = App->gui->AddElementText(750, 70, TEXT, 3, 0, 0, 0, this, time, true, true);
+			App->gui->AddElementImage(win_width*0.5, 0.1*win_height, IMAGE, &rect_clock, this);
+			Clock = App->gui->AddElementText(win_width*0.5, 0.07*win_height, TEXT, 3, 0, 0, 0, this, time, true, true);
 
 			rect_button_exit = { 2556,1407,183,191 };
-			exit_button = App->gui->AddElementButton(150,380, BUTTON, &rect_button_exit, this, nullptr, false);
-			exit_text = App->gui->AddElementText(250, 420, TEXT, 1, 255, 255, 0, this, "Exit", false);
+			exit_button = App->gui->AddElementButton(0.1*win_width,0.38*win_height, BUTTON, &rect_button_exit, this, nullptr, false);
+			exit_text = App->gui->AddElementText(0.17*win_width, 0.42*win_height, TEXT, 1, 255, 255, 0, this, "Exit", false);
 			
 			rect_button_back = { 3094,101,179,182 };
-			back_menu_button = App->gui->AddElementButton(150, 230, BUTTON, &rect_button_back, this, nullptr, false);
-			back_menu_text= App->gui->AddElementText(250, 270, TEXT, 1, 255, 255, 0, this, "Menu", false);
+			back_menu_button = App->gui->AddElementButton(0.1*win_width, 0.23*win_height, BUTTON, &rect_button_back, this, nullptr, false);
+			back_menu_text= App->gui->AddElementText(0.17*win_width, 0.27*win_height, TEXT, 1, 255, 255, 0, this, "Menu", false);
 
 			rect_exit_pause = { 3093,537,178,181 };
-			exit_pause = App->gui->AddElementButton(640, 400, BUTTON, &rect_exit_pause, this, nullptr, false);
+			exit_pause = App->gui->AddElementButton(0.43*win_width, 0.4*win_height, BUTTON, &rect_exit_pause, this, nullptr, false);
 
 			pause_buttons.add(exit_button);
 			pause_buttons.add(back_menu_button);
@@ -132,7 +132,7 @@ bool j1Scene::Start()
 			pause_buttons.add(exit_text);
 			pause_buttons.add(exit_pause);
 
-			pause_window = App->gui->AddElementWindow(300, 200, WINDOWS, this, &pause_buttons, { 999,2023,768,623 }, false);
+			pause_window = App->gui->AddElementWindow(0.25*win_width, 0.2*win_height, WINDOWS, this, &pause_buttons, { 999,2023,768,623 }, false);
 		}
 		App->GamePaused = false;
 	}
