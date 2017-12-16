@@ -45,13 +45,23 @@ void UIButton::Draw()
 		rect_y = position.y - App->render->camera.y;
 
 		Elementrect = { rect_x,rect_y,(int)(collider_size_x*scale),(int)(collider_size_y*scale)};
-		App->render->Blit(ElementTexture, rect_x, rect_y,RectTexture, scale);
-
+		
+		if (!action)
+		{
+			App->render->Blit(ElementTexture, rect_x, rect_y,RectTexture, scale);
+		}
+		else
+		{
+			SDL_Rect aux = { RectTexture->x + 204,RectTexture->y,RectTexture->w,RectTexture->h };
+			App->render->Blit(ElementTexture, rect_x, rect_y, &aux, scale);
+		}
+		
 		if (buttontext != nullptr)
 		{
 			App->render->Blit(ButtonText, position.x - App->render->camera.x - sizeTx / 2, position.y - App->render->camera.y + sizeTy / 2);
 		}
 
+		
 		if (debug == true)
 		{
 			App->render->DrawQuad(Elementrect, 255, 0, 255, 80);
@@ -66,9 +76,10 @@ void UIButton::Action()
 		light = true;
 		RectTexture->x = RectTexture->x + 204;
 	}
-	else
+	else if(light)
 	{
 		light = false;
+		action = false;
 		RectTexture->x = RectTexture->x - 204;
 	}
 }

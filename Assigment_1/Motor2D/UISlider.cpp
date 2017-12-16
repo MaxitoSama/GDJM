@@ -52,7 +52,6 @@ void UISlider::Draw()
 			App->render->DrawQuad(Elementrect, 255, 0, 255, 80);
 		}
 		Action();
-		
 	}
 
 }
@@ -61,15 +60,15 @@ void UISlider::Action()
 {
 	if (action)
 	{
-
 		App->input->GetMousePosition(mouse_position.x, mouse_position.y);
 		int slider_end = position.x + slider->w;
 		int slider_begining = position.x;
-		if (mouse_position.x < slider_end && mouse_position.x > position.x - slider->w/2)
+		if (mouse_position.x < slider_end)
 		{
-			button_point.x = mouse_position.x - (int)(collider_size_x*scale / 2);
+			if (mouse_position.x > position.x - slider->w / 2)
+			{
+				button_point.x = mouse_position.x - (int)(collider_size_x*scale / 2);
+			}
 		}
-		
-
 	}
 }
