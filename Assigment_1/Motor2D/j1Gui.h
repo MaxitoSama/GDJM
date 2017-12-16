@@ -51,9 +51,7 @@ public:
 
 	bool GUIEvent(UIEvents eventType, UIElements* element) { return true; }
 
-	// TODO 2: Create the factory methods
 	// Gui creation functions
-
 	void AddBackground(int x, int y, UIElementType type, j1Module* modul);
 	UIElements* AddElementText(int x, int y, UIElementType type, uint font, int _r, int _g, int _b, j1Module* modul, const char* text = nullptr,bool actualize=false, bool show=true);
 	UIElements* AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text = nullptr);

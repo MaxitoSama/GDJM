@@ -147,7 +147,7 @@ bool j1Menu::Start()
 		License_text.add(License_16);
 		License_text.add(License_17);
 
-		License_window = App->gui->AddElementWindow(300, 200, WINDOWS, this, &License_text, { 1055,160,930,742 }, false);
+		License_window = App->gui->AddElementWindow(300, 50, WINDOWS, this, &License_text, { 1055,160,930,742 }, false);
 	}
 
 	
