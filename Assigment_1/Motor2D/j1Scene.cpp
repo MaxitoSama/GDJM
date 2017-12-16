@@ -142,8 +142,10 @@ bool j1Scene::Update(float dt)
 
  	win_position_y = App->render->camera.y*-1;
 
-	if(App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	{
 		App->SaveGame();
+	}
 
 	if(App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame();

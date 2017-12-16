@@ -21,8 +21,8 @@ public:
 	void OptionsButton();
 	void CreditsButton();
 	bool GUIEvent(UIEvents eventType, UIElements* element);
+	bool checkLoad();
 	
-
 private:
 
 	SDL_Texture* sprites_ninja = nullptr;
@@ -100,7 +100,6 @@ private:
 	float dt;
 
 	bool exit = true;
-	
 
 };
 

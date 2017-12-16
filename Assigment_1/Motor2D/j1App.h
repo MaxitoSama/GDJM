@@ -108,6 +108,9 @@ public:
 
 	bool				Cap_on = false;
 	bool				GamePaused = false;
+
+	p2SString			load_game;
+	mutable p2SString	save_game;
 	
 
 private:
@@ -123,8 +126,6 @@ private:
 
 	mutable bool		want_to_save;
 	bool				want_to_load;
-	p2SString			load_game;
-	mutable p2SString	save_game;
 
 	j1PerfTimer			ptimer;
 	uint32				frame_count=0;

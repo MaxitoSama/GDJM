@@ -81,6 +81,7 @@ bool j1Transition::PostUpdate()
 		{
 			transp += 6;
 		}
+
 		SDL_RenderFillRect(App->render->renderer, &screen);
 	}
 

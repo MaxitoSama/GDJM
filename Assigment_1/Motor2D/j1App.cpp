@@ -431,7 +431,9 @@ bool j1App::LoadGameNow()
 			LOG("...loading process interrupted with error on module %s", (item != NULL) ? item->data->name.GetString() : "unknown");
 	}
 	else
+	{
 		LOG("Could not parse game state xml file %s. pugi error: %s", load_game.GetString(), result.description());
+	}
 
 	want_to_load = false;
 	return ret;

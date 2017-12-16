@@ -235,8 +235,11 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			}
 			if (element == button_continue && element->show)
 			{
-				continue_game = true;
-				App->transit->Transition(this, App->scene);
+				if (checkLoad())
+				{
+					continue_game = true;
+					App->transit->Transition(this, App->scene);
+				}
 			}
 			if (element == button_options && element->show)
 			{
@@ -399,4 +402,25 @@ void j1Menu::CreditsButton()
 		License_window->show = false;
 
 	}
+}
+
+bool j1Menu::checkLoad()
+{
+	bool ret = false;
+
+	pugi::xml_document data;
+	pugi::xml_node root;
+
+	pugi::xml_parse_result result = data.load_file(App->load_game.GetString());
+
+	if (result != NULL)
+	{
+		ret = true;
+	}
+	else
+	{
+		ret= false;
+	}
+	
+	return ret;
 }
