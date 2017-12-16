@@ -64,6 +64,7 @@ bool j1Gui::PostUpdate()
 {
 	p2List_item<UIElements*>* element = elements.start;
 	p2List_item<UIElements*>* element2 = elements.start;
+	
 
 	while (element != nullptr)
 	{
@@ -117,6 +118,63 @@ bool j1Gui::PostUpdate()
 
 			element2 = element2->next;
 		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
+	{
+		tabing = true;
+		tab_num++;
+
+		if (tab_num == elements.count())
+		{
+			tab_num = 0;
+		}
+
+		if (elements[tab_num]->type == BUTTON)
+		{
+			if (last_tab != -1)
+			{
+				elements[last_tab]->callback->GUIEvent(MOUSE_LEAVE, elements[last_tab]);
+			}
+			
+			last_tab = tab_num;
+			
+			elements[tab_num]->callback->GUIEvent(MOUSE_ENTER, elements[tab_num]);
+		}
+		else
+		{
+			while (elements[tab_num]->type != BUTTON || elements[tab_num]->show==false)
+			{
+				tab_num++;
+				
+				if (tab_num == elements.count())
+				{
+					tab_num = 0;
+					break;
+				}
+			}
+			
+			if (last_tab != -1)
+			{
+				elements[last_tab]->callback->GUIEvent(MOUSE_LEAVE, elements[last_tab]);
+			}
+
+			last_tab = tab_num;
+
+			elements[tab_num]->callback->GUIEvent(MOUSE_ENTER, elements[tab_num]);
+		}		
+
+		LOG("TAB pressed");
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+	{
+		elements[tab_num]->callback->GUIEvent(MOUSE_CLICK, elements[tab_num]);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP)
+	{
+		elements[tab_num]->callback->GUIEvent(MOUSE_STOP_CLICK, elements[tab_num]);
+		tab_num = 0;
 	}
 
 	if (startgame)

@@ -83,7 +83,16 @@ public:
 private:
 
 	SDL_Texture* atlas = nullptr;
+	
 	p2SString atlas_file_name;
+	
+	p2List_item<UIElements*>* tab_element=nullptr;
+	p2List_item<UIElements*>* last_tab_element = nullptr;
+
+	uint tab_num=-1;
+	uint last_tab = -1;
+
+	bool tabing = false;
 };
 
 #endif // __j1GUI_H__

@@ -41,6 +41,12 @@ bool j1Transition::PostUpdate()
 		{
 		case fade_step::fade_to_black:
 		{
+			if (transp <= 249)
+			{
+				transp += 6;
+
+			}
+
 			if (clock.ReadSec() >= 1.5 && free_gui)
 			{
 				free_gui = false;
@@ -70,18 +76,19 @@ bool j1Transition::PostUpdate()
 
 		case fade_step::fade_from_black:
 		{
-			current_step = fade_step::none;
+			if (transp >= 6)
+			{
+				transp -= 6;
+			}
+			else 
+			{
+				current_step = fade_step::none;
+			}
 		}
 		break;
 		}
 
 		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 225, transp);
-		
-		if (transp <= 249)
-		{
-			transp += 6;
-		}
-
 		SDL_RenderFillRect(App->render->renderer, &screen);
 	}
 
