@@ -53,9 +53,14 @@ bool j1Menu::Start()
 {
 	App->audio->PlayMusic("audio/music/menu_music.ogg");
 	App->GamePaused = false;
+
 	sprites_ninja = App->tex->Load("assets/character/character.png");
 	ninja.Reset();
 	animation = &ninja;
+	while (331* scale_ninja <= App->win->screen_surface->h* 0.529)
+	{
+		scale_ninja += 0.01f;//scale_ninja = -1.6f
+	}
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -176,7 +181,7 @@ bool j1Menu::PostUpdate()
 			exit=false;
 	if (active && button_play->show)
 	{
-		App->render->Blit(sprites_ninja, 870, 340, &(animation->GetCurrentFrame(dt)), -1.6f);
+		App->render->Blit(sprites_ninja, 0.55*App->win->screen_surface->w, 0.339*App->win->screen_surface->h, &(animation->GetCurrentFrame(dt)), -scale_ninja);//-1.6f
 	}
 
 	return exit;

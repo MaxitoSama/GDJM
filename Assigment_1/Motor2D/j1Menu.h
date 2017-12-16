@@ -95,6 +95,7 @@ private:
 
 	Animation* animation = nullptr;
 	Animation ninja;
+	float scale_ninja = 0.0f;
 
 	bool continue_game = false;
 
