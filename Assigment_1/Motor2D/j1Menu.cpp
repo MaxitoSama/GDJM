@@ -97,8 +97,6 @@ bool j1Menu::Start()
 
 	//use xml to insert the licence once everything is done (ric feedback)
 	{
-		text_music = App->gui->AddElementText(250, 340, TEXT, 1, 255, 255, 0, this, "Music", false, false);
-
 		License_1 = App->gui->AddElementText(60, 180, TEXT, 2, 0, 0, 0, this, "MIT License", false, false);
 		License_2 = App->gui->AddElementText(60, 210, TEXT, 2, 0, 0, 0, this, "Copyright (c) 2017 Marc Garcia, Josep Pi", false, false);
 		License_3 = App->gui->AddElementText(60, 250 + 5, TEXT, 2, 0, 0, 0, this, "Permission is hereby granted, free of charge, to any person obtaining a copy", false, false);
@@ -144,11 +142,15 @@ bool j1Menu::Start()
 	button_back_credits = App->gui->AddElementButton(App->win->screen_surface->w- rect_button_back.w, 1*App->win->screen_surface->h - rect_button_back.h, BUTTON, &rect_button_back, this, nullptr, false);
 
 	//OPTIONS_MENU
-	button_sound = App->gui->AddElementButton(150, 150, BUTTON, &rect_button_sound, this,nullptr,false);
-	text_sound = App->gui->AddElementText(250, 190, TEXT, 1, 255, 255, 0, this, "Volume", false, false);
-	button_music = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_music, this, nullptr,false);
-	slider_horizontal_sound = App->gui->AddElementSlider(800, 220, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 1);
-	slider_horizontal_music = App->gui->AddElementSlider(800, 360, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 2);
+	button_sound = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.15*App->win->screen_surface->h, BUTTON, &rect_button_sound, this,nullptr,false);
+	text_sound = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.19*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Volume", false, false);
+	slider_horizontal_sound = App->gui->AddElementSlider(0.53*App->win->screen_surface->w, 0.21*App->win->screen_surface->h, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 1);
+
+	button_music = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.30*App->win->screen_surface->h, BUTTON, &rect_button_music, this, nullptr,false);
+	text_music = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.34*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Music", false, false);
+	slider_horizontal_music = App->gui->AddElementSlider(0.53*App->win->screen_surface->w, 0.36*App->win->screen_surface->h, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 2);
+	
+
 	button_back = App->gui->AddElementButton(App->win->screen_surface->w- rect_button_back.w, 1*App->win->screen_surface->h - rect_button_back.h, BUTTON, &rect_button_back, this, nullptr, false);
 
 

@@ -44,10 +44,10 @@ void UISlider::Draw()
 		Elementrect = { rect_x-45,rect_y-40,(int)(collider_size_x*scale),(int)(collider_size_y*scale) };
 
 		//slider
-		App->render->Blit(App->gui->window, position.x - App->render->camera.x - slider->w / 2, position.y - App->render->camera.y - slider->h / 2, slider, 1.5f);
+		App->render->Blit(App->gui->window, position.x - App->render->camera.x - slider->w / 2, position.y - App->render->camera.y - slider->h / 2, slider, scale*3);
 		
 		//button
-		App->render->Blit(App->gui->GetAtlas(), button_point.x, button_point.y, button, 0.5f);
+		App->render->Blit(App->gui->GetAtlas(), button_point.x, button_point.y, button, scale);
 
 		if (debug == true)
 		{
@@ -73,13 +73,13 @@ void UISlider::Action()
 				if (id == 1) //sound
 				{
 					int volume = 128;
-					volume = (button_point.x - 455) * 150 / 916;
+					volume = (button_point.x - slider_begining) * 150 / (slider_end- slider_begining);
 					App->audio->fx_volume = volume;
 				}
 				if (id == 2) //music
 				{
 					int volume = 128;
-					volume = (button_point.x - 455) * 150 / 916;
+					volume = (button_point.x - slider_begining) * 150 / (slider_end - slider_begining);
 					App->audio->music_volume = volume;
 				}
 			}
