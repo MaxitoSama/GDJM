@@ -4,14 +4,16 @@
 #include "j1Window.h"
 #include "UISlider.h"
 #include "j1Input.h"
+#include "j1Audio.h"
 
 
-UISlider::UISlider(int x, int y, UIElementType type, SDL_Rect* slider, SDL_Rect* button, j1Module* modul, UIElements* element_button, bool show) :UIElements(x, y, type, modul)
+UISlider::UISlider(int x, int y, UIElementType type, SDL_Rect* slider, SDL_Rect* button, j1Module* modul, int id, bool show) :UIElements(x, y, type, modul)
 {
 	this->show = show;
 	this->slider = slider;
 	this->button = button;
 	Elementrect = *button;
+	this->id = id;
 
 	scale = 0.5f;
 	collider_size_x = button->w;
@@ -19,7 +21,7 @@ UISlider::UISlider(int x, int y, UIElementType type, SDL_Rect* slider, SDL_Rect*
 
 	button_point.x = position.x - App->render->camera.x - button->w / 2;
 	button_point.y = position.y - App->render->camera.y + 55 - button->h / 2;
-
+	
 
 
 }
@@ -62,12 +64,24 @@ void UISlider::Action()
 	{
 		App->input->GetMousePosition(mouse_position.x, mouse_position.y);
 		int slider_end = position.x + slider->w;
-		int slider_begining = position.x;
+		int slider_begining = position.x - slider->w * 0.50;
 		if (mouse_position.x < slider_end)
 		{
-			if (mouse_position.x > position.x - slider->w / 2)
+			if (mouse_position.x > slider_begining)
 			{
 				button_point.x = mouse_position.x - (int)(collider_size_x*scale / 2);
+				if (id == 1) //sound
+				{
+					int volume = 128;
+					volume = (button_point.x - 455) * 150 / 916;
+					App->audio->fx_volume = volume;
+				}
+				if (id == 2) //music
+				{
+					int volume = 128;
+					volume = (button_point.x - 455) * 150 / 916;
+					App->audio->music_volume = volume;
+				}
 			}
 		}
 	}

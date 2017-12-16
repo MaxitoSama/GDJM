@@ -60,7 +60,8 @@ private:
 	p2List<UIElements*> slider_horizontal_list;
 	UIElements* slider_horizontal_sound = nullptr;
 	UIElements* slider_horizontal_music = nullptr;
-	UIElements* slider_button_horizontal = nullptr;
+	UIElements* slider_button_music = nullptr;
+	UIElements* slider_button_sound = nullptr;
 	
 	UIElements* text_start = nullptr;
 	UIElements* text_continue = nullptr;

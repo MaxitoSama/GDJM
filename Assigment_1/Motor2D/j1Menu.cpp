@@ -102,8 +102,8 @@ bool j1Menu::Start()
 	button_sound = App->gui->AddElementButton(150, 150, BUTTON, &rect_button_sound, this,nullptr,false);
 	text_sound = App->gui->AddElementText(250, 190, TEXT, 1, 255, 255, 0, this, "Volume", false, false);
 	button_music = App->gui->AddElementButton(150, 300, BUTTON, &rect_button_music, this, nullptr,false);
-	slider_horizontal_sound = App->gui->AddElementSlider(800, 220, BUTTON, &rect_slider_horizontal, &rect_button_horizontal, this, slider_button_horizontal);
-	slider_horizontal_music = App->gui->AddElementSlider(800, 360, BUTTON, &rect_slider_horizontal, &rect_button_horizontal, this, slider_button_horizontal);
+	slider_horizontal_sound = App->gui->AddElementSlider(800, 220, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 1);
+	slider_horizontal_music = App->gui->AddElementSlider(800, 360, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 2);
 
 	//use xml to insert the licence once everything is done (ric feedback)
 	{
@@ -215,6 +215,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			if (element == slider_horizontal_sound && element->show)
 			{
 				element->action = true;
+				
 			}
 			if (element == slider_horizontal_music && element->show)
 			{
@@ -268,6 +269,7 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			if (element == slider_horizontal_sound && element->show)
 			{
 				element->action = false;
+				
 			}
 			if (element == slider_horizontal_music && element->show)
 			{
