@@ -15,13 +15,18 @@ UISlider::UISlider(int x, int y, UIElementType type, SDL_Rect* slider, SDL_Rect*
 	Elementrect = *button;
 	this->id = id;
 
-	scale = 0.5f;
+	button->h;
+	while (button->h*scale <= App->win->screen_surface->h*0.0952)
+	{
+		scale += 0.01f;//scale 0.5f
+	}
+
 	collider_size_x = button->w;
 	collider_size_y = button->h;
 
 	button_point.x = position.x - App->render->camera.x - button->w / 2;
 	button_point.y = position.y - App->render->camera.y + 55 - button->h / 2;
-	
+
 
 
 }
@@ -38,13 +43,16 @@ void UISlider::Draw()
 		int rect_x;
 		int rect_y;
 
+		slider_end = position.x + slider->w*0.5;
+		slider_begining = position.x - slider->w * 0.50;
+
 		rect_x = button_point.x+ (int)(collider_size_x*scale / 2);
 		rect_y = button_point.y+ (int)(collider_size_y*scale)/3;
 
 		Elementrect = { rect_x-45,rect_y-40,(int)(collider_size_x*scale),(int)(collider_size_y*scale) };
 
 		//slider
-		App->render->Blit(App->gui->window, position.x - App->render->camera.x - slider->w / 2, position.y - App->render->camera.y - slider->h / 2, slider, scale*3);
+		App->render->Blit(App->gui->window, position.x - App->render->camera.x - slider->w / 2, position.y - App->render->camera.y - slider->h / 2, slider, scale*2);
 		
 		//button
 		App->render->Blit(App->gui->GetAtlas(), button_point.x, button_point.y, button, scale);
@@ -63,8 +71,6 @@ void UISlider::Action()
 	if (action)
 	{
 		App->input->GetMousePosition(mouse_position.x, mouse_position.y);
-		int slider_end = position.x + slider->w;
-		int slider_begining = position.x - slider->w * 0.50;
 		if (mouse_position.x < slider_end)
 		{
 			if (mouse_position.x > slider_begining)

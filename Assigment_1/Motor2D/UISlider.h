@@ -22,13 +22,12 @@ public:
 	SDL_Rect* button;
 	SDL_Texture* texture;
 	int id;
+	int slider_end = 0;
+	int slider_begining = 0;
 
 
-	iPoint mouse_origin;
 	iPoint mouse_position;
 	iPoint button_point;
-	int mouse_button = 0;
-	bool mouse_button_state;
 };
 
 #endif //__UIIMAGE_H__

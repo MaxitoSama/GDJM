@@ -88,7 +88,7 @@ bool j1Menu::Start()
 	button_continue = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.40*App->win->screen_surface->h, BUTTON, &rect_button_continue, this);
 	text_continue= App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.45*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Continue");
 	button_options = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.55*App->win->screen_surface->h, BUTTON, &rect_button_options, this);
-	text_option = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.60*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Option");
+	text_option = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.60*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Options");
 	button_credits = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.70*App->win->screen_surface->h, BUTTON, &rect_button_credits, this);
 	text_exit = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.75*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Credits");
 	button_exit = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.85*App->win->screen_surface->h, BUTTON, &rect_button_exit, this);
@@ -144,11 +144,11 @@ bool j1Menu::Start()
 	//OPTIONS_MENU
 	button_sound = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.15*App->win->screen_surface->h, BUTTON, &rect_button_sound, this,nullptr,false);
 	text_sound = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.19*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Volume", false, false);
-	slider_horizontal_sound = App->gui->AddElementSlider(0.53*App->win->screen_surface->w, 0.21*App->win->screen_surface->h, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 1);
+	slider_horizontal_sound = App->gui->AddElementSlider(0.7*App->win->screen_surface->w, 0.21*App->win->screen_surface->h, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 1);
 
 	button_music = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.30*App->win->screen_surface->h, BUTTON, &rect_button_music, this, nullptr,false);
 	text_music = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.34*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Music", false, false);
-	slider_horizontal_music = App->gui->AddElementSlider(0.53*App->win->screen_surface->w, 0.36*App->win->screen_surface->h, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 2);
+	slider_horizontal_music = App->gui->AddElementSlider(0.7*App->win->screen_surface->w, 0.36*App->win->screen_surface->h, SLIDER, &rect_slider_horizontal, &rect_button_horizontal, this, 2);
 	
 
 	button_back = App->gui->AddElementButton(App->win->screen_surface->w- rect_button_back.w, 1*App->win->screen_surface->h - rect_button_back.h, BUTTON, &rect_button_back, this, nullptr, false);
