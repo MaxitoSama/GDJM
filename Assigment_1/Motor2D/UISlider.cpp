@@ -43,7 +43,7 @@ void UISlider::Draw()
 
 		//slider
 		App->render->Blit(App->gui->window, position.x - App->render->camera.x - slider->w / 2, position.y - App->render->camera.y - slider->h / 2, slider, 1.5f);
-
+		
 		//button
 		App->render->Blit(App->gui->GetAtlas(), button_point.x, button_point.y, button, 0.5f);
 
