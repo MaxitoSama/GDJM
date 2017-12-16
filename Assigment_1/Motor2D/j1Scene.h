@@ -77,7 +77,10 @@ private:
 	UIElements* button_back = nullptr;
 	UIElements* pause_window = nullptr;
 	UIElements* back_menu_button = nullptr;
+	UIElements* back_menu_text = nullptr;
 	UIElements* exit_button = nullptr;
+	UIElements* exit_text = nullptr;
+	UIElements* exit_pause = nullptr;
 	UIElements* clockframe = nullptr;
 	UIElements* Clock = nullptr;
 
@@ -88,6 +91,7 @@ private:
 	SDL_Rect rect_button_back;
 	SDL_Rect rect_button_exit;
 	SDL_Rect rect_clock;
+	SDL_Rect rect_exit_pause;
 
 	int map_height;
 	int map_width;

@@ -116,13 +116,23 @@ bool j1Scene::Start()
 			Clock = App->gui->AddElementText(750, 70, TEXT, 3, 0, 0, 0, this, time, true, true);
 
 			rect_button_exit = { 2556,1407,183,191 };
-			exit_button = App->gui->AddElementButton(150, 250, BUTTON, &rect_button_exit, this, nullptr, false);
+			exit_button = App->gui->AddElementButton(150,380, BUTTON, &rect_button_exit, this, nullptr, false);
+			exit_text = App->gui->AddElementText(250, 420, TEXT, 1, 255, 255, 0, this, "Exit", false);
+			
 			rect_button_back = { 3094,101,179,182 };
-			back_menu_button = App->gui->AddElementButton(150, 400, BUTTON, &rect_button_back, this, nullptr, false);
+			back_menu_button = App->gui->AddElementButton(150, 230, BUTTON, &rect_button_back, this, nullptr, false);
+			back_menu_text= App->gui->AddElementText(250, 270, TEXT, 1, 255, 255, 0, this, "Menu", false);
+
+			rect_exit_pause = { 3093,537,178,181 };
+			exit_pause = App->gui->AddElementButton(640, 400, BUTTON, &rect_exit_pause, this, nullptr, false);
+
 			pause_buttons.add(exit_button);
 			pause_buttons.add(back_menu_button);
+			pause_buttons.add(back_menu_text);
+			pause_buttons.add(exit_text);
+			pause_buttons.add(exit_pause);
 
-			pause_window = App->gui->AddElementWindow(300, 200, WINDOWS, this, &pause_buttons, { 1055,160,930,742 }, false);
+			pause_window = App->gui->AddElementWindow(300, 200, WINDOWS, this, &pause_buttons, { 999,2023,768,623 }, false);
 		}
 		App->GamePaused = false;
 	}
@@ -323,26 +333,32 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 	switch (eventType)
 	{
 	case MOUSE_ENTER:
-		if (element == exit_button && element->show)
+		if (element->type == BUTTON && element->show)
 		{
-
+			element->Action();
 		}
-
+		break;
 	case MOUSE_LEAVE:
-		if (element == exit_button && element->show)
+		if (element->type == BUTTON && element->show)
 		{
-
+			element->Action();
+			element->action = false;
 		}
 		break;
 
 	case MOUSE_CLICK:
-		if (element == exit_button && element->show)
+		if (element->type == BUTTON && element->show)
 		{
-
+			element->action = true;
 		}
 		break;
 
 	case MOUSE_STOP_CLICK:
+		if (element->type == BUTTON && element->show == true)
+		{
+			App->audio->PlayFx(3);
+			element->action = false;
+		}
 		if (element == exit_button && element->show)
 		{
 			exit = false;
@@ -352,6 +368,13 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 			App->gui->startgame = true;
 			App->transit->Transition(this, App->menu);
 		}
+
+		if (element == exit_pause && element->show)
+		{
+			pause_window->show = false;
+			App->GamePaused = false;
+		}
+		
 		break;
 
 	default:
