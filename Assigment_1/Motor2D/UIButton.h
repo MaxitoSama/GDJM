@@ -29,9 +29,6 @@ private:
 	SDL_Rect*		RectTexture;
 
 	bool light = false;
-
-
-
 };
 
 #endif //__BUTTONS_H__

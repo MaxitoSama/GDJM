@@ -225,13 +225,11 @@ bool j1Menu::GUIEvent(UIEvents eventType, UIElements* element)
 			}
 			if (element == button_play && element->show)
 			{
-				App->gui->startgame = true;
 				continue_game = false;
 				App->transit->Transition(this, App->scene);
 			}
 			if (element == button_continue && element->show)
 			{
-				App->gui->startgame = true;
 				continue_game = true;
 				App->transit->Transition(this, App->scene);
 			}

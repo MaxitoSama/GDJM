@@ -4,6 +4,7 @@
 #include "j1Entities.h"
 #include "j1Menu.h"
 #include "j1Scene.h"
+#include "j1Gui.h"
 #include "j1Transition.h"
 
 
@@ -26,7 +27,7 @@ bool j1Transition::Start()
 	return true;
 }
 
-bool j1Transition::Update(float dt)
+bool j1Transition::PostUpdate()
 {
 	bool ret=true;
 
@@ -40,7 +41,12 @@ bool j1Transition::Update(float dt)
 		{
 		case fade_step::fade_to_black:
 		{
-			if (clock.ReadSec() >= 3)
+			if (clock.ReadSec() >= 1.5 && free_gui)
+			{
+				free_gui = false;
+				App->gui->startgame = true;
+			}
+			if (clock.ReadSec() >= 2)
 			{
 				to_disable->active = false;
 
@@ -69,8 +75,12 @@ bool j1Transition::Update(float dt)
 		break;
 		}
 
-		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, transp);
-		transp+=2;
+		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 225, transp);
+		
+		if (transp <= 249)
+		{
+			transp += 6;
+		}
 		SDL_RenderFillRect(App->render->renderer, &screen);
 	}
 
@@ -85,6 +95,7 @@ bool j1Transition::Transition(j1Module* module_off, j1Module* module_on)
 	{
 		current_step = fade_step::fade_to_black;
 		transp = 0;
+		free_gui = true;
 		to_disable = module_off;
 		to_enable = module_on;
 		clock.Start();
