@@ -3,7 +3,7 @@
 ## Introduction
 This is a 2D Platformer game created with the only purpose of learning how to create a game as a team.
 
-## The Team<img src="https://drive.google.com/uc?id=1SUI-_vtJnh1_dBpWQIYwFUOo-o0mzvlI" width="225" align="left">
+## The Team<img src="https://drive.google.com/embed/uc?id=1SUI-_vtJnh1_dBpWQIYwFUOo-o0mzvlI" width="225" align="left">
 
 
 **Marc Garcia Uceda(left)**: He is responsible for the pathfinding, map drawing, entity system, the base structure for the GUI and the differential time of the game.
