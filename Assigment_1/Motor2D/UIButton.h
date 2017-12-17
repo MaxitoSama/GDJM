@@ -20,13 +20,13 @@ private:
 
 	const char* buttontext = nullptr;
 
-	SDL_Texture*	ButtonTex;
-	SDL_Texture*	ButtonText;
+	SDL_Texture*	ButtonTex=nullptr;
+	SDL_Texture*	ButtonText = nullptr;
 
 	uint sizeTx;
 	uint sizeTy;
 
-	SDL_Rect*		RectTexture;
+	SDL_Rect*		RectTexture = nullptr;
 
 	bool light = false;
 };

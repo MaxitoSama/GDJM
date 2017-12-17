@@ -17,8 +17,8 @@ public:
 
 public:
 
-	SDL_Rect* rectangle;
-	SDL_Texture* texture;
+	SDL_Rect*		rectangle = nullptr;
+	SDL_Texture*	texture = nullptr;
 
 };
 

@@ -36,8 +36,6 @@ public:
 
 	bool			actualizable = false;
 
-	
-
 };
 
 #endif //__UITENT_H__

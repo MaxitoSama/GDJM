@@ -15,7 +15,7 @@ public:
 
 private:
 
-	p2List<UIElements*>* windowelements;
+	p2List<UIElements*>* windowelements=NULL;
 	SDL_Rect window_rect;
 
 	iPoint mousestart;

@@ -11,7 +11,9 @@ public:
 	~UIBackground();
 
 	void Draw();
+
 public:
+
 	int h_background;
 	float scale = 0.1f;
 

@@ -10,7 +10,6 @@ class GuiImage;
 class GuiText;
 class GuiWindw;
 
-
 class j1Scene : public j1Module
 {
 public:

@@ -38,22 +38,7 @@ j1Menu::j1Menu()
 	ninja.loop = true;
 	ninja.speed = 30.0f;
 
-	//MAIN_MENU
-	rect_button_play_2 = { 400, 972, 183, 191 };
-	rect_button_play = { 196, 972, 183, 191 };
-	rect_button_options = { 3093, 318, 183, 191 };
-	rect_button_exit = { 2556,1407,183,191 };
-	rect_button_credits = { 1142,1191,183,191 };
-	rect_button_continue = { 197,2498,183,191 };
-
-	//OPTIONS_MENU
-	rect_button_back = { 3094, 101, 179, 182 };
-	rect_button_music = { 2148, 1844,183, 191 };
-	rect_button_sound = { 2148, 2062,183, 191 };
-	rect_slider_vertical = { 1534, 2977, 12, 602 };
-
-	rect_slider_horizontal = { 2981, 3626, 604, 14 };
-	rect_button_horizontal = { 3094, 2280, 183, 191 };
+	
 
 }
 
@@ -88,6 +73,23 @@ bool j1Menu::Start()
 
 
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
+	
+	//MAIN_MENU
+	rect_button_play_2 = { 400, 972, 183, 191 };
+	rect_button_play = { 196, 972, 183, 191 };
+	rect_button_options = { 3093, 318, 183, 191 };
+	rect_button_exit = { 2556,1407,183,191 };
+	rect_button_credits = { 1142,1191,183,191 };
+	rect_button_continue = { 197,2498,183,191 };
+
+	//OPTIONS_MENU
+	rect_button_back = { 3094, 101, 179, 182 };
+	rect_button_music = { 2148, 1844,183, 191 };
+	rect_button_sound = { 2148, 2062,183, 191 };
+	rect_slider_vertical = { 1534, 2977, 12, 602 };
+
+	rect_slider_horizontal = { 2981, 3626, 604, 14 };
+	rect_button_horizontal = { 3094, 2280, 183, 191 };
 
 	//MAIN_MENU 768
 	button_play = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.25*App->win->screen_surface->h, BUTTON, &rect_button_play, this);

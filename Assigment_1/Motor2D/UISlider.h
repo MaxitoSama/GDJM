@@ -18,9 +18,9 @@ public:
 
 public:
 
-	SDL_Rect* slider;
-	SDL_Rect* button;
-	SDL_Texture* texture;
+	SDL_Rect*		slider = nullptr;
+	SDL_Rect*		button = nullptr;
+	SDL_Texture*	texture = nullptr;
 	int id;
 	int slider_end = 0;
 	int slider_begining = 0;
