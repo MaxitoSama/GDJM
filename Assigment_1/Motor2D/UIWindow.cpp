@@ -39,8 +39,8 @@ void UIWindow::Draw()
 {
 	if (show)
 	{
-		int rect_x = position.x;
-		int rect_y = position.y;
+		int rect_x = position.x - App->render->camera.x;
+		int rect_y = position.y - App->render->camera.y;
 
 		Elementrect = { rect_x,rect_y,(int)collider_size_x*(int)scale,(int)collider_size_y*(int)scale };
 

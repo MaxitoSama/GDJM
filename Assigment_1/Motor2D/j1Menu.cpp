@@ -37,9 +37,6 @@ j1Menu::j1Menu()
 
 	ninja.loop = true;
 	ninja.speed = 30.0f;
-
-	
-
 }
 
 j1Menu::~j1Menu()

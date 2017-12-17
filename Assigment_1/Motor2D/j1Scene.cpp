@@ -101,7 +101,7 @@ bool j1Scene::Start()
 			live_icon = { 683,2985,83,79 };
 			rect_clock = { 853,2984,215,76 };
 
-			rect_button_exit = { 2556,1407,183,191 };
+			rect_button_exit = { 2149, 1409, 178, 182 };
 			rect_button_back = { 3094,101,179,182 };
 			rect_exit_pause = { 3093,537,178,181 };
 

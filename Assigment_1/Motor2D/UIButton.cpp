@@ -68,7 +68,6 @@ void UIButton::Draw()
 			App->render->Blit(ButtonText, position.x - App->render->camera.x - sizeTx / 2, position.y - App->render->camera.y + sizeTy / 2);
 		}
 
-		
 		if (debug == true)
 		{
 			App->render->DrawQuad(Elementrect, 255, 0, 255, 80);
