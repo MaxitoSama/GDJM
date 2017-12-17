@@ -85,7 +85,7 @@ bool j1Menu::Start()
 	rect_button_sound = { 2148, 2062,183, 191 };
 	rect_slider_vertical = { 1534, 2977, 12, 602 };
 
-	rect_slider_horizontal = { 2981, 3626, 604, 14 };
+	rect_slider_horizontal = { 1128, 142, 604, 14 };
 	rect_button_horizontal = { 3094, 2280, 183, 191 };
 
 	//MAIN_MENU 768
