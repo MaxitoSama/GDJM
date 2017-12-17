@@ -26,7 +26,6 @@ UISlider::UISlider(int x, int y, UIElementType type, SDL_Rect* slider, SDL_Rect*
 
 	button_point.x = position.x - App->render->camera.x - button->w / 2;
 	button_point.y = position.y - App->render->camera.y + 55 - button->h / 2;
-
 }
 
 UISlider::~UISlider()
