@@ -34,7 +34,7 @@ UIText::UIText(int x, int y, UIElementType type, const char* text, uint fonttype
 	int rect_x = position.x - (collider_size_x / 2);
 	int rect_y = position.y;
 
-	Elementrect = { rect_x,rect_y,(int)collider_size_x,(int)collider_size_y };
+	
 }
 
 UIText::~UIText()
@@ -45,6 +45,8 @@ void UIText::Draw()
 {
 	if (show)
 	{
+		Elementrect = { (int)(position.x - App->render->camera.x), (int)(position.y - App->render->camera.y),(int)collider_size_x,(int)collider_size_y };
+
 		if (!actualizable)
 		{
 			if(BlackBackground!=nullptr)
