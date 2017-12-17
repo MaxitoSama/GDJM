@@ -90,6 +90,9 @@ private:
 	UIElements* License_15 = nullptr;
 	UIElements* License_16 = nullptr;
 	UIElements* License_17 = nullptr;
+	UIElements* Credits_1 = nullptr;
+	UIElements* Credits_2 = nullptr;
+	UIElements* Credits_3 = nullptr;
 	
 
 	Animation* animation = nullptr;

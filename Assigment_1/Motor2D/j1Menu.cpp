@@ -101,7 +101,6 @@ bool j1Menu::Start()
 	text_credits = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.90*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, "Exit");
 	
 
-	//use xml to insert the licence once everything is done (ric feedback)
 	{
 		License_1 = App->gui->AddElementText(60, 180, TEXT, 2, 0, 0, 0, this, "MIT License", false, false);
 		License_2 = App->gui->AddElementText(60, 210, TEXT, 2, 0, 0, 0, this, "Copyright (c) 2017 Marc Garcia, Josep Pi", false, false);
@@ -122,6 +121,10 @@ bool j1Menu::Start()
 		License_16 = App->gui->AddElementText(60, 550 + 5, TEXT, 2, 0, 0, 0, this, "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS", false, false);
 		License_17 = App->gui->AddElementText(60, 570 + 5, TEXT, 2, 0, 0, 0, this, "IN THE SOFTWARE", false, false);
 
+		Credits_1 = App->gui->AddElementText(60, 670, TEXT, 2, 0, 0, 0, this, "DEVELOPED BY:", false, false);
+		Credits_2 = App->gui->AddElementText(60, 690 + 5, TEXT, 2, 100, 0, 100, this, "Marc Garcia i Uceda", false, false);
+		Credits_3 = App->gui->AddElementText(60, 720 + 5, TEXT, 2, 0, 100, 100, this, "Josep Pi Serra", false, false);
+
 
 		License_text.add(License_1);
 		License_text.add(License_2);
@@ -140,8 +143,11 @@ bool j1Menu::Start()
 		License_text.add(License_15);
 		License_text.add(License_16);
 		License_text.add(License_17);
+		License_text.add(Credits_1);
+		License_text.add(Credits_2);
+		License_text.add(Credits_3);
 
-		License_window = App->gui->AddElementWindow((App->win->screen_surface->w - 930) / 2, (App->win->screen_surface->h - 742) / 2, WINDOWS, this, &License_text, { 1055,160,930,742 }, false);
+		License_window = App->gui->AddElementWindow((App->win->screen_surface->w - 930) / 2, (App->win->screen_surface->h - 900) / 2, WINDOWS, this, &License_text, { 1055,160,930,1090 }, false);
 	}
 
 	//CREDITS
