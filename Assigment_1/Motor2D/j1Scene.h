@@ -53,7 +53,6 @@ public:
 	p2DynArray<iPoint> path_test;
 	p2List<UIElements*> pause_buttons;
 
-	//p2SString score_string;
 	char score_string[256];
 	char coins[256];
 	char lives[8];
@@ -100,6 +99,7 @@ private:
 	int win_position_y;
 	int limit_y;
 	int limit_x;
+
 };
 
 #endif // __j1SCENE_H__

@@ -61,9 +61,6 @@ public:
 	UIElements* AddElementSlider(int x, int y, UIElementType type, SDL_Rect* slider, SDL_Rect* button, j1Module* modul, int id, bool show = false);
 	void DeleteElements(UIElements* element);
 
-	bool CheckMouse(UIElements*)const;
-
-
 	SDL_Texture* GetAtlas() const;
 	SDL_Texture* GetBackground() const;
 

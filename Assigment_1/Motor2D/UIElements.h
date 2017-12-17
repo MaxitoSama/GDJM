@@ -26,6 +26,8 @@ public:
 	virtual void Draw() {};
 	virtual void Action() {};
 
+	bool CheckMouse()const;
+
 public:
 
 	SDL_Rect		Elementrect;

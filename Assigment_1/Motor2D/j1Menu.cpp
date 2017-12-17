@@ -295,6 +295,12 @@ void j1Menu::StartGame()
 {
 	CleanUp();
 
+	if (!continue_game)
+	{
+		App->scene->Map_1 = true;
+		App->scene->Map_2 = false;
+	}
+
 	App->scene->Start();
 	App->entities->Start();
 	
@@ -309,15 +315,8 @@ void j1Menu::StartGame()
 		App->entities->player->lives = 3;
 		App->entities->player->score = 0;
 		App->entities->player->coins = 0;
-
-		if (App->scene->Map_1)
-		{
-			App->scene->StartCurrentScene();
-		}
-		else
-		{
-			App->scene->ChangeScene(60, 215);
-		}
+		App->entities->player->Curr_map = 1;
+		App->scene->StartCurrentScene();
 	}
 }
 

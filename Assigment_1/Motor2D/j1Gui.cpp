@@ -70,7 +70,7 @@ bool j1Gui::PostUpdate()
 	{
 		element->data->Draw();
 
-		if (CheckMouse(element->data) == true)
+		if (element->data->CheckMouse() == true)
 		{
 			if (element->data->mousein == false)
 			{
@@ -91,7 +91,7 @@ bool j1Gui::PostUpdate()
 		
 		if (element != nullptr)
 		{
-			if (CheckMouse(element->data) == false && element->data->mouseout == false)
+			if (element->data->CheckMouse() == false && element->data->mouseout == false)
 			{
 				element->data->callback->GUIEvent(MOUSE_LEAVE, element->data);
 				element->data->mousein = false;
@@ -167,11 +167,11 @@ bool j1Gui::PostUpdate()
 		LOG("TAB pressed");
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN && last_tab != -1)
 	{
 		elements[tab_num]->callback->GUIEvent(MOUSE_CLICK, elements[tab_num]);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP)
+	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP && last_tab != -1)
 	{
 		elements[tab_num]->callback->GUIEvent(MOUSE_STOP_CLICK, elements[tab_num]);
 		tab_num = 0;
@@ -286,25 +286,4 @@ UIElements* j1Gui::AddElementSlider(int x, int y, UIElementType type, SDL_Rect* 
 void j1Gui::DeleteElements(UIElements* element)
 {
 	RELEASE(element);
-}
-
-bool j1Gui::CheckMouse(UIElements* element)const
-{
-	bool ret = false;
-	int x, y;
-
-	App->input->GetMousePosition(x, y);
-
-	x = x - App->render->camera.x;
-	y = y - App->render->camera.y;
-
-	if (x>element->Elementrect.x && x<element->Elementrect.x + element->Elementrect.w)
-	{
-		if (y > element->Elementrect.y && y <element->Elementrect.y + element->Elementrect.h)
-		{
-			ret = true;
-		}
-	}
-
-	return ret;
 }

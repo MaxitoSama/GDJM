@@ -14,21 +14,21 @@
 	<scene />
 	<colliders />
 	<entity>
-		<player x="60" y="828.833374" Map="1" score="0" lives="3" coins="0" />
+		<player x="11888.9023" y="668.333374" Map="1" score="0" lives="3" coins="8" />
 		<enemy_zombie>
-			<position x="1349.66663" y="812.333313" />
-			<position x="2549.66675" y="620" />
-			<position x="19418.666" y="812.999939" />
-			<position x="7049.6665" y="3143.33325" />
-			<position x="9861.66699" y="652" />
+			<position x="1210.6167" y="812.333313" />
+			<position x="2432.86694" y="620" />
+			<position x="19397.166" y="812.999939" />
+			<position x="6875.1665" y="7966.83301" />
+			<position x="9632.96777" y="652" />
 		</enemy_zombie>
 		<enemy_plane>
-			<position x="1893.86621" y="100" />
+			<position x="1899.06665" y="92.4000549" />
 		</enemy_plane>
 	</entity>
 	<transition />
 	<fonts />
 	<renderer>
-		<camera x="0" y="-115" />
+		<camera x="-11138" y="-108" />
 	</renderer>
 </game_state>
