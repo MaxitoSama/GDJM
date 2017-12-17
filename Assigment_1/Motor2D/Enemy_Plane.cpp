@@ -252,7 +252,7 @@ bool Enemy_Plane::Update(float dt)
 		}
 	}
 
-	LOG("plane position %f", original_pos.x);
+	//LOG("plane position %f", original_pos.x);
 
 	return true;
 }
