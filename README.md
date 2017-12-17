@@ -11,8 +11,6 @@ Ninja's Path
 Short 2D platform game with enemies that make pathfinding.
 There are two types of controls.
 
-hola això és una prova
-
 For gameplay:
  - Left  			= "D"
  - Right 			= "A"
