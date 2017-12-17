@@ -6,10 +6,10 @@ This is a 2D Platformer game created with the only purpose of learning how to cr
 ## The Team<img src="https://drive.google.com/uc?id=1SUI-_vtJnh1_dBpWQIYwFUOo-o0mzvlI" width="225" align="left">
 
 
-**Marc Garcia Uceda**: He is responsible for the pathfinding, map drawing, entity system, the base structure for the GUI and the differential time of the game.
+**Marc Garcia Uceda(left)**: He is responsible for the pathfinding, map drawing, entity system, the base structure for the GUI and the differential time of the game.
 
 
-**Josep Pi**: He is responsible for the sprite sheets, the animations of the game, the user experience, the level design, keep the track of the goals, the web creation and applying the code provided by Marc and making some changes/ask for advice to Marc for changing it.
+**Josep Pi(right)**: He is responsible for the sprite sheets, the animations of the game, the user experience, the level design, keep the track of the goals, the web creation and applying the code provided by Marc and making some changes/ask for advice to Marc for changing it.
 
 Both were active in the process of creating the GUI for the game.
 
