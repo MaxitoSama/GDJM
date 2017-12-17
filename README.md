@@ -22,6 +22,8 @@ For gameplay:
  - Save  			= "F5"
  - Load				 = "F6"
  - Pause    = "P"
+ - Select GUI buttons = "Shift"
+ - Execute selected button = "Enter"
 
 For Testing:
  - First Scene     		= "F1"
