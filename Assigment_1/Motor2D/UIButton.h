@@ -18,7 +18,7 @@ public:
 
 private:
 
-	const char* buttontext = nullptr;
+	const char*		buttontext = nullptr;
 
 	SDL_Texture*	ButtonTex=nullptr;
 	SDL_Texture*	ButtonText = nullptr;
@@ -28,7 +28,7 @@ private:
 
 	SDL_Rect*		RectTexture = nullptr;
 
-	bool light = false;
+	bool			light = false;
 };
 
 #endif //__BUTTONS_H__

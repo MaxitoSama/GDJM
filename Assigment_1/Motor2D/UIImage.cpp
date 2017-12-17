@@ -9,6 +9,7 @@ UIImage::UIImage(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* mod
 {
 	rectangle = rect;
 	Elementrect = *rect;	
+	
 	rectangle->h;
 	while (rectangle->h*scale <= App->win->screen_surface->h*0.135*0.8)
 	{

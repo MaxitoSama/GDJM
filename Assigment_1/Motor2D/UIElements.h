@@ -50,7 +50,7 @@ public:
 
 	SDL_Texture*	ElementTexture = nullptr;
 
-	float scale;
+	float			scale=0;
 
 };
 

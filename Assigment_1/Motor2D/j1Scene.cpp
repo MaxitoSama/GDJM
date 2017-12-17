@@ -20,15 +20,6 @@
 j1Scene::j1Scene() : j1Module()
 {
 	name.create("scene");
-
-	display_score = { 173, 3149, 397, 133 };
-	display_coins = { 187,2976,383,132 };
-	live_icon = { 683,2985,83,79 };
-	rect_clock = { 853,2984,215,76 };
-
-	rect_button_exit = { 2556,1407,183,191 };
-	rect_button_back = { 3094,101,179,182 };
-	rect_exit_pause = { 3093,537,178,181 };
 }
 
 // Destructor
@@ -105,6 +96,16 @@ bool j1Scene::Start()
 
 		if (LoadUI)
 		{
+
+			display_score = { 173, 3149, 397, 133 };
+			display_coins = { 187,2976,383,132 };
+			live_icon = { 683,2985,83,79 };
+			rect_clock = { 853,2984,215,76 };
+
+			rect_button_exit = { 2556,1407,183,191 };
+			rect_button_back = { 3094,101,179,182 };
+			rect_exit_pause = { 3093,537,178,181 };
+
 			LoadUI = false;
 		
 			App->gui->AddElementImage(0.008*App->win->screen_surface->w, 0.05*App->win->screen_surface->h, IMAGE, &display_coins, this);

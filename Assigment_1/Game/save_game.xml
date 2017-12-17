@@ -4,8 +4,8 @@
 	<window />
 	<textures />
 	<audio>
-		<music_volume value="64" />
-		<fx_volume value="128" />
+		<music_volume value="8" />
+		<fx_volume value="47" />
 	</audio>
 	<map />
 	<pathfinding />
@@ -14,19 +14,21 @@
 	<scene />
 	<colliders />
 	<entity>
-		<player x="60" y="828.333374" Map="2" score="0" lives="3" coins="0" />
+		<player x="21111.4023" y="828.699951" Map="1" score="1000" lives="4" coins="0" />
 		<enemy_zombie>
-			<position x="19570.416" y="812.999939" />
-			<position x="18576.416" y="812.999939" />
-			<position x="5058.4165" y="812.999939" />
+			<position x="-1993.40002" y="8876" />
+			<position x="2474.81714" y="620" />
+			<position x="19592.7656" y="812.999939" />
+			<position x="7078.66602" y="13217.833" />
+			<position x="-2000" y="4619.5" />
 		</enemy_zombie>
 		<enemy_plane>
-			<position x="1680.76758" y="100" />
+			<position x="1963.96411" y="90.8000793" />
 		</enemy_plane>
 	</entity>
 	<transition />
 	<fonts />
 	<renderer>
-		<camera x="0" y="-110" />
+		<camera x="-20361" y="-113" />
 	</renderer>
 </game_state>
