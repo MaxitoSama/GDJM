@@ -35,9 +35,11 @@ For Testing:
  - God Mode			= "F10"
 
 We tried to implement slow motion in the game, but we ran out of time and so we couldn't adapt it to our mechanics.
+You can test it pressing Q.
 
 ## Github Link
 [Repository](https://github.com/MaxitoSama/GDJM)
+[Web](https://maxitosama.github.io/GDJM/)
 
 ## Licence
 Tile Map: [Link](http://www.gameart2d.com/free-platformer-game-tileset.html)
