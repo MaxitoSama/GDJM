@@ -147,7 +147,7 @@ bool j1Menu::Start()
 		License_text.add(Credits_2);
 		License_text.add(Credits_3);
 
-		License_window = App->gui->AddElementWindow((App->win->screen_surface->w - 930) / 2, (App->win->screen_surface->h - 900) / 2, WINDOWS, this, &License_text, { 1055,160,930,1090 }, false);
+		License_window = App->gui->AddElementWindow((App->win->screen_surface->w - 930) / 2, (App->win->screen_surface->h - 900) / 2, WINDOWS, this, &License_text, { 38,18,930,880 }, false);
 	}
 
 	//CREDITS

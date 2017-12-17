@@ -92,8 +92,6 @@ bool j1Scene::Start()
 			App->entities->AddEnemy(ZOMBIE, 19350, 825);
 			App->entities->AddEnemy(ZOMBIE, 19461, 825);
 
-
-
 			App->entities->AddEnemy(PLANE, 500, 50);
 		}
 
@@ -139,7 +137,7 @@ bool j1Scene::Start()
 			pause_buttons.add(exit_text);
 			pause_buttons.add(exit_pause);
 
-			pause_window = App->gui->AddElementWindow(0.25*win_width, 0.2*win_height, WINDOWS, this, &pause_buttons, { 999,2023,768,623 }, false);
+			pause_window = App->gui->AddElementWindow(0.25*win_width, 0.2*win_height, WINDOWS, this, &pause_buttons, { 1086,250,768,623 }, false);
 		}
 		App->GamePaused = false;
 	}
@@ -187,18 +185,6 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)
 		ChangeScene(60,215);
 
-	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
-	{
-		App->pathfinding->ResetPath();
-		iPoint PlayerPosition = { (int)App->entities->player->original_pos.x, (int)App->entities->player->position.y+50 };
-		
-		if (App->pathfinding->CreatePath({ 0,0 }, PlayerPosition) != -1)
-		{
-			App->pathfinding->Path(PlayerPosition.x, PlayerPosition.y, path_test);
-		}
-		LOG("Path created");
-	}
-
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{
 		if (App->Cap_on)
@@ -240,9 +226,6 @@ bool j1Scene::Update(float dt)
 	}
 
 	App->map->Draw();
-	App->pathfinding->DrawPath(path_test);
-
-	//p2SString title("%s",App->GetTitle());
 
 	sprintf_s(score_string,256,"%d",App->entities->player->score);
 	sprintf_s(coins, 256, "%d", App->entities->player->coins);
