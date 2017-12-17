@@ -20,6 +20,15 @@
 j1Scene::j1Scene() : j1Module()
 {
 	name.create("scene");
+
+	display_score = { 173, 3149, 397, 133 };
+	display_coins = { 187,2976,383,132 };
+	live_icon = { 683,2985,83,79 };
+	rect_clock = { 853,2984,215,76 };
+
+	rect_button_exit = { 2556,1407,183,191 };
+	rect_button_back = { 3094,101,179,182 };
+	rect_exit_pause = { 3093,537,178,181 };
 }
 
 // Destructor
@@ -97,12 +106,7 @@ bool j1Scene::Start()
 		if (LoadUI)
 		{
 			LoadUI = false;
-
-			display_score = { 173, 3149, 397, 133 };
-			display_coins = { 187,2976,383,132 };
-			live_icon = { 683,2985,83,79 };
-			rect_clock = { 853,2984,215,76 };
-			
+		
 			App->gui->AddElementImage(0.008*App->win->screen_surface->w, 0.05*App->win->screen_surface->h, IMAGE, &display_coins, this);
 			Coins = App->gui->AddElementText(0.10*App->win->screen_surface->w, 0.075*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, coins, true, true);
 
@@ -114,16 +118,15 @@ bool j1Scene::Start()
 
 			App->gui->AddElementImage(App->win->screen_surface->w/2-(rect_clock.w/2*1.6), 0.04*App->win->screen_surface->h, IMAGE, &rect_clock, this);
 			Clock = App->gui->AddElementText(App->win->screen_surface->w *0.48 , 0.065*App->win->screen_surface->h, TEXT, 3, 0, 0, 0, this, time, true, true);
-
-			rect_button_exit = { 2556,1407,183,191 };
+			
 			exit_button = App->gui->AddElementButton(0.1*win_width,0.38*win_height, BUTTON, &rect_button_exit, this, nullptr, false);
 			exit_text = App->gui->AddElementText(0.17*win_width, 0.42*win_height, TEXT, 1, 255, 255, 0, this, "Exit", false);
 			
-			rect_button_back = { 3094,101,179,182 };
+
 			back_menu_button = App->gui->AddElementButton(0.1*win_width, 0.23*win_height, BUTTON, &rect_button_back, this, nullptr, false);
 			back_menu_text= App->gui->AddElementText(0.17*win_width, 0.27*win_height, TEXT, 1, 255, 255, 0, this, "Menu", false);
 
-			rect_exit_pause = { 3093,537,178,181 };
+	
 			exit_pause = App->gui->AddElementButton(0.43*win_width, 0.4*win_height, BUTTON, &rect_exit_pause, this, nullptr, false);
 
 			pause_buttons.add(exit_button);
