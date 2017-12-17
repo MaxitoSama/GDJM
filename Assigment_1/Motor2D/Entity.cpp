@@ -33,11 +33,11 @@ void Entity::Draw(SDL_Texture* sprites, float direction, float dt)
 		
 		if (collider->type == COLLIDER_PLAYER && App->entities->player->slide)
 		{
-			collider->SetPos((int)position.x+25, (int)position.y+40);
+			collider->SetPos((int)position.x, (int)position.y+40);
 		}
 		else
 		{
-			collider->SetPos((int)position.x, (int)position.y);
+			collider->SetPos((int)position.x+45, (int)position.y);
 		}
 
 		if (collider->type == COLLIDER_ENEMY && alive)

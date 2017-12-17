@@ -84,7 +84,6 @@ bool j1Scene::Start()
 			limit_x = map_width - win_width / 2;
 
 			App->colliders->AddCollider({ 25400,0,50,310 }, COLLIDER_WIN2, this);
-			App->colliders->AddCollider({ 18923,0,50,310 }, COLLIDER_WIN2, this);
 			App->colliders->AddCollider({ 21087,828,320,32 }, COLLIDER_DEATH);
 
 			App->entities->AddEnemy(ZOMBIE, 19461, 825);
