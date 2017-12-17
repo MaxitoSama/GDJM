@@ -78,7 +78,7 @@ bool j1Menu::Start()
 	rect_button_play_2 = { 400, 972, 183, 191 };
 	rect_button_play = { 196, 972, 183, 191 };
 	rect_button_options = { 3093, 318, 183, 191 };
-	rect_button_exit = { 2556,1407,183,191 };
+	rect_button_exit = { 2149, 1409, 178, 182 };
 	rect_button_credits = { 1142,1191,183,191 };
 	rect_button_continue = { 197,2498,183,191 };
 
