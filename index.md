@@ -29,7 +29,7 @@ Some of the goals we want to accomplish for the main core subsystems are:
 
 ## Links
 - Repository: [Link](https://github.com/MaxitoSama/GDJM)
-- Release: [Link](https://github.com/MaxitoSama/GDJM/releases)
+- Release: [Link](https://github.com/MaxitoSama/GDJM/releases/tag/2.0)
 
 ## Gameplay Video
 
@@ -47,16 +47,22 @@ For gameplay:
  - Music Volume Up 		= "+"
  - Music Volume Down 		= "-"
  - Save  			= "F5"
- - Load				= "F6"
+ - Load				 = "F6"
+ - Pause    = "P"
+ - Select GUI buttons = "Shift"
+ - Execute selected button = "Enter"
 
 For Testing:
  - First Scene     		= "F1"
  - Start of Scene 		= "F2"
  - See Colliders 		= "F3"
- - Create Path			= "F8"
+ - Show Colliders GUI & Enemies Pathfinding			= "F8"
  - Save				= "F5"
  - Load				= "F6"
  - God Mode			= "F10"
+
+We tried to implement slow motion in the game, but we ran out of time and so we couldn't adapt it to our mechanics.
+You can test it pressing Q.
 
 ## License.
 Licence: [Link](https://github.com/MaxitoSama/GDJM/blob/master/LICENSE.txt)
