@@ -20,17 +20,19 @@ For gameplay:
  - Music Volume Up 		= "+"
  - Music Volume Down 		= "-"
  - Save  			= "F5"
- - Load				= "F6"
+ - Load				 = "F6"
+ - Pause    = "P"
 
 For Testing:
  - First Scene     		= "F1"
  - Start of Scene 		= "F2"
  - See Colliders 		= "F3"
- - Create Path			= "F8"
+ - Show Colliders GUI & Enemies Pathfinding			= "F8"
  - Save				= "F5"
  - Load				= "F6"
  - God Mode			= "F10"
 
+We tried to implement slow motion in the game, but we ran out of time and so we couldn't adapt it to our mechanics.
 
 ## Github Link
 [Repository](https://github.com/MaxitoSama/GDJM)
