@@ -63,11 +63,12 @@ bool j1Scene::Start()
 
 			//enemies
 			App->entities->AddEnemy(ZOMBIE, 1300, 600);
-			App->entities->AddEnemy(ZOMBIE, 2500, 600);
-			App->entities->AddEnemy(ZOMBIE, 19369, 827);
-			App->entities->AddEnemy(ZOMBIE, 7000, 600);
+			App->entities->AddEnemy(PLANE, 2000, 250);
+			//App->entities->AddEnemy(ZOMBIE, 2700, 600);
+			App->entities->AddEnemy(ZOMBIE, 10900, 600);
 			App->entities->AddEnemy(ZOMBIE, 9812, 668);
-			App->entities->AddEnemy(PLANE, 2000, 100);
+			App->entities->AddEnemy(ZOMBIE, 21754, 827);
+		
 			App->colliders->AddCollider({ 11104,636,608,64 }, COLLIDER_DEATH);
 			App->colliders->AddCollider({ 22112,829,288,32 }, COLLIDER_DEATH);
 		}
@@ -86,11 +87,13 @@ bool j1Scene::Start()
 			App->colliders->AddCollider({ 25400,0,50,310 }, COLLIDER_WIN2, this);
 			App->colliders->AddCollider({ 21087,828,320,32 }, COLLIDER_DEATH);
 
+			App->entities->AddEnemy(ZOMBIE, 5500, 828);
+			App->entities->AddEnemy(ZOMBIE, 19350, 825);
 			App->entities->AddEnemy(ZOMBIE, 19461, 825);
-			App->entities->AddEnemy(ZOMBIE, 18467, 825);
-			App->entities->AddEnemy(ZOMBIE, 4949, 828);
 
-			App->entities->AddEnemy(PLANE, 1500, 100);
+
+
+			App->entities->AddEnemy(PLANE, 500, 50);
 		}
 
 		if (LoadUI)
