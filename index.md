@@ -57,7 +57,7 @@ For Testing:
  - God Mode			= "F10"
 
 ## License.
-Licence: [[MIT|Licence]]
+Licence: [Link](https://github.com/MaxitoSama/GDJM/blob/master/LICENSE.txt)
 
 Tile Map: [Link](http://www.gameart2d.com/free-platformer-game-tileset.html)
 
