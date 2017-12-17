@@ -14,8 +14,8 @@ public:
 
 public:
 
-	int h_background;
-	float scale = 0.1f;
+	int		h_background;
+	float	scale = 0.1f;
 
 };
 

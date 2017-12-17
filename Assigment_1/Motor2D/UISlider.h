@@ -22,12 +22,12 @@ public:
 	SDL_Rect*		button = nullptr;
 	SDL_Texture*	texture = nullptr;
 
-	int id;
-	int slider_end = 0;
-	int slider_begining = 0;
+	int				id;
+	int				slider_end = 0;
+	int				slider_begining = 0;
 
-	iPoint mouse_position;
-	iPoint button_point;
+	iPoint			mouse_position;
+	iPoint			button_point;
 };
 
 #endif //__UIIMAGE_H__

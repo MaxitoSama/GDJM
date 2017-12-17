@@ -141,7 +141,6 @@ bool j1Audio::PlayMusic(const char* path, float fade_time)
 			Mix_HaltMusic();
 		}
 
-		// this call blocks until fade out is done
 		Mix_FreeMusic(music);
 	}
 

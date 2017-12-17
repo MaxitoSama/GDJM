@@ -28,7 +28,6 @@ UIButton::UIButton(int x, int y, UIElementType type, SDL_Rect* RecTex, const cha
 	{
 		scale += 0.01f;
 	}
-	//scale = 0.7f; 
 	
 	collider_size_x = RectTexture->w;
 	collider_size_y = RectTexture->h;

@@ -14,7 +14,7 @@ UIImage::UIImage(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* mod
 	
 	while (rectangle->h*scale <= App->win->screen_surface->h*0.135*0.8)
 	{
-		scale += 0.01f; //scale = 1.0f
+		scale += 0.01f; 
 	}
 }
 

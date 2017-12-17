@@ -59,15 +59,13 @@ bool j1Menu::Start()
 	animation = &ninja;
 	while (331* scale_ninja <= App->win->screen_surface->h* 0.529)
 	{
-		scale_ninja += 0.01f;//scale_ninja = -1.6f
+		scale_ninja += 0.01f;
 	}
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
 	App->scene->active = false;
-	//Put fade to black once everything is done (ric feedback) 
-
 
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
 	
@@ -88,7 +86,7 @@ bool j1Menu::Start()
 	rect_slider_horizontal = { 1128, 142, 604, 14 };
 	rect_button_horizontal = { 3094, 2280, 183, 191 };
 
-	//MAIN_MENU 768
+	//MAIN_MENU
 	button_play = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.25*App->win->screen_surface->h, BUTTON, &rect_button_play, this);
 	text_start = App->gui->AddElementText(0.17*App->win->screen_surface->w, 0.30*App->win->screen_surface->h, TEXT, 1,255,255,0, this, "Start Game");
 	button_continue = App->gui->AddElementButton(0.1*App->win->screen_surface->w, 0.40*App->win->screen_surface->h, BUTTON, &rect_button_continue, this);
@@ -189,7 +187,7 @@ bool j1Menu::PostUpdate()
 			exit=false;
 	if (active && button_play->show)
 	{
-		App->render->Blit(sprites_ninja, 0.55*App->win->screen_surface->w, 0.339*App->win->screen_surface->h, &(animation->GetCurrentFrame(dt)), -scale_ninja);//-1.6f
+		App->render->Blit(sprites_ninja, 0.55*App->win->screen_surface->w, 0.339*App->win->screen_surface->h, &(animation->GetCurrentFrame(dt)), -scale_ninja);
 	}
 
 	return exit;

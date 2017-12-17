@@ -41,8 +41,6 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
-	//bool Update(float dt);
-
 	// Called after all Updates
 	bool PostUpdate();
 

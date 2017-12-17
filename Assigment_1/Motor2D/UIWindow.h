@@ -15,12 +15,11 @@ public:
 
 private:
 
-	p2List<UIElements*>* windowelements=NULL;
-	SDL_Rect window_rect;
+	p2List<UIElements*>*	windowelements=NULL;
+	SDL_Rect				window_rect;
 
-	iPoint mousestart;
-	iPoint mouseend = { 0,0 };
-
+	iPoint					mousestart;
+	iPoint					mouseend = { 0,0 };
 };
 
 #endif //__WINDOW_H__

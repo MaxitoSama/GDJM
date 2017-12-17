@@ -17,12 +17,12 @@ public:
 
 private:
 
-	const char* HidenText = nullptr;
-	SDL_Texture* hidentexture = nullptr;
+	const char*		HidenText = nullptr;
+	SDL_Texture*	hidentexture = nullptr;
 
-	bool hide = false;
-	uint sizeTx;
-	uint sizeTy;
+	bool			hide = false;
+	uint			sizeTx;
+	uint			sizeTy;
 
 };
 

@@ -505,8 +505,6 @@ bool Player::Update(float dt)
 		collider->rect.h = 332 / 2;
 	}
 
-	//LOG("Score %d", score);
-
 	return true;
 }
 
