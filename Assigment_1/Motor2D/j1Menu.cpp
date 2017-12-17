@@ -169,7 +169,8 @@ bool j1Menu::Update(float dt)
 	this->dt = dt;
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		App->gui->startgame = true;
+		continue_game = false;
+		App->transit->Transition(this, App->scene);
 	}
 
 	return true;
