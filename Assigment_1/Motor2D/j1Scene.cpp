@@ -78,6 +78,7 @@ bool j1Scene::Start()
 			App->map->Load("Map_2.tmx");
 			App->audio->PlayMusic("audio/music/map1_music.ogg");
 			App->map->Draw_Colliders();
+			App->map->LoadEntities();
 			
 			map_height = App->map->data.height * App->map->data.tile_height;
 			map_width = App->map->data.width * App->map->data.tile_width;
@@ -248,7 +249,7 @@ bool j1Scene::Update(float dt)
 	sprintf_s(lives, 256, "x0%d", App->entities->player->lives);
 	sprintf_s(time, 128, "%i", (int)timer.ReadSec());
 
-	if (App->entities->player->lives < 1)
+	if (App->entities->player->lives < 1 || timer.ReadSec()>=100)
 	{
 		App->gui->startgame = true;
 		App->GamePaused = true;
