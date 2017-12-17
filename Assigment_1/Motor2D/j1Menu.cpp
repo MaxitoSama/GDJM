@@ -122,8 +122,8 @@ bool j1Menu::Start()
 		License_17 = App->gui->AddElementText(60, 570 + 5, TEXT, 2, 0, 0, 0, this, "IN THE SOFTWARE", false, false);
 
 		Credits_1 = App->gui->AddElementText(60, 670, TEXT, 2, 0, 0, 0, this, "DEVELOPED BY:", false, false);
-		Credits_2 = App->gui->AddElementText(60, 690 + 5, TEXT, 2, 100, 0, 100, this, "Marc Garcia i Uceda", false, false);
-		Credits_3 = App->gui->AddElementText(60, 720 + 5, TEXT, 2, 0, 100, 100, this, "Josep Pi Serra", false, false);
+		Credits_2 = App->gui->AddElementText(60, 700, TEXT, 2, 100, 0, 100, this, "Marc Garcia i Uceda", false, false);
+		Credits_3 = App->gui->AddElementText(60, 720, TEXT, 2, 0, 100, 100, this, "Josep Pi Serra", false, false);
 
 
 		License_text.add(License_1);
