@@ -6,6 +6,8 @@
 #include "j1Scene.h"
 #include "j1Gui.h"
 #include "j1Transition.h"
+#include "j1Window.h"
+#include "j1App.h"
 
 
 
@@ -13,7 +15,7 @@
 j1Transition::j1Transition()
 {
 	name.create("transition");
-	screen = { 0, 0,1500, 1000 };
+	
 }
 
 j1Transition::~j1Transition()
@@ -24,6 +26,7 @@ bool j1Transition::Start()
 {
 	LOG("Preparing Fade Screen");
 	SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
+	screen = { 0, 0,App->win->screen_surface->w, App->win->screen_surface->h };
 	return true;
 }
 
