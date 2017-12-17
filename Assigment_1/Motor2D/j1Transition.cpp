@@ -25,6 +25,7 @@ j1Transition::~j1Transition()
 bool j1Transition::Start()
 {
 	LOG("Preparing Fade Screen");
+
 	SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
 	screen = { 0, 0,App->win->screen_surface->w, App->win->screen_surface->h };
 	return true;
@@ -32,6 +33,7 @@ bool j1Transition::Start()
 
 bool j1Transition::PostUpdate()
 {
+	BROFILER_CATEGORY("PostUpdate Transition", Profiler::Color::WhiteSmoke);
 	bool ret=true;
 
 	if (current_step == fade_step::none)
