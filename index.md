@@ -33,7 +33,7 @@ Some of the goals we want to accomplish for the main core subsystems are:
 
 ## Gameplay Video
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=6PjkNRSz2i0&feature=youtu.be" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://youtu.be/6PjkNRSz2i0" frameborder="0" allowfullscreen></iframe>
 
 ## Instructions to play
 Your goal is to reach the end of the map by going all the way to the right.
