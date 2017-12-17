@@ -103,17 +103,17 @@ bool j1Scene::Start()
 			live_icon = { 683,2985,83,79 };
 			rect_clock = { 853,2984,215,76 };
 			
-			App->gui->AddElementImage(200, 100, IMAGE, &display_coins, this);
-			Coins = App->gui->AddElementText(120, 65, TEXT, 1, 255, 255, 0, this, coins, true, true);
+			App->gui->AddElementImage(0.01*App->win->screen_surface->w, 0.05*App->win->screen_surface->h, IMAGE, &display_coins, this);
+			Coins = App->gui->AddElementText(0.13*App->win->screen_surface->w, 0.07*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, coins, true, true);
 
-			App->gui->AddElementImage(400, 100, IMAGE, &display_score, this);
-			Score = App->gui->AddElementText(340, 65, TEXT, 1, 255, 255, 0, this, score_string, true, true);
+			App->gui->AddElementImage(0.003*App->win->screen_surface->w, 0.15*App->win->screen_surface->h, IMAGE, &display_score, this);
+			Score = App->gui->AddElementText(0.13*App->win->screen_surface->w, 0.17*App->win->screen_surface->h, TEXT, 1, 255, 255, 0, this, score_string, true, true);
 
-			App->gui->AddElementImage(1317, 100, IMAGE, &live_icon, this);
-			Lives = App->gui->AddElementText(1350, 80, TEXT, 1, 0, 0, 0, this, lives, true, true);
+			App->gui->AddElementImage(0.77*App->win->screen_surface->w, 0.05*App->win->screen_surface->h, IMAGE, &live_icon, this);
+			Lives = App->gui->AddElementText(0.87*App->win->screen_surface->w, 0.07*App->win->screen_surface->h, TEXT, 1, 0, 0, 0, this, lives, true, true);
 
-			App->gui->AddElementImage(App->win->screen_surface->w/2, 100, IMAGE, &rect_clock, this);
-			Clock = App->gui->AddElementText(750, 70, TEXT, 3, 0, 0, 0, this, time, true, true);
+			App->gui->AddElementImage(App->win->screen_surface->w/2-(rect_clock.w/2*1.6), 0.04*App->win->screen_surface->h, IMAGE, &rect_clock, this);
+			Clock = App->gui->AddElementText(App->win->screen_surface->w *0.48 , 0.065*App->win->screen_surface->h, TEXT, 3, 0, 0, 0, this, time, true, true);
 
 			rect_button_exit = { 2556,1407,183,191 };
 			exit_button = App->gui->AddElementButton(150,380, BUTTON, &rect_button_exit, this, nullptr, false);

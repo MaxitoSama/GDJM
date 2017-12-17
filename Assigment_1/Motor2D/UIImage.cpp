@@ -10,9 +10,9 @@ UIImage::UIImage(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* mod
 	rectangle = rect;
 	Elementrect = *rect;	
 	rectangle->h;
-	while (rectangle->h*scale <= App->win->screen_surface->h*0.135)
+	while (rectangle->h*scale <= App->win->screen_surface->h*0.135*0.8)
 	{
-		scale += 0.01f;
+		scale += 0.01f; //scale = 1.0f
 	}
 }
 
@@ -23,5 +23,5 @@ UIImage::~UIImage()
 
 void UIImage::Draw()
 {
-	App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x - rectangle->w / 2, position.y - App->render->camera.y - rectangle->h / 2, rectangle, scale);
+	App->render->Blit(App->gui->GetAtlas(), position.x - App->render->camera.x, position.y - App->render->camera.y, rectangle, scale);
 }
